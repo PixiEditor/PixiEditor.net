@@ -11,7 +11,7 @@ header{
 }
 
 h1{
-    font-size: 64px;
+    font-size: 70px;
     margin-bottom: 0;
 }
 
@@ -21,10 +21,34 @@ h1{
 }
 
 .download-section p{
+    font-size: 34px;
+    text-justify: inter-word;
+    color: rgb(185, 185, 185);
+}
+
+.download-buttons p {
+    font-size: 18px;
     color: #727272;
     font-weight: 300;
-    font-size: 22px;
     margin-top: 0;
+}
+
+.header-container * {
+    display: inline-block;
+    vertical-align: middle;
+}
+
+.header-container h1{
+    margin-right: 115px;
+}
+
+.header-container img {
+    margin-top: 50px;
+    margin-right: 20px;
+}
+
+.download-buttons{
+    margin-top: 50px;
 }
 
 .download-button{
@@ -39,9 +63,37 @@ h1{
     margin: 5px;
 }
 
-.download-section img{
-    margin-top: 50px;
+#screenshot{
+    margin-top: 10px;
     -webkit-box-shadow: 0px 0px 10px 0px #54316F; 
     box-shadow: 0px 0px 10px 0px #54316F;
     border-radius: 5px;
+    width: 1000px;
+}
+
+.features{
+    display: flex;
+    flex-direction: row;
+    justify-content: space-around;
+    width: 1100px;
+    margin: 0 auto;
+    margin-top: 100px;
+}
+
+
+.feature-text {
+    vertical-align: middle;
+    display: inline-block;
+    font-size: 40px;
+    font-weight: 300;
+}
+
+.feature-icon{
+    display: inline-block;
+    vertical-align: middle;
+
+}
+
+.feature-icon img{
+    width: 58px;    
 }
