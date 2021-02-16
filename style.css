@@ -70,11 +70,18 @@ h1 {
     color: white;
     font-size: 30px;
     font-weight: 300;
-    background-color: #54316F;
+    background-color: #e3002d;
     padding: 10px;
     display: inline-block;
     border-radius: 4px;
     margin: 5px;
+    transition: background-color .1s;
+}
+
+.download-button:hover {
+    color: white;
+    background-color: #54316F;
+    transition: background-color .3s;
 }
 
 #screenshot {
