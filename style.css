@@ -111,32 +111,32 @@ h1 {
     vertical-align: middle;
 }
 
-.feature-icon img {
+.bullet-point-icon img {
     width: 5vw;
 }
 
 @media (min-width:1200px) {
-    .feature-text {
+    .bullet-point-text {
         font-size: 40px;
     }
-    .feature-icon img {
+    .bullet-point-icon img {
         width: 58px;
     }
 }
 
 @media (max-width:800px) {
-    .features {
+    .bullet-points {
         flex-direction: column;
         margin-right: 50px;
         align-items: center;
     }
-    .feature {
+    .bullet-point {
         margin-top: 5%;
     }
-    .feature-text {
+    .bullet-point-text {
         font-size: 8vw;
     }
-    .feature-icon img {
+    .bullet-point-icon img {
         width: 12vw;
     }
     #screenshot {
