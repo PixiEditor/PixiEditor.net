@@ -71,29 +71,28 @@ h1{
     width: 1000px;
 }
 
-.features{
+.bullet-points{
     display: flex;
     flex-direction: row;
     justify-content: space-around;
     width: 1100px;
-    margin: 0 auto;
-    margin-top: 100px;
+    margin: 75px auto;   
 }
 
 
-.feature-text {
+.bullet-point-text {
     vertical-align: middle;
     display: inline-block;
     font-size: 40px;
     font-weight: 300;
 }
 
-.feature-icon{
+.bullet-point-icon{
     display: inline-block;
     vertical-align: middle;
 
 }
 
-.feature-icon img{
+.bullet-point-icon img{
     width: 58px;    
 }
