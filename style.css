@@ -30,8 +30,6 @@ h1 {
     .download-section p {
         font-size: 5vw;
         margin-left: 5px;
-        text-justify: inter-word;
-        color: rgb(185, 185, 185);
     }
 }
 
@@ -126,6 +124,22 @@ h1 {
     }
 }
 
-.bullet-point-icon img {
-    width: 58px;
+@media (max-width:800px) {
+    .features {
+        flex-direction: column;
+        margin-right: 50px;
+        align-items: center;
+    }
+    .feature {
+        margin-top: 5%;
+    }
+    .feature-text {
+        font-size: 8vw;
+    }
+    .feature-icon img {
+        width: 12vw;
+    }
+    #screenshot {
+        width: 100%;
+    }
 }
