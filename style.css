@@ -23,7 +23,7 @@ h1 {
 .download-section p {
     font-size: 34px;
     text-justify: inter-word;
-    color: rgb(185, 185, 185);
+    color: white;
 }
 
 @media (max-width:960px) {
@@ -35,7 +35,7 @@ h1 {
 
 .download-buttons p {
     font-size: 18px;
-    color: #727272;
+    color: #AFAfAf;
     font-weight: 300;
     margin-top: 0;
 }
