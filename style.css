@@ -96,7 +96,9 @@ h1 {
     flex-direction: row;
     justify-content: space-around;
     width: 1100px;
-    margin: 75px auto;
+    margin: 0 auto;
+    margin-top: 100px;
+    max-width: 100%;
 }
 
 .bullet-point-text {
