@@ -24,6 +24,10 @@
     <link rel="icon" type="image/png" sizes="32x32" href="favicons/favicon-32x32.png">
     <link rel="icon" type="image/png" sizes="96x96" href="favicons/favicon-96x96.png">
     <link rel="icon" type="image/png" sizes="16x16" href="favicons/favicon-16x16.png">
+    <link
+    rel="stylesheet"
+    href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/4.1.1/animate.min.css"
+  />
     <link rel="manifest" href="/manifest.json">
     <meta name="msapplication-TileColor" content="#ffffff">
     <meta name="msapplication-TileImage" content="/ms-icon-144x144.png">
@@ -38,16 +42,18 @@
 <body>
     <header>
         <div class="header-container">
-            <img src="favicons/android-icon-96x96.png" alt>
-            <h1>PixiEditor</h1>
+            <a href="/">
+                <img src="favicons/android-icon-96x96.png" alt>
+                <div class="header-title">PixiEditor</div>
+            </a>
         </div>
     </header>
     <div class="download-section">
 
-        <p>A beautiful, lighweight pixel-art editor packed <br /> in eye-friendly dark theme.</p>
+        <h1 class="animate__animated animate__fadeInUp">A beautiful, lighweight pixel-art editor packed in eye-friendly dark theme.</h1>
         <picture>
             <source media="(max-width: 800px)" srcset="screenshotMini.png">
-            <img id="screenshot" src="screenshot.png" alt="Program screenshot">
+            <img class="animate__animated animate__fadeInUp" id="screenshot" src="screenshot.png" alt="Program screenshot">
         </picture>
         <div class="download-buttons">
             <a href="" class="download-button">Download</a>
