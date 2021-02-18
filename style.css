@@ -85,6 +85,7 @@ h1{
 
 .download-buttons {
     margin-top: 30px;
+    animation-delay: 100ms;
 }
 
 .download-button {
@@ -92,18 +93,20 @@ h1{
     color: white;
     font-size: 30px;
     font-weight: 300;
-    background-color: #4400E3;
+    background-color: transparent;
+    border: solid 1px grey;
     padding: 10px;
     display: inline-block;
     border-radius: 4px;
     margin: 5px;
-    transition: background-color .1s;
+    transition: .2s;
 }
 
 .download-button:hover {
     color: white;
-    background-color: #54316F;
-    transition: background-color .3s;
+    background-color: #a81b37;
+    border: solid 1px #a81b37;
+    transition: .3s;
 }
 
 #screenshot {
@@ -139,6 +142,24 @@ h1{
 
 .bullet-point-icon img {
     width: 5vw;
+}
+
+.features{
+    display: flex;
+    width: 80%;
+    margin: 0 auto;
+    margin-top: 50px;
+    flex-direction: column;
+}
+
+.feature{
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+}
+
+.feature-icon img{
+    width: 80px;
 }
 
 @media (min-width:1200px) {
