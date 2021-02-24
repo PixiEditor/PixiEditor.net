@@ -148,14 +148,44 @@ h1{
     display: flex;
     width: 80%;
     margin: 0 auto;
-    margin-top: 50px;
+    margin-top: 150px;
     flex-direction: column;
 }
 
 .feature{
     display: flex;
     flex-direction: row;
+    align-items: flex-start;
+    justify-content: space-around;
+    margin-top: 35px;
+}
+
+.feature.right{
+    flex-direction: row-reverse;
+}
+
+.feature-heading{
+    display: flex;
+    flex-direction: row;
     align-items: center;
+}
+
+.feature-title{
+    font-size: 33px;
+    margin-left: 15px;
+}
+
+.feature-description{
+    margin-left: 6rem;
+    max-width: 600px;
+    font-weight: 100;
+    font-size: 18px;
+}
+
+.feature-gif img{
+    border: 1px solid black;
+    border-radius: 5px;
+    max-height: 400px;
 }
 
 .feature-icon img{
