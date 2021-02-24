@@ -144,9 +144,15 @@ h1{
     width: 5vw;
 }
 
+.features-container{
+    background-color: #2c2c2c;
+    padding: 15px;
+    margin-top: 75px;
+}
+
 .features{
     display: flex;
-    width: 80%;
+    width: 85%;
     margin: 0 auto;
     margin-top: 150px;
     flex-direction: column;
@@ -156,8 +162,8 @@ h1{
     display: flex;
     flex-direction: row;
     align-items: flex-start;
-    justify-content: space-around;
-    margin-top: 35px;
+    justify-content: space-between;
+    margin-bottom: 200px;
 }
 
 .feature.right{
@@ -176,10 +182,16 @@ h1{
 }
 
 .feature-description{
-    margin-left: 6rem;
+    margin-top: 10px;
+    margin-left: 4rem;
     max-width: 600px;
     font-weight: 100;
-    font-size: 18px;
+    font-size: 24px;
+    line-height: 35px;
+}
+
+.feature-gif{
+    min-width: 30%;
 }
 
 .feature-gif img{
@@ -189,7 +201,8 @@ h1{
 }
 
 .feature-icon img{
-    width: 80px;
+    width: 50px;
+    visibility: visible;
 }
 
 @media (min-width:1200px) {
