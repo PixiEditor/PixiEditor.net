@@ -34,7 +34,6 @@ class Index extends React.Component {
 
       return <div>
         <div className="download-section">
-
           <h1 className="animate__animated animate__fadeInUp">A beautiful, lighweight pixel-art editor packed in eye-friendly
           dark theme.</h1>
           <picture>

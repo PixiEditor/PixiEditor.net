@@ -1,24 +1,5 @@
-/**
- * Copyright (c) Facebook, Inc. and its affiliates.
- *
- * This source code is licensed under the MIT license found in the
- * LICENSE file in the root directory of this source tree.
- */
-
 // See https://docusaurus.io/docs/site-config for all the possible
 // site configuration options.
-
-// List of projects/orgs using your project for the users page.
-const users = [
-  {
-    caption: 'flabbet',
-    // You will need to prepend the image path with your baseUrl
-    // if it is not '/', like: '/test-site/img/image.jpg'.
-    image: '/img/undraw_open_source.svg',
-    infoLink: 'https://www.facebook.com',
-    pinned: true,
-  },
-];
 
 const siteConfig = {
   title: 'PixiEditor', // Title for your website.
@@ -32,6 +13,9 @@ const siteConfig = {
   // Used for publishing and more
   projectName: 'pixieditor.net',
   organizationName: 'PixiEditor Organization',
+
+  repoUrl: "https://github.com/PixiEditor/PixiEditor",
+  twitterUsername: "PixiEditor",
   // For top-level user or org sites, the organization is still the same.
   // e.g., for the https://JoelMarcey.github.io site, it would be set like...
   //   organizationName: 'JoelMarcey'
