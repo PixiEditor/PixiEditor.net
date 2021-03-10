@@ -22,7 +22,7 @@ class Footer extends React.Component {
           </a>
           <div>
             <h5>Docs</h5>
-            <a href={this.docUrl('getting-started.html')}>
+            <a href={this.docUrl('introduction.html')}>
               Getting Started
             </a>
             <a href={this.docUrl('guides.html')}>Guides</a>
@@ -52,7 +52,7 @@ class Footer extends React.Component {
               data-show-count="true"
               data-count-aria-label="# stargazers on GitHub"
               aria-label="Star this project on GitHub">
-              Star
+              PixiEditor
             </a>
             {this.props.config.twitterUsername && (
               <div className="social">
@@ -63,6 +63,10 @@ class Footer extends React.Component {
                 </a>
               </div>
             )}
+          </div>
+          <div>
+            <h5>Legal</h5>
+            <a href={`${this.props.config.baseUrl}privacy`}>Privacy</a>
           </div>
         </section>
         <section className="copyright">{this.props.config.copyright}</section>

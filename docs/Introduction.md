@@ -1,6 +1,6 @@
 ---
 id: introduction
 title: Introduction
-sidebar_label: Getting Started
+sidebar_label: Introduction
 ---
 My new content here..

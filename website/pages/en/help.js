@@ -22,17 +22,26 @@ function Help(props) {
   const supportLinks = [
     {
       content: `Learn more using the [documentation on this site.](${docUrl(
-        'doc1.html',
+        'introduction.html',
       )})`,
       title: 'Browse Docs',
+      image: 'img/book.svg',
+      imageAlign: 'bottom',
+      imageLink: `${docUrl("introduction.html")}`
     },
     {
-      content: 'Ask questions about the documentation and project',
+      content: `Ask questions about the documentation and project on our [Discord.](https://discord.gg/qSRMYmq)`,
       title: 'Join the community',
+      image: 'img/Discord-Logo-White.svg',
+      imageAlign: 'bottom',
+      imageLink: "https://discord.gg/qSRMYmq"
     },
     {
-      content: "Find out what's new with this project",
-      title: 'Stay up to date',
+      title: 'Contact us',
+      content: "Send us email with your question pixieditorproject@gmail.com",
+      image: 'img/mail.svg',
+      imageAlign: 'bottom',
+      imageLink: "mailto:pixieditorproject@gmail.com"
     },
   ];
 
@@ -44,7 +53,7 @@ function Help(props) {
             <h1>Need help?</h1>
           </header>
           <p>This project is maintained by a dedicated group of people.</p>
-          <GridBlock contents={supportLinks} layout="threeColumn" />
+          <GridBlock className="helpColumn" contents={supportLinks} layout="threeColumn" />
         </div>
       </Container>
     </div>

@@ -43,7 +43,7 @@ class Index extends React.Component {
           </picture>
           <div className="download-buttons animate__animated animate__fadeInUp">
             <a href="" className="download-button">Download now</a>
-            <p title="PixiEditor is currently only available for Windows">Windows v0.2 beta</p>
+            <p title="PixiEditor is currently only available for Windows">Windows v0.2 Beta</p>
           </div>
         </div>
         <div className="bullet-points-container">

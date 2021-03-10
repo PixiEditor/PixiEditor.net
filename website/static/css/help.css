@@ -1,0 +1,13 @@
+
+.helpColumn a {
+    color: #b91f3e;
+}
+
+.helpColumn a:hover {
+    text-decoration: none;
+    color: #b91f3e;
+}
+
+.helpColumn img {
+    width: 200px;
+}
