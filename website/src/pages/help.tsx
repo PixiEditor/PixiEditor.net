@@ -1,16 +1,5 @@
-/**
- * Copyright (c) Facebook, Inc. and its affiliates.
- *
- * This source code is licensed under the MIT license found in the
- * LICENSE file in the root directory of this source tree.
- */
-
-const React = require('react');
-
-const CompLibrary = require('../../core/CompLibrary.js');
-
-const Container = CompLibrary.Container;
-const GridBlock = CompLibrary.GridBlock;
+import React from 'react';
+import Layout from '@theme/Layout';
 
 function Help(props) {
   const {config: siteConfig, language = ''} = props;
@@ -46,18 +35,15 @@ function Help(props) {
   ];
 
   return (
-    <div className="docMainWrapper wrapper">
-      <Container className="mainContainer documentContainer postContainer">
+    <Layout title="Help">
         <div className="post">
           <header className="postHeader">
             <h1>Need help?</h1>
           </header>
           <p>This project is maintained by a dedicated group of people.</p>
-          <GridBlock className="helpColumn" contents={supportLinks} layout="threeColumn" />
         </div>
-      </Container>
-    </div>
+    </Layout>
   );
 }
 
-module.exports = Help;
+export default Help;
