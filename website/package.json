@@ -9,19 +9,20 @@
     "rename-version": "docusaurus rename-version"
   },
   "dependencies": {
-    "@docusaurus/core": "^2.0.0-alpha.71",
-    "@docusaurus/preset-classic": "^2.0.0-alpha.71",
+    "@docusaurus/core": "^2.0.0-alpha.73",
+    "@docusaurus/preset-classic": "^2.0.0-alpha.73",
     "clsx": "^1.1.1",
-    "postcss": "^8.2.8",
-    "react": "^17.0.1",
-    "react-dom": "^17.0.1"
+    "postcss": "^8.2.10",
+    "react": "^17.0.2",
+    "react-toggle": "4.1.2",
+    "react-dom": "^17.0.2"
   },
   "devDependencies": {
-    "@docusaurus/module-type-aliases": "^2.0.0-alpha.71",
+    "@docusaurus/module-type-aliases": "^2.0.0-alpha.73",
     "@tsconfig/docusaurus": "^1.0.2",
     "@types/react": "^17.0.3",
-    "@types/react-helmet": "^6.1.0",
+    "@types/react-helmet": "^6.1.1",
     "@types/react-router-dom": "^5.1.7",
-    "typescript": "^4.2.3"
+    "typescript": "^4.2.4"
   }
 }

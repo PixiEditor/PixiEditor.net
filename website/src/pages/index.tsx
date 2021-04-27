@@ -23,9 +23,20 @@ const Feature = (props) => {
   </div>
 }
 
+const BulletPoint = (props) => {
+  return <div className="bullet-point">
+    <div className="bullet-point-icon">
+      <img src={props.icon} alt="" />
+    </div>
+    <div className="bullet-point-text">
+      {props.text}
+      </div>
+  </div>
+} 
+
 class Index extends React.Component {
   render() {
-    return <Layout title="Download">
+    return <Layout title="Main page">
       <div className="download-section">
         <h1 className="animate__animated animate__fadeInUp">A beautiful, lighweight pixel-art editor packed in eye-friendly
           dark theme.</h1>
@@ -35,35 +46,14 @@ class Index extends React.Component {
             alt="Program screenshot" />
         </picture>
         <div className="download-buttons animate__animated animate__fadeInUp">
-          <a href="" className="download-button">Download now</a>
+          <a href="/download" className="download-button">Download now</a>
           <p title="PixiEditor is currently only available for Windows">Windows v0.2 Beta</p>
         </div>
       </div>
       <div className="bullet-points">
-        <div className="bullet-point">
-          <div className="bullet-point-icon">
-            <img src="icons/github.svg" alt="" />
-          </div>
-          <div className="bullet-point-text">
-            Open source
-            </div>
-        </div>
-        <div className="bullet-point">
-          <div className="bullet-point-icon">
-            <img src="icons/feather.svg" alt="" />
-          </div>
-          <div className="bullet-point-text">
-            Lightweight
-            </div>
-        </div>
-        <div className="bullet-point">
-          <div className="bullet-point-icon">
-            <img src="icons/star.svg" alt="" />
-          </div>
-          <div className="bullet-point-text">
-            Easy to use
-            </div>
-        </div>
+        <BulletPoint text="Open source" icon="icons/github.svg"/>
+        <BulletPoint text="Lightweight" icon="icons/feather.svg"/>
+       <BulletPoint text="Easy to use" icon="icons/star.svg"/>
       </div>
       <div className="features-container">
         <div className="features">
@@ -85,6 +75,9 @@ class Index extends React.Component {
               ["Draw like a pro, using our pixel-perfect pen, which removes unnecessary pixels, so your artwork can be done faster and better.",
                 "Bucket, line, ellipse, rectangle, all ready for fast and flawless editing."]}
             gif="gifs/outline.gif" />
+            <Feature gif="gifs/Docking.gif" align="right" icon="icons/columns.svg" title="Multiple documents editing support" 
+            description={["Edit documents side to side, create multiple columns, rows. Float windows and tabs.", 
+            "You can organize layout anyway you want, without disturbing your work."]}/>         
         </div>
       </div>
     </Layout>

@@ -1,5 +1,4 @@
 body {
-    background-color: #252525;
     color: white;
     font-family: 'Roboto', sans-serif;
     margin: 0;
@@ -15,7 +14,7 @@ body {
     width: 100%;
     max-width: 100%;
     margin: 0;
-    background-color: #2c2c2c;
+    background-color: var(--ifm-navbar-background-color);
 }
 
 a{
@@ -123,6 +122,7 @@ header {
     background-color: #a81b37;
     border: solid 1px #a81b37;
     transition: .3s;
+    text-decoration: none;
 }
 
 #screenshot {

@@ -1,3 +1,6 @@
 :root{
-    --ifm-color-primary: white;
+    --ifm-color-primary: white !important;
+    --ifm-background-color: #252525 !important;
+    --ifm-surface-color: #2c2c2c !important;
+    --ifm-navbar-background-color: #2c2c2c;
 }

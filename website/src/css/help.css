@@ -11,3 +11,11 @@
 .helpColumn img {
     width: 200px;
 }
+
+.supportItemsGrid{
+    display: grid;
+}
+
+.supportItem-image img{
+    width: 36px;
+}

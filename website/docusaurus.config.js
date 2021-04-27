@@ -1,6 +1,3 @@
-// See https://docusaurus.io/docs/site-config for all the possible
-// site configuration options.
-
 const siteConfig = {
   projectName: 'pixieditor.net',
   organizationName: 'PixiEditor Organization',
@@ -39,6 +36,7 @@ module.exports =
   tagline: 'A beautiful pixel art editor',
   url: 'https://pixieditor.net', // Your website URL
   baseUrl: '/', // Base URL for your project */
+  projectName: "PixiEditor",
   presets: [
     [
       '@docusaurus/preset-classic',
@@ -58,6 +56,10 @@ module.exports =
   ],
 
   themeConfig: {
+    colorMode: {
+      defaultMode: "dark",
+      disableSwitch: true
+    },
     navbar: {
       title: "PixiEditor",
       logo: {
@@ -68,8 +70,13 @@ module.exports =
         {to: 'docs/introduction', label: 'Docs', position: 'left'},
         {to: 'help', label: 'Help', position: 'left'},
         {
-          href: 'https://github.com/',
+          href: 'https://github.com/PixiEditor/PixiEditor',
           label: 'GitHub',
+          position: 'right',
+        },
+        {
+          href: 'https://opencollective.com/pixieditor',
+          label: 'Donate ✨',
           position: 'right',
         },
         {to: 'blog', label: 'Blog', position: 'left'},
@@ -81,6 +88,53 @@ module.exports =
         src: "img/favicon-96x96.png",
         href: "/"
       },
+      links: [
+        {
+          title: "Docs",
+          items: [
+            {
+            label: "Getting started",
+            to: "docs/Introduction"
+            }
+          ],
+        },
+        {
+          title: "Community",
+          items: [
+            {
+              label: "Reddit",
+              href: "https://www.reddit.com/r/PixiEditor/"
+            },
+            {
+              label: "Twitter",
+              href: "https://twitter.com/PixiEditor"
+            },
+            {
+              label: "Discord",
+              href: "https://discord.gg/qSRMYmq"
+            },
+            {
+              label: "YouTube",
+              href: "https://www.youtube.com/channel/UCT5XvyvX1q5PAIaXfWmpsMQ"
+            }
+          ]
+        },
+        {
+          title: "More",
+          items: [
+            {
+              label: "Donate",
+              href: "https://opencollective.com/pixieditor"
+            }
+          ]
+        },
+        {
+          title: "Legal",
+          items: [
+            
+          ]
+        }
+      ],
       copyright: `Copyright © ${new Date().getFullYear()} PixiEditor Organization`,
     },
     image: "img/favicon-96x96.png",
