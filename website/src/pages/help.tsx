@@ -31,8 +31,7 @@ const SupportItem: React.FC<SupportLinkItem> = (props) => {
     <div className="supportItem-image">
       <a href={props.imageLink}><img src={props.image} alt=""/></a>
     </div>
-    <div className="supportItem-content">
-      {props.content}
+    <div className="supportItem-content" dangerouslySetInnerHTML={{__html: props.content}}>
     </div>
     </div>
   )
@@ -41,28 +40,26 @@ const SupportItem: React.FC<SupportLinkItem> = (props) => {
 function Help(props) {
   const {config: siteConfig, language = ''} = props;
   const {baseUrl, docsUrl} = siteConfig;
-  const docsPart = `${docsUrl ? `${docsUrl}/` : ''}`;
+  const docsPart = `${docsUrl ? `${docsUrl}/` : 'docs/'}`;
   const langPart = `${language ? `${language}/` : ''}`;
   const docUrl = (doc) => `${baseUrl}${docsPart}${langPart}${doc}`;
 
   const supportLinks = [
     {
-      content: `Learn more using the [documentation on this site.](${docUrl(
-        'introduction.html',
-      )})`,
+      content: `Learn more using the <a href="${docUrl('introduction')}">documentation on this site.</a>`,
       title: 'Browse Docs',
       image: 'img/book.svg',
-      imageLink: `${docUrl("introduction.html")}`
+      imageLink: `${docUrl("introduction")}`
     },
     {
-      content: `Ask questions about the documentation and project on our [Discord.](https://discord.gg/qSRMYmq)`,
+      content: `Ask questions about the documentation and project on our <a href="https://discord.gg/qSRMYmq">Discord.</a>`,
       title: 'Join the community',
       image: 'img/Discord-Logo-White.svg',
       imageLink: "https://discord.gg/qSRMYmq"
     },
     {
       title: 'Contact us',
-      content: "Send us email with your question pixieditorproject@gmail.com",
+      content: `Send us email with your question <a href="mailto:pixieditorproject@gmail.com">pixieditorproject@gmail.com</a>`,
       image: 'img/mail.svg',
       imageLink: "mailto:pixieditorproject@gmail.com"
     },

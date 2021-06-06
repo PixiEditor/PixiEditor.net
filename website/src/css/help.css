@@ -1,19 +1,36 @@
 
-.helpColumn a {
+.supportItem-title{
+    font-size: 32px;
+}
+
+.supportItem-image{
+    text-align: center;
+    margin: 50px;
+}
+
+.supportItem a {
     color: #b91f3e;
 }
 
-.helpColumn a:hover {
+.supportItem a:hover {
     text-decoration: none;
     color: #b91f3e;
 }
 
-.helpColumn img {
-    width: 200px;
+.supportItem-image a img {
+    width: 125px;
 }
 
 .supportItemsGrid{
     display: grid;
+    grid-template-columns: auto auto auto;
+    grid-template-rows: auto;
+    align-items: center;
+    justify-content: center;
+    height: 500px;
+    gap: 0px 100px;
+    grid-template-areas:
+      ". . .";
 }
 
 .supportItem-image img{
