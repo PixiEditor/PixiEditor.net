@@ -1,6 +1,8 @@
 {
   "docs": {
-    "Getting Started": ["introduction"],
-    "Usage": ["shortcuts"]
+    "Getting Started 🏠": ["introduction"],
+    "Usage 🎮": ["shortcuts"],
+    "Contributing 💻": ["start-here", {"Tools": ["toolbars", "building-tool", "toolbar-settings"]}, "undo-manager"],
+    "Other 🔍": ["faq", "third-party-licenses", "privacy-policy"]
   }
 }

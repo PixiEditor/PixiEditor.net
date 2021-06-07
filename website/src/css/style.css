@@ -17,9 +17,18 @@ body {
     background-color: var(--ifm-navbar-background-color);
 }
 
-a{
+#mainPage a{
     text-decoration: none;
     color: white;
+}
+
+.markdown a {
+    color: #b91f3e;
+}
+
+.markdown a:hover {
+    text-decoration: none;
+    color: #b91f3e;
 }
 
 header {
@@ -51,7 +60,7 @@ header {
 
 .download-section h1{
     font-size: 50px;
-    margin: 90px;
+    margin: 80px;
 }
 
 .download-section {
@@ -70,13 +79,6 @@ header {
         font-size: 5vw;
         margin-left: 5px;
     }
-}
-
-.download-buttons p {
-    font-size: 18px;
-    color: #AFAfAf;
-    font-weight: 300;
-    margin-top: 0;
 }
 
 .header-container {
@@ -228,6 +230,15 @@ header {
     max-height: 400px;
 }
 
+
+.feature-icon{
+    min-width: 50px;
+}
+
+.feature.right .feature-gif{
+    margin-right: 20px;
+}
+
 .feature-icon img{
     width: 50px;
     visibility: visible;
@@ -263,12 +274,37 @@ header {
 }
 
 @media only screen and (min-device-width: 360px) and (max-device-width: 736px) {
+
+    #screenshot{
+        width: 90%;
+    }
+
+    .download-section h1{
+        font-size: 36px;
+    }
 }
 
-@media only screen and (min-width: 1024px) {
-}
+@media only screen and (max-width: 1024px) {
 
-@media only screen and (max-width: 1023px) {
+    .feature{
+        max-width: 100%;
+        flex-direction: column;
+        text-align: left;
+        margin-left: auto;
+        margin-right: auto;
+        margin-bottom: 75px;
+
+    }
+
+    .feature-gif{
+        margin: 0 auto;
+    }
+
+    .feature.right
+    {
+        flex-direction: column;
+    }
+
 }
 
 @media only screen and (min-width: 1400px) {

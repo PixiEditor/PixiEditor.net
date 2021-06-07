@@ -36,18 +36,14 @@ const BulletPoint = (props) => {
 
 class Index extends React.Component {
   render() {
-    return <Layout title="Main page">
+    return <Layout id="mainPage" title="Main page">
       <div className="download-section">
         <h1 className="animate__animated animate__fadeInUp">A beautiful, lighweight pixel-art editor packed in eye-friendly
           dark theme.</h1>
-        <picture>
-          <source media="(max-width: 800px)" srcSet="screenshotMini.png" />
           <img className="animate__animated animate__fadeInUp" id="screenshot" src="screenshot.png"
             alt="Program screenshot" />
-        </picture>
         <div className="download-buttons animate__animated animate__fadeInUp">
           <a href="/download" className="download-button">Download now</a>
-          <p title="PixiEditor is currently only available for Windows">Windows v0.2 Beta</p>
         </div>
       </div>
       <div className="bullet-points">

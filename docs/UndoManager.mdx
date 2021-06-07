@@ -1,0 +1,235 @@
+---
+id: undo-manager
+title: Working with UndoManager and Changes
+sidebar_label: UndoManager and Changes
+---
+# About
+
+PixiEditor utilizes a quite complex undo system, yet easy to use after understanding a few concepts. The editor itself handles almost all the hard work and unless you are building some complex tool, implementing new things should come with ease.
+
+# The UndoManager class
+
+Generally, there are 3 methods, that you'll use while working with [UndoManager](https://github.com/PixiEditor/PixiEditor/blob/master/PixiEditor/Models/Controllers/UndoManager.cs).
+
+- `AddUndoChange`
+- `Undo`
+- `Redo`
+
+## `AddUndoChange`
+
+This is a method that adds your change to [UndoManager](https://github.com/PixiEditor/PixiEditor/blob/master/PixiEditor/Models/Controllers/UndoManager.cs)
+
+Example usage: 
+
+```csharp
+public int Number { get; set; }
+
+public void ChangeNumber(int newNumber)
+{
+    UndoManager.AddUndoChange(new Change("Number", Number, newNumber, "Changed number", this));
+    Number = newNumber;
+}
+```
+---
+
+There are 2 parameters, `Change change` and `bool invokedInsideSetter = false`.
+
+- Change is a class that contains all the data about your undoable change.
+- invokedInsideSetter is used to prevent infinite adding the same change when `AddUndoChange` is located inside the setter property of this change.
+
+
+:::danger wrong
+This Example will yield an infinite loop of adding changes to UndoManager
+:::
+
+```csharp
+private int number;
+public int Number
+{
+    get => number;
+    set
+    {
+        UndoManager.AddUndoChange(new Change("Number", number, value, "Changed number", this));
+        number = value;
+    }
+}
+```
+
+:::tip correct
+By setting `invokedInsideSetter` to `true` this problem is gone.
+:::
+
+```csharp
+private int number;
+public int Number
+{
+    get => number;
+    set
+    {
+        UndoManager.AddUndoChange(new Change("Number", number, value, "Changed number", this), true);
+        number = value;
+    }
+}
+```
+
+# Different types of Change
+
+## Property-based change
+
+This is the most basic change type. It sets the property value on `Undo` and `Redo`.
+
+```csharp
+public Change(string property, object oldValue, object newValue, string description = "", object root = null)
+```
+
+- `property` is the name of the property that is affected, dot format is supported (ex. `NumberStore.Number`)
+- `oldValue` is the value before the property was changed
+- `newValue` is the value after the property was changed
+- `description` is the description of the change, it's just a documentation
+- `root` is the parent class that contains property, default is null, which points to PixiEditor `UndoChanges` property containing class (while writing this doc, it's: `ViewModelMain.Current.UndoSubViewModel`)
+
+[Example is shown above](#addundochange)
+
+## Process-based change
+
+This type of change is significantly different from a property-based one. It doesn't set any values by itself, but rather executes a defined process (method/function/Action) on `Undo` and `Redo`.
+
+```csharp
+ public Change(Action<object[]> reverseProcess, object[] reverseArguments, Action<object[]> process, object[] processArguments, string description = "")
+```
+
+In this constructor, we have `reverseProcess`, `reverseArguments`, `process` and `processArguments`. The reverse process is a function that is called on `Undo` and the process is a function called on `Redo`. They both are Actions with `object[]` arguments. This kind of Undo is for more complex cases, where simple property changing isn't enough. PixiEditor mainly uses them, since working with images is a challenging task, and we do not store whole bitmaps in memory.
+
+Example
+
+```csharp
+
+public WriteableBitmap Bitmap { get; set; }
+
+public void SetBlackPixel(Coordinates position)
+{
+    object[] processArgs = new object[] { position };
+    object[] reverseProcessArgs = new object[] { position, Colors.Red };
+    UndoManager.AddUndoChange(new Change(RemovePixelProcess, reverseProcessArgs, SetPixelProcess, processArgs, "Set pixel to black"));
+    SetPixelToBlack(position);
+}
+
+public void SetPixelToBlack(Coordinates position)
+{
+    Bitmap.SetPixel(pixelPosition.X, pixelPosition.Y, Colors.Black);
+}
+
+public void SetPixelProcess(object[] arguments)
+{
+    if (arguments.Length > 0 && arguments[0] is Coordinates pixelPosition)
+    {
+        SetPixelToBlack(pixelPosition);
+    }
+}
+
+public void RemovePixelProcess(object[] arguments)
+{
+    if (arguments.Length > 1 && arguments[0] is Coordinates pixelPosition && arguments[1] is Color lastColor)
+    {
+        Bitmap.SetPixel(pixelPosition.X, pixelPosition.Y, lastColor);
+    }
+}
+```
+
+In this example, we are setting the pixel at some Coordinates to black, we have 2 methods that are used in undo, they are called processes, One is basically a wrapper for `SetPixelToBlack` with `object[] arguments` and second Undoes the setting pixel with `lastColor` which is red.
+
+## StorageBasedChange
+
+Some actions are unreversible, and cannot be recreated without saving the bitmap somewhere, that's where `StorageBasedChange` comes in. This change saves selected layers on the disk.
+
+This class is basically a wrapper for normal Change, that injects some logic into `ReverseProcess` (undo) and `Process` (redo). Either you choose to save layers on each `Undo()` or `Redo()`, StorageBasedChange supports both approaches.
+
+First, you need to construct an object and provide layers, which you want to save with some additional parameters.
+
+The basic syntax looks like this: 
+
+```csharp
+StorageBasedChange(Document document, IEnumerable<Layer> layersToSave, bool saveOnStartup = true);
+```
+
+where
+
+`document` - is a Document that contains layers to save.
+
+`layers` - layers to save on disk
+
+`saveOnStartup` - if true, layers are saved on disk after object initialization (in the constructor).
+
+And the next this is to construct actual `Change`, which you can insert into `UndoManager` using `ToChange(...) function`.
+
+One of the method overloads looks like this
+
+```csharp
+public Change ToChange(Action<Layer[], UndoLayer[]> undoProcess, Action<object[]> redoProcess, object[] redoProcessParameters, string description = "")
+``` 
+
+Where
+
+`undoProcess` - is a method that will be executed on Undo, it needs to have 2 parameters and doesn't return anything. Both parameters are connected with restored layers from the disk.
+
+The first parameter is a `Layer[]`, these layer array is loaded from disk, and you can do whatever with them.
+
+The Second parameter is a UndoLayer[], this class contains information about the layer before saving, this is required since `StorageBasedUndo` saves only layer bitmap on disk (as a PNG).
+
+
+`redoProcess` - is a basic method with object[] parameters, same as a normal Change process, but before calling this function, `StorageBasedUndo` saves layers on disk again.
+
+`redoProcessParameters` - arguments for `redoProcess`
+
+`description` - description of undo.
+
+There are a few more overloads, one which swaps `Undo` with `Redo`, so you save layers on disk on `Redo` and restore on `Undo`, another adds the possibility to attach custom parameters to `Undo` etc.
+
+Example of add layer undo (taken directly from PixiEditor).
+
+```csharp
+
+ StorageBasedChange storageChange = new StorageBasedChange(this, new[] { Layers[^1] }, false); //Constructing StorageBasedChange with last layer in Layers array
+
+UndoManager.AddUndoChange(
+    storageChange.ToChange(
+    RemoveLayerProcess,
+    new object[] { Layers[^1].LayerGuid },
+    RestoreLayersProcess,
+    "Add layer"));
+
+private void RestoreLayersProcess(Layer[] layers, UndoLayer[] layersData)
+        {
+            for (int i = 0; i < layers.Length; i++)
+            {
+                Layer layer = layers[i];
+
+                Layers.Insert(layersData[i].LayerIndex, layer);
+                if (layersData[i].IsActive)
+                {
+                    SetActiveLayer(Layers.IndexOf(layer));
+                }
+            }
+        }
+
+private void RemoveLayerProcess(object[] parameters)
+        {
+            if (parameters != null && parameters.Length > 0 && parameters[0] is Guid layerGuid)
+            {
+                Layer layer = Layers.First(x => x.LayerGuid == layerGuid);
+                int index = Layers.IndexOf(layer);
+                bool wasActive = layer.IsActive;
+                Layers.Remove(layer);
+
+                if (wasActive || ActiveLayerIndex >= index)
+                {
+                    SetNextLayerAsActive(index);
+                }
+            }
+        }
+
+```
+
+# Summary
+
+Undo system is quite complex, there are a lot of variations and possibilities, you've learned from this guide about most important aspects, you can find out more examples in source code and tests (they are a great source of knowledge!).
