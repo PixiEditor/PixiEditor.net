@@ -59,9 +59,9 @@ function Help(props) {
     },
     {
       title: 'Contact us',
-      content: `Send us email with your question <a href="mailto:pixieditorproject@gmail.com">pixieditorproject@gmail.com</a>`,
+      content: `Send us email with your question <a href="mailto:info@pixieditor.net">info@pixieditor.net</a>`,
       image: 'img/mail.svg',
-      imageLink: "mailto:pixieditorproject@gmail.com"
+      imageLink: "mailto:info@pixieditor.net"
     },
   ];
 
