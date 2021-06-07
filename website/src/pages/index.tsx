@@ -18,7 +18,7 @@ const Feature = (props) => {
       </div>
     </div>
     <div className="feature-gif">
-      <img src={props.gif} />
+      <img src={props.gif} alt="feature gif"/>
     </div>
   </div>
 }

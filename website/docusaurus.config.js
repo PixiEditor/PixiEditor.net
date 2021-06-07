@@ -36,7 +36,8 @@ module.exports =
   tagline: 'A beautiful pixel art editor',
   url: 'https://pixieditor.net', // Your website URL
   baseUrl: '/', // Base URL for your project */
-  projectName: "PixiEditor",
+  projectName: "pixieditor.github.io",
+  organizationName: 'PixiEditor',
   presets: [
     [
       '@docusaurus/preset-classic',
@@ -155,8 +156,4 @@ module.exports =
     image: "img/favicon-96x96.png",
     sidebarCollapse: false
   },
-  url: 'https://pixieditor.github.io',
-  baseUrl: '/',
-  projectName: 'pixieditor.github.io',
-  organizationName: 'PixiEditor',
 };
