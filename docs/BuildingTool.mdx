@@ -1,0 +1,184 @@
+---
+id: building-tool
+title: Building a tool
+sidebar_label: Building a tool
+---
+
+# Introduction
+
+In this guide, we will be building a simple, single-pixel drawing tool, to show the process of creating tools.
+
+# Tool Types
+
+There are 2 main different types of tools.
+
+The `BitmapOperationTool` and `ReadonlyTool`.
+
+## BitmapOperationTool
+
+BitmapOperationTool is a tool, that performs some kind of operation, which yields the result as change on canvas.
+
+An example of such a tool is [`EarserTool`](https://github.com/PixiEditor/PixiEditor/blob/master/PixiEditor/Models/Tools/Tools/EraserTool.cs) which "erases" pixels (changes the color to transparent).
+
+It does two main things:
+
+- Processes the input data
+- Returns the changed pixels
+
+## ReadonlyTool
+
+Readonly tool, as the name suggests, does not return any data, it just processes the input.
+
+An Example is [`SelectTool`](https://github.com/PixiEditor/PixiEditor/blob/master/PixiEditor/Models/Tools/Tools/SelectTool.cs) which selects the area on the canvas. It doesn't affect the layers in any way.
+
+
+# Building the single-pixel Pen Tool
+
+We are starting by creating a `SinglePixelTool.cs` file in `Models/Tools/Tools` folder.
+
+Our tool will _draw_ the pixel, which means we should inherit from `BitmapOperationTool`.
+
+By now the script should look like this:
+
+```cs
+using PixiEditor.Models.DataHolders;
+using PixiEditor.Models.Layers;
+using PixiEditor.Models.Position;
+using System;
+using System.Windows.Media;
+
+namespace PixiEditor.Models.Tools.Tools
+{
+    public class SinglePixelTool : BitmapOperationTool
+    {
+        public override ToolType ToolType => throw new NotImplementedException();
+
+        public override LayerChange[] Use(Layer layer, Coordinates[] mouseMove, Color color)
+        {
+            throw new NotImplementedException();
+        }
+    }
+}
+```
+
+As we can see, we have 2 required abstractions, `ToolType` and `Use`.
+
+## ToolType
+
+ToolType is an Enum, it is used to select tools easily, this approach might change in the future, but for now, it is that way.
+
+We need to add our SinglePixelTool to the `ToolType`. Open ToolType script and append `SinglePixelPen` to the end.
+
+The script should look like this:
+
+```cs
+namespace PixiEditor.Models.Tools
+{
+    public enum ToolType
+    {
+        None,
+        Move,
+        Pen,
+        Select,
+        ...
+        SinglePixel
+    }
+}
+```
+
+Now we can set it in our `SinglePixelTool.cs`
+```csharp 
+public override ToolType ToolType => ToolType.SinglePixel; 
+```
+
+## Building Use logic
+
+Now we are ready to write actual tool code.
+```csharp
+Use(Layer layer, Coordinates[] mouseMove, Color color)
+```
+is a method that is executed for every `BitmapOperationTool`. All logic should be placed here.
+
+### layer
+
+This argument is a Layer that was selected as active while drawing. It **should** be used only to read values, not write them directly. Some tools might require a lot of processing power, in this case, you _can_ Set pixels directly, but be aware, that you will need to write Undo logic yourself.
+
+### mouseMove
+
+This argument contains an array of mouse positions since mouse click. So latest mouse positon is `mouseMove[0]` and start (click) is `mouseMove[mouseMove.Length - 1]`, or as I like it more `mouseMove[^1]`.
+
+### color
+
+This argument is a color that is used while drawing (Primary Color).
+
+## Implementation
+
+We want to draw a _single_ pixel on a position where the user clicked (is holding mouse). So we need to take the recent mouse position and color and return the change there.
+
+Our code will look like this:
+
+```cs
+using PixiEditor.Models.DataHolders;
+using PixiEditor.Models.Layers;
+using PixiEditor.Models.Position;
+using System;
+using System.Windows.Media;
+
+namespace PixiEditor.Models.Tools.Tools
+{
+     public class SinglePixelTool : BitmapOperationTool
+    {
+        public override ToolType ToolType => ToolType.SinglePixel;
+
+        public override LayerChange[] Use(Layer layer, Coordinates[] mouseMove, Color color)
+        {
+            Coordinates latestPosition = mouseMove[0];
+            return Only(GetPixelChange(latestPosition, color), layer);
+        }
+
+        public BitmapPixelChanges GetPixelChange(Coordinates mouseClick, Color color)
+        {
+            Coordinates[] changedPositions = new[] { mouseClick }; // We need to return array, but changed pixel is only the mouseClick.
+            return BitmapPixelChanges.FromSingleColoredArray(changedPositions, color);
+        }
+    }
+}
+
+```
+
+`Only` is a nice wrapper for LayerChange[], if we are only changing a single layer. It looks like this
+```csharp
+return new[] { new LayerChange(changes, layerIndex) };
+``` 
+
+`BitmapPixelChanges.FromSingleColoredArray` returns a BitmapPixelChanges that are single-colored. This class is used to store changed pixels.
+
+# Adding the tool to the editor
+
+Our tool is ready, now it's the time to add it to the editor.
+
+Go to `ViewModels/ViewModelMain` and in the class constructor, under `ToolSet` add a `new SinglePixelTool()`.
+
+Now it should look like this: 
+
+```csharp
+ToolSet = new ObservableCollection<Tool>
+            {
+                new MoveTool(), new PenTool(), new SelectTool(), ... new SinglePixelTool()
+            };
+```
+
+Awesome, we are almost ready!
+
+Everything is set up when you run the program the tool is will be there, but invisible! You can click under the last tool you can see, and you'll select the SinglePixelPen tool.
+
+# Adding the image
+
+Adding a tool image is super easy. The only thing you need to do is to create an image with name format: `{ToolTypeName}Image.png` For example `PenImage.png`, so image for SinglePixelTool should be named `SinglePixelImage.png`, copy it to `Images\` and mark it as a resource in properties.
+
+If you still don't see the image, go to `Build -> Rebuild solution`
+
+# Conclusion
+
+Adding a tool requires a bit of work, but it's easy. There are a lot of cool features provided with Tools, I recommend checking out the source code and other tools for reference.
+

@@ -1,0 +1,76 @@
+---
+id: toolbar-settings
+title: Toolbar Settings
+sidebar_label: Toolbar Settings
+---
+
+:::info
+
+Since version 0.1.3.2, Settings are typed, this guide is still relevant, but syntax might vary.
+
+:::
+# Introduction
+
+[Setting](https://github.com/PixiEditor/PixiEditor/blob/master/PixiEditor/Models/Tools/ToolSettings/Settings/Setting.cs) is a core part of [Toolbars](https://github.com/PixiEditor/PixiEditor/wiki/Toolbars), Setting can be a simple CheckBox or a complex Color Picker. Every setting consist of:
+
+- `Name` - A unique id, that allows identifying the setting and share values between toolbars.
+- `Value` - A result value of the setting.
+- `SettingControl` - UI part of Setting, a WPF Control.
+- `Label` (optional) - Label for Setting, appears on the left from the control
+
+# Pre-made Settings
+
+Here is a list of some of the pre-built settings ready to use, for a full list, check out [source code](https://github.com/PixiEditor/PixiEditor/tree/master/PixiEditor/Models/Tools/ToolSettings/Settings)
+
+- `BoolSetting` - Boolean Checkbox
+- `ColorSetting` - Pop-up(Portable) color picker
+- `DropdownSetting` - ComboBox with array of string values
+- `FloatSetting` - A TextBox that accepts floating precision values
+- `SizeSetting` - A TextBox that accepts integers (Size in pixels), adds "px" at the end of edit (Value is still integer)
+
+## Creating existing Setting
+
+```csharp
+Setting setting = new DropdownSetting("Mode", new[] {"New", "Add", "Subtract"}, "Selection type"); //"Mode" is a name (ID), array is a list of values for 
+                                                                                                   //DropdownSetting, "Selection type" is a label.
+```
+You can add `setting` to Toolbar as described in [this guide](https://github.com/PixiEditor/PixiEditor/wiki/Toolbars) and it will be ready to use.
+
+# Creating a new Setting
+
+Creating a Setting is not a hard task, but can be tricky sometimes. 
+
+Let's get a simple example from source code.
+
+```csharp
+public class ColorSetting : Setting
+    {
+        public ColorSetting(string name, string label = "") : base(name)
+        {
+            Label = label;
+            SettingControl = GenerateColorPicker();
+            Value = Color.FromArgb(0, 0, 0, 0);
+        }
+
+        private PortableColorPicker GenerateColorPicker()
+        {
+            PortableColorPicker picker = new PortableColorPicker();
+            Binding binding = new Binding("Value")
+            {
+                Mode = BindingMode.TwoWay
+            };
+            picker.SetBinding(PortableColorPicker.SelectedColorProperty, binding);
+            return picker;
+        }
+    }
+```
+
+As you can see, a `Setting` requires `Name` as a parameter. It's good to pass a label as an optional one. We are providing transparent color as a default `Value` and generating `PortableColorPicker`.
+
+The tricky part is in generating Control since you must bind correct values. 
+
+In this example, we are binding "Value" (the Setting property) to the PortableColorPicker `SelectedColorProperty`. Usually, the principle is the same for most controls, but sometimes you might want to bind more things, check out [other source code files](https://github.com/PixiEditor/PixiEditor/tree/master/PixiEditor/Models/Tools/ToolSettings/Settings) for more reference. 
+
+# Conclusion
+
+The settings are a very comfortable way for easily setting up the tool values, Toolbar system takes care of getting the values and managing them. Building a Setting is easy but requires a bit of setup.

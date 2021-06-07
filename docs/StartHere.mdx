@@ -1,0 +1,34 @@
+---
+id: start-here
+title: Start here
+sidebar_label: Start here
+---
+# Getting started with source code guide
+
+This guide will help you start with PixiEditor codebase.
+
+## Important information
+
+Want to make something cool huh? Great! But first, you need to know a few things.
+
+* PixiEditor is written in C#
+* PixiEditor is built in .NET 5 WPF framework
+* We use the MVVM design pattern.
+
+Everyone can find something for themselves. From easy things, to hard.
+
+PixiEditor is a complex application, so it's important to follow some rules, to ensure quality and maintainability.
+
+Most important is the MVVM design pattern. Separating UI from logic is crucial. However, we accept some exceptions to that. For example, building **simple** user controls or dialogs can hold logic in code-behind, building ViewModel is unnecessary, but there is no clear border, it all depends on complexity.
+
+## Code main points
+
+[ViewModelMain](https://github.com/PixiEditor/PixiEditor/blob/master/PixiEditor/ViewModels/ViewModelMain.cs) is considered entry point of program. It is a DataContext to MainWindow, all initialization happens there.
+
+## List of useful guides
+
+[Building a Tool](building-tool) - Covers basics of the tool system.
+
+[Toolbars](Toolbars) - How they work and how to create them
+
+[Undo system](undo-manager) - Understanding how to add new undo changes and how do they work

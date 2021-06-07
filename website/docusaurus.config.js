@@ -56,9 +56,17 @@ module.exports =
   ],
 
   themeConfig: {
+    prism:{
+      theme: require('prism-react-renderer/themes/dracula'),
+      additionalLanguages: ['csharp'],
+    },
     colorMode: {
       defaultMode: "dark",
       disableSwitch: true
+    },
+    googleAnalytics: {
+      trackingID: 'G-XLN6FQ07LW',
+      anonymizeIP: true,
     },
     navbar: {
       title: "PixiEditor",
@@ -116,6 +124,10 @@ module.exports =
             {
               label: "YouTube",
               href: "https://www.youtube.com/channel/UCT5XvyvX1q5PAIaXfWmpsMQ"
+            },
+            {
+              label: "Instagram",
+              href: "https://instagram.com/pixi.editor"
             }
           ]
         },
@@ -131,7 +143,10 @@ module.exports =
         {
           title: "Legal",
           items: [
-            
+            {
+            label: "Privacy Policy",
+            to: "docs/privacy-policy" 
+            }
           ]
         }
       ],
@@ -139,5 +154,9 @@ module.exports =
     },
     image: "img/favicon-96x96.png",
     sidebarCollapse: false
-  }
+  },
+  url: 'https://pixieditor.github.io',
+  baseUrl: '/',
+  projectName: 'pixieditor.github.io',
+  organizationName: 'PixiEditor',
 };

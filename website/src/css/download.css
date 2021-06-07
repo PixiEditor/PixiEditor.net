@@ -4,13 +4,16 @@
 }
 
 .download h2{
-    font-size: 28px;
-    margin-bottom: 50px;
+    font-size: 48px;
+    margin-bottom: 150px;
+}
+
+.download-buttons a {
+    vertical-align: middle;    
 }
 
 .download img{
-    width: 195px;
-    vertical-align: middle;
+    width: 250px;
 }
 
 .or-separator{
@@ -18,9 +21,22 @@
     margin: 0 20px;
 }
 
-.download-button{
+.download-buttons.second{
+    display: inline-block;
+}
+
+.download-button.second{
+    font-size: 40px;
     display: inline-block;
     vertical-align: middle;
+}
+
+#version {
+    font-size: 18px;
+    color: #AFAfAf;
+    font-weight: 300;
+    margin-top: 10px;
+    display: block;    
 }
 
 iframe{
@@ -29,7 +45,7 @@ iframe{
 }
 
 .waiting-text{
-    margin-top: 100px;
+    margin-top: 120px;
     margin-bottom: 100px;
     color: #AFAfAf;
     font-size: 24px;
@@ -55,6 +71,8 @@ iframe{
 .discord img{
     width: 256px;
     padding: 15px;
+    display: inline-block;
+    vertical-align: middle;
 }
 
 .discord a{
@@ -63,9 +81,47 @@ iframe{
     border-radius: 3px;
     margin: 10px;
     transition: 0.3s;
+    display: inline-block;
+    vertical-align: middle;
 }
 
 .discord a:hover{
     background-color: #359553;
     text-decoration: none;
+}
+
+
+@media only screen and (max-width: 1024px) {
+
+    .discord{
+        margin-bottom: 50px;
+    }
+
+}
+
+@media only screen and (max-width: 670px) {
+
+    .youtubeIframe{
+        width: 90%;
+    }
+
+}
+
+@media only screen and (max-width: 450px) {
+    .discord img{
+        width: 90%;
+        padding: 5px;
+    }
+
+    .download h2{
+        font-size: 38px;
+        margin-bottom: 100px;
+    }
+
+    .download-button.second{
+        font-size: 35px;
+        display: inline-block;
+        vertical-align: middle;
+    }
+    
 }
