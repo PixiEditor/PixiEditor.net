@@ -29,8 +29,8 @@ function download(props) {
                     <a href='//www.microsoft.com/store/apps/9NDDRHS8PBRN?cid=storebadge&ocid=badge' target="_blank">
                         <img src='https://developer.microsoft.com/store/badges/images/English_get-it-from-MS.png' alt='Microsoft Store Badge' /></a>
                     <span className="or-separator">Or</span>
-                    <a href={releases && releases.length > 0 ? releases.find((val, _) => val.name.includes("x64.exe")).browser_download_url : ""} className="download-button second">Download now</a>
-                    <a href={releases && releases.length > 0 ? releases.find((val, _) => val.name.includes("x86.exe")).browser_download_url : ""} className="download-button second">x86</a>
+                    <a href={releases && releases.length > 0 ? releases.find((val, _) => val.name.includes("setup64.zip")).browser_download_url : ""} className="download-button second">Download now</a>
+                    <a href={releases && releases.length > 0 ? releases.find((val, _) => val.name.includes("setup86.zip")).browser_download_url : ""} className="download-button second">x86</a>
                     <span id="version" title="PixiEditor is currently only available for Windows">Windows v{version}</span>
                 </div>
                 <div className="waiting-text">
