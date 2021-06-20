@@ -5,7 +5,7 @@
 
 .download h2{
     font-size: 48px;
-    margin-bottom: 150px;
+    margin-bottom: 100px;
 }
 
 .download-buttons a {
@@ -39,13 +39,21 @@
     display: block;    
 }
 
+.donation-container{
+    margin-top: 50px;
+}
+
+.donation-container img{
+    width: 350px;
+}
+
 iframe{
     border: 1px solid black;
     border-radius: 5px;
 }
 
 .waiting-text{
-    margin-top: 120px;
+    margin-top: 50px;
     margin-bottom: 100px;
     color: #AFAfAf;
     font-size: 24px;
