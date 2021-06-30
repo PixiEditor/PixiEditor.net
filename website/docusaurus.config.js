@@ -131,7 +131,7 @@ module.exports =
       ],
       copyright: `Copyright © ${new Date().getFullYear()} PixiEditor Organization`,
     },
-    image: "img/favicon-96x96.png",
+    image: "img/PixiEditorBanner.png",
     sidebarCollapse: false
   },
 };

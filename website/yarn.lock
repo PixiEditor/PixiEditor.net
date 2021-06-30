@@ -1160,7 +1160,7 @@
     "@docsearch/css" "3.0.0-alpha.36"
     "algoliasearch" "^4.0.0"
 
-"@docusaurus/core@^2.0.0-beta.0", "@docusaurus/core@2.0.0-beta.ff31de0ff":
+"@docusaurus/core@^2.0.0-beta.3", "@docusaurus/core@2.0.0-beta.ff31de0ff":
   "integrity" "sha512-+4Mmm5Zi1AvnFi0r/KfwSrXqOVQQPXQN610KcwrNsfXvq2QTR5O7QwXzUdZSERLQ183+iI1PD4x7bAiSSmwUBw=="
   "resolved" "https://registry.npmjs.org/@docusaurus/core/-/core-2.0.0-beta.ff31de0ff.tgz"
   "version" "2.0.0-beta.ff31de0ff"
@@ -1274,10 +1274,10 @@
     "url-loader" "^4.1.1"
     "webpack" "^5.37.0"
 
-"@docusaurus/module-type-aliases@^2.0.0-beta.0":
-  "integrity" "sha512-Yj+7hjy5pCK4DQ3l2JDGBF4bMY63MV/z18WK7REHniyqC66IJQT+0Gpb6Q+Oz8e2Og8AsyWIbfTXvsFWK0UhJA=="
-  "resolved" "https://registry.npmjs.org/@docusaurus/module-type-aliases/-/module-type-aliases-2.0.0-beta.0.tgz"
-  "version" "2.0.0-beta.0"
+"@docusaurus/module-type-aliases@^2.0.0-beta.3":
+  "integrity" "sha512-vciejziDBu39cyfmdvbpn865YlvugJMUOeD2m/7Kg4RLUPIZzQTWns0ZGIMc/iToiwebHwkoJtRsHaHzj8FpnA=="
+  "resolved" "https://registry.npmjs.org/@docusaurus/module-type-aliases/-/module-type-aliases-2.0.0-beta.3.tgz"
+  "version" "2.0.0-beta.3"
 
 "@docusaurus/plugin-content-blog@2.0.0-beta.ff31de0ff":
   "integrity" "sha512-abd9Fnqn7kYifIVUdYVwC9yeG2lEBFn3T0fNREplmrjtdNQUWfXx8hGMKOhigXmIzWjGdqtti3/2pLmRxomNIA=="
@@ -1381,7 +1381,7 @@
     "sitemap" "^7.0.0"
     "tslib" "^2.2.0"
 
-"@docusaurus/preset-classic@^2.0.0-beta.0":
+"@docusaurus/preset-classic@^2.0.0-beta.3":
   "integrity" "sha512-kXTtH1CygI7+jL/Tr2gQwGytE4IZti/Nep7f3p+i0I4euihMz90413CUHdp6/jx3HnrzcO5lPKAfdlZXbKh5Rw=="
   "resolved" "https://registry.npmjs.org/@docusaurus/preset-classic/-/preset-classic-2.0.0-beta.ff31de0ff.tgz"
   "version" "2.0.0-beta.ff31de0ff"
@@ -1841,10 +1841,10 @@
     "@types/history" "*"
     "@types/react" "*"
 
-"@types/react@*", "@types/react@^17.0.9", "@types/react@>= 16.8.0 < 18.0.0":
-  "integrity" "sha512-2Cw7FvevpJxQrCb+k5t6GH1KIvmadj5uBbjPaLlJB/nZWUj56e1ZqcD6zsoMFB47MsJUTFl9RJ132A7hb3QFJA=="
-  "resolved" "https://registry.npmjs.org/@types/react/-/react-17.0.9.tgz"
-  "version" "17.0.9"
+"@types/react@*", "@types/react@^17.0.11", "@types/react@>= 16.8.0 < 18.0.0":
+  "integrity" "sha512-yFRQbD+whVonItSk7ZzP/L+gPTJVBkL/7shLEF+i9GC/1cV3JmUxEQz6+9ylhUpWSDuqo1N9qEvqS6vTj4USUA=="
+  "resolved" "https://registry.npmjs.org/@types/react/-/react-17.0.11.tgz"
+  "version" "17.0.11"
   dependencies:
     "@types/prop-types" "*"
     "@types/scheduler" "*"
@@ -6677,7 +6677,7 @@
   "resolved" "https://registry.npmjs.org/postcss-zindex/-/postcss-zindex-5.0.1.tgz"
   "version" "5.0.1"
 
-"postcss@^7.0.0 || ^8.0.1", "postcss@^8.0.9", "postcss@^8.1.0", "postcss@^8.2.15", "postcss@^8.2.2", "postcss@^8.2.4", "postcss@^8.2.9", "postcss@^8.3.0", "postcss@^8.3.1":
+"postcss@^7.0.0 || ^8.0.1", "postcss@^8.0.9", "postcss@^8.1.0", "postcss@^8.2.15", "postcss@^8.2.2", "postcss@^8.2.4", "postcss@^8.2.9", "postcss@^8.3.1", "postcss@^8.3.5":
   "integrity" "sha512-NxTuJocUhYGsMiMFHDUkmjSKT3EdH4/WbGF6GCi1NDGk+vbcUTun4fpbOqaPtD8IIsztA2ilZm2DhYCuyN58gA=="
   "resolved" "https://registry.npmjs.org/postcss/-/postcss-8.3.5.tgz"
   "version" "8.3.5"
@@ -8281,10 +8281,10 @@
   dependencies:
     "is-typedarray" "^1.0.0"
 
-"typescript@^4.3.2":
-  "integrity" "sha512-zZ4hShnmnoVnAHpVHWpTcxdv7dWP60S2FsydQLV8V5PbS3FifjWFFRiHSWpDJahly88PRyV5teTSLoq4eG7mKw=="
-  "resolved" "https://registry.npmjs.org/typescript/-/typescript-4.3.2.tgz"
-  "version" "4.3.2"
+"typescript@^4.3.4":
+  "integrity" "sha512-uauPG7XZn9F/mo+7MrsRjyvbxFpzemRjKEZXS4AK83oP2KKOJPvb+9cO/gmnv8arWZvhnjVOXz7B49m1l0e9Ew=="
+  "resolved" "https://registry.npmjs.org/typescript/-/typescript-4.3.4.tgz"
+  "version" "4.3.4"
 
 "ua-parser-js@^0.7.18":
   "integrity" "sha512-6Gurc1n//gjp9eQNXjD9O3M/sMwVtN5S8Lv9bvOYBfKfDNiIIhqiyi01vMBO45u4zkDE420w/e0se7Vs+sIg+g=="
