@@ -38,7 +38,7 @@ class Index extends React.Component {
   render() {
     return <Layout id="mainPage" title="Main page">
       <div className="download-section">
-        <h1 className="animate__animated animate__fadeInUp">A beautiful, lighweight pixel-art editor packed in eye-friendly
+        <h1 className="animate__animated animate__fadeInUp">A beautiful, lightweight pixel-art editor packed in eye-friendly
           dark theme.</h1>
           <img className="animate__animated animate__fadeInUp" id="screenshot" src="screenshot.png"
             alt="Program screenshot" />
