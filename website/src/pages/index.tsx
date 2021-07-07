@@ -1,6 +1,7 @@
 import React from 'react';
 import Layout from '@theme/Layout';
 import "../css/style.css";
+import CookieConsent from "react-cookie-consent";
 
 const Feature = (props) => {
   return <div className={props.align === "right" ? "feature right" : "feature"}>
@@ -76,6 +77,15 @@ class Index extends React.Component {
             "You can organize layout anyway you want, without disturbing your work."]}/>         
         </div>
       </div>
+      <CookieConsent
+  location="bottom"
+  style={{ background: "#2c2c2c" }}
+  cookieName="cookieConsent"
+  buttonStyle={{ background: "#b91f3e", color:"white", fontSize: "13px" }}
+  expires={150}>
+  This website uses cookies to enhance the user experience.{" "}
+
+</CookieConsent>
     </Layout>
   }
 }

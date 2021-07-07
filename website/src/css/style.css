@@ -244,6 +244,11 @@ header {
     visibility: visible;
 }
 
+video{
+    border-radius: 5px;
+    border: 1px black solid;
+}
+
 @media (min-width:1200px) {
     .bullet-point-text {
         font-size: 40px;
