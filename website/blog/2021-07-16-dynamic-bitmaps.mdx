@@ -39,22 +39,22 @@ Let's start with a simple algorithm
 
 ```
 1. Create a new bitmap with a size of 0x0 (or of any other size, depending on your usage)
-2. Wait for coordinates and color to apply
+2. When set pixel is requested (for example user clicked on canvas), do the following:
 3. If the color is not transparent (if alpha is not 0):
 
   a. If X of given coordinates is bigger than current width or Y is bigger than height, Increase size to bottom right
 
   b. Else if new colored pixel X is smaller than 0 (relative to bitmap coordinates) or Y is smaller than 0, then increase the size to top left
   
-4. Else If color is transparent and coordinates already contain nontransparent pixel and these coordinates were last edge pixel:
+4. Else If: color is transparent and coordinates already contain non-transparent pixel and after deleting them, there is a gap between content and the bitmap:
   a. Decrease size of bitmap to fit content
   ```
 
   The process of resizing the bitmap is quite simple:
 
   ```
-  1. Copy pixels from the current bitmap
-  2. Create a new bitmap with the desired size
+  1. Create a new bitmap with the desired size
+  2. Copy pixels from the current bitmap
   3. Fill a new bitmap with the copied pixels at a calculated offset.
   ```
 
@@ -204,15 +204,25 @@ Let's start with a simple algorithm
         }
 ```
 
-As you can see, the code is not trivial, it takes a lot of steps, our implementation also does a bit more stuff, like requesting clips and
-clamping the maximum size. 
+As you can see, the code is not trivial, it takes a lot of steps, our implementation also does a bit more stuff, like requesting clips 
+(resizing whole document to perfectly fit the content) and clamping the maximum size. 
 
 ## Performance
 
 Our implementation is very performant since we are using fast `BitmapContext.BlockCopy` to copy and paste pixels into a new bitmap.
 
 It's almost unnoticeable in real-time, with fast mouse movement small visual jittering can be visible, but there is no delay whatsoever.
-It all depends on the implementation, platform, native bitmap APIs, etc.
+How fast dynamic bitmaps work, depends on the implementation, platform, native bitmap APIs, etc.
+
+## Other benefits
+
+The benefits described below are not directly related to the implementation, but the usage of dynamic bitmaps.
+
+These features are way easier to create (or possible at all), thanks to perfectly fitted bitmaps:
+- Resize and rotate border,
+- Clip canvas (fit document to content),
+- Center content relative to document or other layers,
+- Snapping and guides
 
 ## Conclusion
 
