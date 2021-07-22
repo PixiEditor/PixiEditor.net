@@ -1,0 +1,232 @@
+---
+title: Dynamic bitmaps
+author: Krzysztof Krysiński
+author_title: PixiEditor Creator
+author_url: https://krysinski.me
+author_image_url: https://avatars.githubusercontent.com/u/25402427?s=400&v=4
+tags: [code, solution]
+keywords: [bitmap, dynamic, data-structure, image, optimization]
+description: "Dynamic bitmap is a solution which made PixiEditor work multiple times faster, decreased RAM usage 10 times, and solved memory leak problems. 
+This article will explain what it is and how it works."
+---
+
+Dynamic bitmaps are a solution that made PixiEditor work multiple times faster, decreased RAM usage by about 10 times and solved memory leak problems. 
+This article will explain what dynamic bitmaps are and how they work.
+
+<!--truncate-->
+
+## History
+
+Dynamic bitmaps have been introduced in a very early alpha (version v0.0.3), before that the PixiEditor image system was pretty straightforward.
+
+Mouse clicks were converted into relative canvas coordinates, and then color was applied to the pixels at a given position. It was pretty simple, however, this solution had one big downside. PixiEditor uses [WriteableBitmap](https://docs.microsoft.com/pl-pl/dotnet/api/system.windows.media.imaging.writeablebitmap?view=net-5.0)
+to manipulate bitmaps and working on bigger canvases using this solution yielded bad performance and huge memory consumption.
+
+So what was the solution? Dynamic bitmaps!
+
+## What is a dynamic bitmap?
+
+In simple words, a dynamic bitmap is a bitmap that fits the size of its content. This is crucial for the layer system.
+Here is a visual representation of how it works 
+
+<video width="650" controls>
+  <source src="/videos/dynamic-bitmaps.mp4" type="video/mp4"/>
+</video>
+
+## How it works
+
+Let's start with a simple algorithm
+
+```
+1. Create a new bitmap with a size of 0x0 (or of any other size, depending on your usage)
+2. When set pixel is requested (for example user clicked on canvas), do the following:
+3. If the color is not transparent (if alpha is not 0):
+
+  a. If X of given coordinates is bigger than current width or Y is bigger than height, Increase size to bottom right
+
+  b. Else if new colored pixel X is smaller than 0 (relative to bitmap coordinates) or Y is smaller than 0, then increase the size to top left
+  
+4. Else If: color is transparent and coordinates already contain non-transparent pixel and after deleting them, there is a gap between content and the bitmap:
+  a. Decrease size of bitmap to fit content
+  ```
+
+  The process of resizing the bitmap is quite simple:
+
+  ```
+  1. Create a new bitmap with the desired size
+  2. Copy pixels from the current bitmap
+  3. Fill a new bitmap with the copied pixels at a calculated offset.
+  ```
+
+  However, the implementation is not trivial, it requires some calculations, like extracting the border pixels, calculating offsets,
+   checking if a coordinate is a border pixel and more.
+
+   ## How PixiEditor does this
+
+   Our algorithms look like this:
+
+   ```csharp
+        public void DynamicResize(BitmapPixelChanges pixels)
+        {
+            if (pixels.ChangedPixels.Count == 0)
+            {
+                return;
+            }
+
+            ResetOffset(pixels);
+            Tuple<DoubleCords, bool> borderData = ExtractBorderData(pixels);
+            DoubleCords minMaxCords = borderData.Item1;
+            int newMaxX = minMaxCords.Coords2.X - OffsetX;
+            int newMaxY = minMaxCords.Coords2.Y - OffsetY;
+            int newMinX = minMaxCords.Coords1.X - OffsetX;
+            int newMinY = minMaxCords.Coords1.Y - OffsetY;
+
+            if (!(pixels.WasBuiltAsSingleColored && pixels.ChangedPixels.First().Value.A == 0)) //Check if all requested pixels are transparent
+            {
+                if ((newMaxX + 1 > Width && Width < MaxWidth) || (newMaxY + 1 > Height && Height < MaxHeight))
+                {
+                    IncreaseSizeToBottomAndRight(newMaxX, newMaxY);
+                }
+
+                if ((newMinX < 0 && Width < MaxWidth) || (newMinY < 0 && Height < MaxHeight))
+                {
+                    IncreaseSizeToTopAndLeft(newMinX, newMinY);
+                }
+            }
+
+            // if clip (fit bitmap to content) is requested
+            if (borderData.Item2)
+            {
+                clipRequested = true;
+            }
+        }
+
+        private void IncreaseSizeToBottomAndRight(int newMaxX, int newMaxY)
+        {
+            if (MaxWidth - OffsetX < 0 || MaxHeight - OffsetY < 0)
+            {
+                return;
+            }
+
+            newMaxX = Math.Clamp(Math.Max(newMaxX + 1, Width), 0, MaxWidth - OffsetX);
+            newMaxY = Math.Clamp(Math.Max(newMaxY + 1, Height), 0, MaxHeight - OffsetY);
+
+            ResizeCanvas(0, 0, 0, 0, newMaxX, newMaxY);
+        }
+
+        private void IncreaseSizeToTopAndLeft(int newMinX, int newMinY)
+        {
+            newMinX = Math.Clamp(Math.Min(newMinX, Width), Math.Min(-OffsetX, OffsetX), 0);
+            newMinY = Math.Clamp(Math.Min(newMinY, Height), Math.Min(-OffsetY, OffsetY), 0);
+
+            Offset = new Thickness(
+                Math.Clamp(OffsetX + newMinX, 0, MaxWidth),
+                Math.Clamp(OffsetY + newMinY, 0, MaxHeight),
+                0,
+                0);
+
+            int newWidth = Math.Clamp(Width - newMinX, 0, MaxWidth);
+            int newHeight = Math.Clamp(Height - newMinY, 0, MaxHeight);
+
+            int offsetX = Math.Abs(newWidth - Width);
+            int offsetY = Math.Abs(newHeight - Height);
+
+            ResizeCanvas(offsetX, offsetY, 0, 0, newWidth, newHeight);
+        }
+
+        private void ResizeCanvas(int offsetX, int offsetY, int offsetXSrc, int offsetYSrc, int newWidth, int newHeight)
+        {
+            int iteratorHeight = Height > newHeight ? newHeight : Height;
+            int count = Width > newWidth ? newWidth : Width;
+
+            using (BitmapContext srcContext = LayerBitmap.GetBitmapContext(ReadWriteMode.ReadOnly))
+            {
+                WriteableBitmap result = BitmapFactory.New(newWidth, newHeight);
+                using (BitmapContext destContext = result.GetBitmapContext())
+                {
+                    for (int line = 0; line < iteratorHeight; line++)
+                    {
+                        int srcOff = (((offsetYSrc + line) * Width) + offsetXSrc) * SizeOfArgb;
+                        int dstOff = (((offsetY + line) * newWidth) + offsetX) * SizeOfArgb;
+                        BitmapContext.BlockCopy(srcContext, srcOff, destContext, dstOff, count * SizeOfArgb);
+                    }
+
+                    LayerBitmap = result;
+                    Width = newWidth;
+                    Height = newHeight;
+                }
+            }
+        }
+
+        private Tuple<DoubleCords, bool> ExtractBorderData(BitmapPixelChanges pixels)
+        {
+            Coordinates firstCords = pixels.ChangedPixels.First().Key;
+            int minX = firstCords.X;
+            int minY = firstCords.Y;
+            int maxX = minX;
+            int maxY = minY;
+            bool clipRequested = false;
+
+            foreach (KeyValuePair<Coordinates, Color> pixel in pixels.ChangedPixels)
+            {
+                if (pixel.Key.X < minX)
+                {
+                    minX = pixel.Key.X;
+                }
+                else if (pixel.Key.X > maxX)
+                {
+                    maxX = pixel.Key.X;
+                }
+
+                if (pixel.Key.Y < minY)
+                {
+                    minY = pixel.Key.Y;
+                }
+                else if (pixel.Key.Y > maxY)
+                {
+                    maxY = pixel.Key.Y;
+                }
+
+                if (clipRequested == false && IsBorderPixel(pixel.Key) && pixel.Value.A == 0)
+                {
+                    clipRequested = true;
+                }
+            }
+
+            return new Tuple<DoubleCords, bool>(
+                new DoubleCords(new Coordinates(minX, minY), new Coordinates(maxX, maxY)), clipRequested);
+        }
+
+        private bool IsBorderPixel(Coordinates cords)
+        {
+            return cords.X - OffsetX == 0 || cords.Y - OffsetY == 0 || cords.X - OffsetX == Width - 1 ||
+                   cords.Y - OffsetY == Height - 1;
+        }
+```
+
+As you can see, the code is not trivial, it takes a lot of steps, our implementation also does a bit more stuff, like requesting clips 
+(resizing whole document to perfectly fit the content) and clamping the maximum size. 
+
+## Performance
+
+Our implementation is very performant since we are using fast `BitmapContext.BlockCopy` to copy and paste pixels into a new bitmap.
+
+It's almost unnoticeable in real-time, with fast mouse movement small visual jittering can be visible, but there is no delay whatsoever.
+How fast dynamic bitmaps work, depends on the implementation, platform, native bitmap APIs, etc.
+
+## Other benefits
+
+The benefits described below are not directly related to the implementation, but the usage of dynamic bitmaps.
+
+These features are way easier to create (or possible at all), thanks to perfectly fitted bitmaps:
+- Resize and rotate border,
+- Clip canvas (fit document to content),
+- Center content relative to document or other layers,
+- Snapping and guides
+- Efficient preview layers
+
+## Conclusion
+
+Dynamic bitmaps are a very useful structure, it helps to create a lot of small bitmaps, which can be easily reused. 
+No more unnecessary memory allocation and heavy CPU operations. If you want to learn more, 
+join our [Discord](https://discord.gg/qSRMYmq), we are open to discussions!
