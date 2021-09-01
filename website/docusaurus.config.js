@@ -67,6 +67,7 @@ module.exports =
           position: 'right',
         },
         {to: 'blog', label: 'Blog', position: 'left'},
+        {to: "colorPicker", label: "Color Picker", position: 'left'}
       ],
     },
     footer: {

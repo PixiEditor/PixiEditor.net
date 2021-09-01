@@ -1,0 +1,20 @@
+.page-title
+{
+    padding: 80px;
+    text-align: center;
+    background-image: url("/img/colorpicker-bg.svg");
+    background-repeat: no-repeat;
+    background-size: cover;
+}
+
+h2{
+  margin-bottom: 50px;  
+}
+
+.usage
+{
+    background-image: url("/img/wave-bottom.svg");
+    background-repeat: no-repeat;
+    background-size: cover;
+    padding: 150px 50px 50px 50px;
+}

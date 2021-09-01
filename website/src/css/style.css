@@ -127,11 +127,15 @@ header {
     text-decoration: none;
 }
 
-#screenshot {
-    margin-top: 10px;
+.highlighted-img
+{
     -webkit-box-shadow: 0px 0px 5px 0px #e3002d;
     box-shadow: 0px 0px 5px 0px #e3002d;
     border-radius: 5px;
+}
+
+#screenshot {
+    margin-top: 10px;  
     width: 80%;
     max-width: 1000px;
 }

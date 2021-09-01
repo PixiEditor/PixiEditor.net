@@ -41,7 +41,7 @@ class Index extends React.Component {
       <div className="download-section">
         <h1 className="animate__animated animate__fadeInUp">A beautiful, lightweight pixel-art editor packed in eye-friendly
           dark theme.</h1>
-          <img className="animate__animated animate__fadeInUp" id="screenshot" src="screenshot.png"
+          <img className="animate__animated animate__fadeInUp highlighted-img" id="screenshot" src="screenshot.png"
             alt="Program screenshot" />
         <div className="download-buttons animate__animated animate__fadeInUp">
           <a href="/download" className="download-button">Download now</a>
