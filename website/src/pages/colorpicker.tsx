@@ -3,6 +3,7 @@ import Layout from '@theme/Layout';
 import '../css/colorPicker.css';
 import CodeBlock from '@theme/CodeBlock';
 import Tabs from '@theme/Tabs';
+import "animate.css"
 import TabItem from '@theme/TabItem';
 import '../css/style.css';
 
@@ -11,10 +12,10 @@ function colorPickerPage(props) {
         <Layout title="WPF Color Picker">
             <div className="colorPicker">
                 <div className="page-title">
-                    <h2>
+                    <h2 className="animate__animated animate__fadeInDown animate__delay-1s">
                         A collection of WPF controls that let users choose colors in various ways.
                     </h2>
-                    <img src="img/colorPicker.png" alt="screenshot" className="highlighted-img" />
+                    <img src="img/colorPicker.png" alt="screenshot" className="animate__animated animate__fadeInDown highlighted-img" />
                 </div>
                 <div className="usage">
                     <h3>Installation</h3>

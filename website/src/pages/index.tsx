@@ -1,6 +1,7 @@
 import React from 'react';
 import Layout from '@theme/Layout';
 import "../css/style.css";
+import "animate.css"
 import CookieConsent from "react-cookie-consent";
 
 const Feature = (props) => {

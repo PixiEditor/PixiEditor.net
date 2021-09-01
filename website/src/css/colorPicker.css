@@ -8,7 +8,7 @@
 }
 
 h2{
-  margin-bottom: 50px;  
+  margin-bottom: 50px;
 }
 
 .usage
@@ -16,5 +16,5 @@ h2{
     background-image: url("/img/wave-bottom.svg");
     background-repeat: no-repeat;
     background-size: cover;
-    padding: 150px 50px 50px 50px;
+    padding: 250px 50px 50px 50px;
 }
