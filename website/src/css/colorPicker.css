@@ -64,7 +64,7 @@ h2{
     margin: 0 10px;
 }
 
-.github-link span::after {
+.github-link span::after, .company-container a::after {
   content: '';
   width: 0px;
   height: 3px;
@@ -74,8 +74,25 @@ h2{
   transition: 300ms;
 }
 
+.company-container a::after
+{
+  margin-top: -5px;
+  width: 0%;
+  margin-left: 10px;
+}
+
+.company-container:hover a::after
+{
+  width: 90%;
+}
+
 .github-link:hover span::after {
   width: 100%;
+}
+
+.company-container a
+{
+  text-decoration: none !important;
 }
 
 .github-link span, .github-link img
