@@ -74,16 +74,7 @@ h2{
   transition: 300ms;
 }
 
-.nuget{
-  background-color: transparent;
-  transition: 300ms;
-}
-
-.nuget:hover{
-  background-color: white;
-}
-
-.github-link span:hover::after {
+.github-link:hover span::after {
   width: 100%;
 }
 
