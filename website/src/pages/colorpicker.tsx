@@ -13,7 +13,7 @@ function colorPickerPage(props) {
             <div className="colorPicker">
                 <div className="page-title">
                     <h2 className="animate__animated animate__fadeInDown animate__delay-1s">
-                        A collection of WPF controls that let users choose colors in various ways.
+                        The most customizable and advanced color picker for WPF.    
                     </h2>
                     <img src="img/colorPicker.png" alt="screenshot" className="animate__animated animate__fadeInDown highlighted-img" />
                 </div>
@@ -44,11 +44,34 @@ xmlns:colorpicker="clr-namespace:ColorPicker;assembly=ColorPicker">`} </CodeBloc
                         {`<colorpicker:StandardColorPicker x:Name="main" />
 <colorpicker:PortableColorPicker ColorState="{Binding ElementName=main, Path=ColorState, Mode=TwoWay}"/>`}
                     </CodeBlock>
+                </div>                
+                <div className="buttons">
+                <a href="https://github.com/PixiEditor/ColorPicker" target="_blank">
+                    <div className="github-link">
+                    <img src="icons/github.svg" width="50"/>
+                    <span>GitHub</span>
+                    </div>
+                </a>
+                <a href="https://www.nuget.org/packages/PixiEditor.ColorPicker" target="_blank">
+                    <div className="github-link">
+                    <img src="icons/nuget-logo.png" width="50"/>
+                    <span>NuGet</span>
+                    </div>
+                </a>
                 </div>
-                //TODO: GITHUB BUTTON}
-                <h3 className="markdown" style={{textAlign: "center", marginBottom: 50}}>
-                    Check out <a href="/docs/colorpicker">docs</a> for more
+                <h3 className="markdown" style={{textAlign: "center", marginBottom: 50, marginTop: 25}}>
+                    Check out <a href="/docs/color-picker" target="_blank">the docs</a> for more
                 </h3>
+
+                <div className="companies-using-section">
+                    <h2>Companies using our Color Picker</h2>
+                    <div className="company-container">
+                        <a href="https://icons8.com/app/windows" target="_blank">
+                        <img src="icons/icons8_logo_full.png" width="250" alt="icons8 logo" />
+                        <div className="product-name">Pichon for Windows</div>
+                        </a>
+                    </div>
+                </div>
             </div>
         </Layout>
     )
