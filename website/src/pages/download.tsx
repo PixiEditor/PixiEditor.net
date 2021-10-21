@@ -43,7 +43,7 @@ function download(props) {
                 </div>
                 <div className="waiting-stuff">
                     <div className="discord">
-                        <img src="../../img/Discord-Logo+Wordmark-White.svg"></img>
+                        <img src="/img/Discord-Logo+Wordmark-White.svg"></img>
                         <a className="discord-button" href="https://discord.gg/qSRMYmq" target="_blank">Join</a>
                     </div>
                     <iframe className="youtubeIframe" width="560" height="315" src={"https://www.youtube-nocookie.com/embed/" + displayVideo} title="PixiEditor video" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowFullScreen={true}></iframe>

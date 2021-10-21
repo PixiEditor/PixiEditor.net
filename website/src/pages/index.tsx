@@ -57,12 +57,12 @@ class Index extends React.Component {
         <div className="features">
           <Feature icon="icons/layers.svg" title="Create, edit and organize layers"
             description={["With our advanced layer system, you can easily organize, edit and work with layers. Delete, group, rename, merge and much more!",
-              "We know how improtant organization is, that's why we designed them, so you can easily locate your layers with live previews."]} gif="gifs/layers.gif" />
+              "We know how important organization is, that's why we designed them, so you can easily locate your layers with live previews."]} gif="gifs/layers.gif" />
 
           <Feature icon="icons/transparency.svg"
             title="Full RGBA + layer opacity transparency support"
             description={
-              ["With layer opacity and color alpha, you can combine muliple transparency levels and work with them easily.",
+              ["With layer opacity and color alpha, you can combine multiple transparency levels and work with them easily.",
                 "You can set individual pixels alpha, or apply whole layer using opacity."]}
             gif="gifs/RGBA.gif"
             align="right" />

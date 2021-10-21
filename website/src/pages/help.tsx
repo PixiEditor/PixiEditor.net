@@ -48,19 +48,19 @@ function Help(props) {
     {
       content: `Learn more using the <a href="${docUrl('introduction')}">documentation on this site.</a>`,
       title: 'Browse Docs',
-      image: 'img/book.svg',
+      image: '/img/book.svg',
       imageLink: `${docUrl("introduction")}`
     },
     {
       content: `Ask questions about the documentation and project on our <a href="https://discord.gg/qSRMYmq">Discord.</a>`,
       title: 'Join the community',
-      image: 'img/Discord-Logo-White.svg',
+      image: '/img/Discord-Logo-White.svg',
       imageLink: "https://discord.gg/qSRMYmq"
     },
     {
       title: 'Contact us',
       content: `Send us email with your question <a href="mailto:info@pixieditor.net">info@pixieditor.net</a>`,
-      image: 'img/mail.svg',
+      image: '/img/mail.svg',
       imageLink: "mailto:info@pixieditor.net"
     },
   ];
