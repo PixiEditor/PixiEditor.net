@@ -7,7 +7,7 @@ import "animate.css"
 import TabItem from '@theme/TabItem';
 import '../css/style.css';
 
-function colorPickerPage(props) {
+function colorpicker(props) {
     return (
         <Layout title="WPF Color Picker">
             <div className="colorPicker">
@@ -15,7 +15,7 @@ function colorPickerPage(props) {
                     <h2 className="animate__animated animate__fadeInDown animate__delay-1s">
                         The most customizable and advanced color picker for WPF.    
                     </h2>
-                    <img src="img/colorPicker.png" alt="screenshot" className="animate__animated animate__fadeInDown highlighted-img" />
+                    <img src="/img/colorPicker.png" alt="screenshot" className="animate__animated animate__fadeInDown highlighted-img" />
                 </div>
                 <div className="usage">
                     <h3>Installation</h3>
@@ -48,13 +48,13 @@ xmlns:colorpicker="clr-namespace:ColorPicker;assembly=ColorPicker">`} </CodeBloc
                 <div className="buttons">
                 <a href="https://github.com/PixiEditor/ColorPicker" target="_blank">
                     <div className="github-link">
-                    <img src="icons/github.svg" width="50"/>
+                    <img src="/icons/github.svg" width="50"/>
                     <span>GitHub</span>
                     </div>
                 </a>
                 <a href="https://www.nuget.org/packages/PixiEditor.ColorPicker" target="_blank">
                     <div className="github-link">
-                    <img src="icons/nuget-logo.png" width="50"/>
+                    <img src="/icons/nuget-logo.png" width="50"/>
                     <span>NuGet</span>
                     </div>
                 </a>
@@ -67,7 +67,7 @@ xmlns:colorpicker="clr-namespace:ColorPicker;assembly=ColorPicker">`} </CodeBloc
                     <h2>Companies using our Color Picker</h2>
                     <div className="company-container">
                         <a href="https://icons8.com/app/windows" target="_blank">
-                        <img src="icons/icons8_logo_full.png" width="250" alt="icons8 logo" />
+                        <img src="/icons/Icons8_logo_full.png" width="250" alt="icons8 logo" />
                         <div className="product-name">Pichon for Windows</div>
                         </a>
                     </div>
@@ -77,4 +77,4 @@ xmlns:colorpicker="clr-namespace:ColorPicker;assembly=ColorPicker">`} </CodeBloc
     )
 }
 
-export default colorPickerPage;
+export default colorpicker;
