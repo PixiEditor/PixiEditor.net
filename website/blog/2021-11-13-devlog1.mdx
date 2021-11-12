@@ -1,0 +1,93 @@
+---
+title: Devlog 1 v0.1.7
+author: Krzysztof Krysiński
+author_title: PixiEditor Creator
+author_url: https://krysinski.me
+author_image_url: https://avatars.githubusercontent.com/u/25402427?s=400&v=4
+tags: [pixieditor, progress, devlog]
+keywords: [devlog, pixieditor, pixel-art editor]
+description: "Current status of PixiEditor version v0.1.7 development."
+---
+
+Hello pixel makers, welcome to PixiEditor v0.1.7 development blog post. We have excited news to share
+about our latest version. Major rework is going on, a lot of new features and bug fixes.
+
+<!--truncate-->
+
+# What was going on for past few months
+
+We decided to rework from ground-up the most important PixiEditor part. Drawing backend. 
+This rework will open a lot of doors for us. From huge performance boost, to easier and quicker
+cross-platform port. So version v0.1.7 is mostly performance improvements and optimalizations.
+Except that, we are working really hard on fixing existing bugs (and not creating more), 
+new exciting features, UI changes and more.
+
+# Port to SkiaSharp
+
+ From now on, PixiEditor will use Skia as drawing backend. Skia is a image processing library made by Google.
+ It's extremely performant and increased drawing speed, to the point, where pen size equal to 300px 
+ is actually usable.
+
+While this is a great news, we are still facing some issues, that are yet to be solved for stable release.
+Almost every aspect of the core code was affected, and we had to rewrite a lot of crutial components.
+Like undo system, tools, custom layer rendering and much more.
+
+New vs old video: 
+<video width="700" controls>
+  <source src="/videos/skia.mkv" type="video/mp4"/>
+  Your browser does not support the video tag.
+</video>
+
+# New features
+
+PixiEditor still lacks a lot of features, and we are adding more and more of them for each version.
+Same applies to this one.
+
+## Layer grouping and hierarchy
+
+This is a biggest feature coming to v0.1.7, from now on, you'll be able to create layer groups and 
+enchance structure in your drawings. This took us almost 4 months to implement and it still is not perfect,
+but we are pretty happy how it works already.
+
+<video width="700" controls>
+  <source src="/videos/groups.mkv" type="video/mp4"/>
+  Your browser does not support the video tag.
+</video>
+
+## Reference layer
+
+Another interesting feature, we've implemented, is reference layer (image). Often, while testing PixiEditor,
+we noticed, that we would like to have full-resolution image as a background to our drawings, so this is how
+reference layer came to live. You'll be able to select any image from the disk and it will fit your canvas
+in uniform size. 
+
+<video width="700" controls>
+  <source src="/videos/reference-layer.mp4" type="video/mp4"/>
+  Your browser does not support the video tag.
+</video>
+
+## Rotate and flip document/layers
+
+Pretty self-explainatory, PixiEditor didn't have any rotation and flipping options, now, you'll be able
+to rotate whole document and individual layers (currently 90 degrees, custom angle planned for v0.2).
+
+<video width="700" controls>
+  <source src="/videos/rotate-flip.mkv" type="video/mp4"/>
+  Your browser does not support the video tag.
+</video>
+
+## Magic wand tool
+
+More tools, more selection capabilities. Magic wand tool selects area with same color. Simple and effective.
+
+# Other changes and improvements
+
+Also, we've replaced WPF Extended Toolkit zoombox with a custom one, that is more responsive and more
+user-friendly. There are a lot of new things, and a lot of them not mentioned in this post.
+
+There are also numerous bugs fixed (and a few new ones as well).
+
+# Summary
+
+We are happy with the current status of PixiEditor v0.1.7, but It's still not ready. New features, reworked core, lots of 
+bug fixes, new tools and many more. Stay tuned for more.
