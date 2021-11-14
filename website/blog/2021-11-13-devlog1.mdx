@@ -9,30 +9,29 @@ keywords: [devlog, pixieditor, pixel-art editor]
 description: "Current status of PixiEditor version v0.1.7 development."
 ---
 
-Hello pixel makers, welcome to PixiEditor v0.1.7 development blog post. We have excited news to share
-about our latest version. Major rework is going on, a lot of new features and bug fixes.
+Hello pixel makers, welcome to PixiEditor v0.1.7 development blog post. We have exciting news to share
+about our latest version. A major rework is going on, there are lots of new features and bug fixes.
 
 <!--truncate-->
 
-# What was going on for past few months
+# What has been going on for the past few months
 
-We decided to rework from ground-up the most important PixiEditor part. Drawing backend. 
-This rework will open a lot of doors for us. From huge performance boost, to easier and quicker
-cross-platform port. So version v0.1.7 is mostly performance improvements and optimalizations.
-Except that, we are working really hard on fixing existing bugs (and not creating more), 
-new exciting features, UI changes and more.
+We've decided to rework the most important part of PixiEditor, the drawing backend, from the ground up.
+The rework will open a lot of doors for us, from a huge performance boost to an easier and quicker
+cross-platform port. Thus the version 0.1.7 mostly has performance improvements and optimizations.
+Apart from that, we are working really hard on fixing existing bugs (and trying not to create more), adding
+new and exciting features, improving UI, etc.
 
 # Port to SkiaSharp
 
- From now on, PixiEditor will use Skia as drawing backend. Skia is a image processing library made by Google.
- It's extremely performant and increased drawing speed, to the point, where pen size equal to 300px 
- is actually usable.
+From the v0.1.7 on, PixiEditor will use Skia as the drawing backend. Skia is an extremely performant image processing library made by Google.
+With it, we managed to increase drawing speed to the point where a pen size of 300px is actually usable.
 
-While this is a great news, we are still facing some issues, that are yet to be solved for stable release.
-Almost every aspect of the core code was affected, and we had to rewrite a lot of crutial components.
-Like undo system, tools, custom layer rendering and much more.
+While those are great news we are still facing some issues that are yet to be solved for a stable release.
+Almost every aspect of the core code was affected, and we had to rewrite a lot of crucial components, such as
+the undo system, tools, custom layer rendering, and much more.
 
-New vs old video: 
+New versus old comparison video: 
 <video width="700" controls>
   <source src="/videos/skia.mkv" type="video/mp4"/>
   Your browser does not support the video tag.
@@ -40,14 +39,14 @@ New vs old video:
 
 # New features
 
-PixiEditor still lacks a lot of features, and we are adding more and more of them for each version.
-Same applies to this one.
+PixiEditor still lacks many features, and we are adding more and more of them in each version.
+The same goes for the one below.
 
 ## Layer grouping and hierarchy
 
-This is a biggest feature coming to v0.1.7, from now on, you'll be able to create layer groups and 
-enchance structure in your drawings. This took us almost 4 months to implement and it still is not perfect,
-but we are pretty happy how it works already.
+This is the biggest feature coming to v0.1.7. From now on you'll be able to create layer groups and
+enhance the structure of your drawings. It took us almost 4 months to implement and while it is still not perfect,
+we are pretty happy with the way it works already.
 
 <video width="700" controls>
   <source src="/videos/groups.mkv" type="video/mp4"/>
@@ -56,10 +55,10 @@ but we are pretty happy how it works already.
 
 ## Reference layer
 
-Another interesting feature, we've implemented, is reference layer (image). Often, while testing PixiEditor,
-we noticed, that we would like to have full-resolution image as a background to our drawings, so this is how
-reference layer came to live. You'll be able to select any image from the disk and it will fit your canvas
-in uniform size. 
+Another interesting feature we implemented is the reference layer. Oftentimes while testing PixiEditor
+we noticed that it would be convenient to have a full-resolution image as a background to our drawings. That was how
+the reference layer came to life. With this feature you'll be able to select any image from the disk and it will fit your canvas
+in a uniform size. 
 
 <video width="700" controls>
   <source src="/videos/reference-layer.mp4" type="video/mp4"/>
@@ -68,8 +67,8 @@ in uniform size.
 
 ## Rotate and flip document/layers
 
-Pretty self-explainatory, PixiEditor didn't have any rotation and flipping options, now, you'll be able
-to rotate whole document and individual layers (currently 90 degrees, custom angle planned for v0.2).
+Pretty self-explanatory. PixiEditor didn't have any rotation and flipping options, so now you'll be able
+to rotate the whole document and the individual layers (currently in 90-degree increments, a custom angle option is planned for v0.2).
 
 <video width="700" controls>
   <source src="/videos/rotate-flip.mkv" type="video/mp4"/>
@@ -78,16 +77,16 @@ to rotate whole document and individual layers (currently 90 degrees, custom ang
 
 ## Magic wand tool
 
-More tools, more selection capabilities. Magic wand tool selects area with same color. Simple and effective.
+More tools, more selection capabilities. The magic wand tool selects an area that has the same color. Simple and effective.
 
 # Other changes and improvements
 
-Also, we've replaced WPF Extended Toolkit zoombox with a custom one, that is more responsive and more
-user-friendly. There are a lot of new things, and a lot of them not mentioned in this post.
+We replaced WPF Extended Toolkit zoombox with a custom one made to be more responsive and
+user-friendly. There are a lot of new changes, and many of them are not mentioned in this post.
 
-There are also numerous bugs fixed (and a few new ones as well).
+Numerous bugs were fixed (and a few new ones were introduced as well).
 
 # Summary
 
-We are happy with the current status of PixiEditor v0.1.7, but It's still not ready. New features, reworked core, lots of 
-bug fixes, new tools and many more. Stay tuned for more.
+We are happy with the current status of PixiEditor v0.1.7, but It's still not ready. New features, a reworked core, lots of 
+bug fixes, new tools, and much more are waiting for the release. Stay tuned for the next posts!
