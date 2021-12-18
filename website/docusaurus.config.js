@@ -11,6 +11,11 @@ module.exports =
     src: "https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js",
     async: true,
     ["data-ad-client"]: "ca-pub-8372287848779618"
+  },
+  {
+    src: "https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-8372287848779618",
+    async: true,
+    crossOrigin: "anonymous"
   }],
   presets: [
     [
