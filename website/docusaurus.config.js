@@ -73,7 +73,8 @@ module.exports =
           position: 'right',
         },
         {to: 'blog', label: 'Blog', position: 'left'},
-        {to: "colorpicker", label: "Color Picker", position: 'left'}
+        {to: "colorpicker", label: "Color Picker", position: 'left'},
+        {to: "roadmap", label: "Roadmap", position: 'left'}
       ],
     },
     footer: {
