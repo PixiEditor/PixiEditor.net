@@ -19,8 +19,8 @@ const Feature = (props) => {
         {props.description.map((section, i) => <div key={i} className="feature-description-item">{section}</div>)}
       </div>
     </div>
-    <div className="feature-gif">
-      <img src={props.gif} alt="feature gif"/>
+    <div className="feature-media">
+        <video src={props.video} autoPlay loop muted></video>
     </div>
   </div>
 }
@@ -56,26 +56,27 @@ class Index extends React.Component {
       <div className="features-container">
         <div className="features">
           <Feature icon="icons/layers.svg" title="Create, edit and organize layers"
-            description={["With our advanced layer system, you can easily organize, edit and work with layers. Delete, group, rename, merge and much more!",
-              "We know how important organization is, that's why we designed them, so you can easily locate your layers with live previews."]} gif="gifs/layers.gif" />
+            description={["We think, that our layers system is quite nice to work with.",
+              "You can create, edit and organize layers in a simple way, as you know it from other graphics editors."]} video="videos/Layers.mkv" />
 
           <Feature icon="icons/transparency.svg"
-            title="Full RGBA + layer opacity transparency support"
+            title="Color tools"
             description={
-              ["With layer opacity and color alpha, you can combine multiple transparency levels and work with them easily.",
-                "You can set individual pixels alpha, or apply whole layer using opacity."]}
-            gif="gifs/RGBA.gif"
+              ["We've built a tool that helps with adjusting darker and lighter color variations.",
+                "Just select the brightness tool, pick the strength, and you're good to go.",
+              "Our users really like this one."]}
+            video="videos/Brightness.mkv"
             align="right" />
 
           <Feature icon="icons/pen-tool.svg"
             title=" Numerous pixel-perfect tools."
             description={
-              ["Draw like a pro, using our pixel-perfect pen, which removes unnecessary pixels, so your artwork can be done faster and better.",
-                "Bucket, line, ellipse, rectangle, all ready for fast and flawless editing."]}
-            gif="gifs/outline.gif" />
-            <Feature gif="gifs/Docking.gif" align="right" icon="icons/columns.svg" title="Multiple documents editing support" 
+              ["There are tools that will help you with pixel-perfect editing.",
+                "Meet pixel-perfect pen mode. Smartly removes corners and doesn't ask questions."]}
+            video="videos/Pixel-perfect.mkv" />
+            <Feature video="videos/Multiple-documents.mkv" align="right" icon="icons/columns.svg" title="Multiple documents editing support" 
             description={["Edit documents side to side, create multiple columns, rows. Float windows and tabs.", 
-            "You can organize layout anyway you want, without disturbing your work."]}/>         
+            "We don't know if you'll use it, but we've added it anyway."]}/>         
         </div>
       </div>
       <CookieConsent

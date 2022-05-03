@@ -200,6 +200,10 @@ header {
     flex-direction: row-reverse;
 }
 
+.feature.right .feature-media{
+    margin-right: 120px;
+}
+
 .feature-heading{
     display: flex;
     flex-direction: row;
@@ -214,7 +218,7 @@ header {
 .feature-description{
     margin-top: 10px;
     margin-left: 4rem;
-    max-width: 600px;
+    max-width: 550px;
     font-weight: 100;
     font-size: 24px;
     line-height: 35px;
@@ -224,11 +228,11 @@ header {
     margin-bottom: 50px;
 }
 
-.feature-gif{
+.feature-media{
     min-width: 30%;
 }
 
-.feature-gif img{
+.feature-media video{
     border: 1px solid black;
     border-radius: 5px;
     max-height: 400px;
