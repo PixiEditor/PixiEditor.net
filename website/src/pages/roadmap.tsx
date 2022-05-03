@@ -6,7 +6,7 @@ import "../css/roadmap.css"
     return (
         <Layout title="Roadmap">
             <div className="roadmap">
-                <img src='/img/Roadmap.svg' alt='roadmap'/>
+                <img src='/img/Roadmap.png' alt='roadmap'/>
             </div>
         </Layout>);
 }
