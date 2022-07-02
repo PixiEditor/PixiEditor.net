@@ -1,0 +1,88 @@
+---
+title: V1.0 Devlog
+author: PixiEditor Team
+author_url: https://pixieditor.net
+author_image_url: https://avatars.githubusercontent.com/u/67740704?s=400&u=e0dd593b370184d299b30651ee58a36631e1a5ae&v=4
+tags: [pixieditor, progress, devlog]
+keywords: [devlog, pixieditor, pixel-art editor]
+description: "Current status of PixiEditor version v1.0 development."
+---
+
+Hello pixel makers, as the time goes, PixiEditor v1.0 is closer and closer. We have some exciting 
+updates and progress to announce.
+
+<!--truncate-->
+
+# Current status
+
+We are addressing most wanted features and improvements for this release, we took all of this seriously and 
+rewritten core codebase from ground-up. At the moment of writing this devlog, new core is waiting to be 
+integrated into our main codebase and connected with the UI. 
+
+Simultaneously we were working on 2 big features, palettes and command manager. One of them (palette system)
+is already available on development channel and you can test it yourself!
+
+Let's dive into the details.
+
+# Palette system
+
+Palettes are extremely important for good drawings, and up until now, we only had swatches system, which
+simply saved colors that were used on canvas while drawing. Comparing swatches to palettes in PixiEditor 1.0
+is like trying to compare a raft with a yacht. It literally took _months_ of development time.
+
+Interested? Let's break things down!
+
+## Palette Viewer
+
+Palette Viewer is simillar to the Swatches tab, it stores current palette and allows to manage it.
+
+![palette-viewer](/img/blog-posts/devlog2/Palette-viewer.png)
+
+We can see a few things there. 
+
+Top bar contains buttons to add colors, copy swatches into palette, open palette browser, import palette
+from disk and save palette.
+
+Then, there are colors! Who would've guess? Click on them to select as a primary drawing color.
+You might've noticed that first 10 colors contain some numbers, from 1 to 0, they are, in fact, shortcuts.
+
+Clicking 1 on keyboard will select first color as your primary, simple, yet time-saving. But don't worry, 
+they are more quality of life features.
+
+At last, bottom bar, this one is a little misterious at first glance.
+It's a color replacer. Drag color to a first field, click on second to pick desired color and hit replace button.
+Not only it will replace color in palette, but also on the canvas!
+
+<video width="700" controls>
+  <source src="/img/blog-posts/devlog2/Color-replacer.mp4" type="video/mp4"/>
+  Your browser does not support the video tag.
+</video>
+
+## Palette Browser
+
+Palette Browser is a place, where you can find all stored palettes, from the ones you've created, to the ones downloaded from the internet.
+
+![palette-browser](/img/blog-posts/devlog2/Palette-Browser.png)
+
+Lookin' good, doesn't it?
+
+First thing, you can see all palettes in the list. You can also search for palettes by name, filters and mark them as favorite. You can also import
+them from your palette viewer, disk or ...import directly from [Lospec](https://lospec.com/palette-list) by clicking "Open in app" button.  
+
+Here is how it looks in action:
+
+<video width="700" controls>
+  <source src="/img/blog-posts/devlog2/Lospec-Import.mp4" type="video/mp4"/>
+  Your browser does not support the video tag.
+</video>
+
+
+## Other features
+
+Context menu quick palette color picker: 
+
+![context-menu](/img/blog-posts/devlog2/Context-menu.png)
+
+- Jasc palette file format support
+- CSP (Clip Studio Paint) file format support
+
