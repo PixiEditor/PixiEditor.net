@@ -34,7 +34,7 @@ Interested? Let's break things down!
 
 ## Palette Viewer
 
-Palette Viewer is simillar to the Swatches tab, it stores current palette and allows to manage it.
+Palette Viewer is similar to the Swatches tab, it stores current palette and allows to manage it.
 
 ![palette-viewer](/img/blog-posts/devlog2/Palette-viewer.png)
 
@@ -49,7 +49,7 @@ You might've noticed that first 10 colors contain some numbers, from 1 to 0, the
 Clicking 1 on keyboard will select first color as your primary, simple, yet time-saving. But don't worry, 
 they are more quality of life features.
 
-At last, bottom bar, this one is a little misterious at first glance.
+At last, bottom bar, this one is a little mysterious at first glance.
 It's a color replacer. Drag color to a first field, click on second to pick desired color and hit replace button.
 Not only it will replace color in palette, but also on the canvas!
 
@@ -140,6 +140,104 @@ Currently, there's only Aseprite, but we will add more inferior editors in the f
 
 - Jasc palette file format support
 - CSP (Clip Studio Paint) file format support
-
 - Debug Mode (Settings > General), which allows you to access all debug features in a release build
 
+# Rewrite of PixiEditor's core
+
+Hey all, this section was written by @Equbuxu. Since around the middle of february I've been working on a complete revamp of a large part of the codebase. 
+All tools, e.g. pen, selection, fill, and others were implemented from scratch, and so was the system that keeps track of everything you draw to let you 
+undo and redo. For the most part this is an internal change, but it already enables us to implement various new features a lot more quickly. 
+
+Right now all of these changes are in a completely separate app, which we refer to as "the prototype". The UI there is intended only for testing, so don't be
+too scared of what you'll see below. The prototype already has a bunch of cool features that will be coming to PixiEditor, here are some of them:
+
+## Improved layers system
+
+<video width="700" controls>
+    <source src="/img/blog-posts/devlog2/Layers.mp4" type="video/mp4"/>
+    Your browser does not support the video tag.
+</video>
+
+Since I was implementing layers from scratch anyway I decided to bring in the features you are probably used to from other editors. Blend modes, layer masks, 
+options to lock layer transparency and clip to layer below are now all included! I've fixed a bunch of issues of the old layers system too, like folder 
+opacity not being correctly applied to layers. Oh, and groups (folders) can be empty now, they won't disappear.
+
+## Selection that actually works
+
+For a long time selection in PixiEditor has been missing a ton of crucial features, it was a joke really. Trying to select anything on all but the 
+smallest of canvases was a misarable experience as the app ground to a halt. You might've wanted to use the selection to mask out a specific area 
+to work on, and it just didn't work. You could draw outside of the selection just as well as inside of it, and the fill tool acted like the 
+selection doesn't exist at all. It wasn't even possible to scale and rotate the selected section of the image, the best you could do is move it around, 
+and even then the app acted buggy at times.
+
+All this changed in the prototype. Performance have been massively improved, all the big and small annoyances have been taken care of, and the system as 
+a whole is now compareable to what you would find in other popular drawing apps.
+
+<video width="700" controls>
+    <source src="/img/blog-posts/devlog2/Lasso-Transform.mp4" type="video/mp4"/>
+    Your browser does not support the video tag.
+</video>
+
+Selecting an area with a lasso and transforming it
+
+<video width="700" controls>
+    <source src="/img/blog-posts/devlog2/Selection-Clipping.mp4" type="video/mp4"/>
+    Your browser does not support the video tag.
+</video>
+
+Everything you draw stays inside selection
+
+## Separate thread
+
+All the drawing operations are now executed in a separate thread, which means (hopefully) no more "not responding" dialog boxes. At the very least, if you see one now 
+it means something really went wrong, and it's not the selection system taking it's time to draw some translucent blue rectangles. Also the mouse cursor won't lag 
+together with the app anymore.
+
+## Viewport improvements
+
+You'll now be able to rotate and flip the viewport. 
+
+<video width="700" controls>
+    <source src="/img/blog-posts/devlog2/Move-Viewport.mp4" type="video/mp4"/>
+    Your browser does not support the video tag.
+</video>
+
+## Chunk system, faster drawing
+
+Quite a long time ago @flabbet wrote an article on the dynamic bitmaps, a system that saved RAM by ignoring the empty areas on the edges of each layer. 
+For example, if you had a 1000x1000 canvas with only a small 200x200 drawing in the middle, PixiEditor wouldn't store the whole 1000x1000 image. Instead, the 
+stored image will be small, 200x200, just enough to fit the drawing. It will be expanded if you draw more things next to what's already there.
+
+<video width="700" controls>
+    <source src="/videos/dynamic-bitmaps.mp4" type="video/mp4"/>
+    Your browser does not support the video tag.
+</video>
+
+I decided to bring this up because now this system will be replaced by a more elaborate, but also better-designed one. Instead of just ignoring empty areas 
+on the edges it will now take care of the empty areas in the middle of the drawing too. For instance, if you have a big canvas and you draw a large circle 
+without any fill only the perimeter of the circle will be stored, not the whole image which would include the empty space inside. This is done by splitting
+the canvas into many small square images, or chunks. Each chunk is 256x256 pixels. When you create a brand new canvas it has no chunks stored internally. 
+Once you start drawing only the chunks you are drawing on are created and saved in RAM.
+
+<video width="700" controls>
+    <source src="/img/blog-posts/devlog2/Chunk-Vis.mp4" type="video/mp4"/>
+    Your browser does not support the video tag.
+</video>
+
+I could write a whole article about this system, but here I just want to mention a couple more details. The chunks don't just sit in RAM, they are also used to render 
+what you see on screen. What's cool is that the new renderer can render separate chunks in low resolution when you zoom far away. Moreover, the chunks you don't see
+on screen don't get rendered. This saves a lot of computation, meaning that you can now comfortably draw on large canvases.
+
+## Moveable reference layer
+
+@CPKreuz aka @PixiCPU is currently working on improving the reference layer. It will get the same transformation features as the selection. 
+In other words, the reference image used to always be in the center, and now you'll be able to put it precisely where you want it to be.
+
+## Symmetry
+
+This one is pretty simple. @Moki on Discord requested a feature that mirrors everything you draw on the other side of the canvas, and now it's in the prototype!
+
+<video width="700" controls>
+    <source src="/img/blog-posts/devlog2/Symmetry.mp4" type="video/mp4"/>
+    Your browser does not support the video tag.
+</video>
