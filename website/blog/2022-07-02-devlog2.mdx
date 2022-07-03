@@ -19,7 +19,7 @@ We are addressing most wanted features and improvements for this release, we too
 rewritten core codebase from ground-up. At the moment of writing this devlog, new core is waiting to be 
 integrated into our main codebase and connected with the UI. 
 
-Simultaneously we were working on 2 big features, palettes and command manager. One of them (palette system)
+Simultaneously we were working on 3 big features, palettes, shortcuts and search. One of them (palette system)
 is already available on development channel and you can test it yourself!
 
 Let's dive into the details.
@@ -75,6 +75,50 @@ Here is how it looks in action:
   <source src="/img/blog-posts/devlog2/Lospec-Import.mp4" type="video/mp4"/>
   Your browser does not support the video tag.
 </video>
+
+## Search
+
+Search lets you do everything you can do inside of PixiEditor, with just one search bar.
+
+For example, you can quickly open any recently opened file, do most of the things you do with your mouse, but more quickly and it has some nice extra features for making you more productive.
+
+To open it, just click on the new search bar at the top of the window or press the shortcut, which is set to Ctrl + K by default.
+
+![search-open](/img/blog-posts/devlog2/Search-open.png)
+
+This opens up the new search bar.
+
+<img src="/img/blog-posts/devlog2/Search-window.png" class="blog-c80"/>
+
+You can basically enter anything in here and it finds it if PixiEditor has it.
+
+But there are a few other neat things you can do with it.
+
+### Color Input
+
+You can quickly type in colors to select them in the color picker.
+
+![search-set-hex](/img/blog-posts/devlog2/Search-set-hex.png)
+
+![search-set-rgb](/img/blog-posts/devlog2/Search-set-rgb.png)
+
+#### Pro tips:
+
+#1 Press Ctrl + R to quickly insert the rgb pattern.
+
+#2 Just press space in the rgb pattern after typing in a number to go to the next value.
+
+#3 Press Ctrl + S to switch between rgb and hex.
+
+### File Path
+
+You can type in a path to a file to open it.
+
+![search-kenobi](/img/blog-posts/devlog2/Search-kenobi.png)
+
+#### Pro tip:
+
+As you can see in the screenshot, by starting the path with a '~' you can start from your users directory.
 
 ## Other features
 
