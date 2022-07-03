@@ -132,17 +132,7 @@ You can also also import all the shortcuts from your old favorite pixel art edit
 
 Currently, there's only Aseprite, but we will add more inferior editors in the future.
 
-## Other features
-
-- Context menu quick palette color picker: 
-
-![context-menu](/img/blog-posts/devlog2/Context-menu.png)
-
-- Jasc palette file format support
-- CSP (Clip Studio Paint) file format support
-- Debug Mode (Settings > General), which allows you to access all debug features in a release build
-
-# Rewrite of PixiEditor's core
+## Rewrite of PixiEditor's core
 
 Hey all, this section was written by @Equbuxu. Since around the middle of february I've been working on a complete revamp of a large part of the codebase. 
 All tools, e.g. pen, selection, fill, and others were implemented from scratch, and so was the system that keeps track of everything you draw to let you 
@@ -151,7 +141,7 @@ undo and redo. For the most part this is an internal change, but it already enab
 Right now all of these changes are in a completely separate app, which we refer to as "the prototype". The UI there is intended only for testing, so don't be
 too scared of what you'll see below. The prototype already has a bunch of cool features that will be coming to PixiEditor, here are some of them:
 
-## Improved layers system
+### Improved layers system
 
 <video width="700" controls>
     <source src="/img/blog-posts/devlog2/Layers.mp4" type="video/mp4"/>
@@ -162,7 +152,7 @@ Since I was implementing layers from scratch anyway I decided to bring in the fe
 options to lock layer transparency and clip to layer below are now all included! I've fixed a bunch of issues of the old layers system too, like folder 
 opacity not being correctly applied to layers. Oh, and groups (folders) can be empty now, they won't disappear.
 
-## Selection that actually works
+### Selection that actually works
 
 For a long time selection in PixiEditor has been missing a ton of crucial features, it was a joke really. Trying to select anything on all but the 
 smallest of canvases was a misarable experience as the app ground to a halt. You might've wanted to use the selection to mask out a specific area 
@@ -187,13 +177,13 @@ Selecting an area with a lasso and transforming it
 
 Everything you draw stays inside selection
 
-## Separate thread
+### Separate thread
 
 All the drawing operations are now executed in a separate thread, which means (hopefully) no more "not responding" dialog boxes. At the very least, if you see one now 
 it means something really went wrong, and it's not the selection system taking it's time to draw some translucent blue rectangles. Also the mouse cursor won't lag 
 together with the app anymore.
 
-## Viewport improvements
+### Viewport improvements
 
 You'll now be able to rotate and flip the viewport. 
 
@@ -202,7 +192,7 @@ You'll now be able to rotate and flip the viewport.
     Your browser does not support the video tag.
 </video>
 
-## Chunk system, faster drawing
+### Chunk system, faster drawing
 
 Quite a long time ago @flabbet wrote an article on the dynamic bitmaps, a system that saved RAM by ignoring the empty areas on the edges of each layer. 
 For example, if you had a 1000x1000 canvas with only a small 200x200 drawing in the middle, PixiEditor wouldn't store the whole 1000x1000 image. Instead, the 
@@ -228,12 +218,12 @@ I could write a whole article about this system, but here I just want to mention
 what you see on screen. What's cool is that the new renderer can render separate chunks in low resolution when you zoom far away. Moreover, the chunks you don't see
 on screen don't get rendered. This saves a lot of computation, meaning that you can now comfortably draw on large canvases.
 
-## Moveable reference layer
+### Moveable reference layer
 
 @CPKreuz aka @PixiCPU is currently working on improving the reference layer. It will get the same transformation features as the selection. 
 In other words, the reference image used to always be in the center, and now you'll be able to put it precisely where you want it to be.
 
-## Symmetry
+### Symmetry
 
 This one is pretty simple. @Moki on Discord requested a feature that mirrors everything you draw on the other side of the canvas, and now it's in the prototype!
 
@@ -241,3 +231,13 @@ This one is pretty simple. @Moki on Discord requested a feature that mirrors eve
     <source src="/img/blog-posts/devlog2/Symmetry.mp4" type="video/mp4"/>
     Your browser does not support the video tag.
 </video>
+
+## Other features
+
+- Context menu quick palette color picker:
+
+![context-menu](/img/blog-posts/devlog2/Context-menu.png)
+
+- Jasc palette file format support
+- CSP (Clip Studio Paint) file format support
+- Debug Mode (Settings > General), which allows you to access all debug features in a release build
