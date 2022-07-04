@@ -76,6 +76,19 @@ Here is how it looks in action:
   Your browser does not support the video tag.
 </video>
 
+## Other features
+
+- Context menu quick palette color picker:
+
+![context-menu](/img/blog-posts/devlog2/Context-menu.png)
+
+- Jasc palette file format support
+- CSP (Clip Studio Paint) file format support
+
+# Command Manager
+
+Command Manager is a quality of life feature, that gives the user ability, to quickly search for different actions. Simillar to Visual Studio Code.
+
 ## Search
 
 Search lets you do everything you can do inside of PixiEditor, with just one search bar.
@@ -134,7 +147,7 @@ Currently, there's only Aseprite, but we will add more inferior editors in the f
 
 ## Rewrite of PixiEditor's core
 
-Hey all, this section was written by @Equbuxu. Since around the middle of february I've been working on a complete revamp of a large part of the codebase. 
+Hey all, this section was written by [@Equbuxu](https://github.com/Equbuxu). Since around the middle of february I've been working on a complete revamp of a large part of the codebase. 
 All tools, e.g. pen, selection, fill, and others were implemented from scratch, and so was the system that keeps track of everything you draw to let you 
 undo and redo. For the most part this is an internal change, but it already enables us to implement various new features a lot more quickly. 
 
@@ -194,7 +207,7 @@ You'll now be able to rotate and flip the viewport.
 
 ### Chunk system, faster drawing
 
-Quite a long time ago @flabbet wrote an article on the dynamic bitmaps, a system that saved RAM by ignoring the empty areas on the edges of each layer. 
+Quite a long time ago [@flabbet](https://github.com/flabbet) wrote an article on the dynamic bitmaps, a system that saved RAM by ignoring the empty areas on the edges of each layer. 
 For example, if you had a 1000x1000 canvas with only a small 200x200 drawing in the middle, PixiEditor wouldn't store the whole 1000x1000 image. Instead, the 
 stored image will be small, 200x200, just enough to fit the drawing. It will be expanded if you draw more things next to what's already there.
 
@@ -220,7 +233,7 @@ on screen don't get rendered. This saves a lot of computation, meaning that you 
 
 ### Moveable reference layer
 
-@CPKreuz aka @PixiCPU is currently working on improving the reference layer. It will get the same transformation features as the selection. 
+[@CPKreuz](https://github.com/CPKreuz) aka @PixiCPU is currently working on improving the reference layer. It will get the same transformation features as the selection. 
 In other words, the reference image used to always be in the center, and now you'll be able to put it precisely where you want it to be.
 
 ### Symmetry
@@ -232,12 +245,7 @@ This one is pretty simple. @Moki on Discord requested a feature that mirrors eve
     Your browser does not support the video tag.
 </video>
 
-## Other features
+# Summary
 
-- Context menu quick palette color picker:
-
-![context-menu](/img/blog-posts/devlog2/Context-menu.png)
-
-- Jasc palette file format support
-- CSP (Clip Studio Paint) file format support
-- Debug Mode (Settings > General), which allows you to access all debug features in a release build
+As you can see, our hands are busy, palette system, command manager and whole new prototype are basically finished. In the next few weeks,
+we will be integrating all of it. Stay tuned!
