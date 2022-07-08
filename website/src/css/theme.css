@@ -4,3 +4,8 @@
     --ifm-surface-color: #2c2c2c !important;
     --ifm-navbar-background-color: #2c2c2c;
 }
+
+.blog-video {
+    max-width: 700px;
+    width: 100%;
+}
