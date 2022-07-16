@@ -20,7 +20,7 @@ const Feature = (props) => {
       </div>
     </div>
     <div className="feature-media">
-        <video src={props.video} class="blog-video" autoPlay loop muted></video>
+        <video src={props.video} autoPlay loop muted></video>
     </div>
   </div>
 }

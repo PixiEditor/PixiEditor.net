@@ -3,23 +3,27 @@ id: start-here
 title: Start here
 sidebar_label: Start here
 ---
-# Getting started with source code guide
+# Contributing to PixiEditor
 
-This guide will help you start with PixiEditor codebase.
+Hey! Thanks for being interested in the project! It means a lot. This guide will help you get familiar with the codebase.
 
-## Important information
+## Before you start
 
-Want to make something cool huh? Great! But first, you need to know a few things.
+- Before you start writing code, it's best to discuss the things you want to add or fix. 
+The quickest way to talk with us is on our discord server. 
+You can make an issue or comment on an existing one. 
+If you want to work on an issue, keep in mind that some issues can be unexpectedly difficult for those unfamiliar with the project, and some may even be invalid (since anyone can make one).
 
-* PixiEditor is written in C#
-* PixiEditor is built in .NET 5 WPF framework
-* We use the MVVM design pattern.
+- We welcome early pull requests, in fact, you can make one before writing any code. 
+This tells everyone what you are working on, and this way you'll be able to get feedback as you are writing code.
 
-Everyone can find something for themselves. From easy things, to hard.
+## The basics
 
-PixiEditor is a complex application, so it's important to follow some rules, to ensure quality and maintainability.
-
-Most important is the MVVM design pattern. Separating UI from logic is crucial. However, we accept some exceptions to that. For example, building **simple** user controls or dialogs can hold logic in code-behind, building ViewModel is unnecessary, but there is no clear border, it all depends on complexity.
+* PixiEditor is written in C#, .NET 6
+* We use WPF framework for the UI and SkiaSharp for everything related to drawing/painting.
+* The app has two general parts
+    * A GUI built in WPF (with plans to eventually switch to AvaloniaUI)
+    * The PixiEditor's Core, the part that implements most of the functionality, like drawing, handling layers, keeping track of the changes for the undo system, etc.
 
 ## Code main points
 
