@@ -200,8 +200,10 @@ header {
     flex-direction: row-reverse;
 }
 
-.feature.right .feature-media{
-    margin-right: 120px;
+@media (min-width: 800px) {
+    .feature.right .feature-media{
+        margin-right: 120px;
+    }
 }
 
 .feature-heading{
@@ -236,6 +238,7 @@ header {
     border: 1px solid black;
     border-radius: 5px;
     max-height: 400px;
+    width: 100%;
 }
 
 
