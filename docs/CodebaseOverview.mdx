@@ -58,13 +58,3 @@ This class is designed to render the drawing operations as fast as possible whil
 This functionality is used to preview some operations before fully committing to drawing them. 
 For instance, when you draw a rectangle, you first drag it around to decide where it should be, 
 and the "dragging around" part is done by drawing it in some place, then cancelling, drawing in a different place, etc.
-
-### way too detailed, move into a page dedicated to chunkyimagelib
-
- `ChunkyImageLib` provides an image class specifically tailored to store the canvas layers. It has an interface that allows you to modify image by enqueing various drawing operations. The operations can be cancelled in an efficient way, allowing you to preview the changes before committing them. 
-
-For example it is used when the user transforms a selected area, since the app needs to display the transformed image while it is being moved around. Other examples include drawing shapes, using brushes, and in general to anything that requires continious input from the user with immediate visual feedback.
-
-An image is stored as a set of 256x256 segments, or chunks. The drawing operations are applied individually and independently to each chunk. They are applied in a lazy fashion, chunks are updated to the latest version only if you try to access them. Moreover, there is an option to render chunks in low resolution. All of this enables PixiEditor to display the above mentioned "continuous" operations in a very efficient way: parts of the image not currently on display aren't being rendered, and if you zoom far enough rendering switches to using a low resolution.
-
-### end of way too detailed

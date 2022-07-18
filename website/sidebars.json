@@ -2,15 +2,21 @@
   "docs": {
     "Getting Started 🏠": ["introduction"],
     "Usage 🎮": ["shortcuts"],
-    "Contributing 💻": 
-    [
+    "Contributing 💻": [
       "start-here",
       "codebase-overview",
       "ui-guide",
+      "core-guide",
+      "change-walkthrough",
       {
-        "Tools": ["toolbars", "building-tool", "toolbar-settings"]
+        "Tools": ["toolbars", "toolbar-settings"]
       }, 
-      "undo-manager"
+      {
+        "Old Pre-1.0 Docs": [
+          "building-tool",
+          "undo-manager"
+        ]
+      }
     ],
     "Color Picker 🎨": ["color-picker"],
     "Other 🔍": ["faq", "third-party-licenses", "privacy-policy"]

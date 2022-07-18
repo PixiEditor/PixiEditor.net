@@ -13,7 +13,7 @@ function colorpicker(props) {
             <div className="colorPicker">
                 <div className="page-title">
                     <h2 className="animate__animated animate__fadeInDown animate__delay-1s">
-                        We tried to make the most customizable and advanced color picker for WPF.
+                        Likely the most customizable and advanced color picker for WPF.
                     </h2>
                     <img src="https://camo.githubusercontent.com/c94144c7c20d0c460f48073cd379b4eea47ea32a31fbc15ea89c4ed4ea65dcec/68747470733a2f2f692e696d6775722e636f6d2f3479734e3446652e706e67" alt="screenshot" className="animate__animated animate__fadeInDown highlighted-img" />
                 </div>
