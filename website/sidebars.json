@@ -9,6 +9,9 @@
       "core-guide",
       "change-walkthrough",
       {
+        "Commands": ["commands", "evaluators"]
+      },
+      {
         "Tools": ["toolbars", "toolbar-settings"]
       }, 
       {
