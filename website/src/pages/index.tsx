@@ -40,17 +40,21 @@ class Index extends React.Component {
   render() {
     return <Layout id="mainPage" title="Main page">
       <div className="download-section">
-        <h1 className="animate__animated animate__fadeInUp">A beautiful, lightweight pixel-art editor packed in an eye-friendly
+        <h1 className="animate__animated animate__fadeInUp">A beautiful, fast pixel-art editor packed in an eye-friendly
           dark theme.</h1>
           <img className="animate__animated animate__fadeInUp highlighted-img" id="screenshot" src="screenshot.png"
             alt="Program screenshot" />
         <div className="download-buttons animate__animated animate__fadeInUp">
           <a href="/download" className="download-button">Download now</a>
         </div>
+        <div className="download-buttons animate__animated animate__fadeInUp">
+          <h2>PixiEditor 1.0 is coming soon, wishlist on Steam now!</h2>
+        <iframe src="https://store.steampowered.com/widget/2218560/" style={{border: 0}} width="646" height="190"></iframe>
+      </div>
       </div>
       <div className="bullet-points">
         <BulletPoint text="Open source" icon="icons/github.svg"/>
-        <BulletPoint text="Lightweight" icon="icons/feather.svg"/>
+        <BulletPoint text="Fast" icon="icons/feather.svg"/>
        <BulletPoint text="Easy to use" icon="icons/star.svg"/>
       </div>
       <div className="features-container">
