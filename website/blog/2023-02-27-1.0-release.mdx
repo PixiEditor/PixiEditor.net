@@ -9,6 +9,16 @@ keywords: [devlog, pixieditor, pixel-art editor]
 description: "PixiEditor Version 1.0 release overview"
 ---
 
+const style = {
+    fontFace:
+    {
+        fontFamily: w95fa;
+        src: url("/img/blog-posts/1.0/w95fa.otf");
+    }
+}
+
+
+
 Hello pixel makers, finally, after years of development, PixiEditor 1.0 is released! Check out new exciting features, changes and what's coming next.
 
 <!--truncate-->
@@ -18,13 +28,13 @@ Hello pixel makers, finally, after years of development, PixiEditor 1.0 is relea
 - Steam release
 - Tutorials
 
-This blog post is going to cover a lot of things, I really recommend reading it all, but if you want, you can skip some parts using navigation on the left.
+This blog post is going to cover a lot of things, I really recommend reading it all, but if you want, you can skip some parts using navigation on the right.
 
 ## Some history
 
 PixiEditor came a long way since 2017, yes, 2017. It's hard to believe it's been six years. Of course first 3 years were pretty slow in development, it was just a fun, learning-focused side project. Right now, however, it's something bigger. For the first year, PixiEditor was hidden from the world, only my hard drive knew the depths of pixel-assembling software, called back then "[Pixi](https://github.com/flabbet/Pixi)". 
 
-[screenshot]
+![Pixi alpha screenshot](/img/blog-posts/1.0/alpha-screenshot.png)
 
 It was bad, really bad, but without it, PixiEditor 1.0 would never happen.
 
@@ -34,27 +44,64 @@ There are a lot of pixel-art focused apps like Aseprite, Piskel or Pixelorama, n
 
 Let's face it, the world is ruled by propriatary software. If you ask random person if he knows what Photoshop is, most likely, he heard about it at least once in his life. What about GIMP then? Well, it's slippery slope from here.
 
-I noticed that a lot of open-source programs, even powerful ones, tend to expose their features to users in unpleasant ways, either visually or intuition-wise. To back up my statement, here are some examples.
+I noticed that a lot of open-source programs, even powerful ones, tend to expose their features to users in unpleasant ways, either visually or in terms of intuition. To back up my statement, here are some examples.
 
 ### Blender
 
-Extremely powerful and popular 3D app, before version 2.8, using it was a pain. Thankfully v2.8 solved that issue, but it's still a good example, since open-source blender was released in 2002 and version 2.8 in 2019, so whooping 17 years of pretty bad UI and UX.
+Extremely powerful and popular 3D app, before version 2.8, using it was a pain. Thankfully v2.8 solved that issue, but it's still a good example, since open-source blender was released in 2002 and version 2.8 in 2019, so whooping 17 years of pretty bad UI and UX, confusing shortcuts, and navigation.
 
-[ss]
+![Blender 2.79](/img/blog-posts/1.0/blender-2.79.png)
 
-### GIMP (maybe replace with Inkscape or add inskcape separately)
+### Inkscape
 
-Now let's check out most popular free and open-source raster graphics editor. In current version, UI is quite clear, but UX on the other hand, is not good in my opinion. Making simple stuff requires knowing a lot of GIMP capabilities and features, like masks, layers guides and blend modes.
+Now let's check out most popular free and open-source vector graphics editor.
+
+![Inkscape](/img/blog-posts/1.0/inkscape.png)
+
+WHOAH, that's a lot of buttons, what do they do? I don't know, I just want to draw a simple line.
+
+![Straight Line Button](/img/blog-posts/1.0/StraightLine.png)
+
+Ok, it is written here that it can create a straight line. Let's draw one then.
+
+<video src="/img/blog-posts/1.0/where-is-my-line.mp4" controls width="600"/>
+
+Uh oh, where is my line? Even dragging the box around requires surgical precision. 
+
+After 10 minutes of trying to find the answer in official manual, online forums and by clicking things in the app I finally found that you have to hold Shift and click on color to set stroke color.
+
+![stroke-color](/img/blog-posts/1.0/stroke-color.png)
+
+Not very intuitive for a beginner, right? After even more time, I found fill and stroke menu, which exposes all the options the way it should've been done in the first place. Why it doesn't show automatically?
+Why top bar doesn't have a button to toggle it? 
+
+No one knows.
 
 ### Audacity
 
 This is an interesting example, because Audacity is probably one of the most popular audio editing software known to man, outrunning other, propriatary ones. But UI and UX, oh boy, just look at that.
 
-[ss]
+![Audacity](/img/blog-posts/1.0/audacity.png)
 
-Don't get me wrong, I love audacity and after learning how to use it, it's very nice.
+> <span style={{color: "orange"}}><img src="https://avatars.githubusercontent.com/u/25402427?s=400&v=4" width="24" style={{verticalAlign: "middle"}}/> Hello beautiful</span>
 
-All of mentioned programs are fantastic and used by many users and I totally get why, some of them are my app of choice too.
+> <span style={{color: "#ff0002"}}><img src="/img/blog-posts/1.0/Audacity_Logo.svg" width="24" style={{verticalAlign: "middle"}}/> H...hi</span>
+
+> <span style={{color: "orange"}}><img src="https://avatars.githubusercontent.com/u/25402427?s=400&v=4" width="24" style={{verticalAlign: "middle"}}/> Are you, by any chance...free tonight?</span>
+
+> <span style={{color: "#ff0002"}}><img src="/img/blog-posts/1.0/Audacity_Logo.svg" width="24" style={{verticalAlign: "middle"}}/> Who's asking?</span>
+
+> <span style={{color: "orange"}}><img src="https://avatars.githubusercontent.com/u/25402427?s=400&v=4" width="24" style={{verticalAlign: "middle"}}/> Do you see that guy over there? It's seems like you're in his type.</span>
+
+> <span style={{color: "#ff0002"}}><img src="/img/blog-posts/1.0/Audacity_Logo.svg" width="24" style={{verticalAlign: "middle"}}/> ???</span>
+
+> <span className="shake-vertical" style={{color: "#ff0002", fontFamily: "w95fa"}}><img src="/img/blog-posts/1.0/win98.png" width="64" style={{verticalAlign: "middle"}}/> Hello</span>
+
+Don't get me wrong, I love audacity and whenever I need to record or edit some audio, I use it.
+
+All of mentioned programs are fantastic and used by many users and I totally get why, some of them are my apps of choice too.
+
+But I think that the world needs free alternatives of paid programs, that makes users feel like they use premium product, which looks good, feels good and, most importantly, is easy to use. And that's why I created PixiEditor.
 
 # What's new
 
