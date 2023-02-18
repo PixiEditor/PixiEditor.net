@@ -9,14 +9,7 @@ keywords: [devlog, pixieditor, pixel-art editor]
 description: "PixiEditor Version 1.0 release overview"
 ---
 
-const style = {
-    fontFace:
-    {
-        fontFamily: w95fa;
-        src: url("/img/blog-posts/1.0/w95fa.otf");
-    }
-}
-
+import "./blog.css"
 
 
 Hello pixel makers, finally, after years of development, PixiEditor 1.0 is released! Check out new exciting features, changes and what's coming next.
@@ -24,9 +17,6 @@ Hello pixel makers, finally, after years of development, PixiEditor 1.0 is relea
 <!--truncate-->
 
 # Overview
-
-- Steam release
-- Tutorials
 
 This blog post is going to cover a lot of things, I really recommend reading it all, but if you want, you can skip some parts using navigation on the right.
 
@@ -91,7 +81,7 @@ This is an interesting example, because Audacity is probably one of the most pop
 
 > <span style={{color: "#ff0002"}}><img src="/img/blog-posts/1.0/Audacity_Logo.svg" width="24" style={{verticalAlign: "middle"}}/> Who's asking?</span>
 
-> <span style={{color: "orange"}}><img src="https://avatars.githubusercontent.com/u/25402427?s=400&v=4" width="24" style={{verticalAlign: "middle"}}/> Do you see that guy over there? It's seems like you're in his type.</span>
+> <span style={{color: "orange"}}><img src="https://avatars.githubusercontent.com/u/25402427?s=400&v=4" width="24" style={{verticalAlign: "middle"}}/> That guy over there.</span>
 
 > <span style={{color: "#ff0002"}}><img src="/img/blog-posts/1.0/Audacity_Logo.svg" width="24" style={{verticalAlign: "middle"}}/> ???</span>
 
@@ -116,7 +106,7 @@ But let's check what's really inside PixiEditor 1.0.
 
 # What's new
 
-We've listed some of new stuff in [previous devlog]() <- put link, however I'll describe all of them in short.
+We've listed some of new stuff in [previous devlog] <- put link, however I'll describe all of them in short.
 
 ## Palette system with Lospec integration
 
@@ -152,26 +142,116 @@ Yee-haw!
 
 [video]
 
-## Command Search
+## Command Search and editable shortcuts
 
+Whole codebase in PixiEditor 1.0 was rewritten from the ground up. And thanks to that, we've built
+quite robust command system, which allows to easily search for stuff and rebind shortcuts.
 
+[video]
 
-- Clip layers 
-- Lock layer alpha
-- Layer Masks
-- Blend modes
+Not only you can use it to find actions, but also to parse colors!
 
-(PixiEditor crashed when launching it without internet)
+## Layer Masks
 
-# Next steps (detailed roadmap)
+Do you know those funny things that women put on their faces? Yeah, now imagine a woman face is a layer.
+Got it? Good. Whole face is visible. Now if you create a mask (or put it on the face) you can't see 
+the face at all. Now when you draw on the mask, you are removing parts of it from the woman face,
+so you can see face parts underneath. That's how layer masks work.
+
+[video]
+
+## Clip layers
+
+Layers are now clipable, which means you can use one layer as a mask for the other. 
+Let's say you have a layer with a weapon, and you want to draw on top of it some patterns. Instead
+of drawing on the same layer, you can now create new layer, clip it to the weapon layer and without a lot
+of precision, draw on top of it.
+
+[video]
+
+## Lock layer alpha
+
+It's like clip to other layer, but it allows to clip to itself. In other words,
+if you toggle lock alpha, you won't be able to draw on transparent pixels on this layer.
+
+[video]
+
+## Blend modes
+
+Blend modes define how colors from different layers mix together. PixiEditor 1.0 allows you to
+change blend mode of each layer. Simple as that.
+
+[video]
+
+## Other stuff
+
+There are way more things that I didn't mention, but listing all of them would take 
+way too much space and time. You can check detailed changelog [here] <- put link.
+
+# What's next?
+
+PixiEditor doesn't end on 1.0, we have a lot of plans for the future. Hopefully 
+they see the light of day. Here is a brief list of things that we want to implement.
+
+## V1.1
+
+For 1.1 we want to add localization support starting with 4 languages out of the box 
+(English, Polish, German and Russian) and lanuch community translations for more.
+
 
 ## V2
 
-- Localization
-- Maybe tile drawing?
-- Custom brushes?
-- Avalonia rework
+For 2.0 we plan to port PixiEditor to new framework, AvaloniaUI, which
+will allow us to run PixiEditor on platforms like Linux macOS and maybe web.
+This is a ambitious goal, because it means we have to rebuild whole UI from the scratch,
+but it's worth the effort. 
 
-## V3 Animation
+We don't have concrete plans for other features yet, but there will be something for sure! We thought about tile drawing, custom brushes,
+FX, but we're not yet sure. Feel free to join us on [Discord] and talk about it with us!
 
-# 
+## V3
+
+Version 3.0 is exciting, because it'll bring animation creation tools. It's one of the 
+most requested feature by our community and we want to do it good.
+
+It's a far future, but we can't wait to show it to the world.
+
+# Steam release
+
+We are widening our distribution line, along with Microsoft Store, itch.io and our website,
+we've launched PixiEditor on Steam! Of course for free. You can now easily track hours
+spent in PixiEditor.
+
+[link]
+
+# Tutorials
+
+We are working on creating tutorials on how to use PixiEditor, check out our [YouTube channel]
+for more info!
+
+# Contributors
+
+I'm extremely grateful to all people who made PixiEditor 1.0 possible. Huge shotout to [Equbuxu],
+who was responsible for whole rework of architecture, without him, this release wouldn't be as big as it is.
+
+Of course, as always, huge thanks to [PixiCPU] for bringing a lot of great features.
+
+To all dev-testers, artisits ands external contributors, Thank you. Your support is invaluable
+and you are awesome.
+
+- Aventurian
+- Batfeula
+- rcpxl
+- ShadowsUnite
+- shin7kgs
+- [mention other people who directly contributed]
+
+# Go draw some pixel-art!
+
+The only thing that was left to say is, good luck and have fun drawing!
+
+We hope you'll like it, if you do, please consider a [donation], we are open-source
+organization that make all of these for free, your support can help us grow and make 
+even more great stuff faster. Perhaps one day, we'll be able to work full-time on 
+PixiEditor. Also, we'd be grateful if you left a review on Steam or Microsoft Store,
+it means a lot for us and we hear your feedback.
