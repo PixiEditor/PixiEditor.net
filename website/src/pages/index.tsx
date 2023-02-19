@@ -48,7 +48,7 @@ class Index extends React.Component {
           <a href="/download" className="download-button">Download now</a>
         </div>
         <div className="download-buttons animate__animated animate__fadeInUp">
-          <h2>PixiEditor 1.0 is coming soon, wishlist on Steam now!</h2>
+          <h2 className='glow'>PixiEditor 1.0 avaliable!</h2>
         <iframe src="https://store.steampowered.com/widget/2218560/" style={{border: 0}} width="646" height="190"></iframe>
       </div>
       </div>

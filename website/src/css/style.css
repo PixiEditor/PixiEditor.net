@@ -252,6 +252,22 @@ header {
     visibility: visible;
 }
 
+
+.glow {
+    color: #fff;
+    text-align: center;
+    animation: glow 1s ease-in-out infinite alternate;
+  }
+  
+  @keyframes glow {
+    from {
+      text-shadow: 0 0 5px #fff, 0 0 10px #fff, 0 0 15px #0000, 0 0 20px #0000, 0 0 25px #0000, 0 0 30px #0000, 0 0 35px #0000;
+    }
+    to {
+      text-shadow: 0 0 10px #fff, 0 0 15px #e3002d, 0 0 20px #e3002d, 0 0 25px #e3002d, 0 0 30px #e3002d, 0 0 35px #e3002d, 0 0 40px #e3002d;
+    }
+  }
+
 video{
     border-radius: 5px;
     border: 1px black solid;
