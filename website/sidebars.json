@@ -1,7 +1,6 @@
 {
   "docs": {
     "Getting Started 🏠": ["introduction"],
-    "Usage 🎮": ["shortcuts"],
     "Contributing 💻": ["start-here", {"Tools": ["toolbars", "building-tool", "toolbar-settings"]}, "undo-manager"],
     "Color Picker 🎨": ["color-picker"],
     "Other 🔍": ["faq", "third-party-licenses", "privacy-policy"]
