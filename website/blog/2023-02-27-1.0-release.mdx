@@ -22,7 +22,7 @@ This blog post is going to cover a lot of things, I really recommend reading it 
 
 ## Some history
 
-PixiEditor came a long way since 2017, yes, 2017. It's hard to believe it's been six years. Of course first 3 years were pretty slow in development, it was just a fun, learning-focused side project. Right now, however, it's something bigger. For the first year, PixiEditor was hidden from the world, only my hard drive knew the depths of pixel-assembling software, called back then "[Pixi](https://github.com/flabbet/Pixi)". 
+PixiEditor came a long way since 2017, yes, 2017. It's hard to believe it's been six years. Of course first 3 years were pretty slow in development, it was just a fun, learning-focused side project. Right now, however, it's something bigger. During the first year, PixiEditor was hidden from the world, only my hard drive knew the depths of pixel-assembling software, called back then "[Pixi](https://github.com/flabbet/Pixi)". 
 
 ![Pixi alpha screenshot](/img/blog-posts/1.0/alpha-screenshot.png)
 
@@ -32,7 +32,7 @@ First public version of rebranded Pixi was released in October 10th of 2018, fro
 
 There are a lot of pixel-art focused apps like Aseprite, Piskel, Pixel Studio or Pixelorama, not mentioning general purpose raster graphics editors like Photoshop or Gimp, which can be configured to draw pixel arts. The market seems crowded, doesn't it? Why would anyone need yet another app? The answer is...User Interfcae and user experience.
 
-Let's face it, the world is ruled by propriatary software. If you ask random person if he knows what Photoshop is, most likely, he heard about it at least once in his life. What about GIMP then? Well, it's slippery slope from here.
+Let's face it, the world is ruled by propriatary software. If you ask random person if he knows what Photoshop is, most likely, he heard about it at least once in his life. What about GIMP then? Well, I wouldn't be so sure.
 
 I noticed that a lot of open-source programs, even powerful ones, tend to expose their features to users in unpleasant ways, either visually or in terms of intuition. To back up my statement, here are some examples.
 
@@ -69,7 +69,7 @@ I don't know.
 
 ### Audacity
 
-This is an interesting example, because Audacity is probably one of the most popular audio editing software known to man, outrunning other, propriatary ones. But UI and UX, oh boy, just look at that.
+This is an interesting example, because Audacity is probably one of the most popular audio editing software known to man, outrunning other, propriatary ones. But the UI, oh boy, just look at that.
 
 ![Audacity](/img/blog-posts/1.0/audacity.png)
 
@@ -91,7 +91,7 @@ Don't get me wrong, I love audacity and whenever I need to record or edit some a
 
 All of mentioned programs are fantastic and used by many users and I totally get why, some of them are my apps of choice too.
 
-But I think that the world needs free alternatives of paid programs, which look good, feel good and most importantly, are easy to use. And that's our goal.
+But I think, that the world needs free alternatives of paid programs, which look good, feel good and most importantly, are easy to use. And that's our goal.
 
 All great, but what about pixel-art focused programs that are already on the market? 
 
@@ -106,19 +106,19 @@ But let's check what's really inside PixiEditor 1.0.
 
 # What's new
 
-We've listed some of new stuff in [previous devlog] <- put link, however I'll describe all of them in short.
+We've listed some of new stuff in [previous devlog](/blog/2022/07/04/devlog2), however I'll describe all of them in short.
 
 ## Palette system with Lospec integration
 
 Dedicated system for managing color palettes, which allows to easily access colors with shortcuts
-1,2,3, etc. The system consists of palette browser which is like a database for your palettes, you can quickly
+1,2,3 etc. The system consists of palette browser which is like a database for your palettes, you can quickly
 access them, mark as favourite, delete, rename etc. 
 
 ![Browser-screenshot](/img/blog-posts/devlog2/Palette-Browser.png)
 
 One of the most interesting things it has is [Lospec Palette List](https://lospec.com/palette-list) integration. What does it mean?
 
-Lospec is the most popular pixel-art site with great palette database, PixiEditor 1.0 supports their palette protocol, which allows you to import palette from their website with just one click.
+Lospec is the most popular pixel-art site with great palette database, PixiEditor 1.0 supports their palette protocol, which allows importing palette from their website with just one click.
 
 <video src="/img/blog-posts/1.0/Palette browser.mp4" controls width="700"/>
 
@@ -156,7 +156,9 @@ Got it? Good. Whole face is visible. Now if you create a mask (or put it on the 
 the face at all. Now when you draw on the mask, you are removing parts of it from the woman face,
 so you can see face parts underneath. That's how layer masks work.
 
-[video]
+Below is a video example, except there is no woman and I'm masking avocado.
+
+<video src="/img/blog-posts/1.0/Masks.mp4" controls width="700"/>
 
 ## Clip layers
 
@@ -165,26 +167,26 @@ Let's say you have a layer with a weapon, and you want to draw on top of it some
 of drawing on the same layer, you can now create new layer, clip it to the weapon layer and without a lot
 of precision, draw on top of it.
 
-[video]
+<video src="/img/blog-posts/1.0/ClipToBelow.mp4" controls width="700"/>
 
 ## Lock layer alpha
 
 It's like clip to other layer, but it allows to clip to itself. In other words,
 if you toggle lock alpha, you won't be able to draw on transparent pixels on this layer.
 
-[video]
+<video src="/img/blog-posts/1.0/LockAlpha.mp4" controls width="700"/>
 
 ## Blend modes
 
 Blend modes define how colors from different layers mix together. PixiEditor 1.0 allows you to
 change blend mode of each layer. Simple as that.
 
-[video]
+<video src="/img/blog-posts/1.0/BlendModes.mp4" controls width="700"/>
 
 ## Other stuff
 
 There are way more things that I didn't mention, but listing all of them would take 
-way too much space and time. You can check detailed changelog [here] <- put link.
+way too much space and time. You can check detailed changelog [here] (<-put link) or ultra detailed changelog [here](https://github.com/PixiEditor/PixiEditor/compare/0.1.8.0...1.0.0.0)
 
 # What's next?
 
@@ -200,8 +202,8 @@ For 1.1 we want to add localization support starting with 4 languages out of the
 ## V2
 
 For 2.0 we plan to port PixiEditor to new framework, AvaloniaUI, which
-will allow us to run PixiEditor on platforms like Linux macOS and maybe web.
-This is a ambitious goal, because it means we have to rebuild whole UI from the scratch,
+will allow us to run PixiEditor on platforms like Linux, macOS and maybe web.
+This is an ambitious goal, because it means we have to rebuild whole UI from the scratch,
 but it's worth the effort. 
 
 We don't have concrete plans for other features yet, but there will be something for sure! We thought about tile drawing, custom brushes,
@@ -220,7 +222,7 @@ We are widening our distribution line, along with Microsoft Store, itch.io and o
 we've launched PixiEditor on Steam! Of course for free. You can now easily track hours
 spent in PixiEditor.
 
-[Link](https://store.steampowered.com/app/2218560/PixiEditor__Pixel_Art_Editor?utm_source=Blog_10)
+<iframe src="https://store.steampowered.com/widget/2218560/" frameborder="0" style={{border: 0}} width="646" height="190"></iframe>
 
 # Tutorials
 
@@ -241,8 +243,12 @@ and you are awesome.
 
 The only thing that was left to say is, good luck and have fun drawing!
 
-We hope you'll like it, if you do, please consider a [donation], we are open-source
-organization that make all of these for free, your support can help us grow and make 
+We hope you'll like it, if you do, please consider a [donation](https://opencollective.com/pixieditor), we are an open-source
+organization that makes all of this for free, your support can help us grow and make 
 even more great stuff faster. Perhaps one day, we'll be able to work full-time on 
 PixiEditor. Also, we'd be grateful if you left a review on Steam or Microsoft Store,
 it means a lot for us and we hear your feedback.
+
+<a href="https://opencollective.com/pixieditor/donate" target="_blank">
+                        <img src="https://opencollective.com/pixieditor/donate/button@2x.png?color=blue" style={{width: 300}}/>
+                    </a>
