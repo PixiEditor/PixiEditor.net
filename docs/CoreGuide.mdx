@@ -8,31 +8,35 @@ sidebar_label: PixiEditor's Core
 
 ## ChangeableDocument
 
-The main goal of `ChangeableDocument` is to keep track of all changes done to a document. 
-All changes are stored in a list, and they can be reverted and re-applied. This enables undo/redo functionality.
+ChangeableDocument is a system used to keep track of all changes done to a document. 
+The system is implemented in the `ChangeableDocument` project and it is the main part of PixiEditor that enables undo and redo functionality.
 
-`ChangeableDocument` stores most of the data of a document. This includes document dimensions; all layers with their bitmaps, blend modes, etc.; 
-all folders; selection; reference layer; other stuff. The data can be freely read from the UI, but the only way to write into it
-is by using the `ChangeableDocument` change pipeline.
+The `Document` class stores most of the data of a single document. This includes document dimensions, all layers with their bitmaps, blend modes,
+all folders, selection, reference layer, and other stuff. The data can be freely read from the UI, but the only way to write into it
+is by using the change pipeline implemented in the `DocumentChangeTracker` class.
 
-`ChangeableDocument` implements a pipeline which accepts `IAction` instances, modifies its document state based on them, 
-and returns `IChangeInfo` instances. `IAction` instances describe user's actions, for example let's take a look at 
-`ResizeCanvas_Action`. `ResizeCanvas_Action` is created and passed to the pipeline when the user resizes the canvas.
-It contains the new canvas size. When `ChangeableDocument` accepts an action it creates a new instances of the change that 
-corresponds to it, in this case `ResizeCanvas_Change`. 
+`DocumentChangeTracker` class implements a pipeline which accepts `IAction` instances, modifies the `Document` based on them, 
+and returns `IChangeInfo` instances. `IAction` instances describe user's actions. For example, `ResizeCanvas_Action` is created 
+and passed down the pipeline when the user resizes the canvas. It contains the new canvas size. 
+After accepting the `ResizeCanvas_Action` `DocumentChangeTracker` creates a new instances of the change that corresponds to it, in this case `ResizeCanvas_Change`.
+
+The GUI passes actions to `DocumentChangeTracker` from the `ActionAccumulator` class.
 
 ### Changes
 
 #### Regular Change
 
 The "change" is an object that describes some modification made to the
-document, like changing it's size. Changes have two main methods: `Apply` and `Revert`. `Apply` method applies the change,
-in this case, it resizes the document to the new requested size, cropping the layer bitmaps. `Revert` goes the other way: 
-it restores the original size of the canvas, resizes the layer bitmaps back to the original size, and draws the areas that
-was previously cropped away. All data required to apply and revert the change is saved inside the change itself.
+document, like changing it's size. Changes have two main methods: `Apply` and `Revert`, used for applying and reverting the change. 
+These methods directly write into the contents of the `Document` class.
+
+If we take changing document size as an example, `Apply` method applies the change, in this case, 
+it resizes the document to the new requested size, cropping the layer bitmaps. `Revert` goes the other way: 
+it restores the original size of the canvas, resizes the layer bitmaps back to the original size, and draws the areas on the edges that
+were previously cut away. All data required to apply and revert the change is saved inside the change itself.
 
 `Apply` and `Revert` functions return zero, one, or multiple instances of `IChangeInfo`. Each instance of `IChangeInfo`
-concretely describes a change made to one or multiple properties, for example "Document size property changed from 64x64 
+concretely describes a change made to one or multiple properties of `Document`, for example "Document size property changed from 64x64 
 to 128x128". These ChangeInfos are passed to the UI, and they are utilized to update the state of the UI.
 
 #### UpdateableChange
@@ -42,11 +46,11 @@ a lasso tool, you first hold down left mouse button, then select the area, then 
 final area is known. This means that the lasso change needs to get updates continiously while you are selecting.
 
 This is what `UpdateableChange` is for. It has an `ApplyTemporarily` function that accepts updated data and returns
-`IChangeInfo`s. `ApplyTemporarily` is very similar to `Apply`, but it can be called multiple times while you are selecting 
+`IChangeInfo`'s. `ApplyTemporarily` is very similar to `Apply`, but it can be called multiple times while you are selecting 
 the area, and once you are done `Apply` is still called. If an updateable change gets reverted and then re-applied 
 `ApplyTemporarily` is not called.
 
-`UpdateableChange`s have two corresponding `IAction`s: the first one implements `IStartUpdateChangeAction` 
+`UpdateableChange`'s have two corresponding `IAction`'s: the first one implements `IStartUpdateChangeAction` 
 and is used to start and update the change; the second one implements `IEndChangeAction` and it indicates the end of 
 the change.
 
@@ -70,31 +74,21 @@ Helpers.ActionAccumulator.AddFinishedActions(new EndStructureMemberOpacity_Actio
 
 #### LayerImageChunks_ChangeInfo
 
-Whenever something is drawn on one of the layer bitmaps, the UI needs to know what area was updated. This info is used 
-to re-render an area of the canvas in the UI. The task of `ChangeableDocument` is to report all updated areas on all 
-bitmaps, and it uses `LayerImageChunks_ChangeInfo`. 
-
-`LayerImageChunks_ChangeInfo` stores a hashset of coordinates
-, where each entry indicates a position of the updated chunk on a bitmap. Each bitmap is split into many 256x256 chunks,
-for example a 512x512 bitmap can contain up to 4 chunks (empty chunks are not stored). If you draw something in the 
-bottom right corner it would mean that chunk with position (1, 1) is updated (the top-left chunk has position (0,0)).
-
-Since keeping track of chunks that you modify can be very tedious, this functionality is built into `ChunkyImage`.
-`ChunkyImage` is a class that represents a bitmap, and it is used throughout `ChangeableDocument` to store most of 
-the bitmaps. Every bitmap I've referred to above is actually a `ChunkyImage`.
+Whenever something is drawn on one of the layer bitmaps, the GUI needs to know what area was updated. 
+ChangeableDocument uses `LayerImageChunks_ChangeInfo` to pass the updated areas to the GUI.
 
 ## ChunkyImage
 
-`ChunkyImageLib` provides an image class specifically tailored to store the document's layers. It has an interface that allows 
-you to modify image by enqueing various drawing operations. 
+`ChunkyImageLib` provides a bitmap class. `ChunkyImage`'s are used to store the contents of a layer and it's mask. 
+You can draw on `ChunkyImage` by calling methods that enqueue various drawing operations. 
 
-The drawing operations can be cancelled in an efficient way, allowing you to preview the changes before committing them. 
-For example, cancelling is used when the user transforms a selected area, since the app needs to display the transformed image 
-while it is being moved around. Every time transform position changes, the old image drawing operation is cancelled, 
+The drawing operations can be cancelled, allowing you to preview the changes before committing them. 
+For example, cancelling is used when transforming an area of the canvas, since the app needs to display the transformed image 
+while it is being moved around. On every position change the old image drawing operation is cancelled, 
 and a new one is enqueued in the new position. Other examples include drawing shapes, using brushes, and in general to 
 anything that requires continious input from the user with immediate visual feedback.
 
-An image is stored as a set of 256x256 segments, or chunks. The drawing operations are applied individually and 
+Inside `ChunkyImage`, the image is stored as a set of 256x256 segments, or chunks. The drawing operations are applied individually and 
 independently to each chunk. They are applied in a lazy fashion, chunks are updated to the latest version only if you 
 try to access them. Moreover, there is an option to render chunks in low resolution. All of this enables PixiEditor to 
 display the above mentioned "continuous" operations in a very efficient way: parts of the image not currently on display 

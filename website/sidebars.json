@@ -9,10 +9,7 @@
       "core-guide",
       "change-walkthrough",
       {
-        "Commands": ["commands", "evaluators"]
-      },
-      {
-        "Tools": ["toolbars", "toolbar-settings"]
+        "ToolViewModels": ["toolbars", "toolbar-settings"]
       }, 
       {
         "Old Pre-1.0 Docs": [

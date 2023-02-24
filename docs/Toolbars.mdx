@@ -12,7 +12,7 @@ The toolbar is a set of settings for individual tools. An example toolbar for Sh
 
 # How toolbars work
 
-[`Toolbar`](https://github.com/PixiEditor/PixiEditor/blob/master/PixiEditor/Models/Tools/ToolSettings/Toolbars/Toolbar.cs) is an abstract wrapper class for List of [`Settings`](https://github.com/PixiEditor/PixiEditor/blob/master/PixiEditor/Models/Tools/ToolSettings/Settings/Setting.cs), that allows easy access and settings sharing.
+[`Toolbar`](https://github.com/PixiEditor/PixiEditor/blob/1c3cb41a35f1bab03e5613b9383b3a5da81330ab/src/PixiEditor/ViewModels/SubViewModels/Tools/ToolSettings/Toolbars/Toolbar.cs) is an abstract wrapper class for List of [`Settings`](https://github.com/PixiEditor/PixiEditor/blob/1c3cb41a35f1bab03e5613b9383b3a5da81330ab/src/PixiEditor/ViewModels/SubViewModels/Tools/ToolSettings/Settings/Setting.cs), that allows easy access and settings sharing.
 
 If several tools contain the same setting (same Setting Names), the toolbar will save and restore them on tool change. For example, if you change tool size in `Pen Tool` to 5px and then select `Line Tool`, the toolbar will still contain the same 5px tool size.
 
@@ -26,13 +26,16 @@ Setting toolSizeSetting = toolbar.GetSetting("ToolSize");
 ```
 # Creating toolbars
 
-Creating toolbars is very easy, you just need to inherit from any [`Toolbar`](https://github.com/PixiEditor/PixiEditor/blob/master/PixiEditor/Models/Tools/ToolSettings/Toolbars/Toolbar.cs) class. Then initialize your settings in the constructor.
+Creating toolbars is very easy, you just need to inherit from any [`Toolbar`](https://github.com/PixiEditor/PixiEditor/blob/1c3cb41a35f1bab03e5613b9383b3a5da81330ab/src/PixiEditor/ViewModels/SubViewModels/Tools/ToolSettings/Toolbars/Toolbar.cs) class. Then initialize your settings in the constructor.
 
 Example Toolbar: 
 
 ```csharp
 public class BasicShapeToolbar : BasicToolbar
     {
+        public bool Fill => GetSetting<BoolSetting>(nameof(Fill)).Value;
+        public Color FillColor => GetSetting<ColorSetting>(nameof(FillColor)).Value;
+
         //This Toolbar will contain 3 settings, ToolSize from BasicToolbar, Fill and FillColor
         public BasicShapeToolbar()
         {
@@ -47,11 +50,11 @@ public class BasicShapeToolbar : BasicToolbar
 To associate any Toolbar with the tool, assign `Toolbar` variable in the Tool constructor
 
 ```csharp
-public class ExampleTool : BitmapOperationTool
+public class ExampleToolViewModel : ToolViewModel
 {
-    public ExampleTool()
+    public ExampleToolViewModel()
     {
-        Toolbar = new BasicToolbar();
+        Toolbar = ToolbarFactory.Create<ExampleToolViewModel, ExampleToolbar>();
     }
 }
 ```
@@ -60,4 +63,4 @@ public class ExampleTool : BitmapOperationTool
 
 To learn about Settings, check out [this guide](Toolbar-Settings)
 
-All available toolbars can be found in [PixiEditor.Models.Tools.ToolSettings.Toolbars namespace](https://github.com/PixiEditor/PixiEditor/tree/master/PixiEditor/Models/Tools/ToolSettings/Toolbars)
+All available toolbars can be found in [PixiEditor.Models.Tools.ToolSettings.Toolbars namespace](https://github.com/PixiEditor/PixiEditor/tree/master/src/PixiEditor/ViewModels/SubViewModels/Tools/ToolSettings/Toolbars)

@@ -17,9 +17,10 @@ calling its RelayCommands (IoViewModel has relay commands that are bound to View
 
 ### IoViewModel, DocumentViewModel
 
-`IoViewModel` filters all incoming mouse events to make sure they stay consistent, e.g. if a left mouse down event happens when the left 
-mouse button is already down, it is ignored. `IoViewModel` then calls the mouse event handlers of ToolsViewModel and `DocumentManagerViewModel.ActiveDocument` 
-which is the currently selected `DocumentViewModel`. 
+Here the mouse input is passed to the document you are drawing in.
+
+`IoViewModel` filters all incoming mouse events to make sure they stay consistent. `IoViewModel` then calls the mouse event handlers of `ToolsViewModel` and 
+`DocumentManagerViewModel.ActiveDocument` which is the currently selected `DocumentViewModel`.
 
 ToolsViewModel initiates drawing by calling `DocumentManagerViewModel.ActiveDocument.UsePenTool()`. After this call, `ActiveDocument` starts using all incoming 
 mouse events to control the pen.

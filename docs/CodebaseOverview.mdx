@@ -6,41 +6,21 @@ sidebar_label: Codebase overview
 
 # Codebase overview
 
-The entire codebase can be broadly split into two parts: UI and Core. 
+The entire codebase can be broadly split into two parts: The GUI and the Core. 
 
-## User Interface
+## GUI, `PixiEditor` project
 
-The UI project (named PixiEditor) is built using WPF. 
-All the visible parts (windows, dialogs, controls, overlays, etc.) are defined in various .xaml files.
-The UI logic is defined in code behind files (.xaml.cs) and in view models (look up MVVM design pattern if you have no idea what any of this means. 
-Some of the logic is separated into other classes, broadly called Models. Here is a non-exhaustive list of the parts of the app implemented in the UI project:
+Our GUI is built with WPF. 
 
-- The layout and styles of all visible parts of the app (`Views`, `Styles` folders)
-    - `MainWindow.xaml`: Top menu, Close/Minimize/Collapse buttons, Tools' buttons, All the dockable windows, some fully defined here and some included from other files.
-    - `Views/Dialogs`: The xaml and code behind files for all the dialog windows, e.g. New File, Resize Canvas, etc.
-    - `Views/UserControls`: User controls and Custom controls used throughout the app. Almost all parts of the app are defined in these controls.
-    - ...
-- `ViewModelMain` and SubViewModels, they contain UI logic that isn't specific to individual user controls (`ViewModels` folder).
-    - `ViewModelMain`: ties all sub view models together
-    - `SubViewModels` folder
-        - `LayersViewModel`: has commands related to layer manipulation
-        - `ColorsViewModel`: has commands that work with palettes and swatches
-        - `IoViewModel`: handles mouse and keyboard input from the canvas, forwards it to other viewmodels
-        - `DocumentManagerViewModel`: a view model storing all opened documents
-        - `DocumentViewModel`: Each opened document has its own instance. Contains all data of a single document: WriteableBitmaps, Layers, Folders, Palette, Swatches, etc.
-        - `StructureMemberViewModel`, `LayerViewModel`, `FolderViewModel`: each layer/folder (both are referred to as Structure Members) has its own instance. Includes layer visibility, opacity, blend modes, masks, children (of a folder) etc.
-        - ...
-- `Helpers` folder, which has:
-    - WPF Behaviors
-    - WPF Converters
-    - Various helper functions and extensions
-- Command manager (`Models/Commands` folder), a system that lets you easily declare commands both in C# (via attributes) and in XAML (by using a markup extension). It also manages shortcuts, letting you easily add one to any command.
-- This project also includes a lot of classes that doesn't directly interact with the views, stored in `Models` folder.
-- ...
+All the visible parts (windows, dialogs, controls, overlays, etc.) are defined in .xaml files located in the [Views](https://github.com/PixiEditor/PixiEditor/tree/master/src/PixiEditor/Views) directory.
+
+The UI logic is defined in code behind files (.xaml.cs) and in [view models](https://github.com/PixiEditor/PixiEditor/tree/master/src/PixiEditor/ViewModels) (referring to ViewModel from the MVVM design pattern).
+
+Some of the logic is separated into other classes, broadly called [Models](https://github.com/PixiEditor/PixiEditor/tree/master/src/PixiEditor/Models).
 
 ## Core
 
-PixiEditor's Core mainly consists of two projects: `ChangeableDocument` and `ChunkyImageLib`.
+PixiEditor's Core consists mainly of two projects: `ChangeableDocument` and `ChunkyImageLib`.
 
 ### ChangeableDocument
 
