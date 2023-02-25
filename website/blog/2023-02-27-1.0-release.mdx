@@ -163,7 +163,7 @@ change the blend mode of each layer. Simple as that.
 ## Other stuff
 
 There are way more things that I didn't mention, but listing all of them would take 
-way too much space and time. You can check detailed changelog [here] (<-put link) or ultra-detailed changelog [here](https://github.com/PixiEditor/PixiEditor/compare/0.1.8.0...1.0.0.0)
+way too much space and time. You can check detailed changelog [here](#changelog) or ultra-detailed changelog [here](https://github.com/PixiEditor/PixiEditor/compare/0.1.8.0...1.0.0.0)
 
 # What's next?
 
@@ -229,3 +229,64 @@ it means a lot to us and we hear your feedback.
 <a href="https://opencollective.com/pixieditor/donate" target="_blank">
                         <img src="https://opencollective.com/pixieditor/donate/button@2x.png?color=blue" style={{width: 300}}/>
                     </a>
+
+---
+## Changelog
+
+```
+- PixiEditor is now on Steam!
+
+Additions:
+- Complete rewrite of PixiEditor's architecture
+- Performance improvements for large canvases
+
+	Commands, shortcuts:
+- Added command search, a handy window that lets you search for any action you want to make in PixiEditor. You can access it using the searchbar on top or by pressing Ctrl+K.
+- You can set your own shortcuts now. If you are used to the ones from Aseprite, you can load the aseprite shortcut template without changing them manually.
+
+	Selection:
+- Improved the performance of all selection tools
+- Added a way to transform the selected area in different ways (move, rotate, stretch, shear, perspective)
+- You can now move and rotate shapes before applying them
+- Added a lasso tool
+- You can't draw outside selection now
+- You can now invert selection
+
+	Layer Manager:
+- Added a slider for layer opacity
+- Added layer blend modes
+- Added lock alpha, a feature that prevents you from drawing on the transparent portions of the layer.
+- Added layer masks
+- Added clipping to layer below
+- Groups are now called folders and they can now be empty
+
+	Palettes:
+- Added a palette system. You can now import palettes from lospec, save and load them from files. The palette browser has all the palettes you have in PixiEditor.
+- You can use the replace color feature of the palette to replace some color with another on the whole canvas
+
+	Reference layer:
+- The reference layer is now saved in .pixi along with the rest of the drawing
+- You can now move the reference layer around, rotate it, and put it above or below your drawing
+
+	Other:
+- Added symmetry, a feature that automatically mirrors everything you draw to the other side of the canvas
+- Added percentage scaling to the export menu, along with a hint saying what percentage might be the best.
+- Added a thing that shows the currently selected color in the bottom left corner
+- You can now rotate and mirror the viewport (in a way that doesn't affect your drawing, it only affects how you see it in PixiEditor)
+- Added a wrench button in the top right corner which contains some useful viewport settings
+- You can now open the same file in multiple windows, and the windows will update in real time
+- The default transparent checkboard background is now less trippy
+- Added an About window with all the info about the project
+- The shape of the brush is now shown as a contour
+- Added ways to rotate and flip the canvas
+- Floodfill now takes all layers into account if you hold down Ctrl
+- Moved the "Copy Main Color" button into the color picker window. The button is used to set the fill color of a shape to be the same as the currently selected color.
+- Updated Discord rich presense preview to the new design of Discord in settings
+- The color picker tool can now pick colors from just the current layer, without taking the ones underneath into account.
+
+Fixes:
+- The mouse pointer no longer lags when launching PixiEditor
+- If you had many layers and tried deleting or creating one, PixiEditor used to lag. This is now fixed.
+- Fix crash when saving a file with a filename ending in .mod
+- PixiEditor should no longer completely stop responsing during long operations, instead it should show a loading animation
+```
