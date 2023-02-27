@@ -60,7 +60,7 @@ class Index extends React.Component {
     if (ExecutionEnvironment.canUseDOM) {
     var header = document.querySelector("#header");
     var screenshot = document.querySelector(".highlighted-img");
-    var button = document.querySelector(".download-button");
+    var button = document.querySelector(".download-buttons");
     var bulletPoints = document.querySelector(".bullet-points");
 
     window.scrollTo({top: header?.offsetTop - 110, behavior: "smooth"});
@@ -114,6 +114,8 @@ class Index extends React.Component {
             alt="Program screenshot" />
         <div className="download-buttons">
           <a href="/download" className="download-button">Download now</a>
+          <a href="/blog/2023/02/27/1.0-release" className="download-button">What's new?</a>
+
         </div>
       </div>
       <div className="bullet-points" id='bullet-points'>
