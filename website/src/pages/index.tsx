@@ -3,6 +3,7 @@ import Layout from '@theme/Layout';
 import "../css/style.css";
 import "animate.css"
 import CookieConsent from "react-cookie-consent";
+import ExecutionEnvironment from '@docusaurus/ExecutionEnvironment';
 
 const Feature = (props) => {
   return <div className={props.align === "right" ? "feature right" : "feature"}>
@@ -42,6 +43,7 @@ class Index extends React.Component {
 
   onScroll = () => {
 
+    if (ExecutionEnvironment.canUseDOM) {
     if(document.documentElement.scrollTop > 100) 
     {
       window.removeEventListener('scroll', this.onScroll);
@@ -52,8 +54,10 @@ class Index extends React.Component {
 
     this.requestScroll();
   }
+  }
 
   requestScroll = () => {
+    if (ExecutionEnvironment.canUseDOM) {
     var header = document.querySelector("#header");
     var screenshot = document.querySelector(".highlighted-img");
     var button = document.querySelector(".download-button");
@@ -82,12 +86,15 @@ class Index extends React.Component {
 
     }, 25);
   }
+  }
 
   constructor(props)
   {
     super(props);
 
+    if (ExecutionEnvironment.canUseDOM) {
     window.addEventListener('scroll', this.onScroll, { passive: true});
+    }
   }
 
   

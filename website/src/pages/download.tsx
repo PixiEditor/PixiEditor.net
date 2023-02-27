@@ -29,7 +29,7 @@ function download(props) {
                     <a href="https://store.steampowered.com/app/2218560/PixiEditor__Pixel_Art_Editor?utm_source=website" target="_blank">
                         <img src='/img/SteamLogo_Dark.png' alt='Steam Badge' height={90} style={{objectFit: "cover"}}/>
                     </a>
-                    <a href='microsoft.com/store/apps/9NDDRHS8PBRN?cid=storebadge&ocid=badge' target="_blank">
+                    <a href='https://www.microsoft.com/store/productId/9NDDRHS8PBRN' target="_blank">
                         <img src='https://developer.microsoft.com/store/badges/images/English_get-it-from-MS.png' alt='Microsoft Store Badge'/></a>
                     <span className="or-separator">Or</span>
                     <a href={releases && releases.length > 0 ? releases.find((val, _) => val.name.includes("setup64.zip")).browser_download_url : ""} className="download-button second">Download now</a>
