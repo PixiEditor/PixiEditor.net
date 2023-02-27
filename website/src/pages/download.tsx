@@ -2,7 +2,7 @@ import React, { useEffect, useState } from 'react';
 import Layout from '@theme/Layout';
 import "../css/download.css";
 
-const displayVideos = ["UK8HnrAQhCo", "bzC-wy6HCB8", ]
+const displayVideos = ["UK8HnrAQhCo", "bzC-wy6HCB8", "kA_eTsKHKa4"]
 
 function download(props) {
 
@@ -32,8 +32,8 @@ function download(props) {
                     <a href='https://www.microsoft.com/store/productId/9NDDRHS8PBRN' target="_blank">
                         <img src='https://developer.microsoft.com/store/badges/images/English_get-it-from-MS.png' alt='Microsoft Store Badge'/></a>
                     <span className="or-separator">Or</span>
-                    <a href={releases && releases.length > 0 ? releases.find((val, _) => val.name.includes("setup64.zip")).browser_download_url : ""} className="download-button second">Download now</a>
-                    <a href={releases && releases.length > 0 ? releases.find((val, _) => val.name.includes("setup86.zip")).browser_download_url : ""} className="download-button second">x86</a>
+                    <a href={releases && releases.length > 0 ? releases.find((val, _) => val.name.includes("64.zip")).browser_download_url : ""} className="download-button second">Download now</a>
+                    <a href={releases && releases.length > 0 ? releases.find((val, _) => val.name.includes("86.zip")).browser_download_url : ""} className="download-button second">x86</a>
                     <span id="version" title="PixiEditor is currently only available for Windows">Windows v{version}</span>
                 </div>
                 <div className="donation-container">
