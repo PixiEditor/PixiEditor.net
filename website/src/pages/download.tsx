@@ -2,7 +2,7 @@ import React, { useEffect, useState } from 'react';
 import Layout from '@theme/Layout';
 import "../css/download.css";
 
-const displayVideos = ["QKnXBUY0Pqk", "bzC-wy6HCB8"]
+const displayVideos = ["UK8HnrAQhCo", "bzC-wy6HCB8", ]
 
 function download(props) {
 
@@ -26,8 +26,11 @@ function download(props) {
             <div className="download">
                 <h2>You are one step away from downloading PixiEditor!</h2>
                 <div className="download-buttons">
-                    <a href='//www.microsoft.com/store/apps/9NDDRHS8PBRN?cid=storebadge&ocid=badge' target="_blank">
-                        <img src='https://developer.microsoft.com/store/badges/images/English_get-it-from-MS.png' alt='Microsoft Store Badge' /></a>
+                    <a href="https://store.steampowered.com/app/2218560/PixiEditor__Pixel_Art_Editor?utm_source=website" target="_blank">
+                        <img src='/img/SteamLogo_Dark.png' alt='Steam Badge' height={90} style={{objectFit: "cover"}}/>
+                    </a>
+                    <a href='microsoft.com/store/apps/9NDDRHS8PBRN?cid=storebadge&ocid=badge' target="_blank">
+                        <img src='https://developer.microsoft.com/store/badges/images/English_get-it-from-MS.png' alt='Microsoft Store Badge'/></a>
                     <span className="or-separator">Or</span>
                     <a href={releases && releases.length > 0 ? releases.find((val, _) => val.name.includes("setup64.zip")).browser_download_url : ""} className="download-button second">Download now</a>
                     <a href={releases && releases.length > 0 ? releases.find((val, _) => val.name.includes("setup86.zip")).browser_download_url : ""} className="download-button second">x86</a>

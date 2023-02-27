@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useEffect, useState } from 'react';
 import Layout from '@theme/Layout';
 import "../css/style.css";
 import "animate.css"
@@ -26,6 +26,7 @@ const Feature = (props) => {
 }
 
 const BulletPoint = (props) => {
+  
   return <div className="bullet-point">
     <div className="bullet-point-icon">
       <img src={props.icon} alt="" />
@@ -36,23 +37,79 @@ const BulletPoint = (props) => {
   </div>
 } 
 
+
 class Index extends React.Component {
+
+  onScroll = () => {
+
+    if(document.documentElement.scrollTop > 100) 
+    {
+      window.removeEventListener('scroll', this.onScroll);
+      return;
+    }
+
+    window.removeEventListener('scroll', this.onScroll);
+
+    this.requestScroll();
+  }
+
+  requestScroll = () => {
+    var header = document.querySelector("#header");
+    var screenshot = document.querySelector(".highlighted-img");
+    var button = document.querySelector(".download-button");
+    var bulletPoints = document.querySelector(".bullet-points");
+
+    window.scrollTo({top: header?.offsetTop - 110, behavior: "smooth"});
+
+    setTimeout(() => {
+    header?.classList.add("animate__animated");
+    header?.classList.add("animate__fadeInUpBig");
+
+    setTimeout(() => {
+      screenshot?.classList.add("animate__animated");
+      screenshot?.classList.add("animate__fadeInUpBig");
+
+      setTimeout(() => {
+        button?.classList.add("animate__animated");
+        button?.classList.add("animate__fadeInUpBig");
+
+        setTimeout(() => {
+          bulletPoints?.classList.add("animate__animated");
+          bulletPoints?.classList.add("animate__fadeInUpBig");
+        }, 100);
+      }, 100);
+    }, 100);
+
+    }, 25);
+  }
+
+  constructor(props)
+  {
+    super(props);
+
+    window.addEventListener('scroll', this.onScroll, { passive: true});
+  }
+
+  
+
   render() {
     return <Layout id="mainPage" title="Main page">
       <div className="download-section">
-        <h1 className="animate__animated animate__fadeInUp">A beautiful, fast pixel-art editor packed in an eye-friendly
+      <div className='super-header'>
+        <h2 className='animate-charcter'>PixiEditor 1.0 is available!</h2>
+        <div style={{height: 100}}>
+      <img src='icons/arrow-down.svg' alt='' onClick={this.requestScroll} className='arrow-down' style={{color: "red", cursor: "pointer"}}/>
+      </div>
+      </div>
+        <h1 id='header'>A beautiful, fast pixel-art editor packed in an eye-friendly
           dark theme.</h1>
-          <img className="animate__animated animate__fadeInUp highlighted-img" id="screenshot" src="screenshot.png"
+          <img className="highlighted-img" id="screenshot" src="screenshot.png"
             alt="Program screenshot" />
-        <div className="download-buttons animate__animated animate__fadeInUp">
+        <div className="download-buttons">
           <a href="/download" className="download-button">Download now</a>
         </div>
-        <div className="download-buttons animate__animated animate__fadeInUp">
-          <h2>PixiEditor 1.0 is coming soon, wishlist on Steam now!</h2>
-        <iframe src="https://store.steampowered.com/widget/2218560/" style={{border: 0}} width="646" height="190"></iframe>
       </div>
-      </div>
-      <div className="bullet-points">
+      <div className="bullet-points" id='bullet-points'>
         <BulletPoint text="Open source" icon="icons/github.svg"/>
         <BulletPoint text="Fast" icon="icons/feather.svg"/>
        <BulletPoint text="Easy to use" icon="icons/star.svg"/>
@@ -73,7 +130,7 @@ class Index extends React.Component {
             align="right" />
 
           <Feature icon="icons/pen-tool.svg"
-            title=" Numerous pixel-perfect tools."
+            title="Pixel-perfect tools."
             description={
               ["There are tools that will help you with pixel-perfect editing.",
                 "Meet pixel-perfect pen mode. Smartly removes corners and doesn't ask questions."]}
@@ -81,6 +138,8 @@ class Index extends React.Component {
             <Feature video="videos/Multiple-documents.mkv" align="right" icon="icons/columns.svg" title="Multiple documents editing support" 
             description={["Edit documents side to side, create multiple columns, rows. Float windows and tabs.", 
             "We don't know if you'll use it, but we've added it anyway."]}/>         
+        <h2 style={{textAlign: "center"}}>And much more!</h2>
+      
         </div>
       </div>
       <CookieConsent
