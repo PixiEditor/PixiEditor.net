@@ -57,21 +57,25 @@ body {
     #fff800 100%
   );
 
-  background-size: auto auto;
-  background-clip: border-box;
   background-size: 200% auto;
   color: #fff;
   background-clip: text;
-  text-fill-color: transparent;
   -webkit-background-clip: text;
   -webkit-text-fill-color: transparent;
   animation: textclip 2s linear infinite;
   font-size: 8em;
+  margin: 0 auto;
+  text-align: center;
+}
+
+.arrow-down-container {
+  height: 100px;
 }
 
 .arrow-down
 {
-    animation: jumpInfinite 1.5s infinite;
+  animation: jumpInfinite 1.5s infinite;
+  cursor: pointer;
 }
 
 @keyframes jumpInfinite {
@@ -375,6 +379,7 @@ video {
   .animate-charcter
   {
     font-size: 3em;
+    max-width: 95%;
   }
 
   video{
@@ -393,7 +398,12 @@ video {
   .feature-description-item {
     margin-bottom: 1.5em;
   }
+
+  .arrow-down-container {
+    margin-top: 30px;
+  }
 }
+
 
 @media only screen and (max-width: 1024px) {
   .feature {

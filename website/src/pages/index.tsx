@@ -21,7 +21,7 @@ const Feature = (props) => {
       </div>
     </div>
     <div className="feature-media">
-        <video src={props.video} autoPlay loop muted></video>
+        <video src={props.video} autoPlay loop muted disableRemotePlayback></video>
     </div>
   </div>
 }
@@ -104,8 +104,8 @@ class Index extends React.Component {
       <div className="download-section">
       <div className='super-header'>
         <h2 className='animate-charcter'>PixiEditor 1.0 is available!</h2>
-        <div style={{height: 100}}>
-      <img src='icons/arrow-down.svg' alt='' onClick={this.requestScroll} className='arrow-down' style={{color: "red", cursor: "pointer"}}/>
+        <div className='arrow-down-container'>
+      <img src='icons/arrow-down.svg' alt='' onClick={this.requestScroll} className='arrow-down' />
       </div>
       </div>
       <div className='presentation-section'>
@@ -129,7 +129,7 @@ class Index extends React.Component {
         <div className="features">
           <Feature icon="icons/layers.svg" title="Create, edit and organize layers"
             description={["We think, that our layers system is quite nice to work with.",
-              "You can create, edit and organize layers in a simple way, as you know it from other graphics editors."]} video="videos/Layers.mkv" />
+              "You can create, edit and organize layers in a simple way, as you know it from other graphics editors."]} video="videos/Layers.webm" />
 
           <Feature icon="icons/transparency.svg"
             title="Color tools"
@@ -137,7 +137,7 @@ class Index extends React.Component {
               ["We've built a tool that helps with adjusting darker and lighter color variations.",
                 "Just select the brightness tool, pick the strength, and you're good to go.",
               "Our users really like this one."]}
-            video="videos/Brightness.mkv"
+            video="videos/Brightness.webm"
             align="right" />
 
           <Feature icon="icons/pen-tool.svg"
@@ -145,8 +145,8 @@ class Index extends React.Component {
             description={
               ["There are tools that will help you with pixel-perfect editing.",
                 "Meet pixel-perfect pen mode. Smartly removes corners and doesn't ask questions."]}
-            video="videos/Pixel-perfect.mkv" />
-            <Feature video="videos/Multiple-documents.mkv" align="right" icon="icons/columns.svg" title="Multiple documents editing support"
+            video="videos/Pixel-perfect.webm" />
+            <Feature video="videos/Multiple-documents.webm" align="right" icon="icons/columns.svg" title="Multiple documents editing support"
             description={["Edit documents side to side, create multiple columns, rows. Float windows and tabs.",
             "We don't know if you'll use it, but we've added it anyway."]}/>
         <h2 style={{textAlign: "center"}}>And much more!</h2>
