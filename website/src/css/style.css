@@ -34,8 +34,17 @@ body {
 
 .super-header
 {
-    height: calc(100vh - 50px);
-    padding-top: 30vh;
+  display: flex;
+  height: 100vh;
+  flex-direction: column;
+  justify-content: center;
+}
+
+.presentation-section {
+  display: flex;
+  height: 100vh;
+  flex-direction: column;
+  align-items: center;
 }
 
 .animate-charcter {
@@ -57,7 +66,7 @@ body {
   -webkit-background-clip: text;
   -webkit-text-fill-color: transparent;
   animation: textclip 2s linear infinite;
-  font-size: 164px;
+  font-size: 8em;
 }
 
 .arrow-down
@@ -181,7 +190,7 @@ header {
 
 #screenshot {
   margin-top: 10px;
-  width: 80%;
+  max-height: 55%;
   max-width: 1000px;
 }
 
@@ -237,7 +246,7 @@ header {
   display: flex;
   flex-direction: row;
   align-items: flex-start;
-  justify-content: space-between;
+  justify-content: space-evenly;
   margin-bottom: 200px;
 }
 
@@ -256,7 +265,7 @@ header {
 }
 
 .feature-title {
-  font-size: 33px;
+  font-size: 2em;
   margin-left: 15px;
 }
 
@@ -265,7 +274,7 @@ header {
   margin-left: 4rem;
   max-width: 550px;
   font-weight: 100;
-  font-size: 24px;
+  font-size: 1.6em;
   line-height: 35px;
 }
 
@@ -348,27 +357,41 @@ video {
   .bullet-point-icon img {
     width: 12vw;
   }
-  #screenshot {
-    width: 100%;
-  }
-}
 
-@media only screen and (min-device-width: 360px) and (max-device-width: 736px) {
   #screenshot {
     width: 90%;
   }
 
+  .download-button {
+    width: 90%;
+  }
+
   .download-section h1 {
-    font-size: 36px;
+    font-size: 1.8em;
+    width: 90%;
+    margin: 0 auto 20px;
   }
 
   .animate-charcter
   {
-    font-size: 48px;
+    font-size: 3em;
   }
 
   video{
+    width: 100%;
     max-width: 325px;
+  }
+
+  .feature-description {
+    margin-left: 0;
+  }
+
+  .feature.right .feature-media {
+    margin-right: 0px;
+  }
+
+  .feature-description-item {
+    margin-bottom: 1.5em;
   }
 }
 
@@ -395,4 +418,8 @@ video {
 }
 
 @media only screen and (min-width: 1500px) {
+}
+
+skipToContent_node_modules-@docusaurus-theme-classic-lib-theme-SkipToContent-styles-module {
+
 }

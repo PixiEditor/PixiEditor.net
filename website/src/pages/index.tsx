@@ -27,7 +27,7 @@ const Feature = (props) => {
 }
 
 const BulletPoint = (props) => {
-  
+
   return <div className="bullet-point">
     <div className="bullet-point-icon">
       <img src={props.icon} alt="" />
@@ -36,7 +36,7 @@ const BulletPoint = (props) => {
       {props.text}
       </div>
   </div>
-} 
+}
 
 
 class Index extends React.Component {
@@ -44,7 +44,7 @@ class Index extends React.Component {
   onScroll = () => {
 
     if (ExecutionEnvironment.canUseDOM) {
-    if(document.documentElement.scrollTop > 100) 
+    if(document.documentElement.scrollTop > 100)
     {
       window.removeEventListener('scroll', this.onScroll);
       return;
@@ -97,7 +97,7 @@ class Index extends React.Component {
     }
   }
 
-  
+
 
   render() {
     return <Layout id="mainPage" title="Main page">
@@ -108,6 +108,7 @@ class Index extends React.Component {
       <img src='icons/arrow-down.svg' alt='' onClick={this.requestScroll} className='arrow-down' style={{color: "red", cursor: "pointer"}}/>
       </div>
       </div>
+      <div className='presentation-section'>
         <h1 id='header'>A beautiful, fast pixel-art editor packed in an eye-friendly
           dark theme.</h1>
           <img className="highlighted-img" id="screenshot" src="screenshot.png"
@@ -117,6 +118,7 @@ class Index extends React.Component {
           <a href="/blog/2023/02/27/1.0-release" className="download-button">What's new?</a>
 
         </div>
+      </div>
       </div>
       <div className="bullet-points" id='bullet-points'>
         <BulletPoint text="Open source" icon="icons/github.svg"/>
@@ -144,11 +146,11 @@ class Index extends React.Component {
               ["There are tools that will help you with pixel-perfect editing.",
                 "Meet pixel-perfect pen mode. Smartly removes corners and doesn't ask questions."]}
             video="videos/Pixel-perfect.mkv" />
-            <Feature video="videos/Multiple-documents.mkv" align="right" icon="icons/columns.svg" title="Multiple documents editing support" 
-            description={["Edit documents side to side, create multiple columns, rows. Float windows and tabs.", 
-            "We don't know if you'll use it, but we've added it anyway."]}/>         
+            <Feature video="videos/Multiple-documents.mkv" align="right" icon="icons/columns.svg" title="Multiple documents editing support"
+            description={["Edit documents side to side, create multiple columns, rows. Float windows and tabs.",
+            "We don't know if you'll use it, but we've added it anyway."]}/>
         <h2 style={{textAlign: "center"}}>And much more!</h2>
-      
+
         </div>
       </div>
       <CookieConsent
