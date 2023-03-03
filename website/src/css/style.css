@@ -406,6 +406,10 @@ video {
     margin-bottom: 75px;
   }
 
+  .feature-description {
+    font-size: 1.2em;
+  }
+
   .feature-media {
     margin-left: 4rem;
   }
@@ -485,7 +489,7 @@ video {
 
   .feature-description {
     margin-left: 0;
-    font-size: 1.4em;
+    font-size: 1.15em;
   }
 
   .feature-media {
