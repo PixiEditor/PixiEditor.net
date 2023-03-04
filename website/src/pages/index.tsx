@@ -41,7 +41,7 @@ const BulletPoint = (props) => {
 
 const SocialMedia = (props) => {
   const social = `${props.name}-social`;
-  return <a href={props.href} className={social}><img src={props.imgsrc}></img></a>
+  return <a href={props.href} className={social} target="_blank"><img src={props.imgsrc}></img></a>
 }
 
 class Index extends React.Component {
