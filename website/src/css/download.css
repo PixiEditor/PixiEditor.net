@@ -21,16 +21,6 @@
     margin: 0 20px;
 }
 
-.download-buttons.second{
-    display: inline-block;
-}
-
-.download-button.second{
-    font-size: 40px;
-    display: inline-block;
-    vertical-align: middle;
-}
-
 #version {
     font-size: 18px;
     color: #AFAfAf;
@@ -132,4 +122,41 @@ iframe{
         vertical-align: middle;
     }
     
+}
+
+@media (min-width: 800px) {
+    .download .download-buttons {
+        display: block !important;
+    }
+
+    .download .download-button {
+        width: 240px !important;
+        margin: 0 5px;
+    }
+
+    .download .steam-button {
+        margin-right: 10px;
+    }
+
+    .download .download-button.x86 {
+        width: 80px!important;
+    }
+
+    .third-party-download img {
+        height: 65px;
+        width: initial;
+    }
+}
+
+@media (max-width: 800px) {
+    .download {
+        padding: 50px 0 0 0;
+        margin: 0 auto;
+        width: 95%;
+    }
+
+    .download h2 {
+        font-size: 1.5em;
+        margin-bottom: 35px;
+    }
 }
