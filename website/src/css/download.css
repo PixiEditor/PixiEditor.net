@@ -141,6 +141,11 @@ iframe{
     .download .download-button.x86 {
         width: 80px!important;
     }
+
+    .third-party-download img {
+        height: 65px;
+        width: initial;
+    }
 }
 
 @media (max-width: 800px) {
