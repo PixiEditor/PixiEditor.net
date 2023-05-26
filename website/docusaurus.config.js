@@ -141,6 +141,9 @@ module.exports =
     },
     image: "img/PixiEditorBanner.png",
     sidebarCollapse: false,
-    metadata: [ {name: 'description', content: 'PixiEditor is a pixel art editing software. Create beautiful sprites for your games and edit images. All packed in an eye-friendly dark theme.' } ]
+    metadata: [
+      { name: 'description', content: 'PixiEditor is a pixel art editing software. Create beautiful sprites for your games and edit images. All packed in an eye-friendly dark theme.' },
+      { name: 'theme-color', content: '#2c2c2c' }
+    ]
   },
 };
