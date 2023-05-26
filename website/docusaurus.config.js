@@ -140,6 +140,7 @@ module.exports =
       copyright: `Copyright © ${new Date().getFullYear()} PixiEditor Organization`,
     },
     image: "img/PixiEditorBanner.png",
-    sidebarCollapse: false
+    sidebarCollapse: false,
+    metadata: [ {name: 'description', content: 'PixiEditor is a pixel art editing software. Create beautiful sprites for your games and edit images. All packed in an eye-friendly dark theme.' } ]
   },
 };
