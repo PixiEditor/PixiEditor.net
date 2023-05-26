@@ -58,8 +58,11 @@ class Index extends React.Component {
       <div className='presentation-section'>
         <h1 id='header'>A beautiful, fast pixel-art editor packed in an eye-friendly
           dark theme.</h1>
-          <img className="highlighted-img" id="screenshot" src="img/screenshot.png"
-            alt="Program screenshot" />
+          <picture>
+            <source media="(max-width: 520px)" srcSet='img/screenshot-vertical.png'/>
+            <img className="highlighted-img" id="screenshot" src="img/screenshot.png"
+                 alt="Program screenshot" />
+          </picture>
         <div className='buttons'>
           <div className="download-buttons">
             <a href="/download" className="download-button">Download now</a>

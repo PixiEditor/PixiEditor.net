@@ -497,18 +497,19 @@ video {
   }
 
   #screenshot {
+    margin: 0;
     max-width: 90%;
   }
 
   .download-button {
     width: 90%;
-    font-size: 1.45em;
+    font-size: 1.2em;
   }
 
   .download-section h1 {
-    font-size: 1.8em;
+    font-size: 1.5em;
     width: 90%;
-    margin: 0 auto 20px;
+    margin: 20px auto;
   }
 
   .animate-charcter
@@ -524,6 +525,7 @@ video {
   .buttons {
     width: 100%;
     align-items: center;
+    flex-direction: column-reverse;
   }
 
   .download-buttons {
@@ -531,11 +533,13 @@ video {
     flex-direction: column;
     gap: 10px;
     align-items: center;
+    margin-top: 5px;
+    flex-direction: column-reverse;
   }
 
   .social-buttons {
     width: 90%;
     align-items: center;
-    margin-top: 10px;
+    margin-top: 0;
   }
 }
