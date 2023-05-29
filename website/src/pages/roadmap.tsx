@@ -11,11 +11,8 @@ function roadmap(props) {
                 <div className='timeline'></div>
                 <div className="roadmap">
                     <div>
-                        <h1>V1.0</h1>
-                        <p>We're here</p>
-                    </div>
-                    <div>
                         <h1>V1.1</h1>
+                        <span className='current-release'>We're here</span>
                         <ul>
                             <li>Localization</li>
                             <li>More palette formats</li>
