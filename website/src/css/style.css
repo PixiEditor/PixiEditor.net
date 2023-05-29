@@ -118,7 +118,11 @@ header {
 
 .download-section h1 {
   font-size: 50px;
-  margin: 80px;
+  margin: 50px;
+}
+
+.main-feature {
+  height: calc(100vh - var(--ifm-navbar-height));
 }
 
 .download-section {
@@ -250,8 +254,13 @@ header {
 
 #screenshot {
   margin-top: 10px;
-  max-height: 53vh;
-  max-width: min(1000px, 90%);
+  max-height: calc(75vh - var(--ifm-navbar-height));
+  max-width: min(1500px, 90%);
+}
+
+.screenshot-buttons {
+  display: flex;
+  align-items: center;
 }
 
 .bullet-points {
@@ -442,6 +451,15 @@ video {
   .feature.right {
     flex-direction: column;
   }
+
+  .screenshot-buttons {
+    flex-direction: column;
+  }
+
+  #screenshot {
+    max-height: calc(55vh - var(--ifm-navbar-height));
+    max-height: calc(55dvh - var(--ifm-navbar-height));
+  }
 }
 
 @media (max-width: 800px) {
@@ -541,5 +559,13 @@ video {
     width: 90%;
     align-items: center;
     margin-top: 0;
+  }
+
+  .screenshot-buttons {
+    flex-direction: column;
+  }
+
+  .main-feature {
+    height: initial;
   }
 }

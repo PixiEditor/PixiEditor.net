@@ -54,34 +54,40 @@ class Index extends React.Component {
 
   render() {
     return <Layout id="mainPage" title="Main page">
-      <div className="download-section">
-      <div className='presentation-section'>
-        <h1 id='header'>A beautiful, fast pixel-art editor packed in an eye-friendly
-          dark theme.</h1>
-          <picture>
-            <source media="(max-width: 520px)" srcSet='img/screenshot-vertical.png'/>
-            <img className="highlighted-img" id="screenshot" src="img/screenshot.png"
-                 alt="Program screenshot" />
-          </picture>
-        <div className='buttons'>
-          <div className="download-buttons">
-            <a href="/download" className="download-button">Download now</a>
-            <a href="/blog/2023/02/27/1.0-release" className="download-button">What's new?</a>
-          </div>
-          <div className='social-buttons'>
-            <SocialMedia name='discord' href='https://discord.gg/qSRMYmq' imgsrc='/img/Discord-Clyde.svg'/>
-            <SocialMedia name='steam' href='https://store.steampowered.com/app/2218560/PixiEditor__Pixel_Art_Editor/' imgsrc='/img/Steam-Logo.svg'/>
-            <SocialMedia name='youtube' href='https://www.youtube.com/@PixiEditor' imgsrc='/img/YT-Logo.svg'/>
-            <SocialMedia name='twitter' href='https://twitter.com/PixiEditor' imgsrc='/img/Twitter-Logo.svg'/>
-            <SocialMedia name='reddit' href='https://www.reddit.com/r/PixiEditor' imgsrc='/img/Reddit-Logo.svg'/>
+      <div className='main-feature'>
+        <div className="download-section">
+          <div className='presentation-section'>
+            <h1 id='header'>A beautiful, fast pixel-art editor packed in an eye-friendly
+              dark theme.</h1>
+            <div className='screenshot-buttons'>
+              <picture>
+                <source media="(max-width: 520px)" srcSet='img/screenshot-vertical.png'/>
+                <img className="highlighted-img" id="screenshot" src="img/screenshot.png"
+                     alt="Program screenshot"/>
+              </picture>
+              <div className='buttons'>
+                <div className="download-buttons">
+                  <a href="/download" className="download-button">Download now</a>
+                  <a href="/blog/2023/02/27/1.0-release" className="download-button">What's new?</a>
+                </div>
+                <div className='social-buttons'>
+                  <SocialMedia name='discord' href='https://discord.gg/qSRMYmq' imgsrc='/img/Discord-Clyde.svg'/>
+                  <SocialMedia name='steam'
+                               href='https://store.steampowered.com/app/2218560/PixiEditor__Pixel_Art_Editor/'
+                               imgsrc='/img/Steam-Logo.svg'/>
+                  <SocialMedia name='youtube' href='https://www.youtube.com/@PixiEditor' imgsrc='/img/YT-Logo.svg'/>
+                  <SocialMedia name='twitter' href='https://twitter.com/PixiEditor' imgsrc='/img/Twitter-Logo.svg'/>
+                  <SocialMedia name='reddit' href='https://www.reddit.com/r/PixiEditor' imgsrc='/img/Reddit-Logo.svg'/>
+                </div>
+              </div>
+            </div>
           </div>
         </div>
-      </div>
-      </div>
-      <div className="bullet-points" id='bullet-points'>
-        <BulletPoint text="Open source" icon="icons/github.svg"/>
-        <BulletPoint text="Fast" icon="icons/feather.svg"/>
-        <BulletPoint text="Easy to use" icon="icons/star.svg"/>
+        <div className="bullet-points" id='bullet-points'>
+          <BulletPoint text="Open source" icon="icons/github.svg"/>
+          <BulletPoint text="Fast" icon="icons/feather.svg"/>
+          <BulletPoint text="Easy to use" icon="icons/star.svg"/>
+        </div>
       </div>
       <div className="features-container">
         <div className="features">
