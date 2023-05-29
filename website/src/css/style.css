@@ -161,6 +161,9 @@ header {
   transition: filter 0.2s linear;
 }
 
+.artwork-author {
+  color: #999;
+}
 
 .social-buttons a:hover img {
   filter: none;
