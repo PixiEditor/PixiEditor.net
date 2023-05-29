@@ -69,7 +69,7 @@ class Index extends React.Component {
             <a href="/blog/2023/02/27/1.0-release" className="download-button">What's new?</a>
           </div>
           <div className='social-buttons'>
-            <SocialMedia name='discord' href='https://discord.gg/qSRMYmq' imgsrc='/img/Discord-Clyde.svg'/>
+            <SocialMedia name='discord' href='https://discord.gg/DwaXAuXVzv' imgsrc='/img/Discord-Clyde.svg'/>
             <SocialMedia name='steam' href='https://store.steampowered.com/app/2218560/PixiEditor__Pixel_Art_Editor/' imgsrc='/img/Steam-Logo.svg'/>
             <SocialMedia name='youtube' href='https://www.youtube.com/@PixiEditor' imgsrc='/img/YT-Logo.svg'/>
             <SocialMedia name='twitter' href='https://twitter.com/PixiEditor' imgsrc='/img/Twitter-Logo.svg'/>
