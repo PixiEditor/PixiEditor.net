@@ -41,71 +41,13 @@ const BulletPoint = (props) => {
 
 const SocialMedia = (props) => {
   const social = `${props.name}-social`;
-  return <a href={props.href} className={social} target="_blank"><img src={props.imgsrc}></img></a>
+  return <a href={props.href} className={social} target="_blank"><img src={props.imgsrc} alt={props.name}></img></a>
 }
 
 class Index extends React.Component {
-
-  onScroll = () => {
-
-    if (ExecutionEnvironment.canUseDOM) {
-    if(document.documentElement.scrollTop > 100)
-    {
-      window.removeEventListener('scroll', this.onScroll);
-      return;
-    }
-
-    window.removeEventListener('scroll', this.onScroll);
-
-    this.requestScroll();
-  }
-  }
-
-    requestScroll = () => {
-        if (ExecutionEnvironment.canUseDOM) {
-            var header = document.querySelector("#header");
-            var screenshot = document.querySelector(".highlighted-img");
-            var downloadButtons = document.querySelector(".download-buttons");
-            var socialButtons = document.querySelector(".social-buttons");
-            var bulletPoints = document.querySelector(".bullet-points");
-
-            window.scrollTo({top: header?.offsetTop - 110, behavior: "smooth"});
-
-            setTimeout(() => {
-                header?.classList.add("animate__animated");
-                header?.classList.add("animate__fadeInUpBig");
-
-                setTimeout(() => {
-                    screenshot?.classList.add("animate__animated");
-                    screenshot?.classList.add("animate__fadeInUpBig");
-
-                    setTimeout(() => {
-                        downloadButtons?.classList.add("animate__animated");
-                        downloadButtons?.classList.add("animate__fadeInUpBig");
-
-                        setTimeout(() => {
-                            socialButtons?.classList.add("animate__animated");
-                            socialButtons?.classList.add("animate__fadeInUpBig");
-
-                            setTimeout(() => {
-                                bulletPoints?.classList.add("animate__animated");
-                                bulletPoints?.classList.add("animate__fadeInUpBig");
-                            }, 100);
-                        }, 150);
-                    }, 100);
-                }, 100);
-
-            }, 25);
-        }
-    }
-
   constructor(props)
   {
     super(props);
-
-    if (ExecutionEnvironment.canUseDOM) {
-    window.addEventListener('scroll', this.onScroll, { passive: true});
-    }
   }
 
 
@@ -113,17 +55,14 @@ class Index extends React.Component {
   render() {
     return <Layout id="mainPage" title="Main page">
       <div className="download-section">
-      <div className='super-header'>
-        <h2 className='animate-charcter'>PixiEditor 1.0 is available!</h2>
-        <div className='arrow-down-container'>
-      <img src='icons/arrow-down.svg' alt='' onClick={this.requestScroll} className='arrow-down' />
-      </div>
-      </div>
       <div className='presentation-section'>
         <h1 id='header'>A beautiful, fast pixel-art editor packed in an eye-friendly
           dark theme.</h1>
-          <img className="highlighted-img" id="screenshot" src="screenshot.png"
-            alt="Program screenshot" />
+          <picture>
+            <source media="(max-width: 520px)" srcSet='img/screenshot-vertical.png'/>
+            <img className="highlighted-img" id="screenshot" src="img/screenshot.png"
+                 alt="Program screenshot" />
+          </picture>
         <div className='buttons'>
           <div className="download-buttons">
             <a href="/download" className="download-button">Download now</a>
