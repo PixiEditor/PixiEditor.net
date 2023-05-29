@@ -1,0 +1,71 @@
+---
+title: PixiEditor 1.1 Released!
+author: Krzysztof Krysiński
+author_title: PixiEditor Creator
+author_url: https://github.com/flabbet
+author_image_url: https://avatars.githubusercontent.com/u/25402427?s=400&v=4
+tags: [pixieditor, progress, devlog]
+keywords: [devlog, pixieditor, pixel-art editor]
+description: "PixiEditor Version 1.1 release overview"
+---
+
+import "./blog.css"
+
+Hola! Cześć! Hello! Finally, community driven translations are here. PixiEditor 1.1 introduces 10 new languages, and a new way to contribute to PixiEditor.
+
+<!--truncate-->
+
+## Localization
+
+Definately, the most important thing that comes with new update is localization. We've implemented whole new system for translations, that allows anyone to contribute to PixiEditor translations. 
+We and our community managed to fully translate PixiEditor to 10 new languages, and we're looking forward to add more in the future.
+
+So which languages are included in 1.1?
+
+- Polish by [flabbet](https://github.com/flabbet)
+- German by [CPK](https://github.com/CPKreuz)
+- Russian by [Equbuxu](https://github.com/Equbuxu)
+- Spanish by Spraf
+- Portuguese by [Dystopixel](https://ln.ki/dystopixelart)
+- Chinese by ILcp331
+- Ukrainian by Alexey
+- Czech by Chaos Runner and iiipt
+- Hungarian by Almos
+- Arabic by 3bdo
+
+and more are in progress!
+
+![languages](/img/blog-posts/1.1/languages.png)
+
+## Changelog
+
+```
+New features:
+- Added localization support with 10 new languages (Polish, Spanish, German, Russian, Portuguese, Chinese, Ukrainian, Czech, Hungarian, Arabic)
+- Added the ability to remove recently opened files
+- Added menu item icons
+- Added a new command that opens anything available from the clipboard
+- Added fluent icons on Windows 11 for top bar
+- Added new palette formats (.png, Paint.NET .txt, .hex, .gpl, and import from .pixi)
+- Added localization debug window
+
+Improvements:
+- Added shortcut icon to Apply Transform button
+- Disallowed hiding the canvas while reference layer is outside of document bounds
+- Disallowed hiding the canvas while using color picker without refererence layer
+- Updated ComboBox UI
+- Disabled the size input on the pen toolbar when pixel perfect is enabled and set it's value to 1
+- Improved icons of the paste commands to make them more distinct
+- Added scrollbar to tools, so now on small screens, they will be accessible
+
+Bug fixes:
+- Fixed a bug of update installer which caused it to ignore sub directories
+- Fixed not being able to change tool size using shortcuts for tools different than pen
+- Fixed default mode in brightness tool
+- Fixed the brush overlay showing the selected tool size when having pixel perfect enabled on the pen tool
+- Fixed .pixi file not being pastable by using preview image of the .pixi file
+- Fixed reference layer drag'n'drop
+- Fixed a bug that caused shared toolbar not to update cursor
+- Fixed bug causing Microsoft Store version to crash on Shortcut Templates
+```
+
