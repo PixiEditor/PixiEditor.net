@@ -29,8 +29,13 @@
 .timeline {
     width: 100%;
     height: 10px;
-    background: linear-gradient(90deg, #dad3af 0%, #d58863 10%, #de3179 50%, #402ba7 80%);
+    background: linear-gradient(90deg, #dad3af 0%, #d58863 20%, #de3179 40%, #9528cb 70%);
     border-radius: 100px;
+}
+
+.current-release {
+    text-decoration: underline;
+    text-decoration-color: #BBB;
 }
 
 .roadmap div {
