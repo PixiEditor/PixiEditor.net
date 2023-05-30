@@ -67,7 +67,7 @@ class Index extends React.Component {
         <div className='buttons'>
           <div className="download-buttons">
             <a href="/download" className="download-button">Download now</a>
-            <a href="/blog/2023/02/27/1.0-release" className="download-button">What's new?</a>
+            <a href="/blog/2023/05/30/1.1-release" className="download-button">What's new?</a>
           </div>
           <div className='social-buttons'>
             <SocialMedia name='discord' href='https://discord.gg/DwaXAuXVzv' imgsrc='/img/Discord-Clyde.svg'/>
