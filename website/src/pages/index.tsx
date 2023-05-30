@@ -63,7 +63,7 @@ class Index extends React.Component {
             <img className="highlighted-img" id="screenshot" src="img/screenshot.png"
                  alt="Program screenshot" />
           </picture>
-        <a className="artwork-author" href='https://twitter.com/null63596290'>(Artwork by @breaddo)</a>
+        {/*<a className="artwork-author" target='_blank' href='https://twitter.com/null63596290'>Artwork by @breaddo</a>*/}
         <div className='buttons'>
           <div className="download-buttons">
             <a href="/download" className="download-button">Download now</a>
