@@ -117,8 +117,8 @@ header {
 }
 
 .download-section h1 {
-  font-size: 50px;
-  margin: 80px;
+  font-size: 3rem;
+  margin: 25px;
 }
 
 .download-section {
@@ -161,6 +161,9 @@ header {
   transition: filter 0.2s linear;
 }
 
+.artwork-author {
+  color: #999;
+}
 
 .social-buttons a:hover img {
   filter: none;
@@ -250,8 +253,9 @@ header {
 
 #screenshot {
   margin-top: 10px;
-  max-height: 53vh;
-  max-width: min(1000px, 90%);
+  max-height: 65vh;
+  max-height: 65dvh;
+  max-width: 90%;
 }
 
 .bullet-points {
@@ -398,6 +402,12 @@ video {
   width: 35px;
 }
 
+@media (max-width: 1600px) {
+  .download-section h1 {
+    font-size: 2rem;
+  }
+}
+
 @media only screen and (max-width: 1400px) {
   .feature {
     max-width: 100%;
@@ -507,7 +517,7 @@ video {
   }
 
   .download-section h1 {
-    font-size: 1.5em;
+    font-size: 1.3em;
     width: 90%;
     margin: 20px auto;
   }
