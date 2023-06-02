@@ -80,6 +80,7 @@ class Index extends React.Component {
       </div>
       </div>
       <div className="bullet-points" id='bullet-points'>
+        <BulletPoint text="Free" icon="icons/striked-dollar-sign.svg"/>
         <BulletPoint text="Open source" icon="icons/github.svg"/>
         <BulletPoint text="Fast" icon="icons/feather.svg"/>
         <BulletPoint text="Easy to use" icon="icons/star.svg"/>

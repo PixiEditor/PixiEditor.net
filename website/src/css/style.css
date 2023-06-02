@@ -261,8 +261,8 @@ header {
 .bullet-points {
   display: flex;
   flex-direction: row;
-  justify-content: space-around;
-  width: 1100px;
+  justify-content: space-evenly;
+  width: 1400px;
   margin: 40px auto 0;
   max-width: 100%;
 }
@@ -286,6 +286,19 @@ header {
 
 .bullet-points .blockImage img {
   width: 48px;
+}
+
+.bullet-point {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.bullet-point-text {
+  font-size: 2em;
+}
+.bullet-point-icon img {
+  width: 35px;
 }
 
 .features-container {
@@ -386,20 +399,6 @@ header {
 video {
   border-radius: 5px;
   border: 1px black solid;
-}
-
-.bullet-point {
-  width: 30%;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-}
-
-.bullet-point-text {
-  font-size: 2em;
-}
-.bullet-point-icon img {
-  width: 35px;
 }
 
 @media (max-width: 1600px) {
