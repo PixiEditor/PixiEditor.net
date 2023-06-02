@@ -63,6 +63,12 @@ module.exports =
         {to: 'docs/introduction', label: 'Docs', position: 'left'},
         {to: 'help', label: 'Help', position: 'left'},
         {
+          to: 'download',
+          label: 'Download',
+          position: 'right',
+          id: 'download-nav'
+        },
+        {
           href: 'https://github.com/PixiEditor/PixiEditor',
           label: 'GitHub',
           position: 'right',
@@ -142,7 +148,7 @@ module.exports =
     image: "img/PixiEditorBanner.png",
     sidebarCollapse: false,
     metadata: [
-      { name: 'description', content: 'PixiEditor is a pixel art editing software. Create beautiful sprites for your games and edit images. All packed in an eye-friendly dark theme.' },
+      { name: 'description', content: 'PixiEditor is a free pixel art editing software. Create beautiful sprites for your games and edit images. All packed in an eye-friendly dark theme.' },
       { name: 'theme-color', content: '#2c2c2c' }
     ]
   },

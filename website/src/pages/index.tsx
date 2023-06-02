@@ -45,12 +45,38 @@ const SocialMedia = (props) => {
 }
 
 class Index extends React.Component {
+  onScroll = () => {
+    const bulletPointsElement = document.getElementById('bullet-points');
+    const downloadNavElement = document.getElementById('download-nav');
+
+    if (bulletPointsElement && downloadNavElement) {
+      const bulletPointsBottom = bulletPointsElement.getBoundingClientRect().bottom;
+
+      if (0 > bulletPointsBottom) {
+        downloadNavElement.classList.remove('hide');
+      } else {
+        downloadNavElement.classList.add('hide');
+      }
+
+      downloadNavElement.style.display = "";
+    }
+  };
+
   constructor(props)
   {
     super(props);
+
+    if (ExecutionEnvironment.canUseDOM) {
+      window.addEventListener('scroll', this.onScroll);
+    }
   }
 
-
+  componentDidMount(): void {
+    const downloadNavElement = document.getElementById('download-nav');
+    if (downloadNavElement != null) {
+      downloadNavElement.style.display = "none";
+    }
+  }
 
   render() {
     return <Layout id="mainPage" title="Main page">
@@ -80,6 +106,7 @@ class Index extends React.Component {
       </div>
       </div>
       <div className="bullet-points" id='bullet-points'>
+        <BulletPoint text="Free" icon="icons/striked-dollar-sign.svg"/>
         <BulletPoint text="Open source" icon="icons/github.svg"/>
         <BulletPoint text="Fast" icon="icons/feather.svg"/>
         <BulletPoint text="Easy to use" icon="icons/star.svg"/>
