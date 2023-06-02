@@ -63,6 +63,12 @@ module.exports =
         {to: 'docs/introduction', label: 'Docs', position: 'left'},
         {to: 'help', label: 'Help', position: 'left'},
         {
+          to: 'download',
+          label: 'Download',
+          position: 'right',
+          id: 'download-nav'
+        },
+        {
           href: 'https://github.com/PixiEditor/PixiEditor',
           label: 'GitHub',
           position: 'right',

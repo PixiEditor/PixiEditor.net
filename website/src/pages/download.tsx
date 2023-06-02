@@ -11,6 +11,11 @@ function download(props) {
     const [version, setVersion] = useState("");
 
     useEffect(() => {
+        const downloadNavElement = document.getElementById('download-nav');
+        if (downloadNavElement != null) {
+          downloadNavElement.style.display = "none";
+        }
+
         fetch("https://api.github.com/repos/PixiEditor/PixiEditor/releases")
             .then(resp => resp.json()).then(json => {
                 setReleases(json[0].assets);

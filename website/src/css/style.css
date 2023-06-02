@@ -112,6 +112,21 @@ header {
   font-size: 25px;
 }
 
+#download-nav {
+  padding: 5px 10px;
+  background: #a81b37;
+  border-radius: 5px;
+  transition: opacity 0.2s, background 0.2s;
+}
+
+#download-nav.hide {
+  opacity: 0;
+}
+
+#download-nav:hover {
+  background: #c10f33;
+}
+
 .navPusher {
   padding-top: 0px;
 }
@@ -550,5 +565,12 @@ video {
     width: 90%;
     align-items: center;
     margin-top: 0;
+  }
+}
+
+@media (max-width: 996px) {
+  #download-nav {
+    background: initial!important;
+    padding: 6px 12px;
   }
 }
