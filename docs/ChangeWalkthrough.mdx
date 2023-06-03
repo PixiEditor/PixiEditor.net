@@ -1,0 +1,49 @@
+---
+id: change-walkthrough
+title: How the pen tool works
+sidebar_label: How the pen tool works
+---
+
+# What happens when you use the pen tool
+
+This is a a walkthrough of how the pen tool works internally. It should give you an idea of how various systems of PixiEditor work together.
+
+Let's start from the very beginning, which is when mouse events appear in the UI.
+
+### Viewport
+
+When you draw on the canvas the mouse events are initially handled inside the `Viewport` user control. There, they are passed to IoViewModel by 
+calling its RelayCommands (IoViewModel has relay commands that are bound to Viewport's dependency properties in MainWindow.xaml).
+
+### IoViewModel, DocumentViewModel
+
+Here the mouse input is passed to the document you are drawing in.
+
+`IoViewModel` filters all incoming mouse events to make sure they stay consistent. `IoViewModel` then calls the mouse event handlers of `ToolsViewModel` and 
+`DocumentManagerViewModel.ActiveDocument` which is the currently selected `DocumentViewModel`.
+
+ToolsViewModel initiates drawing by calling `DocumentManagerViewModel.ActiveDocument.UsePenTool()`. After this call, `ActiveDocument` starts using all incoming 
+mouse events to control the pen.
+
+### ActionAccumulator
+
+Now we leave the UI layer and start to descend into `ChangeableDocument` which is part of PixiEditor's Core. When UsePenTool() is called, `ActiveDocument` 
+creates a new `LineBasedPen_Action` which contains all the drawing settings (color, stroke width, ...) as well as the initial position on the canvas. 
+As you draw, it creates more `LineBasedPen_Action`s with updated positions. Once you finally stop drawing, an `EndLineBasedPen_Action` is created. 
+All of these actions are passed to this document's  `ActionAccumulator`. `ActionAccumulator` passes all of these actions to `ChangeableDocument`, which 
+processes them asynchronously in a separate thread. Meanwhile, the UI thread goes back to processing incoming mouse events.
+
+### ChangeableDocument
+
+The actions that `ChangeableDocument` receives are used to control an instance of `LineBasedPen_UpdateableChange`. The instance is created when the first 
+action is received, and the mouse positions from the following actions are used to update the change. Finally, once `EndLineBasedPen_Action` is received, 
+the updateable change gets fully applied.
+
+`LineBasedPen_UpdateableChange` uses the `EnqueueLine` method of the target `ChunkyImage` to draw lines. A new line is drawn after every update. In the 
+end, when the `Apply` function is called, the affected chunks get saved, after which `CommitChanges` is called, solidifying all the drawn lines.
+
+### Back to GUI
+
+`LineBasedChange_UpdateableChange` emits a new `LayerImageChunks_ChangeInfo` on every update. This change info is passed to UI and used in `WriteableBitmapUpdater` 
+to re-render the parts of the main `WriteableBitmap`s that were changed. The main canvas you see in the GUI is one of those bitmaps, so this is when you see the 
+new stroke segment that you've just drawn.

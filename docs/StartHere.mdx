@@ -3,32 +3,45 @@ id: start-here
 title: Start here
 sidebar_label: Start here
 ---
-# Getting started with source code guide
 
-This guide will help you start with PixiEditor codebase.
+:::info
+Docs are still work in progress and lots of information are missing. Join our [Discord server](https://discord.com/invite/qSRMYmq) to get help.
+:::
 
-## Important information
+# Contributing to PixiEditor
 
-Want to make something cool huh? Great! But first, you need to know a few things.
+Hey! Thanks for being interested in the project! It means a lot. This guide will help you get familiar with the codebase.
 
-* PixiEditor is written in C#
-* PixiEditor is built in .NET 5 WPF framework
-* We use the MVVM design pattern.
+## Before you start
 
-Everyone can find something for themselves. From easy things, to hard.
+- Before you start writing code, it's best to discuss the changes you want to make. 
+The quickest way to talk with us is on our [discord server](https://discord.com/invite/qSRMYmq).
+You can also make an issue or comment on an existing one. 
+If you want to work on an issue, keep in mind that some issues can be unexpectedly difficult, and some may even be invalid (since anyone can make one).
 
-PixiEditor is a complex application, so it's important to follow some rules, to ensure quality and maintainability.
+- We welcome early pull requests, in fact, you can and should make one before writing any code. 
+This tells everyone what you are working on, and this way you'll be able to get feedback as you are writing code.
 
-Most important is the MVVM design pattern. Separating UI from logic is crucial. However, we accept some exceptions to that. For example, building **simple** user controls or dialogs can hold logic in code-behind, building ViewModel is unnecessary, but there is no clear border, it all depends on complexity.
+## The basics
+
+* PixiEditor is written in C#, .NET 7
+* We use WPF framework for the UI and SkiaSharp for everything related to drawing/painting.
+* The app has two general parts
+    * A GUI built in WPF (with plans to eventually switch to AvaloniaUI or other UI framework)
+    * The PixiEditor's Core, the part that implements most of the functionality, like drawing, handling layers, keeping track of the changes for the undo system, etc.
 
 ## Code main points
 
-[ViewModelMain](https://github.com/PixiEditor/PixiEditor/blob/master/PixiEditor/ViewModels/ViewModelMain.cs) is considered entry point of program. It is a DataContext to MainWindow, all initialization happens there.
+### `PixiEditor` project (the GUI)
 
-## List of useful guides
+- The constructor of [MainWindow](https://github.com/PixiEditor/PixiEditor/blob/1c3cb41a35f1bab03e5613b9383b3a5da81330ab/src/PixiEditor/Views/MainWindow.xaml) is considered to be the entry point of program.
+- Part of the initialization also happens in [ViewModelMain](https://github.com/PixiEditor/PixiEditor/blob/1c3cb41a35f1bab03e5613b9383b3a5da81330ab/src/PixiEditor/ViewModels/ViewModelMain.cs), which is the `DataContext` of `MainWindow`
+- The outside look and layout of PixiEditor's GUI is defined in .xaml files, located in the [Views directory](https://github.com/PixiEditor/PixiEditor/tree/master/src/PixiEditor/Views)
+- The C# code that backs the GUI is mostly located in the [ViewModels directory](https://github.com/PixiEditor/PixiEditor/tree/master/src/PixiEditor/ViewModels)
+- [ActionAccumulator](https://github.com/PixiEditor/PixiEditor/blob/1c3cb41a35f1bab03e5613b9383b3a5da81330ab/src/PixiEditor/Models/DocumentModels/ActionAccumulator.cs) is the main class that ties the GUI with the Core.
 
-[Building a Tool](building-tool) - Covers basics of the tool system.
+### `PixiEditor.ChangeableDocument` project (the Core)
 
-[Toolbars](Toolbars) - How they work and how to create them
-
-[Undo system](undo-manager) - Understanding how to add new undo changes and how do they work
+- The [Changes](https://github.com/PixiEditor/PixiEditor/tree/master/src/PixiEditor.ChangeableDocument/Changes) directory contains all the code used for 
+actions that change the content of the document, specifically the ones that you can undo and redo. 
+Examples include: Drawing, Creating and deleting layers, Changing canvas size, Selecting pixels with the magic wand tool, etc.

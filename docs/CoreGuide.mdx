@@ -1,0 +1,145 @@
+---
+id: core-guide
+title: PixiEditor's Core
+sidebar_label: PixiEditor's Core
+---
+
+# PixiEditor's Core
+
+## ChangeableDocument
+
+ChangeableDocument is a system used to keep track of all changes done to a document. 
+The system is implemented in the `ChangeableDocument` project and it is the main part of PixiEditor that enables undo and redo functionality.
+
+The `Document` class stores most of the data of a single document. This includes document dimensions, all layers with their bitmaps, blend modes,
+all folders, selection, reference layer, and other stuff. The data can be freely read from the UI, but the only way to write into it
+is by using the change pipeline implemented in the `DocumentChangeTracker` class.
+
+`DocumentChangeTracker` class implements a pipeline which accepts `IAction` instances, modifies the `Document` based on them, 
+and returns `IChangeInfo` instances. `IAction` instances describe user's actions. For example, `ResizeCanvas_Action` is created 
+and passed down the pipeline when the user resizes the canvas. It contains the new canvas size. 
+After accepting the `ResizeCanvas_Action` `DocumentChangeTracker` creates a new instances of the change that corresponds to it, in this case `ResizeCanvas_Change`.
+
+The GUI passes actions to `DocumentChangeTracker` from the `ActionAccumulator` class.
+
+### Changes
+
+#### Regular Change
+
+The "change" is an object that describes some modification made to the
+document, like changing it's size. Changes have two main methods: `Apply` and `Revert`, used for applying and reverting the change. 
+These methods directly write into the contents of the `Document` class.
+
+If we take changing document size as an example, `Apply` method applies the change, in this case, 
+it resizes the document to the new requested size, cropping the layer bitmaps. `Revert` goes the other way: 
+it restores the original size of the canvas, resizes the layer bitmaps back to the original size, and draws the areas on the edges that
+were previously cut away. All data required to apply and revert the change is saved inside the change itself.
+
+`Apply` and `Revert` functions return zero, one, or multiple instances of `IChangeInfo`. Each instance of `IChangeInfo`
+concretely describes a change made to one or multiple properties of `Document`, for example "Document size property changed from 64x64 
+to 128x128". These ChangeInfos are passed to the UI, and they are utilized to update the state of the UI.
+
+#### UpdateableChange
+
+Some changes can't be applied right away. Let's take using a lasso tool to select an area as an example. When using 
+a lasso tool, you first hold down left mouse button, then select the area, then release the button, and only then the 
+final area is known. This means that the lasso change needs to get updates continiously while you are selecting.
+
+This is what `UpdateableChange` is for. It has an `ApplyTemporarily` function that accepts updated data and returns
+`IChangeInfo`'s. `ApplyTemporarily` is very similar to `Apply`, but it can be called multiple times while you are selecting 
+the area, and once you are done `Apply` is still called. If an updateable change gets reverted and then re-applied 
+`ApplyTemporarily` is not called.
+
+`UpdateableChange`'s have two corresponding `IAction`'s: the first one implements `IStartUpdateChangeAction` 
+and is used to start and update the change; the second one implements `IEndChangeAction` and it indicates the end of 
+the change.
+
+Here is an example of how you'd use actions to execute updateable changes. This example changes layer/folder opacity,
+like you would while dragging the opacity slider.
+
+```csharp
+// user started dragging the slider, start changing opacity of layer/folder with guid memberGuid
+// initial value - 1.0f
+// this will create an updateable change and call it's `ApplyTemporarily`
+Helpers.ActionAccumulator.AddActions(new StructureMemberOpacity_Action(memberGuid, 1.0f));
+...
+// some time later, user dragged the slider to 0.5, update opacity to 0.5f
+// this will call `ApplyTemporarily` of the active updateable change
+Helpers.ActionAccumulator.AddActions(new StructureMemberOpacity_Action(memberGuid, 0.5f));
+...
+// some time later, when the user let go of the slider, end the change
+// this calls `Apply` of the active updateable change
+Helpers.ActionAccumulator.AddFinishedActions(new EndStructureMemberOpacity_Action());
+```
+
+#### LayerImageChunks_ChangeInfo
+
+Whenever something is drawn on one of the layer bitmaps, the GUI needs to know what area was updated. 
+ChangeableDocument uses `LayerImageChunks_ChangeInfo` to pass the updated areas to the GUI.
+
+## ChunkyImage
+
+`ChunkyImageLib` provides a bitmap class. `ChunkyImage`'s are used to store the contents of a layer and it's mask. 
+You can draw on `ChunkyImage` by calling methods that enqueue various drawing operations. 
+
+The drawing operations can be cancelled, allowing you to preview the changes before committing them. 
+For example, cancelling is used when transforming an area of the canvas, since the app needs to display the transformed image 
+while it is being moved around. On every position change the old image drawing operation is cancelled, 
+and a new one is enqueued in the new position. Other examples include drawing shapes, using brushes, and in general to 
+anything that requires continious input from the user with immediate visual feedback.
+
+Inside `ChunkyImage`, the image is stored as a set of 256x256 segments, or chunks. The drawing operations are applied individually and 
+independently to each chunk. They are applied in a lazy fashion, chunks are updated to the latest version only if you 
+try to access them. Moreover, there is an option to render chunks in low resolution. All of this enables PixiEditor to 
+display the above mentioned "continuous" operations in a very efficient way: parts of the image not currently on display 
+aren't being rendered, and if you zoom far enough the rendering system switches to using a low resolution.
+
+## How ChangeableDocument uses ChunkyImages
+
+In general, we draw on `ChunkyImage`s from various `Change`s and `UpdateableChange`s. As an example, let's take the `Apply` 
+function of `ReplaceColor_Change`. `ReplaceColor_Change` operates on all layers, replacing one color with another, e.g. 
+all red #FF0000 pixels are replaced by green #00FF00 pixels.
+
+```csharp
+public override OneOf<None, IChangeInfo, List<IChangeInfo>> Apply(Document target, bool firstApply, out bool ignoreInUndo)
+{
+	...
+	// initialize a dictionary where old versions of the chunks will be stored
+	// they are needed cause the change can get reverted in the future
+	savedChunks = new();
+	
+	List<IChangeInfo> infos = new();
+	// for each layer
+	target.ForEveryMember(member =>
+	{
+		if (member is not Layer layer)
+			return;
+		
+		// enqueue a color replacing operation in layer's ChunkyImage
+		layer.LayerImage.EnqueueReplaceColor(oldColor, newColor);
+		
+		// find all chunks affected by currently enqueued operations
+		HashSet<VecI>? chunks = layer.LayerImage.FindAffectedChunks();
+		
+		// save these chunks
+		CommittedChunkStorage storage = new(layer.LayerImage, chunks);
+		savedChunks[layer.GuidValue] = storage;
+		
+		// fully commit changes
+		layer.LayerImage.CommitChanges();
+		
+		// create a new changeinfo for this layer
+		infos.Add(new LayerImageChunks_ChangeInfo(layer.GuidValue, chunks));
+	});
+	// if no layers were modified, don't save this change in the undo/redo history
+	ignoreInUndo = !savedChunks.Any();
+	
+	// return all created infos
+	return infos;
+}
+```
+
+Notice how we first enqueue changes in ChunkyImage, then get affected chunks, save them in `CommittedChunkStorage`, 
+then commit them. This is a very common pattern, shared by many changes. `ApplyTemporarily` functions of 
+`UpdateableChange`s usually don't commit the changes, as they may need to be cancelled on the next update (next 
+call to `ApplyTemporarily`). Instead the changes are committed in the `Apply` function.
