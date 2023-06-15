@@ -1,4 +1,5 @@
 import React, { useEffect, useState } from 'react';
+import ReactDOM from 'react-dom';
 import Layout from '@theme/Layout';
 import "../css/style.css";
 import "animate.css"
@@ -76,10 +77,34 @@ class Index extends React.Component {
     if (downloadNavElement != null) {
       downloadNavElement.style.display = "none";
     }
+
+    if (Date.UTC(2023, 7, 15, 16, 0, 0) < Date.now()) {
+      return;
+    }
+
+    const supporterPack = document.getElementById("supporter-pack");
+    supporterPack!.style.display = "";
+
+    if (Date.UTC(2023, 6, 3, 16, 0, 0) < Date.now()) {
+    }
+    else {
+      ReactDOM.render(this.spBeforeRelease(), supporterPack);
+    }
+  }
+
+  spBeforeRelease() {
+    return [ <h1>Wishlist the Supporter&nbsp;Pack on <a href='https://store.steampowered.com/app/2435860/PixiEditor__Supporter_Pack' target='_blank'>Steam</a> now!</h1>, <p>Get 21 handcrafted palettes and support PixiEditor's development</p> ]
+  }
+
+  spAfterRelease() {
+    return [ <h1>Get the Supporter&nbsp;Pack on <a href='https://store.steampowered.com/app/2435860/PixiEditor__Supporter_Pack' target='_blank'>Steam</a> now!</h1>, <p>Get 21 handcrafted palettes and support PixiEditor's development</p> ]
   }
 
   render() {
     return <Layout id="mainPage" title="Main page">
+      <div id='supporter-pack' style={{display: 'none'}}>
+        <p>Support PixiEditor and receive 21 Palettes</p>
+      </div>
       <div className="download-section">
       <div className='presentation-section'>
         <h1 id='header'>A beautiful, fast pixel-art editor packed in an eye-friendly
