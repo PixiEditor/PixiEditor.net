@@ -86,6 +86,7 @@ class Index extends React.Component {
     supporterPack!.style.display = "";
 
     if (Date.UTC(2023, 6, 3, 16, 0, 0) < Date.now()) {
+      ReactDOM.render(this.spAfterRelease(), supporterPack);
     }
     else {
       ReactDOM.render(this.spBeforeRelease(), supporterPack);
