@@ -234,7 +234,7 @@ class Index extends React.Component {
               className="adsbygoogle"
               style={{ display: "block" }}
               data-ad-format="fluid"
-              data-ad-layout-key="-cs-9s+2t+52+ru"
+              data-ad-layout-key="-9y-21-vz-7x+4mp"
               data-ad-client="ca-pub-8372287848779618"
               data-ad-slot="2371632681"
             ></ins>
@@ -280,7 +280,7 @@ class Index extends React.Component {
               className="adsbygoogle"
               style={{ display: "block" }}
               data-ad-format="fluid"
-              data-ad-layout-key="-cs-9s+2t+52+ru"
+              data-ad-layout-key="-9y-21-vz-7x+4mp"
               data-ad-client="ca-pub-8372287848779618"
               data-ad-slot="2371632681"
             ></ins>
