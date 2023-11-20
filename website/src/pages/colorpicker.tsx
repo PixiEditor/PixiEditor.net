@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useState } from "react";
 import Layout from '@theme/Layout';
 import '../css/colorPicker.css';
 import CodeBlock from '@theme/CodeBlock';
@@ -6,10 +6,18 @@ import Tabs from '@theme/Tabs';
 import "animate.css"
 import TabItem from '@theme/TabItem';
 import '../css/style.css';
+import TogglePicker from "../components/togglePicker";
 
 function colorpicker(props) {
+    const [pickedOption, setPickedOption] = useState(0);
+
+    const optionSelected = (option) => {
+        console.log(option);
+        setPickedOption(option);
+    }
+
     return (
-        <Layout title="WPF Color Picker">
+        <Layout title="AvaloniaUI/WPF Color Picker">
             <div className="colorPicker">
                 <div className="page-title">
                     <h2 className="animate__animated animate__fadeInDown animate__delay-1s">
@@ -19,16 +27,7 @@ function colorpicker(props) {
                 </div>
                 <div className="usage">
                     <h3>Installation</h3>
-                    <div className="slider-option one">
-                        WPF 
-                    </div>
-                    <label className="switch">
-                        <input type="checkbox"/>
-                        <span className="slider round"></span>
-                    </label>
-                    <div className="slider-option two">
-                        AvaloniaUI 
-                    </div> 
+                  <TogglePicker label1="WPF" label2="AvaloniaUI" onOptionSelected={optionSelected}/>
                     <Tabs
                         defaultValue="PM"
                         values={[
@@ -37,19 +36,20 @@ function colorpicker(props) {
                         ]}>
                         <TabItem value="PM">
                             <CodeBlock className="language-powershell">
-                            {"Install-Package PixiEditor.ColorPicker"}
+                            {pickedOption === 0 ? "Install-Package PixiEditor.ColorPicker" : "Install-Package PixiEditor.ColorPicker.AvaloniaUI"}
                         </CodeBlock>
                         </TabItem>
                         <TabItem value="dotnet-cli">
                             <CodeBlock className="language-bash">
-                                dotnet add package PixiEditor.ColorPicker
+                                {pickedOption === 0 ? "dotnet add package PixiEditor.ColorPicker" : "dotnet add package PixiEditor.ColorPicker.AvaloniaUI"}
                             </CodeBlock>
                         </TabItem>
                     </Tabs>
                     <h3>Usage</h3>
                     <CodeBlock className="language-xml">
-                        {`<Window
-xmlns:colorpicker="clr-namespace:ColorPicker;assembly=ColorPicker">`} </CodeBlock>
+                        {pickedOption === 0 ? `<Window
+xmlns:colorpicker="clr-namespace:ColorPicker;assembly=ColorPicker">` : `<Window 
+xmlns:colorPicker="clr-namespace:ColorPicker;assembly=ColorPicker.AvaloniaUI">`} </CodeBlock>
                     <CodeBlock className="language-xml">
                         {`<colorpicker:StandardColorPicker x:Name="main" />
 <colorpicker:PortableColorPicker ColorState="{Binding ElementName=main, Path=ColorState, Mode=TwoWay}"/>`}
@@ -62,7 +62,7 @@ xmlns:colorpicker="clr-namespace:ColorPicker;assembly=ColorPicker">`} </CodeBloc
                     <span>GitHub</span>
                     </div>
                 </a>
-                <a href="https://www.nuget.org/packages/PixiEditor.ColorPicker" target="_blank">
+                <a href={pickedOption === 0 ? "https://www.nuget.org/packages/PixiEditor.ColorPicker" : "https://www.nuget.org/packages/PixiEditor.ColorPicker.AvaloniaUI"} target="_blank">
                     <div className="github-link">
                     <img src="/icons/nuget-logo.png" width="50"/>
                     <span>NuGet</span>
@@ -72,16 +72,6 @@ xmlns:colorpicker="clr-namespace:ColorPicker;assembly=ColorPicker">`} </CodeBloc
                 <h3 className="markdown" style={{textAlign: "center", marginBottom: 50, marginTop: 25}}>
                     Check out <a href="/docs/color-picker" target="_blank">the docs</a> for more
                 </h3>
-
-                <div className="companies-using-section">
-                    <h2>Companies using our Color Picker</h2>
-                    <div className="company-container">
-                        <a href="https://icons8.com/app/windows" target="_blank">
-                        <img src="/icons/Icons8_logo_full.png" width="250" alt="icons8 logo" />
-                        <div className="product-name">Pichon for Windows</div>
-                        </a>
-                    </div>
-                </div>
             </div>
         </Layout>
     )
