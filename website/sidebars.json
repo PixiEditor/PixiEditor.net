@@ -12,7 +12,7 @@
         "ToolViewModels": ["toolbars", "toolbar-settings"]
       }
     ],
-    "Color Picker 🎨": ["color-picker"],
+    "Color Picker 🎨": ["color-picker", "color-picker-avaloniaui", "color-picker-wpf"],
     "Other 🔍": ["faq", "third-party-licenses", "privacy-policy"]
     }
 }
