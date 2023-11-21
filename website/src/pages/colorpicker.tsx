@@ -21,9 +21,11 @@ function colorpicker(props) {
             <div className="colorPicker">
                 <div className="page-title">
                     <h2 className="animate__animated animate__fadeInDown animate__delay-1s">
-                        Likely the most customizable and advanced color picker for WPF and AvaloniaUI.
+                        Likely the most customizable and advanced color picker for WPF and AvaloniaUI. <br/><a href="/ColorPickerDemo/" target="_blank" style={{color: "#c6283d"}}>Try in the browser</a>
                     </h2>
-                    <video muted autoPlay className="animate__animated animate__fadeInDown highlighted-img" src="/videos/colorpicker.mp4"/>
+                    <a href="/ColorPickerDemo/" target="_blank">
+                        <video muted autoPlay className="animate__animated animate__fadeInDown highlighted-img" src="/videos/colorpicker.mp4"/>
+                    </a>
                 </div>
                 <div className="usage">
                     <h3>Installation</h3>
