@@ -49,7 +49,7 @@ function colorpicker(props) {
                     <CodeBlock className="language-xml">
                         {pickedOption === 0 ? `<Window
 xmlns:colorpicker="clr-namespace:ColorPicker;assembly=ColorPicker">` : `<Window 
-xmlns:colorPicker="clr-namespace:ColorPicker;assembly=ColorPicker.AvaloniaUI">`} </CodeBlock>
+xmlns:colorpicker="clr-namespace:ColorPicker;assembly=ColorPicker.AvaloniaUI">`} </CodeBlock>
                     <CodeBlock className="language-xml">
                         {`<colorpicker:StandardColorPicker x:Name="main" />
 <colorpicker:PortableColorPicker ColorState="{Binding ElementName=main, Path=ColorState, Mode=TwoWay}"/>`}

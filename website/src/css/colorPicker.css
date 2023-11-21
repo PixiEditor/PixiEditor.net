@@ -141,6 +141,46 @@ input:focus + .slider {
   box-shadow: 0 0 1px #606060;
 }
 
+.togglePicker
+{
+    border-color: #504f50;
+    border-width: 1px;
+    border-style: solid;
+    background-color: #201f20;
+    padding: 8px;
+    font-size: 14px;
+    color: #827f7e;
+    cursor: pointer;
+    transition: 0.3s;
+}
+
+.togglePicker:disabled
+{
+    background-color: #2e2d2e;
+    color: white;
+    border-color: white;
+}
+
+.togglePicker.firstButton {
+    border-radius: 5px 0 0 5px;
+    border-right: none;
+}
+
+.togglePicker.secondButton {
+    border-radius: 0 5px 5px 0;
+    border-left: none;
+}
+
+.togglePicker.secondButton:disabled {
+    border-radius: 0 5px 5px 0;
+    border-left: 1px solid white;
+}
+
+.togglePicker.firstButton:disabled {
+    border-radius: 5px 0 0 5px;
+    border-right: 1px solid white;
+}
+
 input:checked + .slider:before {
   -webkit-transform: translateX(27px);
   -ms-transform: translateX(27px);

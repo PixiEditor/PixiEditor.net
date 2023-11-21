@@ -24,11 +24,11 @@ const TogglePicker: React.FC<TogglePickerProps> = (props) => {
 
   return (
     <div>
-      <button onClick={handleButton1Click} disabled={isButton1Toggled}>
-        <span>{props.label1}</span>
+      <button onClick={handleButton1Click} disabled={isButton1Toggled} className='togglePicker firstButton'>
+      {props.label1}
       </button>
-      <button onClick={handleButton2Click} disabled={isButton2Toggled}>
-        <span>{props.label2}</span>
+      <button onClick={handleButton2Click} disabled={isButton2Toggled} className='togglePicker secondButton'>
+      {props.label2}
       </button>
     </div>
   );
