@@ -1,0 +1,60 @@
+---
+title: Devlog 3
+author: Krzysztof Krysiński
+author_title: PixiEditor Creator
+author_url: https://github.com/flabbet
+author_image_url: https://avatars.githubusercontent.com/u/25402427?s=400&v=4
+tags: [devlog, pixieditor]
+keywords: [devlog, pixieditor, 2.0, pixelart]
+description: "Autosave, new color picker, AvaloniaUI and lots of other changes."
+---
+
+In past few months we've been working hard on 2.0 release of PixiEdior.
+Check out all the things we've been preparing.
+
+<!--truncate-->
+
+# State of v2.0
+
+New major release is still in progress, we've done some huge progress with
+porting existing PixiEditor to a new UI framework - AvaloniaUI along with
+modernizing core components, however it's still far from completion.
+
+## What to expect from 2.0?
+
+- First of all, PixiEditor will be **cross-platform**: Windows, Linux, MacOSX and even
+browser. However not all platforms will be supported from the beginning.
+(Support us on [OpenCollective](https://opencollective.com/pixieditor) for MacOSX version!)
+
+- **Extensibility**, we are making PixiEditor code much more extensible, which means, that in
+the future, you'll be able to create and install community made extesnions.
+
+- **Themes**, you'll be able to create and edit the looks of editor (yes, setting those
+ anime girls as a background as well, you weirdos)
+
+
+ ## AvaloniaUI Color picker
+
+ As a part of porting process, we've also made AvaloniaUI version of 
+ our Color Picker, you can use it in your AvaloniaUI project! 
+Check it out [here](https://pixieditor.net/colorpicker)
+
+<video muted autoPlay loop src="/videos/colorpicker.mp4"/>
+
+We have also started working on OkLab color space support.
+Which will be represented as OkHsl and OkHsv pickers.
+
+<img src="/img/blog-posts/devlog3/OkHsl.png" width="300"/>
+
+# In the meantime...
+
+While we are working on all those 2.0 things, we are preparing a small update with
+some QoL features and bug fixes. One of which is autosave!
+
+Yes, finally. Crashes happen sometimes and losing your work because you didn't save is 
+one of the most frustrating things, that's why we've decided to implement autosave.
+
+![autosave img](/img/blog-posts/devlog3/autosave.png)
+
+Also, closing PixiEditor now saves your files, so whenever you open it again, your last session
+will be recovered!
