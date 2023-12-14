@@ -3,6 +3,8 @@ id: privacy-policy
 title: Privacy Policy
 sidebar_label: Privacy Policy
 ---
+import exampleStackTrace from "./ExampleStackTraceReport";
+import FileExample from "@site/src/components/fileExample.tsx"
 
 # PixiEditor.net Privacy Policy
 
@@ -67,32 +69,72 @@ By using the Website, you acknowledge that you have read and understood this Pri
 
 # PixiEditor Application Privacy Policy
 
+Last updated: 14.12.2023
+
+We reserve the right to update and modify this Privacy Policy at any time. The "Last updated" date at the beginning of the policy will reflect the latest revision date. We encourage you to review this Privacy Policy periodically.
+
 ## Crash reports
 
-In an event of a crash, a report containing diagnostic data will be automatically sent to us. The report includes:
+In an event of a crash, a report containing diagnostic data will be automatically sent to us via Discord. The report includes:
 - The version of PixiEditor you are running
 - Date and time when PixiEditor crashed
+- Date and time when PixiEditor was opened
 - Your operating system
 - Your hardware, including info about your CPU, GPU and RAM
+- The last 8 commands you have been using. (Example: Creating a new document, Creating a new layer)
+- A info about the state of PixiEditor, including
+    - The amount of threads used by the application
+    - Your selected language
+    - Your Windows region and language settings
+    - Preferences like Shared Toolbar, Right Click mode and if Rich presence or Debug mode is enabled
+    - UI Information, like the size of the main window and if its state
+    - The currently selected Tool and Colors
+    - Info about the current document, including:
+        - Size
+        - Layer Count
+        - Info if all changes are saved
+        - Is horizontal or vertical symmetry enabled and where the axis is
+        - Info about current transformation
 - A stack trace, which is a location in the PixiEditor code where the error happened. It contains no personal data.
 - An error message, which may include textual data related to the files currently opened in the app, or related to actions done in the app prior to the crash. Examples include, but are not limited to:
     - The filenames and full paths (including your Windows username) of the currently opened files
-    - Text that you've previous entered in the app
+    - Text that you've previously entered in the app
     - The name of currently selected layer
+
+Please refer to [Discords Privacy Policy](https://discord.com/privacy) for further information
+
+### Why do we collect this data
+
+These crash reports help us find and eliminate bugs.
+
+The information contained in these reports is crucial for us to accurately reproduce and prioritize issues.
+
+### Example Crash Report
+
+<FileExample fileName="crash-2023-12-14_13-02-31_710.txt">
+    {exampleStackTrace()}
+</FileExample>
 
 ### All images created or opened in PixiEditor stay on your machine and are never sent anywhere.
 
 ## Discord Rich Presence
 
 PixiEditor supports [Discord Rich Presence](https://discordapp.com/developers/docs/rich-presence/how-to) API. This means, your status
-is publically displayed on your discord profile while using PixiEditor. By default this option is enabled.
+is publicly displayed on your discord profile while using PixiEditor. By default, this option is enabled.
 
-Default PixiEditor Rich Presence publically shares information about:
+Please refer to [Discords Privacy Policy](https://discord.com/privacy) for further information
+
+Default PixiEditor Rich Presence publicly shares information about:
 - Document size
 - Layers count
 - Time elapsed
 
-All of the options can be disabled in the settings as well as Rich Presence itself.
+All the options can be disabled in the settings as well as Rich Presence itself.
 
+## Updates
 
-Another thing PixiEditor uses internet access for, is to check updates. You can disable that option as well.
+The Standalone version of PixiEditor (the one you can download from this website) checks for updates using the GitHub API.
+
+Please refer to [GitHubs Privacy Policy](https://docs.github.com/en/site-policy/privacy-policies/github-privacy-statement) for further information
+
+You can disable this option in the settings.
