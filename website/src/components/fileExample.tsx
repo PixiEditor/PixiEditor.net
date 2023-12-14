@@ -32,7 +32,7 @@ class FileExample extends React.Component {
         return <div className="file-example" style={{
             width: this.state.expanded ? "100%" : "70%"}}>
             <div className='file-example-header'>
-                <a href='#' onClick={() => this.toggleExpanded()}>{this.state.expanded ? "Collapse" : "Expand"}</a>
+                <a href='#' className={this.state.expanded ? "expanded" : ""} onClick={() => this.toggleExpanded()}>{this.state.expanded ? "Collapse" : "Expand"}</a>
                 <span className='file-example-file-name'>{this.props.fileName}</span>
             </div>
             <pre className='file-example-content' style={{
