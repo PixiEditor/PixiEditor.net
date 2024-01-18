@@ -1,0 +1,132 @@
+#subheader
+{
+    margin-top: 10px;
+    margin-left: 4rem;
+    font-weight: normal;
+    font-size: 1.6em;
+    line-height: 35px;
+    color: #c2c2c2
+}
+
+#header.v2
+{
+    margin-top: 100px;
+}
+
+.buttons.v2 {
+    width: 100%;
+    align-items: center;
+    flex-direction: column;
+  }
+
+  .wishlist-input
+  {
+        display: inline-block;
+  }
+
+form input
+{
+    border: 1px solid #c2c2c2;
+    border-radius: 5px 0 0 5px;
+    padding: 10px;
+    font-size: 1.2em;
+    margin-bottom: 20px;
+    display: inline-block;
+}
+
+form button{
+    border: 1px solid #c2c2c2;
+    border-radius: 0 5px 5px 0;
+    padding: 10px;
+    font-size: 1.2em;
+    margin-bottom: 20px;
+    background-color: #2c2c2c;
+    color: #c2c2c2;
+    display: inline;
+    transition: all 0.2s ease-in-out;
+}
+
+form button:hover
+{
+    background-color: #cf2849;
+    border: 1px solid #cf2849;
+    color: #fff;
+    cursor: pointer;
+}
+
+  .highlight
+  {
+    color: #cf2849;
+  }
+
+.featurev2 {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: space-evenly;
+    margin-bottom: 200px;
+  }
+  
+  .featurev2.right {
+    flex-direction: row-reverse;
+  }
+  
+  .featurev2.right .featurev2-media {
+    margin-right: 120px;
+  }
+  
+  .featurev2-media{
+    width: 42.5%;
+  }
+
+  .featurev2-heading {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+  }
+  
+  .featurev2-title {
+    font-size: 2em;
+    margin-left: 15px;
+  }
+  
+  .featurev2-description {
+    margin-top: 10px;
+    margin-left: 4rem;
+    max-width: 550px;
+    font-weight: normal;
+    font-size: 1.6em;
+    color: #c2c2c2;
+    line-height: 35px;
+  }
+  
+  .featurev2-description-item {
+    margin-bottom: 50px;
+  }
+  
+  
+  .featurev2-icon {
+    min-width: 50px;
+  }
+  
+  .featurev2.right .featurev2-gif {
+    margin-right: 20px;
+  }
+  
+  .featurev2-icon img {
+    width: 50px;
+    visibility: visible;
+  }
+
+  .featuresv2-container {
+    background-color: #2c2c2c;
+    padding: 15px;
+    margin-top: 75px;
+  }
+  
+  .featuresv2 {
+    display: flex;
+    width: 85%;
+    margin: 150px auto 0;
+    flex-direction: column;
+  }
