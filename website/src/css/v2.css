@@ -73,6 +73,12 @@ form button:hover
   transition: all 0.2s ease-in-out;
 }
 
+
+.donate-options a
+{
+  text-decoration: none;
+}
+
 .donate-option.first
 {
   border-radius: 5px 0 0 5px;

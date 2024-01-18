@@ -137,10 +137,10 @@ class V2WishlistRegistration extends React.Component {
                 <div className="donate-button">
                   <div className="donate-button-text">Support our work</div>
                   <div className="donate-options">
-                    <div className="donate-option first">1$</div>
-                    <div className="donate-option">5$</div>
-                    <div className="donate-option">10$</div>
-                    <div className="donate-option last">Other</div>
+                  <a href="https://opencollective.com/pixieditor/donate?interval=month&amount=1" target="_blank"><div className="donate-option first">1$</div></a>
+                  <a href="https://opencollective.com/pixieditor/donate?interval=month&amount=5" target="_blank"><div className="donate-option">5$</div></a>
+                  <a href="https://opencollective.com/pixieditor/donate?interval=month&amount=10" target="_blank"><div className="donate-option">10$</div></a>
+                  <a href="https://opencollective.com/pixieditor/donate?interval=month&amount=25" target="_blank"><div className="donate-option last">Other</div></a>
                   </div>
                 </div>
               </div>
@@ -225,10 +225,10 @@ class V2WishlistRegistration extends React.Component {
                 <div className="donate-button">
                   <div className="donate-button-text">Support our work</div>
                   <div className="donate-options">
-                    <div className="donate-option first">1$</div>
-                    <div className="donate-option">5$</div>
-                    <div className="donate-option">10$</div>
-                    <div className="donate-option last">Other</div>
+                  <a href="https://opencollective.com/pixieditor/donate?interval=month&amount=1" target="_blank"><div className="donate-option first">1$</div></a>
+                  <a href="https://opencollective.com/pixieditor/donate?interval=month&amount=5" target="_blank"><div className="donate-option">5$</div></a>
+                  <a href="https://opencollective.com/pixieditor/donate?interval=month&amount=10" target="_blank"><div className="donate-option">10$</div></a>
+                  <a href="https://opencollective.com/pixieditor/donate?interval=month&amount=25" target="_blank"><div className="donate-option last">Other</div></a>
                   </div>
                 </div>
               </div>
