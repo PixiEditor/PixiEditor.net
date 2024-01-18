@@ -88,12 +88,13 @@ class V2WishlistRegistration extends React.Component {
       headers: {
         "Content-Type": "application/json",
       },
-    }).then((response) => {
-      console.log(response);
     })
-    .catch((error) => {
-      console.error(error);
-     });
+      .then((response) => {
+        console.log(response);
+      })
+      .catch((error) => {
+        console.error(error);
+      });
   };
 
   constructor(props) {
@@ -132,6 +133,17 @@ class V2WishlistRegistration extends React.Component {
                   <button type="submit">Join Waitlist</button>
                 </form>
               </div>
+              <div className="donate-buttons" style={{ marginTop: 70 }}>
+                <div className="donate-button">
+                  <div className="donate-button-text">Support our work</div>
+                  <div className="donate-options">
+                    <div className="donate-option first">1$</div>
+                    <div className="donate-option">5$</div>
+                    <div className="donate-option">10$</div>
+                    <div className="donate-option last">Other</div>
+                  </div>
+                </div>
+              </div>
               <div className="social-buttons">
                 <SocialMedia
                   name="discord"
@@ -169,7 +181,7 @@ class V2WishlistRegistration extends React.Component {
               title="Install extensions to make PixiEditor truly yours."
               description={[
                 "We believe, that community is what makes software great and live long.",
-                "And this is what core of PixiEditor 2.0 is all about, <span class='highlight'>extensions</span> made by you, for you.",
+                "And this is what core of PixiEditor 2.0 is all about, <span class='highlight'>extensions</span> made by users, for users.",
                 "Version 2.0 will not be limited to any specific type of graphics, but will be a <span class='highlight'>universal tool</span> for all of them.",
                 "Installing and browsing extensions will be as easy as a single click.",
               ]}
@@ -202,6 +214,25 @@ class V2WishlistRegistration extends React.Component {
               title="Infinite canvas mode"
               description={["Do you like ", ""]}
             />
+            <div className="buttons v2">
+              <div className="wishlist-input">
+                <form onSubmit={this.submitForm}>
+                  <input type="email" placeholder="Enter your email" />
+                  <button type="submit">Join Waitlist</button>
+                </form>
+              </div>
+              <div className="donate-buttons">
+                <div className="donate-button">
+                  <div className="donate-button-text">Support our work</div>
+                  <div className="donate-options">
+                    <div className="donate-option first">1$</div>
+                    <div className="donate-option">5$</div>
+                    <div className="donate-option">10$</div>
+                    <div className="donate-option last">Other</div>
+                  </div>
+                </div>
+              </div>
+            </div>
             <h2 style={{ textAlign: "center" }}>
               Tutaj daj takie bullet pointy jakby, dodatkowych featurów
             </h2>
