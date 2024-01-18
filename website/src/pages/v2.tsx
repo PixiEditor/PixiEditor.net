@@ -129,7 +129,7 @@ class V2WishlistRegistration extends React.Component {
         <div className="featuresv2-container">
           <div className="featuresv2">
           <Feature
-              icon="icons/transparency.svg"
+              icon="icons/download-cloud.svg"
               title="Install extensions to make PixiEditor truly yours."
               description={[
                 "We believe, that community is what makes software great and live long.",
