@@ -4,8 +4,8 @@ import Layout from "@theme/Layout";
 import "../css/v2.css";
 import "animate.css";
 import CookieConsent from "react-cookie-consent";
-import Lottie from 'react-lottie';
-import extensionsAnimation from '/static/animations/Extensions.json';
+import Lottie from "react-lottie";
+import extensionsAnimation from "/static/animations/Extensions.json";
 import ExecutionEnvironment from "@docusaurus/ExecutionEnvironment";
 
 const Feature = (props) => {
@@ -20,15 +20,26 @@ const Feature = (props) => {
         </div>
         <div className="featurev2-description">
           {props.description.map((section, i) => (
-            <div key={i} className="featurev2-description-item" dangerouslySetInnerHTML={{__html: section}}>
-            </div>
+            <div
+              key={i}
+              className="featurev2-description-item"
+              dangerouslySetInnerHTML={{ __html: section }}
+            ></div>
           ))}
         </div>
       </div>
       <div className="featurev2-media">
-        <Lottie className="lottie" options={{loop: true, autoplay: true, animationData: props.lottie, rendererSettings: {
-        preserveAspectRatio: "xMidYMid slice"
-      }}} />
+        <Lottie
+          className="lottie"
+          options={{
+            loop: true,
+            autoplay: true,
+            animationData: props.lottie,
+            rendererSettings: {
+              preserveAspectRatio: "xMidYMid slice",
+            },
+          }}
+        />
       </div>
     </div>
   );
@@ -62,6 +73,29 @@ class V2WishlistRegistration extends React.Component {
     }
   };
 
+  submitForm = (e) => {
+    e.preventDefault();
+    let endPoint = "https://newsletter.pixieditor.net/api/public/subscription";
+    let email = e.target[0].value;
+    let data = {
+      email: email,
+      list_uuids: ["4c17fdb6-9410-41af-9da4-ef9b961b0ae3"],
+    };
+
+    fetch(endPoint, {
+      method: "POST",
+      body: JSON.stringify(data),
+      headers: {
+        "Content-Type": "application/json",
+      },
+    }).then((response) => {
+      console.log(response);
+    })
+    .catch((error) => {
+      console.error(error);
+     });
+  };
+
   constructor(props) {
     super(props);
 
@@ -83,19 +117,21 @@ class V2WishlistRegistration extends React.Component {
         <div className="download-section">
           <div className="presentation-section">
             <h1 id="header" className="v2">
-                Universal graphics platform - one to rule them all.
+              Universal 2D graphics platform - one to rule them all.
             </h1>
             <h2 id="subheader">
-                Are you tired of expensive tool suites, just to create different types of graphics? <br />
-                Raster, vector, pixel art, animations, procedural art - PixiEditor 2.0 got you covered, <span className="highlight">for free.</span>
+              Are you tired of expensive tool suites, just to create different
+              types of graphics? <br />
+              Raster, vector, pixel art, animations, procedural art - PixiEditor
+              2.0 got you covered, <span className="highlight">for free.</span>
             </h2>
             <div className="buttons v2">
-                <div className="wishlist-input">
-                    <form>
-                        <input type="text" placeholder="Enter your email" itemType="email"/>
-                        <button type="submit">Join Waitlist</button>
-                    </form>
-                </div>
+              <div className="wishlist-input">
+                <form onSubmit={this.submitForm}>
+                  <input type="email" placeholder="Enter your email" />
+                  <button type="submit">Join Waitlist</button>
+                </form>
+              </div>
               <div className="social-buttons">
                 <SocialMedia
                   name="discord"
@@ -128,7 +164,7 @@ class V2WishlistRegistration extends React.Component {
         </div>
         <div className="featuresv2-container">
           <div className="featuresv2">
-          <Feature
+            <Feature
               icon="icons/download-cloud.svg"
               title="Install extensions to make PixiEditor truly yours."
               description={[
@@ -140,7 +176,6 @@ class V2WishlistRegistration extends React.Component {
               lottie={extensionsAnimation}
               align="left"
             />
-
             <Feature
               icon="icons/transparency.svg"
               title="Animations"
@@ -149,10 +184,8 @@ class V2WishlistRegistration extends React.Component {
                 "You'll be able to <span class='highlight'>create any kind of animations.</span> From simple frame-by-frame, to complex keyframe animations.",
                 "As extensible, as everything else.",
               ]}
-          
               align="right"
             />
-
             <Feature
               icon="icons/pen-tool.svg"
               title="Introducing Layer Nodes, our take on procedural art."
@@ -167,13 +200,11 @@ class V2WishlistRegistration extends React.Component {
               align="right"
               icon="icons/columns.svg"
               title="Infinite canvas mode"
-              description={[
-                "Do you like ",
-                "",
-              ]}
+              description={["Do you like ", ""]}
             />
-            <h2 style={{ textAlign: "center" }}>Tutaj daj takie bullet pointy jakby, dodatkowych featurów</h2>
-
+            <h2 style={{ textAlign: "center" }}>
+              Tutaj daj takie bullet pointy jakby, dodatkowych featurów
+            </h2>
             FAQ
           </div>
         </div>
