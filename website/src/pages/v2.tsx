@@ -255,7 +255,7 @@ class V2WishlistRegistration extends React.Component {
               icon="icons/columns.svg"
               title="Infinite canvas mode"
               description={[
-                "No more restrictions, create sprite atlases, artboards and use it as a sandbox.",
+                "No more restrictions - create sprite atlases, artboards and use it as a sandbox.",
                 "Why stop at sandbox, a whole desert!",
                 "Desert is kinda empty though, your canvas won't, maybe forest then? There are a lot of things there, like frogs and trees.",
                 "Anyway, you get the point.",
@@ -312,8 +312,8 @@ class V2WishlistRegistration extends React.Component {
             <Faq question="PixiEditor 1.0 is a pixel art focused editor, will version 2.0 lose pixel art tooling?" 
             answer="Not at all! New update will include all tooling that was available in previous versions. You'll be able to choose pixel-art tooling and just enjoy new features.
             <br/><br/> Besides built-in pixel art tools, you'll be able to install new community-made extensions, that will enhance your pixel-art drawing experience.
-            We believe, that universality of new update will broaden the range of users who use PixiEditor, which might create a positive feedback loop.
-            More users -> more tooling extensions -> more users." />
+            We believe, that making PixiEditor more universal in the new update will broaden the range of users who use it, which might create a positive feedback loop:
+            more users -> more tooling extensions -> more users." />
 
             <Faq question="What platforms will PixiEditor 2.0 be available on?"
             answer="We plan to release PixiEditor 2.0 for Windows, Linux and MacOS. We are also experimenting with web version, however this is not our target for 2.0 release." />
@@ -322,7 +322,7 @@ class V2WishlistRegistration extends React.Component {
 
             <Faq question="Will PixiEditor 2.0 be open-source?" 
             answer="Yes, core PixiEditor app will remain open-source under LGPL license.
-            <br/><br/> However, due to the nature of PixiEditor 2.0, we might create official extensions that are not going to be open-source." />
+            <br/><br/> However, due to the nature of PixiEditor 2.0, we might create official extensions that will not be open-source." />
 
             <Faq question="What will be the release date?" 
             answer="We don't have a specific date yet. However, we plan to release a few beta versions in the upcoming months, with different set of features. 
