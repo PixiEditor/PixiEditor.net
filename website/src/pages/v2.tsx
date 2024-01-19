@@ -54,6 +54,19 @@ const SocialMedia = (props) => {
   );
 };
 
+const Faq = (props) => {
+  const [answer, setAnswer] = useState("");
+
+  return (
+    <div className="faq">
+      <div className="faq-question">
+        {props.question}
+      </div>
+      <div className="faq-answer" dangerouslySetInnerHTML={{__html: props.answer}}></div>
+    </div>
+  );
+};
+
 class V2WishlistRegistration extends React.Component {
   onScroll = () => {
     const bulletPointsElement = document.getElementById("bullet-points");
@@ -137,10 +150,30 @@ class V2WishlistRegistration extends React.Component {
                 <div className="donate-button">
                   <div className="donate-button-text">Support our work</div>
                   <div className="donate-options">
-                  <a href="https://opencollective.com/pixieditor/donate?interval=month&amount=1" target="_blank"><div className="donate-option first">1$</div></a>
-                  <a href="https://opencollective.com/pixieditor/donate?interval=month&amount=5" target="_blank"><div className="donate-option">5$</div></a>
-                  <a href="https://opencollective.com/pixieditor/donate?interval=month&amount=10" target="_blank"><div className="donate-option">10$</div></a>
-                  <a href="https://opencollective.com/pixieditor/donate?interval=month&amount=25" target="_blank"><div className="donate-option last">Other</div></a>
+                    <a
+                      href="https://opencollective.com/pixieditor/donate?interval=month&amount=1"
+                      target="_blank"
+                    >
+                      <div className="donate-option first">1$</div>
+                    </a>
+                    <a
+                      href="https://opencollective.com/pixieditor/donate?interval=month&amount=5"
+                      target="_blank"
+                    >
+                      <div className="donate-option">5$</div>
+                    </a>
+                    <a
+                      href="https://opencollective.com/pixieditor/donate?interval=month&amount=10"
+                      target="_blank"
+                    >
+                      <div className="donate-option">10$</div>
+                    </a>
+                    <a
+                      href="https://opencollective.com/pixieditor/donate?interval=month&amount=25"
+                      target="_blank"
+                    >
+                      <div className="donate-option last">Other</div>
+                    </a>
                   </div>
                 </div>
               </div>
@@ -212,8 +245,14 @@ class V2WishlistRegistration extends React.Component {
               align="right"
               icon="icons/columns.svg"
               title="Infinite canvas mode"
-              description={["Do you like ", ""]}
+              description={[
+                "No more restrictions, create sprite atlases, artboards and use it as a sandbox.",
+                "Why stop at sandbox, a whole desert!",
+                "Desert is kinda empty though, your canvas won't, maybe forest then? There are a lot of things there, like frogs and trees.",
+                "Anyway, you get the point.",
+              ]}
             />
+
             <div className="buttons v2">
               <div className="wishlist-input">
                 <form onSubmit={this.submitForm}>
@@ -225,18 +264,72 @@ class V2WishlistRegistration extends React.Component {
                 <div className="donate-button">
                   <div className="donate-button-text">Support our work</div>
                   <div className="donate-options">
-                  <a href="https://opencollective.com/pixieditor/donate?interval=month&amount=1" target="_blank"><div className="donate-option first">1$</div></a>
-                  <a href="https://opencollective.com/pixieditor/donate?interval=month&amount=5" target="_blank"><div className="donate-option">5$</div></a>
-                  <a href="https://opencollective.com/pixieditor/donate?interval=month&amount=10" target="_blank"><div className="donate-option">10$</div></a>
-                  <a href="https://opencollective.com/pixieditor/donate?interval=month&amount=25" target="_blank"><div className="donate-option last">Other</div></a>
+                    <a
+                      href="https://opencollective.com/pixieditor/donate?interval=month&amount=1"
+                      target="_blank"
+                    >
+                      <div className="donate-option first">1$</div>
+                    </a>
+                    <a
+                      href="https://opencollective.com/pixieditor/donate?interval=month&amount=5"
+                      target="_blank"
+                    >
+                      <div className="donate-option">5$</div>
+                    </a>
+                    <a
+                      href="https://opencollective.com/pixieditor/donate?interval=month&amount=10"
+                      target="_blank"
+                    >
+                      <div className="donate-option">10$</div>
+                    </a>
+                    <a
+                      href="https://opencollective.com/pixieditor/donate?interval=month&amount=25"
+                      target="_blank"
+                    >
+                      <div className="donate-option last">Other</div>
+                    </a>
                   </div>
                 </div>
               </div>
             </div>
-            <h2 style={{ textAlign: "center" }}>
-              Tutaj daj takie bullet pointy jakby, dodatkowych featurów
-            </h2>
-            FAQ
+          </div>
+        </div>
+        <div className="faq-section">
+          <h1 className="faq-header">FAQ</h1>
+          <div className="faq-container">
+            <Faq question="Will PixiEditor 2.0 be a different product than PixiEditor?" 
+            answer="No, PixiEditor 2.0 will be a major free update for PixiEditor." />
+
+            <Faq question="PixiEditor 1.0 is a pixel art focused editor, will version 2.0 lose pixel art tooling?" 
+            answer="Not at all! New update will include all tooling that was available in previous versions. You'll be able to choose pixel-art tooling and just enjoy new features.
+            <br/><br/> Besides built-in pixel art tools, you'll be able to install new community-made extensions, that will enhance your pixel-art drawing experience.
+            We believe, that universality of new update will broaden the range of users who use PixiEditor, which might create a positive feedback loop.
+            More users -> more tooling extensions -> more users." />
+
+            <Faq question="What platforms will PixiEditor 2.0 be available on?"
+            answer="We plan to release PixiEditor 2.0 for Windows, Linux and MacOS. We are also experimenting with web version, however this is not our target for 2.0 release." />
+            
+            <Faq question="Will PixiEditor 2.0 update be free?" answer="Yes, just like every previous and future update. No hidden costs."/>
+
+            <Faq question="Will PixiEditor 2.0 be open-source?" 
+            answer="Yes, core PixiEditor app will remain open-source under LGPL license.
+            <br/><br/> However, due to the nature of PixiEditor 2.0, we might create official extensions that are not going to be open-source." />
+
+            <Faq question="What will be the release date?" 
+            answer="We don't have a specific date yet. However, we plan to release a few beta versions in the upcoming months, with different set of features. 
+            <br/>We'll be sending out emails to everyone who joined the waitlist, when new beta versions are released, so sign in to be as early as possible!
+            <br/><br/> Please note, that beta might not be published for all platforms at once. At first, we aim to deliver PixiEditor 2.0 for Windows and Linux.
+            MacOS build might be delayed, because we currently don't have any MacOS device and we expect porting process to take more time than Windows and Linux." />
+
+            <Faq question="I am a developer and I want to create an extension for PixiEditor 2.0, how and when can I do that?" 
+            answer="Our extensions API is still very work in progress and might drastically change each day, however during beta releases, 
+            we'll create proper docs and notify you with resources you need. We want to introduce the API as soon as possible to you, so you can start creating 
+            awesome things before official 2.0 release.
+            <br/><br/> Make sure to join our <a href='https://discord.gg/DwaXAuXVzv'>Discord</a> for latest info!"/>
+
+            <Faq question="What emails will I receive after joining the waitlist?" 
+            answer="We plan to send out emails with invitations to beta versions, as well as marketing emails with updates, interesting facts about PixiEditor 2.0, 
+            development progress and tutorials. We promise not to spam your inbox, we'll try to keep our newsletter interesting and as high quality as possible!"/>
           </div>
         </div>
         <CookieConsent
