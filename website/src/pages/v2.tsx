@@ -58,12 +58,20 @@ const SocialMedia = (props) => {
 const Faq = (props) => {
   const [answer, setAnswer] = useState("");
 
+  const toggleAnswer = () => {
+    if (answer === "") {
+      setAnswer("active");
+    } else {
+      setAnswer("");
+    }
+  }
+
   return (
-    <div className="faq">
+    <div className="faq" onClick={toggleAnswer}>
       <div className="faq-question">
         {props.question}
       </div>
-      <div className="faq-answer" dangerouslySetInnerHTML={{__html: props.answer}}></div>
+      <div className={answer === "active" ? "faq-answer" : "faq-answer collapsed"} dangerouslySetInnerHTML={{__html: props.answer}}></div>
     </div>
   );
 };

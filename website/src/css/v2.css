@@ -215,10 +215,15 @@ form button:hover
   {
     width: 85%;
     margin: 0 auto;
-    margin-bottom: 50px;
+    margin-bottom: 25px;
     background: #2c2c2c;
     border-radius: 5px;
     border: 1px solid #161616
+  }
+
+  .faq:hover
+  {
+    cursor: pointer;
   }
 
   .faq-question
@@ -226,7 +231,6 @@ form button:hover
     font-size: 1.6em;
     font-weight: bold;
     padding: 20px;
-    border-bottom: 1px solid #c2c2c2;
   }
 
   .faq-answer
@@ -234,4 +238,10 @@ form button:hover
     font-size: 1.2em;
     color: #c2c2c2;
     padding: 20px;
+    border-top: 1px solid #c2c2c2;
+  }
+
+  .faq-answer.collapsed
+  {
+    display: none;
   }
