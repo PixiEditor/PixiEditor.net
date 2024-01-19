@@ -6,6 +6,7 @@ import "animate.css";
 import CookieConsent from "react-cookie-consent";
 import Lottie from "react-lottie";
 import extensionsAnimation from "/static/animations/Extensions.json";
+import nodesAnimation from "/static/animations/Nodes.json";
 import ExecutionEnvironment from "@docusaurus/ExecutionEnvironment";
 
 const Feature = (props) => {
@@ -232,13 +233,13 @@ class V2WishlistRegistration extends React.Component {
               align="right"
             />
             <Feature
-              icon="icons/pen-tool.svg"
+              icon="icons/nodes.svg"
               title="Introducing Layer Nodes, our take on procedural art."
               description={[
                 "That's right, if you like to play around and connect some nodes, you'll find yourself at home.",
                 "Layer nodes will allow you to <span class='highlight'>create procedural art</span>, animations, vfx and whatever your imagination can come up with.",
               ]}
-              video="videos/Pixel-perfect.webm"
+              lottie={nodesAnimation}
             />
             <Feature
               video="videos/Multiple-documents.webm"
