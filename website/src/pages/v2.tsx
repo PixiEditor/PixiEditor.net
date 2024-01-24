@@ -135,6 +135,10 @@ class V2WishlistRegistration extends React.Component {
   }
 
   render() {
+    if(prompt("enter the bro code") !== "unicorn")
+    {
+       return <span>no</span>
+    }
     return (
       <Layout id="v2" title="PixiEditor 2.0 Waitlist">
         <div className="download-section">

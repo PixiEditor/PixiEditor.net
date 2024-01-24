@@ -1,1 +1,1 @@
-Copyright (C) 2021 PixiEditor Organization
+Copyright (C) 2024 PixiEditor Organization

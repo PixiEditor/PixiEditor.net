@@ -80,7 +80,6 @@ module.exports =
         },
         {to: 'blog', label: 'Blog', position: 'left'},
         {to: "colorpicker", label: "Color Picker", position: 'left'},
-        {to: "v2", label: "V2 - Wishlist", position: 'left'},
         {to: "roadmap", label: "Roadmap", position: 'left'}
       ],
     },
