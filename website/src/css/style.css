@@ -112,49 +112,49 @@ header {
   font-size: 25px;
 }
 
-#supporter-pack {
+#extraInfo {
   text-align: center;
-  background: #473d77;
+  background: #c10f33;
 }
 
-#supporter-pack h1 {
+#extraInfo h1 {
   margin: 25px;
-  font-size: 3em;
+  font-size: 2em;
 }
 
-#supporter-pack h1::before {
-  content: '🎨 ';
+#extraInfo h1::before {
+  content: '📰 ';
 }
 
-#supporter-pack h1::after {
-  content: ' 🎨';
+#extraInfo h1::after {
+  content: ' 📧';
 }
 
-#supporter-pack h1 a {
+#extraInfo h1 a {
   text-decoration: underline;
 }
 
-#supporter-pack p {
-  font-size: 1.6em;
+#extraInfo p {
+  font-size: 1.3em;
 }
 
 @media (max-width: 1600px) {
-  #supporter-pack h1 {
+  #extraInfo h1 {
     margin: 25px;
     font-size: 1.45em;
   }
 
-  #supporter-pack p {
+  #extraInfo p {
     font-size: 1.2em;
   }
 }
 
 @media (max-width: 630px) {
-  #supporter-pack h1::before {
+  #extraInfo h1::before {
     content: '';
   }
 
-  #supporter-pack h1::after {
+  #extraInfo h1::after {
     content: '';
   }
 }

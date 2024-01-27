@@ -136,6 +136,7 @@ form button:hover
   
   .featurev2-media{
     width: 42.5%;
+    border-radius: 5px;
   }
 
   .featurev2-heading {

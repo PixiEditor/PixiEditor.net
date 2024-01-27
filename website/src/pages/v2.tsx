@@ -7,8 +7,9 @@ import CookieConsent from "react-cookie-consent";
 import Lottie from "react-lottie";
 import extensionsAnimation from "/static/animations/Extensions.json";
 import nodesAnimation from "/static/animations/Nodes.json";
+import animationsAnimation from "/static/animations/Animations.json";
+import infiniteCanvasAnimation from "/static/animations/InfiniteCanvas.json";
 import ExecutionEnvironment from "@docusaurus/ExecutionEnvironment";
-import BrowserOnly from "@docusaurus/BrowserOnly";
 
 const Feature = (props) => {
   return (
@@ -252,7 +253,7 @@ class V2WishlistRegistration extends React.Component {
                     "You'll be able to <span class='highlight'>create any kind of animations.</span> From simple frame-by-frame, to complex keyframe animations.",
                     "As extensible, as everything else.",
                   ]}
-                  align="right"
+                  align="right" lottie={animationsAnimation}
                 />
                 <Feature
                   icon="icons/nodes.svg"
@@ -268,6 +269,7 @@ class V2WishlistRegistration extends React.Component {
                   align="right"
                   icon="icons/columns.svg"
                   title="Infinite canvas mode"
+                  lottie={infiniteCanvasAnimation}
                   description={[
                     "No more restrictions - create sprite atlases, artboards and use it as a sandbox.",
                     "Why stop at sandbox, a whole desert!",
