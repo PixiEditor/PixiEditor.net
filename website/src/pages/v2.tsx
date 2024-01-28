@@ -330,15 +330,14 @@ class V2WishlistRegistration extends React.Component {
               <div className="faq-container">
                 <Faq
                   question="Will PixiEditor 2.0 be a different product than PixiEditor?"
-                  answer="No, PixiEditor 2.0 will be a major free update for PixiEditor."
+                  answer="No, PixiEditor 2.0 will be a free major update for PixiEditor."
                 />
 
                 <Faq
                   question="PixiEditor 1.0 is a pixel art focused editor, will version 2.0 lose pixel art tooling?"
                   answer="Not at all! New update will include all tooling that was available in previous versions. You'll be able to choose pixel-art tooling and just enjoy new features.
-                <br/><br/> Besides built-in pixel art tools, you'll be able to install new community-made extensions, that will enhance your pixel-art drawing experience.
-                We believe, that making PixiEditor more universal in the new update will broaden the range of users who use it, which might create a positive feedback loop:
-                more users -> more tooling extensions -> more users."
+                <br/><br/> Besides built-in pixel art tools, you'll be able to install new community-made extensions that will enhance your pixel-art drawing experience.
+                We believe that making PixiEditor more universal in the new update will broaden the range of users who use it. This, in turn, might create a positive feedback loop: more users -> more tooling extensions -> more users."
                 />
 
                 <Faq
@@ -359,7 +358,7 @@ class V2WishlistRegistration extends React.Component {
 
                 <Faq
                   question="What will be the release date?"
-                  answer="We don't have a specific date yet. However, we plan to release a few beta versions in the upcoming months, with different set of features. 
+                  answer="We don't have a specific date yet. However, we plan to release a few beta versions in the upcoming months, with different sets of features. 
                 <br/>We'll be sending out emails to everyone who joined the waitlist, when new beta versions are released, so sign in to be as early as possible!
                 <br/><br/> Please note, that beta might not be published for all platforms at once. At first, we aim to deliver PixiEditor 2.0 for Windows and Linux.
                 MacOS build might be delayed, because we currently don't have any MacOS device and we expect porting process to take more time than Windows and Linux."
@@ -367,8 +366,8 @@ class V2WishlistRegistration extends React.Component {
 
                 <Faq
                   question="I am a developer and I want to create an extension for PixiEditor 2.0, how and when can I do that?"
-                  answer="Our extensions API is still very work in progress and might drastically change each day, however during beta releases, 
-                we'll create proper docs and notify you with resources you need. We want to introduce the API as soon as possible to you, so you can start creating 
+                  answer="Our extensions API is still very much a work-in-progress and might drastically change each day. However, during beta releases, 
+                we'll create proper docs and notify you with resources you need. We want to introduce the API to you as soon as possible, so you can start creating 
                 awesome things before official 2.0 release.
                 <br/><br/> Make sure to join our <a href='https://discord.gg/DwaXAuXVzv'>Discord</a> for latest info!"
                 />
