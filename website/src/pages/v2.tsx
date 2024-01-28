@@ -79,26 +79,9 @@ const Faq = (props) => {
   );
 };
 
-class V2WishlistRegistration extends React.Component {
-  onScroll = () => {
-    const bulletPointsElement = document.getElementById("bullet-points");
-    const downloadNavElement = document.getElementById("download-nav");
+const WishlistForm = (props) => {
 
-    if (bulletPointsElement && downloadNavElement) {
-      const bulletPointsBottom =
-        bulletPointsElement.getBoundingClientRect().bottom;
-
-      if (0 > bulletPointsBottom) {
-        downloadNavElement.classList.remove("hide");
-      } else {
-        downloadNavElement.classList.add("hide");
-      }
-
-      downloadNavElement.style.display = "";
-    }
-  };
-
-  submitForm = (e) => {
+  const submitForm = (e) => {
     e.preventDefault();
     let endPoint = "https://newsletter.pixieditor.net/api/public/subscription";
     let email = e.target[0].value;
@@ -129,6 +112,40 @@ class V2WishlistRegistration extends React.Component {
       });
   };
 
+  return (
+    <div className="wishlist-input">
+                    <form onSubmit={submitForm}>
+                      <input type="email" placeholder="Enter your email" />
+                      <button type="submit">Join Waitlist</button>
+                      <div>
+                        <input type="checkbox" id={props.id} value="1" required />
+                        <label className="secondary-text" htmlFor={props.id}>By signing up, you agree to PixiEditor's <a href="/docs/privacy-policy" target="_blank">privacy policy.</a></label>
+                        <br/><span className="secondary-text">Receive newsletter with PixiEditor news, tutorials, tips and product releases.</span>           
+                      </div>
+                    </form>
+                  </div>
+  );
+}
+
+class V2WishlistRegistration extends React.Component {
+  onScroll = () => {
+    const bulletPointsElement = document.getElementById("bullet-points");
+    const downloadNavElement = document.getElementById("download-nav");
+
+    if (bulletPointsElement && downloadNavElement) {
+      const bulletPointsBottom =
+        bulletPointsElement.getBoundingClientRect().bottom;
+
+      if (0 > bulletPointsBottom) {
+        downloadNavElement.classList.remove("hide");
+      } else {
+        downloadNavElement.classList.add("hide");
+      }
+
+      downloadNavElement.style.display = "";
+    }
+  };
+
   constructor(props) {
     super(props);
 
@@ -146,7 +163,7 @@ class V2WishlistRegistration extends React.Component {
 
   render() {
     if (ExecutionEnvironment.canUseDOM) {
-      if (window.prompt("enter the bro code") !== "unicorn") {
+      if ((process.env.NODE_ENV && process.env.NODE_ENV !== 'development') && window.prompt("enter the bro code") !== "unicorn") {
         return <span>no</span>;
       } else {
         return (
@@ -164,12 +181,7 @@ class V2WishlistRegistration extends React.Component {
                   <span className="highlight">for free.</span>
                 </h2>
                 <div className="buttons v2">
-                  <div className="wishlist-input">
-                    <form onSubmit={this.submitForm}>
-                      <input type="email" placeholder="Enter your email" />
-                      <button type="submit">Join Waitlist</button>
-                    </form>
-                  </div>
+                  <WishlistForm id="agree1"/>
                   <div className="donate-buttons" style={{ marginTop: 70 }}>
                     <div className="donate-button">
                       <div className="donate-button-text">Support our work</div>
@@ -279,12 +291,7 @@ class V2WishlistRegistration extends React.Component {
                 />
 
                 <div className="buttons v2">
-                  <div className="wishlist-input">
-                    <form onSubmit={this.submitForm}>
-                      <input type="email" placeholder="Enter your email" />
-                      <button type="submit">Join Waitlist</button>
-                    </form>
-                  </div>
+                <WishlistForm id="agree2"/>
                   <div className="donate-buttons">
                     <div className="donate-button">
                       <div className="donate-button-text">Support our work</div>

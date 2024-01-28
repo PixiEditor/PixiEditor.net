@@ -1,7 +1,8 @@
 #subheader
 {
     margin-top: 10px;
-    margin-left: 4rem;
+    margin: 0px 2em;
+    margin-bottom: 50px;
     font-weight: normal;
     font-size: 1.6em;
     line-height: 35px;
@@ -24,7 +25,7 @@
         display: inline-block;
   }
 
-form input
+form input[type="email"]
 {
     border: 1px solid #c2c2c2;
     border-radius: 5px 0 0 5px;
@@ -52,6 +53,28 @@ form button:hover
     border: 1px solid #cf2849;
     color: #fff;
     cursor: pointer;
+}
+
+
+form input[type="checkbox"] {
+  vertical-align: middle;
+  width: 20px;
+  height: 20px;
+  margin-bottom: 8px;
+  margin-right: 5px;
+}
+
+
+.secondary-text
+{
+    color: #c2c2c2;
+    font-size: 1.2em;
+    margin-bottom: 20px;
+}
+
+.donate-buttons
+{
+  margin: 15px 0;
 }
 
 .donate-button
@@ -245,4 +268,63 @@ form button:hover
   .faq-answer.collapsed
   {
     display: none;
+  }
+
+  @media only screen and (max-width: 1400px) {
+    #subheader
+    {
+      font-size: 1.2em;
+    }
+
+    .secondary-text
+    {
+      font-size: 1em;
+    }
+
+    .featurev2 {
+      max-width: 100%;
+      flex-direction: column;
+      text-align: left;
+      margin-bottom: 75px;
+    }
+  
+    .featurev2-description {
+      font-size: 1.2em;
+    }
+  
+    .featurev2-media {
+      margin-left: 3rem;
+      width: 65%;
+      max-height: 500px;
+    }
+
+  
+    .featurev2.right .featurev2-media {
+      margin-right: 0;
+    }
+  
+    .featurev2-description {
+      max-width: initial;
+    }
+  
+    .featurev2-description-item {
+      margin-bottom: 1.5em;
+    }
+  
+    .arrow-down-container {
+      margin-top: 30px;
+    }
+
+  
+    .featurev2.right {
+      flex-direction: column;
+    }
+  }
+
+  @media only screen and (max-width: 800px) {
+    .featurev2-media {
+      margin-left: 0rem;
+      width: 100%;
+      max-height: 500px;
+    }
   }
