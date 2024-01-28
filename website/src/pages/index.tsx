@@ -97,7 +97,8 @@ class Index extends React.Component {
     const extraInfo = document.getElementById("extraInfo");
     extraInfo!.style.display = "";
 
-    ReactDOM.render(this.v2SignIn(), extraInfo);
+    //TODO: Uncomment on release
+    //ReactDOM.render(this.v2SignIn(), extraInfo);
   }
 
   v2SignIn() {
@@ -120,7 +121,6 @@ class Index extends React.Component {
     return (
       <Layout id="mainPage" title="Main page">
         <div id="extraInfo" style={{ display: "none" }}>
-          <p>PixiEditor 2.0 Announced, join waitlist today.</p>
         </div>
         <div className="download-section">
           <div className="presentation-section">

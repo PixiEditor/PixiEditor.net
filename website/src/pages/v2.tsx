@@ -101,6 +101,7 @@ const WishlistForm = (props) => {
         if(response.ok)
         {
           e.target[0].value = "";
+          e.target[2].checked = false;
           e.target[0].placeholder = "Success!";
           setTimeout(() => {
             e.target[0].placeholder = "Enter your email";
@@ -258,7 +259,7 @@ class V2WishlistRegistration extends React.Component {
                   align="left"
                 />
                 <Feature
-                  icon="icons/transparency.svg"
+                  icon="icons/play.svg"
                   title="Animations"
                   description={[
                     "A feature, that was the most wanted. Finally here.",
@@ -277,9 +278,8 @@ class V2WishlistRegistration extends React.Component {
                   lottie={nodesAnimation}
                 />
                 <Feature
-                  video="videos/Multiple-documents.webm"
                   align="right"
-                  icon="icons/columns.svg"
+                  icon="icons/zoom-in.svg"
                   title="Infinite canvas mode"
                   lottie={infiniteCanvasAnimation}
                   description={[
@@ -290,7 +290,7 @@ class V2WishlistRegistration extends React.Component {
                   ]}
                 />
 
-                <div className="buttons v2">
+                <div className="buttons v2 bottom">
                 <WishlistForm id="agree2"/>
                   <div className="donate-buttons">
                     <div className="donate-button">

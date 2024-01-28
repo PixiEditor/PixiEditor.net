@@ -80,7 +80,7 @@ module.exports =
         },
         {to: 'blog', label: 'Blog', position: 'left'},
         {to: "colorpicker", label: "Color Picker", position: 'left'},
-        {to: "roadmap", label: "Roadmap", position: 'left'}
+        {to: "v2", label: "2.0 Waitlist", position: 'left'}
       ],
     },
     footer: {

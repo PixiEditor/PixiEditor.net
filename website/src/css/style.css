@@ -688,6 +688,12 @@ video {
     width: 90%;
     align-items: center;
     margin-top: 0;
+    flex-wrap: wrap;
+  }
+
+  .social-buttons a{
+    width: 15%;
+    min-width: 40px;  
   }
 
   .file-example {
