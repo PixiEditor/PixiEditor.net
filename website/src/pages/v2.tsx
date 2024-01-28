@@ -175,8 +175,7 @@ class V2WishlistRegistration extends React.Component {
                   Universal 2D graphics platform - one to rule them all.
                 </h1>
                 <h2 id="subheader">
-                  Are you tired of expensive tool suites, just to create
-                  different types of graphics? <br />
+                Are you tired of relying on expensive tool suites just to create different types of graphics? <br />
                   Raster, vector, pixel art, animations, procedural art -
                   PixiEditor 2.0 got you covered,{" "}
                   <span className="highlight">for free.</span>
@@ -250,8 +249,8 @@ class V2WishlistRegistration extends React.Component {
                   icon="icons/download-cloud.svg"
                   title="Install extensions to make PixiEditor truly yours."
                   description={[
-                    "We believe, that community is what makes software great and live long.",
-                    "And this is what core of PixiEditor 2.0 is all about, <span class='highlight'>extensions</span> made by users, for users.",
+                    "We believe that a strong community is what makes software great and ensures its longevity.",
+                    "And this is what the core of PixiEditor 2.0 is all about, <span class='highlight'>extensions</span> made by users, for users.",
                     "Version 2.0 will not be limited to any specific type of graphics, but will be a <span class='highlight'>universal tool</span> for all of them.",
                     "Installing and browsing extensions will be as easy as a single click.",
                   ]}
@@ -262,7 +261,7 @@ class V2WishlistRegistration extends React.Component {
                   icon="icons/play.svg"
                   title="Animations"
                   description={[
-                    "A feature, that was the most wanted. Finally here.",
+                    "A feature that was the most wanted. Finally here.",
                     "You'll be able to <span class='highlight'>create any kind of animations.</span> From simple frame-by-frame, to complex keyframe animations.",
                     "As extensible, as everything else.",
                   ]}
@@ -283,9 +282,9 @@ class V2WishlistRegistration extends React.Component {
                   title="Infinite canvas mode"
                   lottie={infiniteCanvasAnimation}
                   description={[
-                    "No more restrictions - create sprite atlases, artboards and use it as a sandbox.",
+                    "No more restrictions - create <span class='highlight'>sprite atlases</span>, <span class='highlight'>artboards</span> and use the canvas as <span class='highlight'>a sandbox.</span>",
                     "Why stop at sandbox, a whole desert!",
-                    "Desert is kinda empty though, your canvas won't, maybe forest then? There are a lot of things there, like frogs and trees.",
+                    "Desert is kinda empty though, your canvas won't be, maybe forest then? There are a lot of things there, like frogs and trees.",
                     "Anyway, you get the point.",
                   ]}
                 />
