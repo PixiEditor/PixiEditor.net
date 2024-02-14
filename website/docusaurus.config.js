@@ -74,7 +74,7 @@ module.exports =
           position: 'right',
         },
         {
-          href: 'https://opencollective.com/pixieditor',
+          to: "donate",
           label: 'Donate ✨',
           position: 'right',
         },

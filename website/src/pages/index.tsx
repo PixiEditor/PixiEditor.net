@@ -97,8 +97,7 @@ class Index extends React.Component {
     const extraInfo = document.getElementById("extraInfo");
     extraInfo!.style.display = "";
 
-    //TODO: Uncomment on release
-    //ReactDOM.render(this.v2SignIn(), extraInfo);
+    ReactDOM.render(this.v2SignIn(), extraInfo);
   }
 
   v2SignIn() {
