@@ -75,7 +75,8 @@ module.exports =
         },
         {
           to: "donate",
-          label: 'Donate ✨',
+          label: 'Donate ❤',
+          className: 'btn-text',
           position: 'right',
         },
         {to: 'blog', label: 'Blog', position: 'left'},

@@ -6,7 +6,6 @@
 h1 {
   font-size: 2.5em;
   font-weight: 700;
-  margin-bottom: 20px;
   color: #fff;
 }
 
@@ -21,6 +20,7 @@ h1 {
   padding: 20px;
   width: 100%;
   background-color: #1c1e1f;
+  margin-bottom: 130px !important;
 }
 
 .donate-buttons {
@@ -42,12 +42,7 @@ h1 {
 }
 
 .togglePicker {
-  width: 15%;
-}
-
-.monthly-donate-option
-{
-  
+  width: 150px;
 }
 
 .one-time-donate-container

@@ -95,6 +95,32 @@ header {
   padding: 20px 25px;
 }
 
+.donate-btn {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  justify-content: space-evenly;
+}
+
+.btn-label
+{
+  font-size: 1.2em;
+  color: #c2c2c2;
+}
+
+.btn-text{
+  color: #fff;
+  background-color: #cf2849;
+  border: 1px solid #cf2849;
+  border-radius: 5px;
+  transition: all 0.2s ease-in-out;
+}
+
+.btn-text:hover {
+  text-decoration: none;
+  background-color: #ff315a;
+}
+
 .header-container a {
   height: 35px;
   display: flex;

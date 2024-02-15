@@ -69,59 +69,12 @@ form input[type="checkbox"] {
   margin-bottom: 20px;
 }
 
-.donate-buttons {
-  margin: 15px 0;
-}
-
-.donate-button {
-  display: flex;
-  flex-direction: row;
-  justify-content: space-between;
-  width: 380px;
-}
-
-.donate-option {
-  border: 1px solid #c2c2c2;
+.btn-text.big
+{
   padding: 10px;
-  font-size: 1.2em;
-  display: inline;
-  background-color: #2c2c2c;
-  color: #c2c2c2;
-  transition: all 0.2s ease-in-out;
+  margin-left: 10px;
 }
 
-.donate-options a {
-  text-decoration: none;
-}
-
-.donate-option.first {
-  border-radius: 5px 0 0 5px;
-}
-
-.donate-option.last {
-  border-radius: 0 5px 5px 0;
-}
-
-.donate-option:hover {
-  background-color: #cf2849;
-  border: 1px solid #cf2849;
-  color: #fff;
-  cursor: pointer;
-}
-
-.donate-button-text {
-  border: 0;
-  font-size: 1.2em;
-  color: #c2c2c2;
-  transition: all 0.2s ease-in-out;
-}
-
-.donateButton:hover {
-  background-color: #cf2849;
-  border: 1px solid #cf2849;
-  color: #fff;
-  cursor: pointer;
-}
 
 .highlight {
   color: #cf2849;
@@ -312,16 +265,6 @@ form input[type="checkbox"] {
   form button {
     border-radius: 5px;
     width: 100%;
-  }
-
-  .donate-button
-  {
-    flex-direction: column;
-  }
-
-  .donate-button-text
-  {
-    margin-bottom: 20px;
   }
 
   .buttons.v2 {

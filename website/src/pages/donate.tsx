@@ -63,9 +63,6 @@ class Donate extends React.Component {
         <div className="donation-header">
           <h1>Support the development of PixiEditor</h1>
         </div>
-        <div className="donation-content">
-          <h2>Choose a memebership or donate once</h2>
-        </div>
         <DonateWidget />
       </Layout>
     );

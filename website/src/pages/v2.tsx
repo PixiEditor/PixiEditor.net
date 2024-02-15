@@ -182,36 +182,9 @@ class V2WishlistRegistration extends React.Component {
                 </h2>
                 <div className="buttons v2">
                   <WishlistForm id="agree1"/>
-                  <div className="donate-buttons" style={{ marginTop: 70 }}>
-                    <div className="donate-button">
-                      <div className="donate-button-text">Support our work</div>
-                      <div className="donate-options">
-                        <a
-                          href="https://opencollective.com/pixieditor/donate?interval=month&amount=1"
-                          target="_blank"
-                        >
-                          <div className="donate-option first">1$</div>
-                        </a>
-                        <a
-                          href="https://opencollective.com/pixieditor/donate?interval=month&amount=5"
-                          target="_blank"
-                        >
-                          <div className="donate-option">5$</div>
-                        </a>
-                        <a
-                          href="https://opencollective.com/pixieditor/donate?interval=month&amount=10"
-                          target="_blank"
-                        >
-                          <div className="donate-option">10$</div>
-                        </a>
-                        <a
-                          href="https://opencollective.com/pixieditor/donate?interval=month&amount=25"
-                          target="_blank"
-                        >
-                          <div className="donate-option last">Other</div>
-                        </a>
-                      </div>
-                    </div>
+                  <div className="donate-btn" style={{ marginTop: 70 }}>
+                  <div className="btn-label">Support our work</div>
+                      <a className="btn-text big" href="/donate">Donate ❤</a>
                   </div>
                   <div className="social-buttons">
                     <SocialMedia
@@ -291,36 +264,9 @@ class V2WishlistRegistration extends React.Component {
 
                 <div className="buttons v2 bottom">
                 <WishlistForm id="agree2"/>
-                  <div className="donate-buttons">
-                    <div className="donate-button">
-                      <div className="donate-button-text">Support our work</div>
-                      <div className="donate-options">
-                        <a
-                          href="https://opencollective.com/pixieditor/donate?interval=month&amount=1"
-                          target="_blank"
-                        >
-                          <div className="donate-option first">1$</div>
-                        </a>
-                        <a
-                          href="https://opencollective.com/pixieditor/donate?interval=month&amount=5"
-                          target="_blank"
-                        >
-                          <div className="donate-option">5$</div>
-                        </a>
-                        <a
-                          href="https://opencollective.com/pixieditor/donate?interval=month&amount=10"
-                          target="_blank"
-                        >
-                          <div className="donate-option">10$</div>
-                        </a>
-                        <a
-                          href="https://opencollective.com/pixieditor/donate?interval=month&amount=25"
-                          target="_blank"
-                        >
-                          <div className="donate-option last">Other</div>
-                        </a>
-                      </div>
-                    </div>
+                <div className="donate-btn" style={{ marginTop: 70 }}>
+                  <div className="btn-label">Support our work</div>
+                      <a className="btn-text big" href="/donate">Donate ❤</a>
                   </div>
                 </div>
               </div>
