@@ -182,7 +182,7 @@ class V2WishlistRegistration extends React.Component {
                 </h2>
                 <div className="buttons v2">
                   <WishlistForm id="agree1"/>
-                  <div className="donate-btn" style={{ marginTop: 70 }}>
+                  <div className="donate-btn" style={{ marginTop: 35 }}>
                   <div className="btn-label">Support our work</div>
                       <a className="btn-text big" href="/donate">Donate ❤</a>
                   </div>
