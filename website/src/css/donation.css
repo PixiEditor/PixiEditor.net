@@ -1,6 +1,6 @@
 .donation-header {
   text-align: center;
-  margin: 50px;
+  padding: 50px;
 }
 
 h1 {
@@ -19,7 +19,7 @@ h1 {
 .donate-buttons {
   padding: 20px;
   width: 100%;
-  background-color: #1c1e1f;
+  background-color: #252525;
   margin-bottom: 130px !important;
 }
 
@@ -48,10 +48,21 @@ h1 {
 .one-time-donate-container
 {
   display: flex;
-  flex-direction: column;
+  flex-direction: row;
   align-items: center;
   justify-content: center;
   margin: 20px 0;
+}
+
+.one-time-donate-container h3{
+  margin: 0 50px;
+  color: #fff;
+}
+
+.one-time-donate-container iframe
+{
+  border: none;
+  background: none;
 }
 
 .monthly-donate-custom
@@ -61,6 +72,28 @@ h1 {
   align-items: center;
   justify-content: center;
   margin: 20px 0;
+}
+
+@media only screen and (max-width: 1024px) {
+.one-time-donate-container {
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  margin: 20px 0;
+}
+
+.one-time-donate-container h3{
+  margin: 20px 0;
+  color: #fff;
+}
+
+}
+
+@media only screen and (max-width: 646px)
+{
+  .one-time-donate-container iframe{
+    width: 100%;
+  }
 }
 
 
