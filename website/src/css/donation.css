@@ -62,3 +62,13 @@ h1 {
   justify-content: center;
   margin: 20px 0;
 }
+
+
+@media only screen and (max-width: 375px) {
+  .togglePicker{
+    width: 100%;
+    border: 1px solid white !important;
+    border-radius: 5px !important;
+    margin: 5px 0 !important;
+  }
+}
