@@ -41,11 +41,10 @@ function download(props) {
                     <a href={releases && releases.length > 0 ? releases.find((val, _) => val.name.includes("86.zip")).browser_download_url : ""} className="download-button x86">x86</a>
                     <span id="version" title="PixiEditor is currently only available for Windows">Windows v{version}</span>
                 </div>
-                <div className="donation-container">
-                    <a href="https://opencollective.com/pixieditor/donate" target="_blank">
-                        <img src="https://opencollective.com/pixieditor/donate/button@2x.png?color=blue" />
-                    </a>
-                </div>
+                <div className="donate-btn" style={{width: 250, margin: "0 auto", marginTop: 50}}>
+                  <div className="btn-label">Support our work</div>
+                      <a className="btn-text big" href="/donate">Donate ❤</a>
+                  </div>
                 <div className="waiting-text">
                     While you are waiting...
                 </div>
