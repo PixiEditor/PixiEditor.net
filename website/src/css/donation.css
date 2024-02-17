@@ -18,7 +18,6 @@ h1 {
 
 .donate-buttons {
   padding: 20px;
-  width: 100%;
   background-color: #252525;
   margin-bottom: 130px !important;
 }
@@ -39,6 +38,15 @@ h1 {
   border: 1px solid #cf2849;
   color: #fff;
   cursor: pointer;
+}
+
+.togglePicker-container
+{
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  justify-content: center;
+  margin-bottom: 50px;
 }
 
 .togglePicker {

@@ -22,13 +22,13 @@ const DonateWidget = (props) => {
         className="monthly-donate-container">
             <div dangerouslySetInnerHTML={{
           __html: `
-<stripe-pricing-table pricing-table-id="prctbl_1OjjOXHZ5wTFDpNNQU3RxiCI"
-publishable-key="pk_test_51OjM1gHZ5wTFDpNNEJ7ilrSGIxVA8AHGD8EnFrynU86AmRrntFsmnt2ttGleYfeoTtFNdKo25VlCZySdgY0k7LpA002JZ9nFHM">
-</stripe-pricing-table>`,
+          <stripe-pricing-table pricing-table-id="prctbl_1Ojhz5HZ5wTFDpNNiRaaiibm"
+          publishable-key="pk_live_51OjM1gHZ5wTFDpNNLAmmwJ4nTbsKL2PWgx85DKCY1zamApjynsVCvOtw1ga7qoGCjKoztXrkEmyJh47TRMe1a7E7009AD3hvhw">
+          </stripe-pricing-table>`,
         }}></div>
         <div className="monthly-donate-custom" dangerouslySetInnerHTML={{__html: `<stripe-buy-button
-  buy-button-id="buy_btn_1OjjlLHZ5wTFDpNNNemCQpFj"
-  publishable-key="pk_test_51OjM1gHZ5wTFDpNNEJ7ilrSGIxVA8AHGD8EnFrynU86AmRrntFsmnt2ttGleYfeoTtFNdKo25VlCZySdgY0k7LpA002JZ9nFHM"
+  buy-button-id="buy_btn_1Okk2KHZ5wTFDpNNuSbQebde"
+  publishable-key="pk_live_51OjM1gHZ5wTFDpNNLAmmwJ4nTbsKL2PWgx85DKCY1zamApjynsVCvOtw1ga7qoGCjKoztXrkEmyJh47TRMe1a7E7009AD3hvhw"
 >
 </stripe-buy-button>`}}></div>
       </div>) : (

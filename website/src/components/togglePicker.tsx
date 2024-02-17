@@ -23,7 +23,7 @@ const TogglePicker: React.FC<TogglePickerProps> = (props) => {
   };
 
   return (
-    <div>
+    <div className='togglePicker-container'>
       <button onClick={handleButton1Click} disabled={isButton1Toggled} className='togglePicker firstButton'>
       {props.label1}
       </button>
