@@ -180,6 +180,7 @@ class V2WishlistRegistration extends React.Component {
                   PixiEditor 2.0 got you covered,{" "}
                   <span className="highlight">for free.</span>
                 </h2>
+                <iframe width="560" height="315" className="teaser" src="https://www.youtube.com/embed/-svVjbJtj0k?si=v3MkQdYXr7n_9ppw" title="YouTube video player" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" allowFullScreen></iframe>
                 <div className="buttons v2">
                   <WishlistForm id="agree1"/>
                   <div className="donate-btn" style={{ marginTop: 35 }}>
