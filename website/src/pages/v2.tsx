@@ -10,6 +10,7 @@ import nodesAnimation from "/static/animations/Nodes.json";
 import animationsAnimation from "/static/animations/Animations.json";
 import infiniteCanvasAnimation from "/static/animations/InfiniteCanvas.json";
 import ExecutionEnvironment from "@docusaurus/ExecutionEnvironment";
+import Head from "@docusaurus/Head";
 
 const Feature = (props) => {
   return (
@@ -172,6 +173,10 @@ class V2WishlistRegistration extends React.Component {
   render() {
     return (
       <Layout id="v2" title="PixiEditor 2.0 Waitlist">
+         <Head>
+          <meta property="og:image" content="/img/ogpreviews/v2.png" />
+          <meta name="twitter:image" content="/img/ogpreviews/v2.png" />
+        </Head>
         <div className="download-section">
           <div className="presentation-section">
             <h1 id="header" className="v2">
