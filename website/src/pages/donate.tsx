@@ -10,43 +10,49 @@ const DonateWidget = (props) => {
     setPickedOption(option);
   };
 
-  return (
-    <div className="donate-buttons">
-      <TogglePicker
-        label1="Monthly"
-        label2="One-time"
-        onOptionSelected={optionSelected}
-      />
-      {pickedOption === 0 ? (
-      <div
-        className="monthly-donate-container">
-            <div dangerouslySetInnerHTML={{
-          __html: `
-          <stripe-pricing-table pricing-table-id="prctbl_1Ojhz5HZ5wTFDpNNiRaaiibm"
-          publishable-key="pk_live_51OjM1gHZ5wTFDpNNLAmmwJ4nTbsKL2PWgx85DKCY1zamApjynsVCvOtw1ga7qoGCjKoztXrkEmyJh47TRMe1a7E7009AD3hvhw">
-          </stripe-pricing-table>`,
-        }}></div>
-        <div className="monthly-donate-custom" dangerouslySetInnerHTML={{__html: `<stripe-buy-button
-  buy-button-id="buy_btn_1Okk2KHZ5wTFDpNNuSbQebde"
+/*<TogglePicker
+label1="Monthly"
+label2="One-time"
+onOptionSelected={optionSelected}
+/>
+{pickedOption === 0 ? (
+<div
+className="monthly-donate-container">
+    <div dangerouslySetInnerHTML={{
+  __html: `
+  <stripe-pricing-table pricing-table-id="prctbl_1Ojhz5HZ5wTFDpNNiRaaiibm"
+  publishable-key="pk_live_51OjM1gHZ5wTFDpNNLAmmwJ4nTbsKL2PWgx85DKCY1zamApjynsVCvOtw1ga7qoGCjKoztXrkEmyJh47TRMe1a7E7009AD3hvhw">
+  </stripe-pricing-table>`,
+}}></div>
+</div>) : (
+<div className="one-time-donate-container">
+<div
+dangerouslySetInnerHTML={{
+  __html: `<script async
+  src="https://js.stripe.com/v3/buy-button.js">
+</script>
+
+<stripe-buy-button
+  buy-button-id="buy_btn_1OmczlHZ5wTFDpNNdKZ9F4vf"
   publishable-key="pk_live_51OjM1gHZ5wTFDpNNLAmmwJ4nTbsKL2PWgx85DKCY1zamApjynsVCvOtw1ga7qoGCjKoztXrkEmyJh47TRMe1a7E7009AD3hvhw"
 >
-</stripe-buy-button>`}}></div>
-      </div>) : (
-      <div className="one-time-donate-container">
-        <div
-        dangerouslySetInnerHTML={{
-          __html: `<stripe-buy-button
-          buy-button-id="buy_btn_1OjMymHZ5wTFDpNNTBlRwfv3"
-          publishable-key="pk_live_51OjM1gHZ5wTFDpNNLAmmwJ4nTbsKL2PWgx85DKCY1zamApjynsVCvOtw1ga7qoGCjKoztXrkEmyJh47TRMe1a7E7009AD3hvhw"
-          >
-          </stripe-buy-button>`}}/>
-          <h3>Or</h3>
-          <div>
-            <iframe src="https://store.steampowered.com/widget/2435860/" width="646" height="190"></iframe>
-          </div>
-      </div>
-          
-          )}
+</stripe-buy-button>`}}/>
+  <h3>Or</h3>
+  <div>
+    <iframe src="https://store.steampowered.com/widget/2435860/" width="646" height="190"></iframe>
+  </div>
+</div>
+  
+  )}*/
+    
+
+  return (
+    <div className="donate-buttons">
+     <div className="one-time-donate-container">
+    <div>
+      <iframe src="https://store.steampowered.com/widget/2435860/" width="646" height="190"></iframe>
+    </div>
+</div>
     </div>
   );
 };

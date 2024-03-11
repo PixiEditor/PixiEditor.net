@@ -174,8 +174,10 @@ class V2WishlistRegistration extends React.Component {
     return (
       <Layout id="v2" title="PixiEditor 2.0 Waitlist">
          <Head>
-          <meta property="og:image" content="/img/ogpreviews/v2.png" />
-          <meta name="twitter:image" content="/img/ogpreviews/v2.png" />
+          <meta property="og:image" content="https://pixieditor.net/img/ogpreviews/v2.png" />
+          <meta name="twitter:image" content="https://pixieditor.net/img/ogpreviews/v2.png" />
+          <meta property="og:description" content="Join the waitlist for PixiEditor 2.0 - Universal Graphics Platform" />
+          <meta name="twitter:description" content="Join the waitlist for PixiEditor 2.0 - Universal Graphics Platform" />
         </Head>
         <div className="download-section">
           <div className="presentation-section">

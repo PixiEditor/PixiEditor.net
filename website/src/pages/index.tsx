@@ -243,7 +243,7 @@ class Index extends React.Component {
               title="Multiple documents editing support"
               description={[
                 "Edit documents side to side, create multiple columns, rows. Float windows and tabs.",
-                "We don't know if you'll use it, but we've added it anyway.",
+                "As flexible as you want. ",
               ]}
             />
             <script
