@@ -1,0 +1,49 @@
+---
+title: PixiEditor Devlog 3
+author: Krzysztof Krysiński
+author_title: PixiEditor Creator
+author_url: https://github.com/flabbet
+author_image_url: https://avatars.githubusercontent.com/u/25402427?s=400&v=4
+tags: [ devlog, pixieditor2.0 ]
+keywords: [ pixieditor, devlog, pixieditor2.0 ]
+description: "Devlog 3 for PixiEditor 2.0"
+---
+
+Long time no see! I've been working on PixiEditor 2.0 for a while now, and I have some updates to share with you.
+
+## State of the project
+
+As you may know, we've announced PixiEditor 2.0 about 3 months ago and promised exciting features like animations, layer nodes, infinite canvas and extensions.
+
+The sheer amount of work required to make all of these features is simply enormous, but fear not, we're up to the challenge.
+
+Almost a year ago, we've started working on huge task of changing UI framework of the app. This means basically, that most of the app had to be rewriten from scratch.
+Up until now, PixiEditor was built in something called WPF, it is a framework for building Windows applications. It's great, but it's not cross-platform. We've decided to switch to AvaloniaUI which solves this problem.
+
+And oh boy, what a journey it was. I mean, it still is. Besides replicating all of the UI elements, behaviours and features, I allowed myself to 
+sidetrack a little bit and improve various elements from WPF version, fix old bugs and prepare everything for new features, mostly extensions.
+
+## New look and feel
+
+The new UI is not only refreshed, but also more consistent, prepared for creating custom themes and more user-friendly.
+
+## Extensions
+
+This is so far the most challenging part of the project, it influences almost every other aspect of the app. We want to make PixiEditor as extensible as possible, but also keep it simple, easy to use and secure.
+
+There are a few key elemnts that describe my philosophy of extensions:
+
+- Write once, run everywhere - extensions should be cross-platform and work everywhere PixiEditor works, developers should not worry about compatibility.
+- Secure - extensions should not be able to access any sensitive data, connect to the internet or access connected devices, unless explicitly allowed by the user.
+- Easy to use - developers should be able to create extensions with minimal effort, and users should be able to install them with a single click.
+- Language-agnostic API - We don't want to limit developers in terms of programming language, originally PixiEditor is written in C#, but we want to allow developers to write extensions in any language they want.
+
+Yeah I know this sounds like a list written by someone who has doesn't even know how to connect a printer and just writes down what sounds good, but surprise surprise, most of these goals are already achieved.
+
+All thanks to the amazing piece of technology called WASI. It stands for "WebAssembly System Interface", and don't get fooled by the name, it's not just for web. 
+I'll not go into technical details here, but in short, it allows running pieces of code in a secure, isolated environment, and it doesn't care about the language it's originally written in. 
+
+### Demo time!
+
+[image]
+
