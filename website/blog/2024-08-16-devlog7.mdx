@@ -1,0 +1,118 @@
+---
+title: PixiEditor Devlog 7 - Speeeeed
+author: Krzysztof Krysiński
+author_title: PixiEditor Creator
+author_url: https://github.com/flabbet
+author_image_url: https://avatars.githubusercontent.com/u/25402427?s=400&v=4
+tags: [ devlog, pixieditor2.0 ]
+keywords: [ pixieditor, devlog, pixieditor2.0 ]
+description: "Devlog 7 of PixiEditor 2.0 development"
+image: /img/blog-posts/devlog7/cover.png
+---
+
+GPU acceleration, squashing bugs and closed beta testing.
+
+{/* truncate */}
+
+## GPU acceleration
+
+There was this one thing that kept me awake during the nights. Our new node system was slow, using filters, creating effects and rendering bigger images took unacceptably long time.
+
+Why was that? Well, because the very core of our rendering engine was CPU-based. Every pixel was executed on the CPU. This is a very slow process, especially when you have to do it for every pixel in the image.
+
+
+For decades now, games and other applications have been using the GPU to process images. GPUs are _much, much_ faster than CPUs when it comes to processing images. They are designed to do exactly that.
+
+
+So far in PixiEditor 2.0 only GPU-accelerated thing was the frontend (the UI), but the whole processing engine of drawing and nodes was still on the CPU. 
+Up until now. I've rewritten most of the rendering code to use the GPU. Whole rendering pipeline is GPU accelerated. The only system that still uses CPU is drawing system;
+however, it's not a huge problem, because we use [chunky rendering](/blog/2022/07/04/devlog2#chunk-system-faster-drawing).
+
+### CPU - Big reference layer
+
+<video width="100%" controls>
+  <source src="/videos/devlog7/cpu.mp4" type="video/mp4"/>
+  Your browser does not support the video tag.
+</video>
+
+### GPU - Big reference layer
+
+<video width="100%" controls>
+  <source src="/videos/devlog7/gpu.mp4" type="video/mp4"/>
+  Your browser does not support the video tag.
+</video>
+
+### CPU - Drawing 9999x9999
+
+<video width="100%" controls>
+  <source src="/videos/devlog7/cpu-draw.mp4" type="video/mp4"/>
+  Your browser does not support the video tag.
+</video>
+ 
+### GPU - Drawing 9999x9999
+
+<video width="100%" controls>
+  <source src="/videos/devlog7/gpu-draw.mp4" type="video/mp4"/>
+  Your browser does not support the video tag.
+</video>
+
+### CPU - Image with filter
+
+<video width="100%" controls>
+  <source src="/videos/devlog7/cpu - filter.mp4" type="video/mp4"/>
+  Your browser does not support the video tag.
+</video>
+
+### GPU - Image with filter
+
+<video width="100%" controls>
+  <source src="/videos/devlog7/gpu - filter.mp4" type="video/mp4"/>
+  Your browser does not support the video tag.
+</video>
+
+I think the results speak for themselves. GPU acceleration is a huge step forward for PixiEditor 2.0, and I'm very happy with the results.
+
+## #MadeInPixiEditor2.0
+
+We've made some examples of what you can do with PixiEditor 2.0
+
+### Procedural islands with seasons
+
+<video width="100%" controls>
+  <source src="/videos/devlog7/example1.mp4" type="video/mp4"/>
+  Your browser does not support the video tag.
+</video>
+
+### Pond - "drill" brush
+
+<video width="100%" controls>
+  <source src="/videos/devlog7/example2.mp4" type="video/mp4"/>
+  Your browser does not support the video tag.
+</video>
+
+### Stars
+
+<video width="100%" controls>
+  <source src="/videos/devlog7/example3.mp4" type="video/mp4"/>
+  Your browser does not support the video tag.
+</video>
+
+### Auto outline
+
+<video width="100%" controls>
+  <source src="/videos/devlog7/example4.mp4" type="video/mp4"/>
+  Your browser does not support the video tag.
+</video>
+
+## Closed beta testing
+
+At the beginning of this month, we've started closed beta testing of PixiEditor 2.0. It's still ongoing, so if you want to join, you can do it [here](https://forms.gle/yp9mp82vNfeA1uAJ6).
+
+All above examples are available to play with in the beta version of PixiEditor 2.0, so don't wait and join us!
+
+## What's next?
+
+Animations and nodes are getting more and more stable, useful and powerful. I am very excited with the progress we've made so far, and I can't wait to show you more.
+But for now, I need to focus on fixing bugs and making PixiEditor 2.0 as stable as possible before jumping into next big features.
+
+Stay tuned for more updates!
