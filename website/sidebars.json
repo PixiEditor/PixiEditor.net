@@ -7,10 +7,7 @@
       "codebase-overview",
       "ui-guide",
       "core-guide",
-      "change-walkthrough",
-      {
-        "ToolViewModels": ["toolbars", "toolbar-settings"]
-      }
+      "change-walkthrough"
     ],
     "Color Picker 🎨": ["color-picker", "color-picker-avaloniaui", "color-picker-wpf"],
     "Other 🔍": ["faq", "third-party-licenses", "privacy-policy"]

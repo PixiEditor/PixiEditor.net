@@ -24,7 +24,6 @@ module.exports =
       {
         docs: {
           // Docs folder path relative to website dir.
-          path: '../docs',
           // Sidebars file relative to website dir.
           sidebarPath: require.resolve('./sidebars.json'),
         },		
@@ -96,7 +95,7 @@ module.exports =
           items: [
             {
             label: "Getting started",
-            to: "docs/Introduction"
+            to: "docs/introduction"
             }
           ],
         },

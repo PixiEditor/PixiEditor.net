@@ -1,9 +1,9 @@
 {
   "dependencies": {
-    "@docusaurus/core": "^3.0.0",
-    "@docusaurus/module-type-aliases": "^3.0.0",
-    "@docusaurus/plugin-google-analytics": "^3.0.0",
-    "@docusaurus/preset-classic": "^3.0.0",
-    "npm-check-updates": "^11.7.1"
+    "@docusaurus/core": "^3.5.2",
+    "@docusaurus/module-type-aliases": "^3.5.2",
+    "@docusaurus/plugin-google-analytics": "^3.5.2",
+    "@docusaurus/preset-classic": "^3.5.2",
+    "npm-check-updates": "^17.1.1"
   }
 }
