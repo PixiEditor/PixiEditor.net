@@ -35,6 +35,9 @@ jobs:
         uses: actions/configure-pages@v5
       - name: Install dependencies
         run: yarn install
+      - name: Add run id
+        run: |
+          echo ${{ github.run_id }} > ./build/gh_action.txt
       - name: Build site
         run: yarn build
       - name: Upload artifact
