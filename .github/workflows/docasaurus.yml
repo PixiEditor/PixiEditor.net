@@ -71,6 +71,7 @@ jobs:
             echo "gh action file matches the run ID."
           else
             echo "gh action file does not match the run ID."
+            echo "gotten '$WEB_CONTENT' expected '${{ github.run_id }}'
             exit 1
           fi
       - name: Audit using Lighthouse
