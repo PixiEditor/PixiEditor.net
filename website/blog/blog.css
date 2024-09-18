@@ -2,3 +2,8 @@
     font-family: w95fa;
     src: url("/img/blog-posts/1.0/W95FA.otf");
 }
+
+.blog-yt-video {
+    max-width: 560px;
+    width: 100%
+}
