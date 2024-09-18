@@ -1,0 +1,30 @@
+# Simple workflow for deploying static content to GitHub Pages
+name: Test Build using yarn
+
+on:
+  # Runs on pushes targeting the default branch
+  pull_request:
+    branches: ["master"]
+
+  # Allows you to run this workflow manually from the Actions tab
+  workflow_dispatch:
+
+jobs:
+  # Single deploy job since we're just deploying
+  build:
+    runs-on: ubuntu-latest    
+    defaults:
+      run:
+        working-directory: ./website
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 20
+          cache: 'yarn'
+          cache-dependency-path: website/yarn.lock
+      - name: Install dependencies
+        run: yarn install
+      - name: Build site
+        run: yarn build
