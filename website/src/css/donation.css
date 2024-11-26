@@ -82,6 +82,43 @@ h1 {
   margin: 20px 0;
 }
 
+.donate-btn-split {
+  display: flex; 
+  margin-top: 35px;
+  gap: 10px; 
+}
+
+.donate-btn-split a {
+  text-decoration: none; 
+  display: flex; 
+  align-items: center; 
+  justify-content: center; 
+  height: 50px; 
+  border-radius: 5px; 
+  font-size: 16px; 
+  transition: all 0.3s ease; 
+}
+
+.donate-btn-split-general {
+  flex: 1;
+  background-color: #ff315a; 
+  border: none; 
+}
+
+.donate-btn-split-option {
+  color: white;
+  border: 2px solid #ff315a; 
+  padding: 0 15px;
+  min-width: fit-content; 
+}
+
+.donate-btn-split-option:hover {
+  background-color: #ff315a; 
+  color: white; 
+  border: 2px solid #ff315a; 
+}
+
+
 @media only screen and (max-width: 1024px) {
 .one-time-donate-container {
   flex-direction: column;

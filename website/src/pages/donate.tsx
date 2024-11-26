@@ -10,7 +10,7 @@ const DonateWidget = (props) => {
     setPickedOption(option);
   };
 
-/*<TogglePicker
+  /*<TogglePicker
 label1="Monthly"
 label2="One-time"
 onOptionSelected={optionSelected}
@@ -44,24 +44,36 @@ dangerouslySetInnerHTML={{
 </div>
   
   )}*/
-    
 
   return (
     <div className="donate-buttons">
-     <div className="one-time-donate-container">
-    <div>
-      <iframe src="https://store.steampowered.com/widget/2435860/" width="646" height="190"></iframe>
-    </div>
-</div>
+      <div className="one-time-donate-container">
+        <div>
+          <iframe
+            src="https://store.steampowered.com/widget/2435860/"
+            width="646"
+            height="190"
+          ></iframe>
+           <div className="donate-btn-split" style={{ marginTop: 35 }}>
+                <a className="btn-text big donate-btn-split-general" href="https://opencollective.com/pixieditor" target="_blank">
+                  Donate on OpenCollective
+                </a>
+                <a className="donate-btn-split-option" href="https://opencollective.com/pixieditor/contribute/silver-tier-81980/checkout?interval=month&amount=5&contributeAs=me" target="_blank">5$</a>
+                <a className="donate-btn-split-option" href="https://opencollective.com/pixieditor/contribute/gold-tier-81981/checkout?interval=month&amount=10&contributeAs=me" target="_blank">10$</a>
+                <a className="donate-btn-split-option" href="https://opencollective.com/pixieditor/contribute/diamond-tier-81982/checkout?interval=month&amount=25&contributeAs=me" target="_blank">25$</a>
+            </div>
+        </div>
+      </div>
     </div>
   );
 };
 
 class Donate extends React.Component {
-
   componentDidMount(): void {
-
-    if (document.getElementById("stripe-js") || document.getElementById("stripe-js-2")) {
+    if (
+      document.getElementById("stripe-js") ||
+      document.getElementById("stripe-js-2")
+    ) {
       return;
     }
 
