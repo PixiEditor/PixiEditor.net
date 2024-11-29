@@ -200,6 +200,7 @@ class V2WishlistRegistration extends React.Component {
               allowFullScreen
             ></iframe>
             <div className="buttons v2">
+              <a className="download-button" style={{width: "auto", marginBottom: 40, paddingLeft: 45, paddingRight: 45}} href="/docs/open-beta">Open beta available now</a>
               <WishlistForm id="agree1" />
               <div className="donate-btn" style={{ marginTop: 35 }}>
                 <div className="btn-label">Support our work</div>
@@ -212,6 +213,11 @@ class V2WishlistRegistration extends React.Component {
                   name="discord"
                   href="https://discord.gg/DwaXAuXVzv"
                   imgsrc="/img/Discord-Clyde.svg"
+                />
+                  <SocialMedia
+                  name="forum"
+                  href="https://forum.pixieditor.net"
+                  imgsrc="/img/forum.svg"
                 />
                 <SocialMedia
                   name="steam"

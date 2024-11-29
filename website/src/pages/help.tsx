@@ -52,6 +52,12 @@ function Help(props) {
       imageLink: `${docUrl("introduction")}`
     },
     {
+        content: `Check out <a href="https://forum.pixieditor.net">PixiEditor Forum</a> for help and support.`,
+        title: 'Forum',
+        image: '/img/forum.svg',
+        imageLink: "https://forum.pixieditor.net"
+    },
+    {
       content: `Ask questions about the documentation and project on our <a href="https://discord.gg/qSRMYmq">Discord.</a>`,
       title: 'Join the community',
       image: '/img/Discord-Logo-White.svg',

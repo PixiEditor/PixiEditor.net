@@ -60,6 +60,7 @@ module.exports =
       },
       items: [
         {to: 'docs/introduction', label: 'Docs', position: 'left'},
+        {href: 'https://forum.pixieditor.net', label: 'Forum', position: 'left'},
         {to: 'help', label: 'Help', position: 'left'},
         {
           to: 'download',
@@ -103,12 +104,16 @@ module.exports =
           title: "Community",
           items: [
             {
+               label: "Forum",
+               href: "https://forum.pixieditor.net"
+            },
+            {
               label: "Reddit",
               href: "https://www.reddit.com/r/PixiEditor/"
             },
             {
-              label: "Twitter",
-              href: "https://twitter.com/PixiEditor"
+              label: "Twitter/X",
+              href: "https://x.com/PixiEditor"
             },
             {
               label: "Discord",
@@ -127,6 +132,14 @@ module.exports =
         {
           title: "More",
           items: [
+            {
+              label: "2.0 Waitlist",
+              to: "v2"
+            },
+            {
+              label: "Color Picker",
+              to: "colorpicker"
+            },
             {
               label: "Donate",
               href: "https://opencollective.com/pixieditor"

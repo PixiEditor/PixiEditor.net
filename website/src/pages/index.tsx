@@ -158,6 +158,11 @@ class Index extends React.Component {
                   href="https://discord.gg/DwaXAuXVzv"
                   imgsrc="/img/Discord-Clyde.svg"
                 />
+                   <SocialMedia
+                  name="forum"
+                  href="https://forum.pixieditor.net"
+                  imgsrc="/img/forum.svg"
+                />
                 <SocialMedia
                   name="steam"
                   href="https://store.steampowered.com/app/2218560/PixiEditor__Pixel_Art_Editor/"

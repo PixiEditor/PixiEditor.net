@@ -1,5 +1,10 @@
-.supportItem{
-    min-width: 30%;
+.supportItemsGrid{
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: center;
+    margin-top: 50px;
+    gap: 50px;
 }
 
 .supportItem-title{
@@ -35,14 +40,6 @@
 
 .supportItem-image a img {
     width: 150px;
-}
-
-.supportItemsGrid{
-    display: flex;
-    flex-direction: row;
-    align-items: center;
-    justify-content: center;
-    margin-top: 50px;
 }
 
 @media only screen and (max-width: 700px) {
