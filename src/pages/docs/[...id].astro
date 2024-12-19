@@ -1,0 +1,37 @@
+﻿---
+import { getCollection, render } from 'astro:content';
+import { getDocsPath } from "@content/contentHelper";
+import Layout from "@layouts/Layout.astro";
+
+const pages = await getCollection('docs');
+
+export async function getStaticPaths() {
+    const pages = await getCollection('docs');
+    return pages.map(page => ({
+        params: { id: page.id },
+        props: { page },
+    }));
+}
+
+const { page } = Astro.props;
+
+const { Content, headings } = await render(page);
+---
+
+<Layout title={page.data.title}>
+    <div class="flex gap-2 justify-between mx-auto">
+        <div class="h-fit min-w-32">
+            {pages.map(x => {
+                return <a href={getDocsPath(x)}>{x.data.title}</a>
+            })}
+        </div>
+        <div class="prose xl:max-w-screen-lg prose-pixi">
+            <Content />
+        </div>
+        <div class="flex flex-col">
+            {headings.map(x => {
+                return <a href=`#${x.slug}`>{x.text}</a>
+            })}
+        </div>
+    </div>
+</Layout>

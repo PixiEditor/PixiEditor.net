@@ -1,0 +1,15 @@
+﻿@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+.px-button-base, .px-button-soft, .px-button-grey {
+    @apply px-3 py-2 rounded;
+}
+
+.px-button-soft {
+    @apply bg-softpixired hover:bg-softpixired-400 transition-colors;
+}
+
+.px-button-grey {
+    @apply bg-neutral-700 hover:bg-neutral-600 transition-colors;
+}

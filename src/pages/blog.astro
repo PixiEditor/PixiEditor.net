@@ -1,0 +1,18 @@
+﻿---
+import { getBlogPath } from "@content/contentHelper";
+import { getCollection } from "astro:content";
+import Layout from "@layouts/Layout.astro";
+
+const posts = await getCollection('blog');
+---
+
+<Layout title="Blog">
+    <div class="container mx-auto">
+        <h1 class="text-xl font-bold">Blog Pages</h1>
+        <div class="h-fit min-w-32">
+            {posts.map(x => {
+                return <a href={getBlogPath(x)}>{x.data.title}</a>
+            })}
+        </div>
+    </div>
+</Layout>

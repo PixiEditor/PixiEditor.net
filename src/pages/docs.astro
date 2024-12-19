@@ -1,0 +1,18 @@
+﻿---
+import {getDocsPath} from "../content/contentHelper";
+import Layout from "../layouts/Layout.astro";
+import {getCollection} from "astro:content";
+
+const pages = await getCollection('docs');
+---
+
+<Layout title="Docs">
+    <div class="container mx-auto">
+        <h1 class="text-xl font-bold">Doc Pages</h1>
+        <div class="h-fit min-w-32">
+            {pages.map(x => {
+                return <a href={getDocsPath(x)}>{x.data.title}</a>
+            })}
+        </div>
+    </div>
+</Layout>

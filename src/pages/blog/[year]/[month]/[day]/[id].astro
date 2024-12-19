@@ -1,0 +1,37 @@
+﻿---
+import { getCollection, render } from 'astro:content';
+import { getBlogPath } from "@content/contentHelper";
+import Layout from "@layouts/Layout.astro";
+
+const posts = await getCollection('blog');
+
+export async function getStaticPaths() {
+    const posts = await getCollection('blog');
+    return posts.map(post => ({
+        params: { id: post.id, year: post.data.date.getFullYear(), month: post.data.date.getMonth() + 1, day: post.data.date.getDate() },
+        props: { post },
+    }));
+}
+
+const { post } = Astro.props;
+
+const { Content, headings } = await render(post);
+---
+
+<Layout title={post.data.title}>
+    <div class="flex gap-2 justify-between mx-auto">
+        <div class="h-fit min-w-32">
+            {posts.map(x => {
+                return <a href={getBlogPath(x)}>{x.data.title}</a>
+            })}
+        </div>
+        <div class="prose xl:max-w-screen-lg prose-pixi">
+            <Content />
+        </div>
+        <div class="flex flex-col">
+            {headings.map(x => {
+                return <a href=`#${x.slug}`>{x.text}</a>
+            })}
+        </div>
+    </div>
+</Layout>

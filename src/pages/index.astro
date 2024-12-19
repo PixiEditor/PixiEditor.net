@@ -1,11 +1,15 @@
 ---
-import Welcome from '../components/Welcome.astro';
-import Layout from '../layouts/Layout.astro';
-
-// Welcome to Astro! Wondering what to do next? Check out the Astro documentation at https://docs.astro.build
-// Don't want to use any of this? Delete everything in this file, the `assets`, `components`, and `layouts` directories, and start fresh.
+import Layout from '@layouts/Layout.astro';
+import '@styles/global.css';
 ---
 
-<Layout>
-	<Welcome />
+<Layout fullTitle="PixiEditor" class="flex justify-center">
+    <section class="container flex flex-col items-center text-center mt-10">
+        <h2 class="text-softpixired">Open source & free</h2>
+        <h1 class="text-2xl font-bold">
+            Universal 2D graphics platform <br>
+            - one to rule them all</h1>
+
+        <a class="px-button-soft mt-6" href="/download">Download now!</a>
+    </section>
 </Layout>
