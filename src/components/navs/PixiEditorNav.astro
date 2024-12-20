@@ -7,30 +7,41 @@ import Lucide from "@components/Lucide.astro";
 import '@styles/global.css';
 ---
 
-<nav class="h-16 py-3 px-10 w-full flex justify-between">
-    <div class="flex gap-2 items-center">
+<nav class="px-6 lg:px-10 py-3 w-full h-16">
+    <div class="flex justify-between max-lg:hidden">
+        <div class="flex gap-2 items-center">
 
+            <a href="/">
+                <Image src={Logo} alt="PixiEditor" loading="eager" />
+            </a>
+
+            <div class="mx-4 flex gap-3">
+                <NavLink href="/docs">Docs</NavLink>
+                <NavLink href="https://forum.pixieditor.net/" target="_blank">Forum</NavLink>
+                <NavLink href="/blog">Blog</NavLink>
+                <NavLink href="/help">Help</NavLink>
+            </div>
+
+            <a class="px-button-soft" href="/download">
+                Download
+            </a>
+        </div>
+
+        <div class="flex gap-2 items-center">
+            <NavLink href="https://github.com/PixiEditor/PixiEditor" target="_blank">GitHub</NavLink>
+
+            <a class="px-button-grey" href="/download">
+                Support us <Lucide data="heart-handshake" class="ms-2" />
+            </a>
+        </div>
+
+    </div>
+
+    <div class="flex justify-between items-center lg:hidden">
         <a href="/">
             <Image src={Logo} alt="PixiEditor" loading="eager" />
         </a>
 
-        <div class="mx-4 flex gap-3">
-            <NavLink href="/docs">Docs</NavLink>
-            <NavLink href="https://forum.pixieditor.net/" target="_blank">Forum</NavLink>
-            <NavLink href="/blog">Blog</NavLink>
-            <NavLink href="/help">Help</NavLink>
-        </div>
-
-        <a class="px-button-soft" href="/download">
-            Download
-        </a>
-    </div>
-
-    <div class="flex gap-2 items-center">
-        <NavLink href="https://github.com/PixiEditor/PixiEditor" target="_blank">GitHub</NavLink>
-
-        <a class="px-button-grey" href="/download">
-            Support us <Lucide data="heart-handshake" class="ms-2" />
-        </a>
+        <Lucide data="menu" class="text-2xl" />
     </div>
 </nav>

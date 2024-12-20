@@ -45,7 +45,7 @@ const tabCollection = Object.entries(tabFiles).map(([_, module]: any) => {
         <div class="mt-6">
             {tabCollection.map((tab) => (
                     <details name="features" id={tab.id} class="tab-panel" open={tab.open}>
-                        <summary class="md:hidden list-none flex justify-between items-center px-6 py-3">
+                        <summary class="md:hidden list-none flex justify-between items-center px-6 py-3 border-b border-b-neutral-700">
                             <div>
                                 <Lucide
                                         data={tab.data.icon}
@@ -69,6 +69,5 @@ const tabCollection = Object.entries(tabFiles).map(([_, module]: any) => {
     </section>
 
     <section>
-        <h1>Test</h1>
     </section>
 </Layout>
