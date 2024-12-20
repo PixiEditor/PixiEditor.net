@@ -1,12 +1,24 @@
+import plugin from "tailwindcss/plugin.js";
+
 /** @type {import('tailwindcss').Config} */
 export default {
 	content: ['./src/**/*.{astro,html,js,jsx,md,mdx,svelte,ts,tsx,vue}'],
+	safelist: [
+		{
+			pattern: /(decoration|text)-pc-.*/
+		}
+	],
 	theme: {
 		extend: {
 			colors: {
-				'pixired': '#e3002d',
-				'softpixired': '#CA1B3D',
-				'softpixired-400': '#e11b41',
+				'pc-pixired': '#e3002d',
+				'pc-softpixired': '#CA1B3D',
+				'pc-softpixired-400': '#e11b41',
+				'pc-procedural-orange': '#FF7C25',
+				'pc-pixel-blue': '#3C98D8',
+				'pc-raster-green': '#87D33B',
+				'pc-vector-purple': '#B046E6',
+				'pc-animation-pink': '#ED385C',
 			},
 			typography: ({ theme }) => ({
 				pixi: {
@@ -50,5 +62,8 @@ export default {
 	},
 	plugins: [
 		require('@tailwindcss/typography'),
+		plugin(function({ addVariant }) {
+			addVariant('data-open-parent', '*[data-open="true"] &')
+		})
 	],
 }

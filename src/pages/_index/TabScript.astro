@@ -1,0 +1,36 @@
+﻿---
+---
+
+<script>
+const buttons = document.getElementsByClassName("tab-button") as HTMLCollectionOf<HTMLButtonElement>;
+const panels = document.getElementsByClassName("tab-panel") as HTMLCollectionOf<HTMLDetailsElement>;
+const query = window.matchMedia("(max-width: 768px)");
+
+query.addEventListener('change', (x) => {
+    if (!x.matches) {
+        if (Array.from(panels).every(panel => !panel.open)) {
+            panels.item(0)!.open = true;
+        }
+    }
+})
+
+for (const button of buttons) {
+    button.addEventListener('click', () => {
+        const details = document.getElementById(button.name) as HTMLDetailsElement;
+
+        details.open = true;
+    })
+}
+
+for (const panel of panels) {
+    updatePanelButton(panel);
+    panel.addEventListener('toggle', () => updatePanelButton(panel));
+}
+
+function updatePanelButton(panel: HTMLDetailsElement) {
+    const button = buttons.namedItem(panel.id)! as HTMLButtonElement & { open: boolean };
+
+    button.dataset.open = panel.open.toString();
+    panel.dataset.open = panel.open.toString();
+}
+</script>

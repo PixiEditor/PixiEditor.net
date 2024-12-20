@@ -7,7 +7,7 @@
 }
 
 .px-button-soft {
-    @apply bg-softpixired hover:bg-softpixired-400 transition-colors;
+    @apply bg-pc-softpixired hover:bg-pc-softpixired-400 transition-colors;
 }
 
 .px-button-grey {

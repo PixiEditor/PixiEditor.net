@@ -1,0 +1,25 @@
+﻿---
+import Lucide from "@components/Lucide.astro";
+import type { IndexTabData } from "./TabData";
+import { Image } from "astro:assets"
+
+import ProceduralArt1 from "@assets/index/procedural-art-1.png"
+
+export const data: IndexTabData = {
+    order: 0,
+    id: "procedural-art",
+    title: "Procedural Art",
+    colorClass: "pc-procedural-orange",
+    iconType: Lucide,
+    icon: "workflow"
+}
+---
+
+<h1 class="text-2xl font-bold text-center">Introducing Layer Nodes, our take on <span class="text-pc-procedural-orange">Procedural Art</span></h1>
+<p class="pt-2 text-center">That's right, if you like to play around and connect some nodes, you'll find yourself at home.</p>
+
+<div class="bg-neutral-800 mt-6 p-4 w-fit mx-auto rounded">
+    <Image class=" w-auto h-96" src={ProceduralArt1} alt="Screenshot of PixiEditor with nodes for creating proceduralally generated islands" loading="eager" />
+
+    <h2 class="mt-4 text-center text-xl">crate procedural game maps</h2>
+</div>

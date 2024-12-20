@@ -1,0 +1,15 @@
+﻿---
+import Lucide from "@components/Lucide.astro";
+import type { IndexTabData } from "./TabData";
+
+export const data: IndexTabData = {
+    order: 1,
+    id: "pixel-art",
+    title: "Pixel Art",
+    colorClass: "pc-pixel-blue",
+    iconType: Lucide,
+    icon: "palette"
+}
+---
+
+<p><span class="text-pc-pixel-blue">Pixel</span> Art</p>

@@ -1,15 +1,74 @@
 ---
 import Layout from '@layouts/Layout.astro';
 import '@styles/global.css';
+import Lucide from "@components/Lucide.astro";
+import {defineCollection, getCollection, z} from "astro:content";
+import TabScript from "./_index/TabScript.astro";
+
+const tabFiles = import.meta.glob('./_index/tabs/*.astro', { eager: true });
+
+const tabCollection = Object.entries(tabFiles).map(([_, module]: any) => {
+    return {
+        id: module.data.id,
+        data: module.data,
+        open: module.data.order === 0,
+        content: module.default,
+    };
+}).sort((o1, o2) => o1.data.order - o2.data.order);
 ---
 
-<Layout fullTitle="PixiEditor" class="flex justify-center">
-    <section class="container flex flex-col items-center text-center mt-10">
-        <h2 class="text-softpixired">Open source & free</h2>
+<Layout fullTitle="PixiEditor">
+    <section class="container mx-auto flex flex-col items-center text-center mt-10">
+        <h2 class="text-pc-softpixired">Open source & free</h2>
         <h1 class="text-2xl font-bold">
             Universal 2D graphics platform <br>
             - one to rule them all</h1>
 
         <a class="px-button-soft mt-6" href="/download">Download now!</a>
+    </section>
+
+    <section class="container max-w-screen-lg mx-auto">
+        <div class="flex justify-center gap-6 max-md:hidden mt-14">
+            {tabCollection.map((tab) => (
+                    <button class="w-32 h-20 flex flex-col items-center tab-button" name={tab.id}>
+                        <tab.data.iconType
+                                data={tab.data.icon}
+                                class={`text-5xl text-${tab.data.colorClass}`}
+                        />
+                        <h2 class={`font-semibold decoration-4 decoration-${tab.data.colorClass} decoration-4 data-open-parent:underline`}>
+                            {tab.data.title}
+                        </h2>
+                    </button>
+            ))}
+        </div>
+
+        <div class="mt-6">
+            {tabCollection.map((tab) => (
+                    <details name="features" id={tab.id} class="tab-panel" open={tab.open}>
+                        <summary class="md:hidden list-none flex justify-between items-center px-6 py-3">
+                            <div>
+                                <Lucide
+                                        data={tab.data.icon}
+                                        class={`text-2xl inline align-middle text-${tab.data.colorClass}`}
+                                />
+                                <h2 class={`font-bold inline align-middle`}>
+                                    {tab.data.title}
+                                </h2>
+                            </div>
+                            <tab.data.iconType data="chevron-down" />
+                        </summary>
+
+                        <div class="bg-neutral-900 w-full md:h-[37rem] lg:rounded p-4">
+                            <tab.content />
+                        </div>
+                    </details>
+            ))}
+        </div>
+
+        <TabScript />
+    </section>
+
+    <section>
+        <h1>Test</h1>
     </section>
 </Layout>
