@@ -1,0 +1,16 @@
+﻿---
+import Layout from "../layouts/Layout.astro";
+import { IconNames } from "@components/PixiPerfectIcon.astro";
+import PixiPerfectIcon from "@components/PixiPerfectIcon.astro";
+---
+
+<Layout title="PixiPerfect Icons p-2">
+    <div class="flex flex-wrap gap-2">
+        {IconNames.map(x =>
+            <div class="w-32">
+                <input class="bg-neutral-600 w-full rounded p-1" value={x}/>
+                <PixiPerfectIcon data={x} class="text-4xl text-center w-full block mt-1" title={x} />
+            </div>
+        )}
+    </div>
+</Layout>
