@@ -30,14 +30,15 @@ const tabCollection = Object.entries(tabFiles).map(([_, module]: any) => {
     <section class="container max-w-screen-lg mx-auto">
         <div class="flex justify-center gap-6 max-md:hidden mt-14">
             {tabCollection.map((tab) => (
-                    <button class="w-32 h-20 flex flex-col items-center tab-button" name={tab.id}>
+                    <button class="w-28 flex flex-col items-center tab-button" name={tab.id}>
                         <tab.data.iconType
                                 data={tab.data.icon}
                                 class={`text-5xl text-${tab.data.colorClass}`}
                         />
-                        <h2 class={`font-semibold decoration-4 decoration-${tab.data.colorClass} decoration-4 data-open-parent:underline`}>
+                        <h2 class="font-semibold mt-3">
                             {tab.data.title}
                         </h2>
+                        <div class=`opacity-0 data-open-parent:opacity-100 rounded-full bg-${tab.data.colorClass} w-full h-[3px]`></div>
                     </button>
             ))}
         </div>
