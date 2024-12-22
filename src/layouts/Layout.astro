@@ -1,5 +1,7 @@
 ---
 import PixiEditorNav from "@components/navs/PixiEditorNav.astro";
+import PixiEditorFooter from "../components/navs/PixiEditorFooter.astro";
+
 interface BaseProps {
 	/**
 	 * If true the content will not be placed inside a <main> element
@@ -47,5 +49,7 @@ import '../styles/global.css';
 		<PixiEditorNav />
 
 		{notMain ? <slot /> : <main class={className} {...rest}><slot /></main>}
+
+		<PixiEditorFooter />
 	</body>
 </html>

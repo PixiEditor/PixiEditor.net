@@ -1,0 +1,62 @@
+﻿---
+import Logo from '@assets/logos/PixiEditorLogoTextHorizontal.svg'
+import { forum, steamSupporterPackStorePage, openCollectivePage, discordServer, subreddit, steamStorePage, twitterPage, youtubePage } from '@assets/links'
+
+import { Image } from "astro:assets";
+
+import discord from '@assets/icons/discord.svg';
+import reddit from '@assets/icons/reddit.svg';
+import steam from '@assets/icons/steam.svg';
+import twitter from '@assets/icons/twitter.svg';
+import youTube from '@assets/icons/youtube.svg';
+---
+
+<div class="bg-neutral-900">
+    <footer class="py-12 px-6 container mx-auto">
+        <div>
+            <Image src={Logo} alt="PixiEditor" loading="eager" />
+        </div>
+
+        <div class="grid max-w-4xl gap-y-8 my-12 grid-cols-2 lg:grid-cols-4">
+            <div>
+                <h1 class="font-bold">Other Projects</h1>
+                <ul class="flex flex-col gap-1 mt-1">
+                    <li><a href="/colorpicker">Color Picker</a></li>
+                </ul>
+            </div>
+            <div>
+                <h1 class="font-bold">Got stuck?</h1>
+                <ul class="flex flex-col gap-1 mt-1">
+                    <li><a href="/docs">Docs</a></li>
+                    <li><a href={forum}>Forum</a></li>
+                    <li><a href="/help">Help</a></li>
+                </ul>
+            </div>
+            <div>
+                <h1 class="font-bold">Support us</h1>
+                <ul class="flex flex-col gap-1 mt-1">
+                    <li><a href={steamSupporterPackStorePage}>Supporter Pack</a></li>
+                    <li><a href={openCollectivePage}>Open Collective</a></li>
+                </ul>
+            </div>
+            <div>
+                <h1 class="font-bold">Legal</h1>
+                <ul class="flex flex-col gap-1 mt-1">
+                    <li><a href="/privacy">Privacy Policy</a></li>
+                </ul>
+            </div>
+        </div>
+
+        <div class="flex max-md:flex-col gap-y-3 justify-between itemcenter">
+            <p class="text-neutral-500 text-center">Copyright @ {new Date().getFullYear()} PixiEditor Organization</p>
+
+            <div class="flex items-end gap-3 justify-center">
+                <a href={discordServer}><Image src={discord} class="w-8 h-8" alt="Discord" /></a>
+                <a href={subreddit}><Image src={reddit} class="w-8 h-8" alt="Reddit" /></a>
+                <a href={steamStorePage}><Image src={steam} class="w-8 h-8" alt="Steam" /></a>
+                <a href={twitterPage}><Image src={twitter} class="w-8 h-8" alt="Twitter" /></a>
+                <a href={youtubePage}><Image src={youTube} class="w-8 h-8" alt="YouTube" /></a>
+            </div>
+        </div>
+    </footer>
+</div>

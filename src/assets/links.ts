@@ -1,0 +1,9 @@
+﻿export const forum = "https://forum.pixieditor.net"
+export const discordServer = "https://discord.gg/DwaXAuXVzv";
+export const githubPixiEditorRepo = "https://github.com/PixiEditor/PixiEditor";
+export const steamStorePage = "https://store.steampowered.com/app/2218560/PixiEditor__Pixel_Art_Editor/";
+export const steamSupporterPackStorePage = "https://store.steampowered.com/app/2435860/PixiEditor__Supporter_Pack/";
+export const openCollectivePage = "https://opencollective.com/PixiEditor";
+export const subreddit = "https://www.reddit.com/r/PixiEditor/";
+export const twitterPage = "https://twitter.com/PixiEditor";
+export const youtubePage = "https://www.youtube.com/@PixiEditor";

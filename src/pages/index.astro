@@ -1,8 +1,6 @@
 ---
 import Layout from '@layouts/Layout.astro';
 import '@styles/global.css';
-import Lucide from "@components/Lucide.astro";
-import {defineCollection, getCollection, z} from "astro:content";
 import TabScript from "./_index/TabScript.astro";
 
 const tabFiles = import.meta.glob('./_index/tabs/*.astro', { eager: true });
@@ -117,5 +115,17 @@ const tabCollection = Object.entries(tabFiles).map(([_, module]: any) => {
             </div>
         </section>
     </div>
+
+    <section class="container mx-auto py-12">
+        <h1 class="text-center text-3xl">What are <span class="font-bold">the User</span> saying?</h1>
+    </section>
+
+    <section class="container mx-auto py-12">
+        <h1 class="text-center text-3xl">Become a part of the <span class="font-bold">PixiEditor community</span></h1>
+    </section>
+
+    <section class="container mx-auto py-12">
+        <h1 class="text-center text-3xl"><span class="font-bold">Support us with</span></h1>
+    </section>
 
 </Layout>
