@@ -1550,11 +1550,12 @@ interface Props {
         "zoom-out";
 
     class?: string;
+    ariaRelevant?: boolean;
 }
 
-const { data, class: className, ... rest } = Astro.props;
+const { data, class: className, ariaRelevant, ... rest } = Astro.props;
 
 const iconName = `icon-${data}`;
 ---
 
-<span class:list={[iconName, className]} {...rest}></span>
+<span class:list={[iconName, className]} {...rest} aria-label={iconName} aria-hidden={!ariaRelevant} role="img"></span>

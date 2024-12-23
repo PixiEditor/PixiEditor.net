@@ -30,7 +30,7 @@ for (const panel of panels) {
 function updatePanelButton(panel: HTMLDetailsElement) {
     const button = buttons.namedItem(panel.id)! as HTMLButtonElement & { open: boolean };
 
-    button.dataset.open = panel.open.toString();
+    button.ariaSelected = panel.open.toString();
     panel.dataset.open = panel.open.toString();
 }
 </script>

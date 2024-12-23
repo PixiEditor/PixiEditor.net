@@ -28,7 +28,7 @@ const tabCollection = Object.entries(tabFiles).map(([_, module]: any) => {
     <section class="container max-w-screen-lg mx-auto">
         <div class="flex justify-center gap-6 max-md:hidden mt-14">
             {tabCollection.map((tab) => (
-                    <button class="w-28 flex flex-col items-center tab-button" name={tab.id}>
+                    <button class="w-28 flex flex-col items-center tab-button" name={tab.id} id=`${tab.id}-button` aria-controls={tab.id} role="tab">
                         <tab.data.iconType
                                 data={tab.data.icon}
                                 class={`text-5xl text-${tab.data.colorClass}`}
@@ -36,14 +36,14 @@ const tabCollection = Object.entries(tabFiles).map(([_, module]: any) => {
                         <h2 class="font-semibold mt-3">
                             {tab.data.title}
                         </h2>
-                        <div class=`opacity-0 data-open-parent:opacity-100 rounded-full bg-${tab.data.colorClass} w-full h-[3px]`></div>
+                        <div class=`opacity-0 aria-selected-parent:opacity-100 rounded-full bg-${tab.data.colorClass} w-full h-[3px]`></div>
                     </button>
             ))}
         </div>
 
         <div class="mt-6">
             {tabCollection.map((tab) => (
-                    <details name="features" id={tab.id} class="tab-panel" open={tab.open}>
+                    <details name="features" id={tab.id} class="tab-panel" open={tab.open} role="tabpanel" aria-labelledby=`${tab.id}-button`>
                         <summary class="md:hidden list-none flex justify-between items-center px-6 py-3 border-b border-b-neutral-700">
                             <div>
                                 <tab.data.iconType

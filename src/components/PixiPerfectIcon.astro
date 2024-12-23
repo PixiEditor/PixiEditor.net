@@ -271,11 +271,12 @@ export const IconNames: PixiPerfectIconName[] = [
 
 interface Props {
     data: PixiPerfectIconName,
-    class?: string
+    class?: string,
+    ariaRelevant?: boolean,
 }
 
-const { data, class: className, ...rest } = Astro.props;
+const { data, class: className, ariaRelevant, ...rest } = Astro.props;
 
 ---
 
-<span class:list={["pixiperfect-icon", className]} {...rest}>{iconToUnicode[data]}</span>
+<span class:list={["pixiperfect-icon", className]} aria-label={data} aria-hidden={!ariaRelevant} role="img" {...rest}>{iconToUnicode[data]}</span>

@@ -63,7 +63,7 @@ export default {
 	plugins: [
 		require('@tailwindcss/typography'),
 		plugin(function({ addVariant }) {
-			addVariant('data-open-parent', '*[data-open="true"] &')
+			addVariant('aria-selected-parent', '*[aria-selected="true"] &')
 		})
 	],
 }
