@@ -2,6 +2,7 @@
 import Layout from '@layouts/Layout.astro';
 import '@styles/global.css';
 import TabScript from "./_index/TabScript.astro";
+import ProgramComparison from "./_index/ProgramComparison.astro";
 
 const tabFiles = import.meta.glob('./_index/tabs/*.astro', { eager: true });
 
@@ -75,6 +76,8 @@ const tabCollection = Object.entries(tabFiles).map(([_, module]: any) => {
 
     <section class="container mx-auto py-12">
         <h1 class="text-center text-3xl">What program <span class="font-bold">is the best</span> for me?</h1>
+
+        <ProgramComparison />
     </section>
 
     <div class="bg-neutral-900 mt-12 py-12">
