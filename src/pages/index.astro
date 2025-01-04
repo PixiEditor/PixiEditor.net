@@ -202,13 +202,17 @@ const steamReviewData = import.meta.env.DEV
         </div>
 
         <div class="flex max-sm:flex-col justify-center gap-6 mt-10 mx-4">
-            <a class="px-5 py-4 flex justify-center items-center bg-discord-blurple rounded" href={discordServer} target="_blank">
-                <Image src={DiscordLogoFull} width="152" height="43" alt="Discord" />
-            </a>
-            <a class="px-5 max-md:py-3 flex justify-center items-center bg-pc-softpixired text-xl rounded" href={forum} target="_blank">
-                <Lucide class="align-middle text-3xl me-3" data="messages-square" />
-                PixiEditor Forum
-            </a>
+            <div class="px-1 has-[:hover]:px-0 transition-all">
+                <a class="px-5 py-4 flex justify-center items-center bg-discord-blurple rounded hover:px-6 transition-all" href={discordServer} target="_blank">
+                    <Image src={DiscordLogoFull} width="152" height="43" alt="Discord" />
+                </a>
+            </div>
+            <div class="px-1 has-[:hover]:px-0 transition-all">
+                <a class="px-5 max-md:py-3 h-full flex justify-center items-center bg-pc-softpixired text-xl rounded hover:px-6 transition-all" href={forum} target="_blank">
+                    <Lucide class="align-middle text-3xl me-3" data="messages-square" />
+                    PixiEditor Forum
+                </a>
+            </div>
         </div>
     </section>
 
