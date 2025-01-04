@@ -10,6 +10,7 @@ import UserReview from "./_index/UserReview.astro";
 
 import SteamLogo from '@assets/logos/SteamLogo.svg';
 import MicrosoftStoreLogo from '@assets/logos/MicrosoftStoreLogo.svg';
+import PixiPerfectIcon from "../components/PixiPerfectIcon.astro";
 
 const tabFiles = import.meta.glob('./_index/tabs/*.astro', { eager: true });
 
@@ -153,11 +154,11 @@ const steamReviewData = import.meta.env.DEV
                 <div class="flex justify-center items-center">
                     <span class="text-7xl font-extrabold my-3">4.4</span>
                     <span class="text-2xl ms-3 mt-3 text-pc-softpixired">
-                        <Lucide data="star" />
-                        <Lucide data="star" />
-                        <Lucide data="star" />
-                        <Lucide data="star" />
-                        <Lucide data="star-half" />
+                        <PixiPerfectIcon data="star-filled" />
+                        <PixiPerfectIcon data="star-filled" />
+                        <PixiPerfectIcon data="star-filled" />
+                        <PixiPerfectIcon data="star-filled" />
+                        <PixiPerfectIcon data="star-half-filled" />
                     </span>
                 </div>
                 <p class="pb-3">based on <span class="font-bold">220 ratings</span></p>
