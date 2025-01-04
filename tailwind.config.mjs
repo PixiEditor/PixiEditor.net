@@ -19,6 +19,7 @@ export default {
 				'pc-raster-green': '#87D33B',
 				'pc-vector-purple': '#B046E6',
 				'pc-animation-pink': '#ED385C',
+				'discord-blurple': '#5865F2',
 			},
 			typography: ({ theme }) => ({
 				pixi: {

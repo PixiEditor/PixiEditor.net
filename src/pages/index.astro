@@ -1,16 +1,19 @@
 ---
 import { Image } from "astro:assets";
 import Layout from '@layouts/Layout.astro';
+import { discordServer, forum } from '@assets/links';
 import '@styles/global.css';
 import TabScript from "./_index/TabScript.astro";
 import ProgramComparison from "./_index/ProgramComparison.astro";
 import fetchPixiEditorReviewStats from "./_index/SteamReviewExtractor";
-import Lucide from "../components/Lucide.astro";
 import UserReview from "./_index/UserReview.astro";
+import PixiPerfectIcon from "../components/PixiPerfectIcon.astro";
+import ChannelPill from "./_index/ChannelPill.astro";
 
 import SteamLogo from '@assets/logos/SteamLogo.svg';
 import MicrosoftStoreLogo from '@assets/logos/MicrosoftStoreLogo.svg';
-import PixiPerfectIcon from "../components/PixiPerfectIcon.astro";
+import DiscordLogoFull from '@assets/logos/DiscordLogoFull.svg'
+import Lucide from "../components/Lucide.astro";
 
 const tabFiles = import.meta.glob('./_index/tabs/*.astro', { eager: true });
 
@@ -188,8 +191,25 @@ const steamReviewData = import.meta.env.DEV
         </div>
     </section>
 
-    <section class="container mx-auto py-12">
+    <section class="py-12 text-center bg-neutral-900">
         <h1 class="text-center text-3xl">Become a part of the <span class="font-bold">PixiEditor community</span></h1>
+
+        <div class="overflow-hidden flex flex-col gap-8 mt-10 py-4 items-center text-xl">
+            <p class="whitespace-nowrap"><ChannelPill emoji="❓">help</ChannelPill><ChannelPill emoji="🤣">memes</ChannelPill><ChannelPill background={false} emoji="🔀">chat</ChannelPill>with artists all over the world!<ChannelPill emoji="❓">help</ChannelPill><ChannelPill emoji="🤣">memes</ChannelPill></p>
+            <p class="whitespace-nowrap"><ChannelPill emoji="🔀">chat</ChannelPill><ChannelPill emoji="📢">announcements</ChannelPill>Take part in our <ChannelPill emoji="🎨📆" background={false}>art-of-the-week</ChannelPill><ChannelPill emoji="🔀">chat</ChannelPill><ChannelPill emoji="📢">announcements</ChannelPill></p>
+            <p class="whitespace-nowrap"><ChannelPill emoji="💬">project</ChannelPill><ChannelPill emoji="🎨🧬">procedural-art</ChannelPill>Get <ChannelPill emoji="❓" background={false}>help</ChannelPill> from expoerts<ChannelPill emoji="💬">project</ChannelPill><ChannelPill emoji="🎨🧬">procedural-art</ChannelPill></p>
+            <p class="whitespace-nowrap"><ChannelPill emoji="🤣">memes</ChannelPill><ChannelPill emoji="🔀">chat</ChannelPill>Talk about the <ChannelPill background={false} emoji="💬">project</ChannelPill><ChannelPill emoji="🤣">memes</ChannelPill><ChannelPill emoji="🔀">chat</ChannelPill>
+        </div>
+
+        <div class="flex max-sm:flex-col justify-center gap-6 mt-10 mx-4">
+            <a class="px-5 py-4 flex justify-center items-center bg-discord-blurple rounded" href={discordServer} target="_blank">
+                <Image src={DiscordLogoFull} width="152" height="43" alt="Discord" />
+            </a>
+            <a class="px-5 max-md:py-3 flex justify-center items-center bg-pc-softpixired text-xl rounded" href={forum} target="_blank">
+                <Lucide class="align-middle text-3xl me-3" data="messages-square" />
+                PixiEditor Forum
+            </a>
+        </div>
     </section>
 
     <section class="container mx-auto py-12">

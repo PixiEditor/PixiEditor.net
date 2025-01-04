@@ -1,0 +1,16 @@
+﻿---
+import Lucide from "../../components/Lucide.astro";
+interface Props {
+    emoji: string,
+	background?: boolean
+}
+
+const { emoji, background = true } = Astro.props;
+
+const backgroundClass = background ? "opacity-20" : "";
+---
+
+<span class:list={["mx-2 bg-neutral-700 p-2 rounded-full", backgroundClass]}>
+    <Lucide data="hash" class="align-bottom text-[#80848E]" />
+    {emoji} <slot />
+</span>
