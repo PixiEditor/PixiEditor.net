@@ -9,6 +9,7 @@ export default {
 		}
 	],
 	theme: {
+		fontFamily: { montserrat: 'Montserrat' },
 		extend: {
 			colors: {
 				'pc-pixired': '#e3002d',

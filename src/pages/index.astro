@@ -34,7 +34,7 @@ const steamReviewData = import.meta.env.DEV
 <Layout fullTitle="PixiEditor">
     <section class="container mx-auto flex flex-col items-center text-center mt-10">
         <h2 class="text-pc-softpixired">Open source & free</h2>
-        <h1 class="text-2xl font-bold">
+        <h1 class="text-4xl font-bold">
             Universal 2D graphics platform <br>
             - one to rule them all</h1>
 
@@ -44,7 +44,7 @@ const steamReviewData = import.meta.env.DEV
     <section class="container max-w-screen-lg mx-auto">
         <div class="flex justify-center gap-6 max-md:hidden mt-14">
             {tabCollection.map((tab) => (
-                    <button class="w-28 flex flex-col items-center tab-button" name={tab.id} id=`${tab.id}-button` aria-controls={tab.id} role="tab">
+                    <button class="w-32 flex flex-col items-center tab-button" name={tab.id} id=`${tab.id}-button` aria-controls={tab.id} role="tab">
                         <tab.data.iconType
                                 data={tab.data.icon}
                                 class={`text-5xl text-${tab.data.colorClass}`}

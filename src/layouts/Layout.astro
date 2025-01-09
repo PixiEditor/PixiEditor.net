@@ -1,6 +1,8 @@
 ---
 import PixiEditorNav from "@components/navs/PixiEditorNav.astro";
 import PixiEditorFooter from "../components/navs/PixiEditorFooter.astro";
+import "@fontsource/montserrat";
+import "@fontsource/montserrat/700.css";
 
 interface BaseProps {
 	/**
@@ -45,7 +47,7 @@ import '../styles/global.css';
 		<meta name="generator" content={Astro.generator} />
 		<title>{pageTitle}</title>
 	</head>
-	<body class="m-0 w-full h-full bg-neutral-800 text-white">
+	<body class="m-0 w-full h-full bg-neutral-800 text-white font-montserrat">
 		<PixiEditorNav />
 
 		{notMain ? <slot /> : <main class={className} {...rest}><slot /></main>}
