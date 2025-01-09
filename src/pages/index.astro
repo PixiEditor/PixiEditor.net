@@ -1,5 +1,5 @@
 ---
-import { Image } from "astro:assets";
+import { Image, getImage } from "astro:assets";
 import Layout from '@layouts/Layout.astro';
 import { discordServer, forum } from '@assets/links';
 import '@styles/global.css';
@@ -14,6 +14,20 @@ import SteamLogo from '@assets/logos/SteamLogo.svg';
 import MicrosoftStoreLogo from '@assets/logos/MicrosoftStoreLogo.svg';
 import DiscordLogoFull from '@assets/logos/DiscordLogoFull.svg'
 import Lucide from "../components/Lucide.astro";
+
+import Wizard from '@assets/sampleImages/wizard.png';
+import Parrot from '@assets/sampleImages/parrot.png';
+import Slimy from '@assets/sampleImages/slimy.gif';
+import HeightMaps from '@assets/sampleImages/proceduralIslands.png';
+import ColorAdjustments from '@assets/sampleImages/colorAdjustmentNodes.png';
+import MasterpieceDraw from '@assets/sampleImages/windyTree.png';
+
+const WizardOptimized = await getImage({ src: Wizard });
+const ParrotOptimized = await getImage({ src: Parrot });
+const SlimyOptimized = await getImage({ src: Slimy });
+const HeightMapsOptimized = await getImage({ src: HeightMaps });
+const ColorAdjustmentsOptimized = await getImage({ src: ColorAdjustments });
+const MasterpieceDrawOptimized = await getImage({ src: MasterpieceDraw });
 
 const tabFiles = import.meta.glob('./_index/tabs/*.astro', { eager: true });
 
@@ -86,6 +100,34 @@ const steamReviewData = import.meta.env.DEV
     <div class="bg-neutral-900 mt-12 py-12">
         <section class="container mx-auto">
             <h1 class="text-center text-3xl">What <span class="font-bold">can you make</span> in PixiEditor?</h1>
+
+            <div class="overflow-x-auto py-2 w-full">
+                <div class="flex gap-12 w-fit mx-auto justify-center">
+                    <div class="-rotate-3 h-48 w-36 rounded bg-neutral-800 image-fit bg-contain bg-no-repeat bg-center flex"
+                         style={`background-image: url('${WizardOptimized.src}')`}>
+                    </div>
+
+                    <div class="rotate-3 h-48 w-36 rounded bg-neutral-800 image-fit bg-cover bg-no-repeat bg-center flex"
+                         style={`background-image: url('${ParrotOptimized.src}')`}>
+                    </div>
+
+                    <div class="-rotate-3 h-48 w-36 rounded bg-neutral-800 image-fit bg-contain bg-no-repeat bg-bottom flex"
+                         style={`background-image: url('${SlimyOptimized.src}')`}>
+                    </div>
+
+                    <div class="rotate-3 h-48 w-36 rounded bg-neutral-800 image-fit bg-cover bg-no-repeat bg-bottom flex"
+                         style={`background-image: url('${HeightMapsOptimized.src}')`}>
+                    </div>
+
+                    <div class="-rotate-3 h-48 w-36 rounded bg-neutral-800 image-fit bg-cover bg-no-repeat bg-bottom flex"
+                         style={`background-image: url('${ColorAdjustments.src}')`}>
+                    </div>
+
+                    <div class="rotate-3 h-48 w-36 rounded bg-neutral-800 image-fit bg-cover bg-no-repeat bg-bottom flex"
+                         style={`background-image: url('${MasterpieceDraw.src}')`}>
+                    </div>
+                </div>
+            </div>
         </section>
     </div>
 
