@@ -1,6 +1,6 @@
 ﻿---
 import { Image } from "astro:assets";
-import { steamStorePage } from "@assets/links";
+import { steamSupporterPackStorePage } from "@assets/links";
 import Lucide from "../Lucide.astro";
 import SteamLogo from "@assets/logos/SteamLogo.svg"
 
@@ -26,5 +26,5 @@ const { class: className } = Astro.props;
         </div>
     </div>
 
-    <a class="flex py-1 gap-2 justify-center bg-pc-softpixired rounded" href={steamStorePage} target="_blank">Take me to Steam <Image src={SteamLogo} alt="" /></a>
+    <a class="flex py-1 gap-2 justify-center bg-pc-softpixired rounded" href={steamSupporterPackStorePage} target="_blank">Take me to Steam <Image src={SteamLogo} alt="" /></a>
 </div>
