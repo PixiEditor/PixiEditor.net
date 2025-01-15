@@ -1,5 +1,7 @@
 ---
 import { Image, getImage } from "astro:assets";
+import type { ImageMetadata } from "astro";
+
 import Layout from '@layouts/Layout.astro';
 import { discordServer, forum } from '@assets/links';
 import '@styles/global.css';
@@ -15,19 +17,9 @@ import MicrosoftStoreLogo from '@assets/logos/MicrosoftStoreLogo.svg';
 import DiscordLogoFull from '@assets/logos/DiscordLogoFull.svg'
 import Lucide from "../components/Lucide.astro";
 
-import Wizard from '@assets/sampleImages/wizard.png';
-import Parrot from '@assets/sampleImages/parrot.png';
-import Slimy from '@assets/sampleImages/slimy.gif';
-import HeightMaps from '@assets/sampleImages/proceduralIslands.png';
-import ColorAdjustments from '@assets/sampleImages/colorAdjustmentNodes.png';
-import MasterpieceDraw from '@assets/sampleImages/windyTree.png';
-
-const WizardOptimized = await getImage({ src: Wizard });
-const ParrotOptimized = await getImage({ src: Parrot });
-const SlimyOptimized = await getImage({ src: Slimy });
-const HeightMapsOptimized = await getImage({ src: HeightMaps });
-const ColorAdjustmentsOptimized = await getImage({ src: ColorAdjustments });
-const MasterpieceDrawOptimized = await getImage({ src: MasterpieceDraw });
+import Wizard from '@assets/sampleImages/wizard.svg'
+import Parrot from '@assets/sampleImages/parrot.svg'
+import Slimy from '@assets/sampleImages/slimy.svg'
 
 const tabFiles = import.meta.glob('./_index/tabs/*.astro', { eager: true });
 
@@ -103,29 +95,11 @@ const steamReviewData = import.meta.env.DEV
 
             <div class="overflow-x-auto py-2 w-full">
                 <div class="flex gap-12 w-fit mx-auto justify-center">
-                    <div class="-rotate-3 h-48 w-36 rounded bg-neutral-800 image-fit bg-contain bg-no-repeat bg-center flex"
-                         style={`background-image: url('${WizardOptimized.src}')`}>
-                    </div>
+                    <Image src={Wizard} height="200" alt="" />
 
-                    <div class="rotate-3 h-48 w-36 rounded bg-neutral-800 image-fit bg-cover bg-no-repeat bg-center flex"
-                         style={`background-image: url('${ParrotOptimized.src}')`}>
-                    </div>
+                    <Image src={Parrot} height="200" alt="" />
 
-                    <div class="-rotate-3 h-48 w-36 rounded bg-neutral-800 image-fit bg-contain bg-no-repeat bg-bottom flex"
-                         style={`background-image: url('${SlimyOptimized.src}')`}>
-                    </div>
-
-                    <div class="rotate-3 h-48 w-36 rounded bg-neutral-800 image-fit bg-cover bg-no-repeat bg-bottom flex"
-                         style={`background-image: url('${HeightMapsOptimized.src}')`}>
-                    </div>
-
-                    <div class="-rotate-3 h-48 w-36 rounded bg-neutral-800 image-fit bg-cover bg-no-repeat bg-bottom flex"
-                         style={`background-image: url('${ColorAdjustments.src}')`}>
-                    </div>
-
-                    <div class="rotate-3 h-48 w-36 rounded bg-neutral-800 image-fit bg-cover bg-no-repeat bg-bottom flex"
-                         style={`background-image: url('${MasterpieceDraw.src}')`}>
-                    </div>
+                    <img src="/images/slimy.svg" decoding="async" loading="lazy" height="200" alt="" />
                 </div>
             </div>
         </section>
