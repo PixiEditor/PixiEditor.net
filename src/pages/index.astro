@@ -20,6 +20,7 @@ import Lucide from "../components/Lucide.astro";
 import Wizard from '@assets/sampleImages/wizard.svg'
 import Parrot from '@assets/sampleImages/parrot.svg'
 import Slimy from '@assets/sampleImages/slimy.svg'
+import OpenCollective from "../components/supportUs/OpenCollective.astro";
 
 const tabFiles = import.meta.glob('./_index/tabs/*.astro', { eager: true });
 
@@ -233,7 +234,7 @@ const steamReviewData = import.meta.env.DEV
     </section>
 
     <section class="container mx-auto py-12">
-        <h1 class="text-center text-3xl"><span class="font-bold">Support us with</span></h1>
+        <OpenCollective />
     </section>
 
 </Layout>

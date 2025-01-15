@@ -7,3 +7,10 @@ export const openCollectivePage = "https://opencollective.com/PixiEditor";
 export const subreddit = "https://www.reddit.com/r/PixiEditor/";
 export const twitterPage = "https://twitter.com/PixiEditor";
 export const youtubePage = "https://www.youtube.com/@PixiEditor";
+
+export const openCollective = {
+    silver: "https://opencollective.com/pixieditor/contribute/silver-tier-81980/",
+    gold: "https://opencollective.com/pixieditor/contribute/gold-tier-81981",
+    diamond: "https://opencollective.com/pixieditor/contribute/diamond-tier-81982",
+    platinum: "https://opencollective.com/pixieditor/contribute/platinum-tier-81983"
+}
