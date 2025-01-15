@@ -21,6 +21,7 @@ import Wizard from '@assets/sampleImages/wizard.svg'
 import Parrot from '@assets/sampleImages/parrot.svg'
 import Slimy from '@assets/sampleImages/slimy.svg'
 import OpenCollective from "../components/supportUs/OpenCollective.astro";
+import SteamSupporterPack from "../components/supportUs/SteamSupporterPack.astro";
 
 const tabFiles = import.meta.glob('./_index/tabs/*.astro', { eager: true });
 
@@ -235,6 +236,7 @@ const steamReviewData = import.meta.env.DEV
 
     <section class="container mx-auto py-12">
         <OpenCollective />
+        <SteamSupporterPack class="mt-12" />
     </section>
 
 </Layout>
