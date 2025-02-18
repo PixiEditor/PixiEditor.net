@@ -14,7 +14,7 @@ Remember! The Open Beta is a pre-release version of PixiEditor 2.0. It may conta
 
 Before you get started, here are a few things you should know:
 
-- Open Beta is available for Windows only.
+- Open Beta is available for Windows and Linux.
 - PixiEditor 2.0 drops support for 32-bit systems. If you are using a 32-bit system, you will not be able to run the Open Beta.
 
 :::note
@@ -39,11 +39,29 @@ There are 2 ways to join the Open Beta:
 
 ## Standalone Development Channel
 
-1. Run PixiEditor (Make sure it's not from Steam or Microsoft Store, it must be downloaded from [pixieditor.net](https://pixieditor.net).
+### For Windows
+
+1. Run PixiEditor (Make sure it's not from Steam or Microsoft Store, it must be downloaded from [pixieditor.net](https://pixieditor.net)).
 2. Open File -> Settings -> General.
 3. Choose "Development" from the "Channel" dropdown menu.
 
 ![Development Channel](/img/channel.png)
+
+### For Linux
+
+#### Ubuntu and Debian
+
+1. [Download the .deb file](https://github.com/PixiEditor/PixiEditor-development-channel/releases/latest)
+2. Install using `sudo apt install ./PixiEditor-2.0.0.55-linux-amd64.deb` (remember to pass the name of the file you downloaded, 2.0.0.55 is an example)
+
+#### Other distros
+
+1. [Download the .tar.gz file](https://github.com/PixiEditor/PixiEditor-development-channel/releases/latest)
+2. Run `tar -xf PixiEditor-2.0.0.55-linux-amd64.tar.gz`
+3. `cd` to extracted directory
+4. You may need to run `chmod +x PixiEditor`
+5. Run with `./PixiEditor`
+
 
 ## Microsoft Store
 
