@@ -1,0 +1,404 @@
+---
+title: PixiEditor 2.0 2025 Q1 Status
+authors: flabbet 
+tags: [ devlog, pixieditor2.0 ]
+keywords: [ pixieditor, devlog, pixieditor2.0 ]
+description: "Summary of first quarter of 2025 in PixiEditor 2.0 development"
+image: /img/blog-posts/q1-status/cover.png
+---
+
+PixiEditor 2.0 is feature complete! Check out all the new stuff that are coming to final release.
+
+{/*truncate*/}
+
+## The goal of PixiEditor 2.0
+
+Before we dive into the new hot stuff in PixiEditor and summarize it's state, let's remind what PixiEditor is even trying to solve and what is it's purpose.
+
+PixiEditor is no longer just a pixel-art program, version 2.0 evolved from it's 1.0 predecessor into a universal 2D editor. Our goal is to build a tool that can handle most if not all your 2D needs.
+Everything for free and open-source, just like Blender does with 3D.
+
+In short PixiEditor 2.0 let's you:
+
+- Create pixel art with specialized tools
+- Edit photos (Color Adjustments, filters, text)
+- Create vectors and open SVGs.
+- Create frame by frame animations
+- Make procedural art and animations using nodes
+- Open font files
+
+And this is far from finished list, it's what possible at the moment, but we want to implement: 
+
+- Vector animations
+- Extensions with VSCode like extension store
+- Node-powered brush engine
+- Raw editing tools
+- Infinite canvas
+and much more!
+
+## PixiEditor 2.0 is feature complete
+
+Yes, that's right, PixiEditor 2.0 is feature complete, meaning that every big feature we planned is implemented.
+
+:::info
+We'll be still adding some smaller features for initial 2.0 release, "big" means core features that change PixiEditor in a significant way.
+:::
+
+Here's a list of highlighted features that PixiEditor 2.0 can do in it's current state
+
+### Node Graph
+
+Node Graph is one of the most powerful PixiEditor's features, it allows for creating effects previously only possible with specialized software such as game engines.
+
+With classic layers + tools experience you can do very much, but with node graph, you can make almost anything. I'm not joking, it's just a matter of time until someone runs a Doom in it.
+
+#### Basic overview
+
+By connecting nodes you can make complex effects by using simple rules. Every layer is a node and it can be connected to other nodes. 
+
+Here are a few examples of custom node setups:
+
+##### _"Drill" Brush_
+<video src="/videos/stateq12025/Pond.webm" width={700} muted autoPlay loop controls/>
+
+##### _Procedurally Generated Islands_
+<video src="/videos/stateq12025/Island.webm" width={700} muted autoPlay loop controls/>
+
+#### What nodes are available?
+
+PixiEditor doesn't have a concept of Adjustment Layers, instead node graph is used to apply different kinds of effects, filters and adjustments
+
+There are a few main node groups:
+
+**Filters**: Common image modifications such as Blur, Shadow, Grayscale, Color Adjustments etc. Filters can be chained to combine multiple effects into one.
+
+![Filters](/img/blog-posts/stateq12025/monke.jpg)
+
+**Image**: Nodes used to generate images and modify existing ones such as Noise, Tile, Mask and Modify Image Shader Graph
+
+![Tiles](/img/blog-posts/stateq12025/Tiles.png)
+
+**Effects**: Custom effects node such as Outline and Shader Node
+
+![Effects](/img/blog-posts/stateq12025/Outline.png)
+
+**Shape**: Nodes related to vectors like Text on path, Distribute points, Rasterize Shape
+
+![Shapes](/img/blog-posts/stateq12025/shapes.png)
+
+**Matrix**: Transformation related nodes such as Offset, Scale, Rotate, Skew
+
+![Matrix](/img/blog-posts/stateq12025/transform.png)
+
+**Animation**: Nodes related to timeline and animating. Mainly Time node that contains Active Frame and Normalized Time
+
+<video src="/videos/stateq12025/Anim.webm" loop autoplay mute controls width={700}/>
+
+
+**Numbers**: Math operations related nodes 
+
+In version 2.0.0.66 there are 47 nodes but it's most likely not a final number for initial stable release.
+
+#### Node Workspaces
+
+To solve the issue of constant need of reattaching nodes to see their effect, we've implemented a special node called "Preview" which creates a custom output that can be toggled in the viewport settings
+
+(video)
+
+It's a very powerful option and allows for creating entire workspaces, we've made a [reusable pixel art case study](https://www.youtube.com/watch?v=ghLrq0Wx41o) that utilizes this.
+
+#### Custom Shaders
+
+One of the elements that were tightly associated with game engines are shaders, or more like the ability to create custom ones. In PixiEditor 2.0 you have full control over that and we've built 2 ways you can make them.
+
+1. Shader Graph (aka Modify Image Node) - it's a visual way to make shaders. It has low learning curve and allows for rapid prototyping.
+
+(screen)
+
+2. Shader Node - It's a more advanced approach but more flexible, you can write shader code directly using language called SKSL.
+
+(screen)
+
+### Animations
+
+One of the most requested features in PixiEditor 1.0 was frame by frame animations, and we've finally delivered. 
+
+(video anim)
+
+But that's not the end, except classic cels you can utilize node graph to create procedural animations.
+
+(video nodes)
+
+You can render them as a video (gif, mp4) or export to spritesheet for your games.
+
+One missing piece of the puzzle is key frame animations and vector animations, but that's coming later after 2.0 release.
+
+### Toolsets
+
+Toolset is a set of preconfigured tools for certain scenarios. The same tools in different toolsets might behave differently. 
+
+For example pen tool (brush) is present both in pixel art and painting toolset, but in pixel art is preconfigured
+for pixel-perfect drawing while in painting for high-resolution.
+
+PixiEditor is built around the idea that you can mix all the toolsets in one document. 
+
+Pixel art + vectors? More than welcome!
+
+### Pixel Art Toolset
+
+You can create pixel arts with dedicated tools, such as:
+
+#### Brush with pixel-perfect option
+<video src="/videos/stateq12025/PixelPerfect.webm" width={700} loop muted autoPlay controls/>
+
+
+#### Transform (scale, move, skew, rotate, perspective) selection and layers
+<video src="/videos/stateq12025/Skew.webm" width={700} loop muted autoPlay controls/>
+#### Fill bucket
+<video src="/videos/stateq12025/Fill.webm" width={700} loop muted autoPlay controls/>
+#### Pixel-perfect shapes: Line, ellipse and rectangle
+(video)
+#### Non-destructive, pixel-perfect text tool
+(video)
+#### Eraser
+(video)
+#### Brightness tool (darkens/lightens pixels)
+(video)
+
+### Painting Toolset
+
+Painting toolset is suited for more traditional drawing and editing. All the tools are anti-aliased and suited for high-resolution scenarios.
+
+It includes tools such as:
+
+- Brush and eraser with hardness and spacing settings
+(video)
+- Transform (scale, move, skew, rotate, perspective) selection and layers
+(video)
+- Fill bucket and magic wand with tolerance
+(video)
+- Anti-aliased shapes (line, rectangle, ellipse)
+(video)
+- Non-destructive text tool
+(video)
+
+### Vector Toolset
+
+PixiEditor natively supports editing vectors in High DPI, meaning you can edit low-res documents and combine it with vectors that will rendered crisp on the same canvas.
+
+All vectors are non-destructive, they are preserved on separate layers and can be edited anytime.
+
+It includes tools such as:
+
+- Path tool: Create Bézier Curves and Polygons
+(video)
+- Line, Ellipse and Rectangle
+(video)
+- Text
+(video)
+
+It's far from end of the list, vectors and vector layers are very powerful in combination with [Node Graph](#node-graph)
+
+### Gradients
+
+You can easily create 3 types of gradients: 
+
+- Linear
+- Radial
+- Conic
+
+by creating a shape and assigning a gradient to a fill or a stroke
+
+video
+
+### Autosave
+
+Losing work sucks. That's why we've added snapshot autosave system that periodically makes a copy of your work, so you can live in peace. 
+
+Additionally, PixiEditor saves sessions, so you can doodle whatever you want, close it and return to it later without manually saving.
+
+### Linear blending
+
+Unlike _a very popular_ blue program for editing raster graphics, we've set linear blending as a default. In short, linear blending is a more proper way to mix colors in computer graphics. If you are interested
+about how it works more in detail, I recommend reading [this fantastic blog post by Björn Ottosson](https://bottosson.github.io/posts/colorwrong/).
+
+We didn't get rid of sRGB blending, it is used by default when opening SVG files to maximally maintain visual coherence with web browsers. You can also manually set your document to use it via command palette (search bar on the top)
+
+### Snapping
+
+Making logos or any other vectors without snapping would be a nightmare, so we've added it.
+
+(video)
+
+### Supported Files
+
+PixiEditor supports more file types than you can expect. It can open images, vectors, palettes and even font files. You can export images, SVGs and gifs/videos.
+
+here's a full list:
+
+<table><thead>
+  <tr>
+    <th>Name</th>
+    <th>Open</th>
+    <th>Save</th>
+  </tr></thead>
+<tbody>
+  <tr>
+    <td>Png</td>
+    <td>yes</td>
+    <td>yes</td>
+  </tr>
+  <tr>
+    <td>Bmp</td>
+    <td>yes</td>
+    <td>yes</td>
+  </tr>
+  <tr>
+    <td>Gif</td>
+    <td>yes</td>
+    <td>yes</td>
+  </tr>
+  <tr>
+    <td>Jpg</td>
+    <td>yes</td>
+    <td>yes</td>
+  </tr>
+  <tr>
+    <td>Mp4</td>
+    <td>no</td>
+    <td>yes</td>
+  </tr>
+  <tr>
+    <td>Ttf</td>
+    <td>yes</td>
+    <td>no</td>
+  </tr>
+  <tr>
+    <td>Otf</td>
+    <td>yes</td>
+    <td>no</td>
+  </tr>
+  <tr>
+    <td>Pixi</td>
+    <td>yes</td>
+    <td>yes</td>
+  </tr>
+  <tr>
+    <td>Svg</td>
+    <td>yes</td>
+    <td>yes</td>
+  </tr>
+  <tr>
+    <td>WebP</td>
+    <td>yes</td>
+    <td>yes</td>
+  </tr>
+</tbody>
+</table>
+
+
+Color Palettes: 
+
+<table><thead>
+  <tr>
+    <th>Name</th>
+    <th>Open</th>
+    <th>Save</th>
+  </tr></thead>
+<tbody>
+  <tr>
+    <td>Cls</td>
+    <td>yes</td>
+    <td>yes</td>
+  </tr>
+  <tr>
+    <td>Jasc Palette <br/>.pal, .psppalette</td>
+    <td>yes</td>
+    <td>yes</td>
+  </tr>
+  <tr>
+    <td>CorelDraw .pal</td>
+    <td>yes</td>
+    <td>yes</td>
+  </tr>
+  <tr>
+    <td>DeluxePaint<br/>.bbm, .lbm</td>
+    <td>yes</td>
+    <td>no</td>
+  </tr>
+  <tr>
+    <td>Gimp GPL .pal</td>
+    <td>yes</td>
+    <td>yes</td>
+  </tr>
+  <tr>
+    <td>Hex</td>
+    <td>yes</td>
+    <td>yes</td>
+  </tr>
+  <tr>
+    <td>Paint.NET Palette .txt</td>
+    <td>yes</td>
+    <td>yes</td>
+  </tr>
+  <tr>
+    <td>Pixi</td>
+    <td>yes</td>
+    <td>no</td>
+  </tr>
+  <tr>
+    <td>Png</td>
+    <td>yes</td>
+    <td>yes</td>
+  </tr>
+</tbody>
+</table>
+
+### Other worth-noting features from 1.0
+
+- Palettes System with browser
+- Lospec palettes one-click import
+- Symmetry drawing
+- Grid
+- Command Search
+
+## Linux, MacOS and Founder's Edition
+
+We are very happy to announce that 2.0 release will be available on all 3 major operating systems!
+
+We have one _but_ though. We are a small team and I (flabbet) quit my job to make PixiEditor full time, donations on [OpenCollective](https://opencollective.com/pixieditor) are nowhere near close to provide a living for me, not speaking about compensating other core contributors. 
+
+So to gather funds for further development, we've decided to create Founder's Edition, a version of PixiEditor that contains everything that [Supporter Pack](https://store.steampowered.com/app/2435860/PixiEditor__Supporter_Pack/) did + 
+additional stuff that will be announced later, but it will be additional content (something like premade workspaces, node setups, assets with stuff that you can use in your art), not features. PixiEditor is free and will be fully free and open source.
+
+In fact we are converting Supporter Pack to Founder's Pack. The price will also increase. If you own Supporter Pack, you won't need to pay additionally.
+
+So, about that _but_, MacOS version will **only** be Founder's Edition until we gather enough funds to continue development. Please do not confuse this with making PixiEditor paid, if you want you'll still be 
+able to compile it from source and run on MacOS without paying. 
+
+Why MacOS and not other systems? It's simple, making apps for Apple devices requires money from the beginning, you basically can't distribute your app on apple devices without paying yearly fee to Apple. 
+
+Also, _**PixiEditor for MacOS won't be on Steam until we release free version!**_ 
+
+Microsoft Store version will also only be Founder's Edition, as a way to support us.
+
+## What's next?
+
+We have tons of plans, and we would like to implement a lot of awesome functionalities, however to make it happen we need your help!
+
+If you support our vision and want to help, please [consider donating](https://pixieditor.net/donate) or contribute directly.
+
+One of our biggest goals after 2.0 release is making proper extensions API with extension store (Similar to Visual Studio Code). 
+Our extension API will utilize WASI components, which means you'll be able to write extensions for PixiEditor in almost any programming language!
+
+## Contributing
+
+We are looking for contributors! 
+
+
+If you are interested in making PixiEditor the ultimate 2D tool, check out our [Contributing Guide](https://github.com/PixiEditor/PixiEditor/blob/master/CONTRIBUTING.md). 
+We've refreshed our GitHub to be more welcome for new contributors, also join the [Discord](https://discord.gg/qSRMYmq) and [Forum](https://forum.pixieditor.net). 
+
+We need testers, developers, translators. If you think you can help us, please do!
+
+I hope to hear from you soon!
