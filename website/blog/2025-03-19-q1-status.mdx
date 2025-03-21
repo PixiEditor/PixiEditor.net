@@ -1,5 +1,5 @@
 ---
-title: PixiEditor 2.0 2025 Q1 Status
+title: PixiEditor 2.0 Status Q1 2025
 authors: flabbet 
 tags: [ devlog, pixieditor2.0 ]
 keywords: [ pixieditor, devlog, pixieditor2.0 ]
@@ -15,25 +15,29 @@ PixiEditor 2.0 is feature complete! Check out all the new stuff that are coming 
 
 Before we dive into the new hot stuff in PixiEditor and summarize it's state, let's remind what PixiEditor is even trying to solve and what is it's purpose.
 
-PixiEditor is no longer just a pixel-art program, version 2.0 evolved from it's 1.0 predecessor into a universal 2D editor. Our goal is to build a tool that can handle most if not all your 2D needs.
-Everything for free and open-source, just like Blender does with 3D.
+PixiEditor is no longer just a pixel-art program, version 2.0 evolved from it's 1.0 predecessor into a universal 2D graphics editor. Our goal is to build a tool that can handle most if not all your 2D needs.
+Everything for free and open-source, just like Blender with 3D.
 
 In short PixiEditor 2.0 let's you:
 
 - Create pixel art with specialized tools
-- Edit photos (Color Adjustments, filters, text)
+- Paint with color palettes and swatches
+- Edit photos, make color adjustments, apply filters create and edit text
 - Create vectors and open SVGs.
 - Create frame by frame animations
 - Make procedural art and animations using nodes
-- Open font files
+- Open Images, SVGs, Font files
+- Create custom shaders and gradients
+- Build workspaces for your needs with Node Graph
 
-And this is far from finished list, it's what possible at the moment, but we want to implement: 
+And this is far from a finished list, it's what possible at the moment, but we want to implement: 
 
 - Vector animations
 - Extensions with VSCode like extension store
 - Node-powered brush engine
-- Raw editing tools
+- RAW editing tools
 - Infinite canvas
+
 and much more!
 
 ## PixiEditor 2.0 is feature complete
@@ -54,19 +58,19 @@ With classic layers + tools experience you can do very much, but with node graph
 
 #### Basic overview
 
-By connecting nodes you can make complex effects by using simple rules. Every layer is a node and it can be connected to other nodes. 
+By connecting nodes you can make complex effects using simple rules. Every layer is a node and it can be connected to other nodes. 
 
 Here are a few examples of custom node setups:
 
 ##### _"Drill" Brush_
 <video src="/videos/stateq12025/Pond.webm" width={700} muted autoPlay loop controls/>
 
-##### _Procedurally Generated Islands_
+##### _Procedurally Generated Islands with seasons animation_
 <video src="/videos/stateq12025/Island.webm" width={700} muted autoPlay loop controls/>
 
 #### What nodes are available?
 
-PixiEditor doesn't have a concept of Adjustment Layers, instead node graph is used to apply different kinds of effects, filters and adjustments
+PixiEditor doesn't have a concept of Adjustment Layers, instead Node Graph is used to apply different kinds of effects, filters and adjustments.
 
 There are a few main node groups:
 
@@ -103,7 +107,9 @@ In version 2.0.0.66 there are 47 nodes but it's most likely not a final number f
 
 To solve the issue of constant need of reattaching nodes to see their effect, we've implemented a special node called "Preview" which creates a custom output that can be toggled in the viewport settings
 
-(video)
+<video src="/videos/stateq12025/Workspace.webm" loop autoplay mute controls width={700}/>
+
+In the video above, there's only a one file that has a graph with multiple outputs. By creating 3 viewports for the same image, you can preview all the outputs at once.
 
 It's a very powerful option and allows for creating entire workspaces, we've made a [reusable pixel art case study](https://www.youtube.com/watch?v=ghLrq0Wx41o) that utilizes this.
 
@@ -113,21 +119,23 @@ One of the elements that were tightly associated with game engines are shaders, 
 
 1. Shader Graph (aka Modify Image Node) - it's a visual way to make shaders. It has low learning curve and allows for rapid prototyping.
 
-(screen)
+![Shader Graph](/img/blog-posts/stateq12025/ShaderGraph.png)
 
 2. Shader Node - It's a more advanced approach but more flexible, you can write shader code directly using language called SKSL.
 
-(screen)
+![Shader Node](/img/blog-posts/stateq12025/ShaderNode.png)
+
+You can use either built-in mini text editor to write shaders or open it in external app such as VS Code.
 
 ### Animations
 
 One of the most requested features in PixiEditor 1.0 was frame by frame animations, and we've finally delivered. 
 
-(video anim)
+<video src="/videos/stateq12025/Slime.webm" loop autoplay mute controls width={700}/>
 
 But that's not the end, except classic cels you can utilize node graph to create procedural animations.
 
-(video nodes)
+<video src="/videos/stateq12025/Anim.webm" loop autoplay mute controls width={700}/>
 
 You can render them as a video (gif, mp4) or export to spritesheet for your games.
 
@@ -157,13 +165,16 @@ You can create pixel arts with dedicated tools, such as:
 #### Fill bucket
 <video src="/videos/stateq12025/Fill.webm" width={700} loop muted autoPlay controls/>
 #### Pixel-perfect shapes: Line, ellipse and rectangle
-(video)
+<video src="/videos/stateq12025/ShapesPp.webm" width={700} loop muted autoPlay controls/>
 #### Non-destructive, pixel-perfect text tool
-(video)
-#### Eraser
-(video)
+<video src="/videos/stateq12025/TextPp.webm" width={700} loop muted autoPlay controls/>
+#### Pixel Eraser
+
+I could put a video, but it's just a eraser, it erases pixels. Everyone knows how eraser work.
+
 #### Brightness tool (darkens/lightens pixels)
-(video)
+
+<video src="/videos/stateq12025/Brightness.webm" width={700} loop muted autoPlay controls/>
 
 ### Painting Toolset
 
@@ -171,16 +182,24 @@ Painting toolset is suited for more traditional drawing and editing. All the too
 
 It includes tools such as:
 
-- Brush and eraser with hardness and spacing settings
-(video)
-- Transform (scale, move, skew, rotate, perspective) selection and layers
-(video)
-- Fill bucket and magic wand with tolerance
-(video)
-- Anti-aliased shapes (line, rectangle, ellipse)
-(video)
-- Non-destructive text tool
-(video)
+#### Brush and eraser with hardness and spacing settings
+![SoftBrush](/img/blog-posts/stateq12025/SoftBrush.png)
+
+#### Transform (scale, move, skew, rotate, perspective) selection and layers
+
+<video src="/videos/stateq12025/Image Editing.webm" width={700} loop muted autoPlay controls/>
+
+#### Fill bucket and magic wand with tolerance
+
+![Selection](/img/blog-posts/stateq12025/Sele.jpg)
+
+#### Anti-aliased shapes (line, rectangle, ellipse)
+
+![Anti Aliased Shapes](/img/blog-posts/stateq12025/AAS.png)
+
+#### Non-destructive text tool
+
+![Meme](/img/blog-posts/stateq12025/Drake.png)
 
 ### Vector Toolset
 
@@ -190,12 +209,12 @@ All vectors are non-destructive, they are preserved on separate layers and can b
 
 It includes tools such as:
 
-- Path tool: Create Bézier Curves and Polygons
-(video)
-- Line, Ellipse and Rectangle
-(video)
-- Text
-(video)
+#### Path tool: Create Bézier Curves and Polygons
+<video src="/videos/stateq12025/Vectors.webm" width={700} loop muted autoPlay controls/>
+#### Line, Ellipse and Rectangle
+![Shapes Vector](/img/blog-posts/stateq12025/ShapesVector.png)
+#### Text
+![Vector Font](/img/blog-posts/stateq12025/mcf.png)
 
 It's far from end of the list, vectors and vector layers are very powerful in combination with [Node Graph](#node-graph)
 
@@ -209,7 +228,9 @@ You can easily create 3 types of gradients:
 
 by creating a shape and assigning a gradient to a fill or a stroke
 
-video
+<video src="/videos/stateq12025/Gradients.webm" width={700} loop muted autoPlay controls/>
+
+It works on every shape and text from all toolsets. Some nodes also support picking gradients. The text in the video example is also made with a linear gradient.
 
 ### Autosave
 
@@ -220,7 +241,7 @@ Additionally, PixiEditor saves sessions, so you can doodle whatever you want, cl
 ### Linear blending
 
 Unlike _a very popular_ blue program for editing raster graphics, we've set linear blending as a default. In short, linear blending is a more proper way to mix colors in computer graphics. If you are interested
-about how it works more in detail, I recommend reading [this fantastic blog post by Björn Ottosson](https://bottosson.github.io/posts/colorwrong/).
+about how it works in more detail, I recommend reading [this fantastic blog post by Björn Ottosson](https://bottosson.github.io/posts/colorwrong/).
 
 We didn't get rid of sRGB blending, it is used by default when opening SVG files to maximally maintain visual coherence with web browsers. You can also manually set your document to use it via command palette (search bar on the top)
 
@@ -228,7 +249,7 @@ We didn't get rid of sRGB blending, it is used by default when opening SVG files
 
 Making logos or any other vectors without snapping would be a nightmare, so we've added it.
 
-(video)
+<video src="/videos/stateq12025/Snappo.webm" width={700} loop muted autoPlay controls/>
 
 ### Supported Files
 
@@ -285,7 +306,7 @@ here's a full list:
   </tr>
   <tr>
     <td>Svg</td>
-    <td>yes</td>
+    <td>yes*</td>
     <td>yes</td>
   </tr>
   <tr>
@@ -296,8 +317,10 @@ here's a full list:
 </tbody>
 </table>
 
+*SVG is a huge format that supports tons of tags and features and PixiEditor doesn't support all of them.
 
-Color Palettes: 
+
+#### Color Palettes: 
 
 <table><thead>
   <tr>
@@ -354,7 +377,46 @@ Color Palettes:
 </tbody>
 </table>
 
+#### Shortcuts
+
+<table><thead>
+  <tr>
+    <th>Name</th>
+    <th>Open</th>
+    <th>Save</th>
+  </tr></thead>
+<tbody>
+  <tr>
+    <td>PixiShorts .pixisc</td>
+    <td>yes</td>
+    <td>yes</td>
+  </tr>
+  <tr>
+    <td>Json .json</td>
+    <td>yes</td>
+    <td>yes</td>
+  </tr>
+  <tr>
+    <td>Aseprite Shortcuts<br/>.aseprite-keys</td>
+    <td>yes</td>
+    <td>no</td>
+  </tr>
+</tbody>
+</table>
+
+#### Ttf and Otf?
+
+While PixiEditor is not suited for creating fonts, it can open ttf and otf files. It's especially useful when you want to edit glyphs in a font and put it in the logo or somewhere else (yes you can convert a text into a vector).
+
+Additionally, using CTRL + SHIFT + C on a selected character, will copy it's unicode to the clipboard. 
+
+I use it when working with PixiEditor icon fonts. Using PixiEditor to make PixiEditor is very cool.
+
+![Fonts](/img/blog-posts/stateq12025/Fonts.png)
+
 ### Other worth-noting features from 1.0
+
+There are of course all the stuff from 1.0 that I didn't list. 
 
 - Palettes System with browser
 - Lospec palettes one-click import
