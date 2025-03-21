@@ -4,33 +4,33 @@ authors: flabbet
 tags: [ devlog, pixieditor2.0 ]
 keywords: [ pixieditor, devlog, pixieditor2.0 ]
 description: "Summary of first quarter of 2025 in PixiEditor 2.0 development"
-image: /img/blog-posts/q1-status/cover.png
+image: /img/blog-posts/stateq12025/cover.png
 ---
 
-PixiEditor 2.0 is feature complete! Check out all the new stuff that are coming to final release.
+PixiEditor 2.0 is feature complete! Check out all the new stuff that is coming to the final release
 
 {/*truncate*/}
 
 ## The goal of PixiEditor 2.0
 
-Before we dive into the new hot stuff in PixiEditor and summarize it's state, let's remind what PixiEditor is even trying to solve and what is it's purpose.
+Before we dive into the new hot stuff in PixiEditor and summarize it's state, let's remind ourselves what PixiEditor is even trying to solve and what its purpose is.
 
 PixiEditor is no longer just a pixel-art program, version 2.0 evolved from it's 1.0 predecessor into a universal 2D graphics editor. Our goal is to build a tool that can handle most if not all your 2D needs.
-Everything for free and open-source, just like Blender with 3D.
+Everything is free and open-source, just like Blender for 3D.
 
 In short PixiEditor 2.0 let's you:
 
 - Create pixel art with specialized tools
 - Paint with color palettes and swatches
-- Edit photos, make color adjustments, apply filters create and edit text
-- Create vectors and open SVGs.
+- Edit photos, make color adjustments, apply filters, create and edit text
+- Create vectors and open SVGs
 - Create frame by frame animations
 - Make procedural art and animations using nodes
 - Open Images, SVGs, Font files
 - Create custom shaders and gradients
 - Build workspaces for your needs with Node Graph
 
-And this is far from a finished list, it's what possible at the moment, but we want to implement: 
+After 2.0 release, we plan to implement features like:
 
 - Vector animations
 - Extensions with VSCode like extension store
@@ -48,11 +48,11 @@ Yes, that's right, PixiEditor 2.0 is feature complete, meaning that every big fe
 We'll be still adding some smaller features for initial 2.0 release, "big" means core features that change PixiEditor in a significant way.
 :::
 
-Here's a list of highlighted features that PixiEditor 2.0 can do in it's current state
+Here's a list of highlighted features that PixiEditor 2.0 has in it's current state.
 
 ### Node Graph
 
-Node Graph is one of the most powerful PixiEditor's features, it allows for creating effects previously only possible with specialized software such as game engines.
+The Node Graph is one of PixiEditor's most powerful features. It allows for creating effects previously only possible with specialized software such as game engines.
 
 With classic layers + tools experience you can do very much, but with node graph, you can make almost anything. I'm not joking, it's just a matter of time until someone runs a Doom in it.
 
@@ -70,11 +70,11 @@ Here are a few examples of custom node setups:
 
 #### What nodes are available?
 
-PixiEditor doesn't have a concept of Adjustment Layers, instead Node Graph is used to apply different kinds of effects, filters and adjustments.
+PixiEditor doesn't have a concept of Adjustment Layers; instead, the Node Graph is used to apply different kinds of effects, filters, and adjustments.
 
 There are a few main node groups:
 
-**Filters**: Common image modifications such as Blur, Shadow, Grayscale, Color Adjustments etc. Filters can be chained to combine multiple effects into one.
+**Filters**: Common image modifications such as Blur, Shadow, Grayscale, Color Adjustments etc. Filters can be chained to combine multiple effects into a single result.
 
 ![Filters](/img/blog-posts/stateq12025/monke.jpg)
 
@@ -109,9 +109,9 @@ To solve the issue of constant need of reattaching nodes to see their effect, we
 
 <video src="/videos/stateq12025/Workspace.webm" loop autoplay mute controls width={700}/>
 
-In the video above, there's only a one file that has a graph with multiple outputs. By creating 3 viewports for the same image, you can preview all the outputs at once.
+In the video above, there's only one file that has a graph with multiple outputs. By creating 3 viewports for the same image, you can preview all the outputs at once.
 
-It's a very powerful option and allows for creating entire workspaces, we've made a [reusable pixel art case study](https://www.youtube.com/watch?v=ghLrq0Wx41o) that utilizes this.
+This is a very powerful feature that allows you to create entire workspaces. We've made a [reusable pixel art case study](https://www.youtube.com/watch?v=ghLrq0Wx41o) to demonstrate its use.
 
 #### Custom Shaders
 
@@ -234,7 +234,7 @@ It works on every shape and text from all toolsets. Some nodes also support pick
 
 ### Autosave
 
-Losing work sucks. That's why we've added snapshot autosave system that periodically makes a copy of your work, so you can live in peace. 
+Losing work sucks. That's why we've added snapshot autosave system that periodically makes a copy of your work, so you can work with peace of mind.
 
 Additionally, PixiEditor saves sessions, so you can doodle whatever you want, close it and return to it later without manually saving.
 
@@ -442,13 +442,13 @@ Why MacOS and not other systems? It's simple, making apps for Apple devices requ
 
 Also, _**PixiEditor for MacOS won't be on Steam until we release free version!**_ 
 
-Microsoft Store version will also only be Founder's Edition, as a way to support us.
+The Microsoft Store version will also be limited to the Founder's Edition as a way to support us
 
 ## What's next?
 
 We have tons of plans, and we would like to implement a lot of awesome functionalities, however to make it happen we need your help!
 
-If you support our vision and want to help, please [consider donating](https://pixieditor.net/donate) or contribute directly.
+If you support our vision and want to help, please consider [donating](https://pixieditor.net/donate) or contributing directly.
 
 One of our biggest goals after 2.0 release is making proper extensions API with extension store (Similar to Visual Studio Code). 
 Our extension API will utilize WASI components, which means you'll be able to write extensions for PixiEditor in almost any programming language!
@@ -459,12 +459,12 @@ We are looking for contributors!
 
 
 If you are interested in making PixiEditor the ultimate 2D tool, check out our [Contributing Guide](https://github.com/PixiEditor/PixiEditor/blob/master/CONTRIBUTING.md). 
-We've refreshed our GitHub to be more welcome for new contributors, also join the [Discord](https://discord.gg/qSRMYmq) and [Forum](https://forum.pixieditor.net). 
+We've refreshed our GitHub to make it more welcoming for new contributors, also join the [Discord](https://discord.gg/qSRMYmq) and [Forum](https://forum.pixieditor.net). 
 
 We need testers, developers, translators. If you think you can help us, please do!
 
 ## Summary
 
-PixiEditor 2.0 is in a very advanced beta, which means that release of stable version will be quite soon, but I can't tell the exact date yet. However the beta is open, so if you want to play around it, [check it out here](https://pixieditor.net/docs/open-beta)
+PixiEditor 2.0 is in a very advanced beta, which means release of stable version will be quite soon, though I can't provide an exact date yet. However the beta is open, so if you want to play around it, [check it out here](https://pixieditor.net/docs/open-beta).
 
 I hope to hear from you soon!
