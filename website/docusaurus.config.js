@@ -55,7 +55,7 @@ module.exports =
         src: "img/favicon-96x96.png"
       },
       items: [
-        {to: 'docs', label: 'Docs', position: 'left'},
+        {to: 'https://pixieditor.net/docs', label: 'Docs', position: 'left'},
         {href: 'https://forum.pixieditor.net', label: 'Forum', position: 'left'},
         {to: 'help', label: 'Help', position: 'left'},
         {
@@ -92,7 +92,7 @@ module.exports =
           items: [
             {
             label: "Getting started",
-            to: "docs/introduction"
+            to: "https://pixieditor.net/docs/introduction"
             }
           ],
         },
@@ -147,7 +147,7 @@ module.exports =
           items: [
             {
             label: "Privacy Policy",
-            to: "docs/privacy-policy" 
+            to: "https://pixieditor.net/docs/privacy-policy" 
             }
           ]
         }
