@@ -22,11 +22,7 @@ module.exports =
     [
       '@docusaurus/preset-classic',
       {
-        docs: {
-          // Docs folder path relative to website dir.
-          // Sidebars file relative to website dir.
-          sidebarPath: require.resolve('./sidebars.json'),
-        },		
+        docs: false,	
 		googleAnalytics: {
 		  trackingID: 'G-XLN6FQ07LW',
 		  anonymizeIP: true,
@@ -59,7 +55,7 @@ module.exports =
         src: "img/favicon-96x96.png"
       },
       items: [
-        {to: 'docs/introduction', label: 'Docs', position: 'left'},
+        {to: 'docs', label: 'Docs', position: 'left'},
         {href: 'https://forum.pixieditor.net', label: 'Forum', position: 'left'},
         {to: 'help', label: 'Help', position: 'left'},
         {
