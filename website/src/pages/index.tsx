@@ -3,7 +3,6 @@ import ReactDOM from "react-dom";
 import Layout from "@theme/Layout";
 import "../css/style.css";
 import "animate.css";
-import CookieConsent from "react-cookie-consent";
 import ExecutionEnvironment from "@docusaurus/ExecutionEnvironment";
 
 const Feature = (props) => {
@@ -205,21 +204,6 @@ class Index extends React.Component {
               video="videos/Layers.webm"
             />
 
-            <script
-              async
-              src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-8372287848779618"
-              crossOrigin="anonymous"
-            ></script>
-            <ins
-              className="adsbygoogle"
-              style={{ display: "block" }}
-              data-ad-format="fluid"
-              data-ad-layout-key="-9y-21-vz-7x+4mp"
-              data-ad-client="ca-pub-8372287848779618"
-              data-ad-slot="2371632681"
-            ></ins>
-            <script>(adsbygoogle = window.adsbygoogle || []).push({});</script>
-
             <Feature
               icon="icons/transparency.svg"
               title="Color tools"
@@ -251,36 +235,9 @@ class Index extends React.Component {
                 "As flexible as you want. ",
               ]}
             />
-            <script
-              async
-              src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-8372287848779618"
-              crossOrigin="anonymous"
-            ></script>
-            <ins
-              className="adsbygoogle"
-              style={{ display: "block" }}
-              data-ad-format="fluid"
-              data-ad-layout-key="-9y-21-vz-7x+4mp"
-              data-ad-client="ca-pub-8372287848779618"
-              data-ad-slot="2371632681"
-            ></ins>
-            <script>(adsbygoogle = window.adsbygoogle || []).push({});</script>
             <h2 style={{ textAlign: "center" }}>And much more!</h2>
           </div>
         </div>
-        <CookieConsent
-          location="bottom"
-          style={{ background: "#2c2c2c" }}
-          cookieName="cookieConsent"
-          buttonStyle={{
-            background: "#b91f3e",
-            color: "white",
-            fontSize: "13px",
-          }}
-          expires={150}
-        >
-          This website uses cookies to enhance the user experience.{" "}
-        </CookieConsent>
       </Layout>
     );
   }

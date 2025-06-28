@@ -136,11 +136,15 @@ module.exports =
             {
             label: "Privacy Policy",
             to: "https://pixieditor.net/docs/privacy-policy" 
+            },
+            {
+              label: "Terms of Service",
+              to: "https://pixieditor.net/docs/terms-of-service"
             }
           ]
         }
       ],
-      copyright: `Copyright © ${new Date().getFullYear()} PixiEditor Organization`,
+      copyright: `Copyright © ${new Date().getFullYear()} Pixi Labs Sp. z o.o<br/>Bładnicka 23, 43-430, Międzyświeć, Poland. | NIP: 5482769278 | REGON: 54203277600000 `,
     },
     image: "img/PixiEditorBanner.png",
     sidebarCollapse: false,
