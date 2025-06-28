@@ -9,28 +9,16 @@ module.exports =
   organizationName: 'PixiEditor',
   trailingSlash: false,
   scripts: [{
-    src: "https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js",
+    src: 'https://cloud.umami.is/script.js',
     async: true,
-    ["data-ad-client"]: "ca-pub-8372287848779618"
+    ["data-website-id"]: '4bd73c8c-e42a-4c6a-8ac6-97ce418a3a93'
   },
-  {
-    src: "https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-8372287848779618",
-    async: true,
-    crossOrigin: "anonymous"
-  }],
+  ],
   presets: [
     [
       '@docusaurus/preset-classic',
       {
         docs: false,	
-		googleAnalytics: {
-		  trackingID: 'G-XLN6FQ07LW',
-		  anonymizeIP: true,
-		},
-		gtag: {
-		  trackingID: 'G-XLN6FQ07LW',
-		  anonymizeIP: true,
-		},
         theme: {
           customCss: [require.resolve('./src/css/theme.css')],
         }
