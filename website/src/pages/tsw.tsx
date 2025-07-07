@@ -1,10 +1,12 @@
 import React from "react";
 import Layout from '@theme/Layout';
 import "../css/roadmap.css"
+import ExecutionEnvironment from '@docusaurus/ExecutionEnvironment';
 
 function tsw(props) {
 
 
+if(ExecutionEnvironment.canUseDOM){
 var password = "szczęść wrząsęk";
 
 if(prompt("Enter password:", "") !== password)
@@ -39,6 +41,10 @@ else{
                         </button>
                     </form>
         </Layout>);
+}
+}
+else{
+    return null;
 }
 }
 
