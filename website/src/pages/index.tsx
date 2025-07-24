@@ -102,16 +102,15 @@ class Index extends React.Component {
   v2SignIn() {
     return [
       <h1>
-        PixiEditor 2.0 is coming, {" "}
+        PixiEditor 2.0 is coming 30th of July! {" "}
         <a
-          href="/v2"
+          href="https://youtube.com/live/D-C0NyARIM8"
           target="_blank"
         >
-          join the waitlist
+          Watch the release stream
         </a>{" "}
-        today.
       </h1>,
-      <p>Meet the new universal graphics platform. Animations, extensions, infinite canvas and more!</p>,
+      <p>Meet the new universal graphics editor. Raster, vector, animations, procedural nodes and more!</p>,
     ];
   }
 
