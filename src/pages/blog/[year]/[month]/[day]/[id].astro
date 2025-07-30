@@ -43,7 +43,7 @@ const { Content, headings } = await render(post);
 <Layout fullTitle={`${post.data.title} | PixiEditor Blog`} description={post.data.description} cover={post.data.cover ?? "img/blog-cover.png"}>
     <div class="mx-auto max-w-screen-xl pt-12 pb-12">
         <a class="mb-2 block text-neutral-400" href="/blog"><Lucide data="chevron-left" class="align-bottom pe-3" /> All Articles</a>
-        <h1 class="text-5xl font-bold my-6">{post.data.title}</h1>
+        <h1 class="text-5xl font-bold my-6 px-4">{post.data.title}</h1>
         <div class="flex pb-12 lg:flex-row flex-col md:gap-6 lg:gap-12 items-center lg:items-start p-4 lg:p-0">
             <div class="flex flex-col w-full lg:w-auto pb-4 lg:items-end w-48 lg:top-22">
                 <div class="flex lg:flex-col md:flex-row h-fit gap-4 lg:gap-0 items-center lg:items-stretch">
