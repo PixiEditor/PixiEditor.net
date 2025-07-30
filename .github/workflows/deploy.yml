@@ -56,7 +56,7 @@ jobs:
       # Merge docs into website
       - name: Copy docs into /docs of website build
         run: |
-          mkdir -p ./website/build/docs
+          mkdir -p ./dist/docs
           cp -r ./docs-source/dist/* ./website/build/docs/
 
       # Upload and deploy final site
