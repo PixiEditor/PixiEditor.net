@@ -57,13 +57,13 @@ jobs:
       - name: Copy docs into /docs of website build
         run: |
           mkdir -p ./dist/docs
-          cp -r ./docs-source/dist/* ./website/build/docs/
+          cp -r ./docs-source/dist/* ./dist/docs/
 
       # Upload and deploy final site
       - name: Upload site artifact
         uses: actions/upload-pages-artifact@v3
         with:
-          path: ./website/build
+          path: ./dist
 
       - name: Deploy to GitHub Pages
         id: deployment
