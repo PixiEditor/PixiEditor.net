@@ -32,11 +32,11 @@ jobs:
       # Build main site
       - name: Install main site dependencies
         run: yarn install
-        working-directory: ./website
+        working-directory: .
 
       - name: Build main site
         run: yarn build
-        working-directory: ./website
+        working-directory: .
 
       - name: Add run ID to site
         run: echo ${{ github.run_id }} > ./website/build/gh_action.txt
