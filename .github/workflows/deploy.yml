@@ -38,9 +38,6 @@ jobs:
         run: yarn build
         working-directory: .
 
-      - name: Add run ID to site
-        run: echo ${{ github.run_id }} > ./website/build/gh_action.txt
-
       # Build docs site
       - name: Clone PixiEditor.net-Docs
         uses: actions/checkout@v4
