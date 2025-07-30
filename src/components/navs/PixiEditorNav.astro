@@ -4,13 +4,14 @@ import Logo from "@assets/logos/PixiEditorLogoTextHorizontal.svg";
 import NavLink from "@components/NavLink.astro";
 import Lucide from "@components/Lucide.astro";
 import PixiEditorNavOtherProjects from "./PixiEditorNavOtherProjects.astro";
+import { openCollective } from './../../assets/links.ts';
 
 import "@styles/global.css";
 import Dropdown from "@components/Dropdown.astro";
 ---
 
 <nav class="py-3 w-full bg-neutral-800 sticky top-0 z-30">
-    <div class="flex justify-between h-16 px-10 max-lg:hidden">
+    <div class="flex justify-between h-16 px-10 mb-4 max-lg:hidden">
         <div class="flex gap-2 items-center">
             <a href="/">
                 <Image src={Logo} alt="PixiEditor" loading="eager" />
@@ -42,7 +43,7 @@ import Dropdown from "@components/Dropdown.astro";
 </nav>
 
 <div class="flex flex-col" id="_navMobile">
-    <div class="flex px-6 justify-between items-center lg:hidden">
+    <div class="flex px-6 justify-between items-center lg:hidden mb-4">
         <a href="/">
             <Image src={Logo} alt="PixiEditor" loading="eager" />
         </a>
@@ -65,10 +66,12 @@ import Dropdown from "@components/Dropdown.astro";
 
         <div class="mt-auto py-8 w-full flex flex-col gap-4">
             <a class="p-2 block bg-pc-softpixired w-full text-center rounded"
+            href="/download"
                 >Download</a
             >
             <a class="p-2 block bg-neutral-600 w-full text-center rounded"
-                >Support us <Lucide data="heart-handshake" class="ms-2" /></a
+            href={openCollective.page} target="_blank"
+                ><span style="pointer-events:none;">Support us <Lucide data="heart-handshake" class="ms-2" /></span></a
             >
         </div>
     </div>
