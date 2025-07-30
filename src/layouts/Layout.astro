@@ -66,7 +66,7 @@ import '../styles/global.css';
 		<title>{pageTitle}</title>
 	</head>
 	<body class="m-0 w-full h-full bg-neutral-800 text-white font-montserrat">
-		<PixiEditorNav class="mb-4"/>
+		<PixiEditorNav/>
 
 		{notMain ? <slot /> : <main class={className} {...rest}><slot /></main>}
 

@@ -7,10 +7,22 @@ import "remark-github-blockquote-alert/alert.css";
 
 export async function getStaticPaths() {
     const posts = await getCollection('blog');
-    return posts.map(post => ({
-        params: { id: post.id, year: post.data.date.getFullYear(), month: post.data.date.getMonth() + 1, day: post.data.date.getDate() },
-        props: { post },
-    }));
+    return posts.map(post => {
+        const date = post.data.date;
+        const year = date.getFullYear();
+        const month = String(date.getMonth() + 1).padStart(2, '0');
+        const day = String(date.getDate()).padStart(2, '0');      
+
+        return {
+            params: {
+                id: post.id,
+                year: String(year),
+                month,
+                day
+            },
+            props: { post },
+        };
+    });
 }
 
 const formatter = new Intl.DateTimeFormat('en-US', { 
