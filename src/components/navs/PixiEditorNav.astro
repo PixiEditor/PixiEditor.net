@@ -1,0 +1,103 @@
+﻿---
+import { Image } from "astro:assets";
+import Logo from "@assets/logos/PixiEditorLogoTextHorizontal.svg";
+import NavLink from "@components/NavLink.astro";
+import Lucide from "@components/Lucide.astro";
+import PixiEditorNavOtherProjects from "./PixiEditorNavOtherProjects.astro";
+
+import "@styles/global.css";
+import Dropdown from "@components/Dropdown.astro";
+---
+
+<nav class="py-3 w-full bg-neutral-800 sticky top-0 z-30">
+    <div class="flex justify-between h-16 px-10 max-lg:hidden">
+        <div class="flex gap-2 items-center">
+            <a href="/">
+                <Image src={Logo} alt="PixiEditor" loading="eager" />
+            </a>
+
+            <div class="mx-4 flex gap-1">
+                <NavLink class="px-2 py-2" href="/docs">Docs</NavLink>
+                <NavLink class="px-2 py-2" href="https://forum.pixieditor.net/" target="_blank">Forum</NavLink>
+                <NavLink class="px-2 py-2" href="/blog">Blog</NavLink>
+                <NavLink class="px-2 py-2" href="/help">Help</NavLink>
+            </div>
+
+            <a class="px-button-soft" href="/download"> Download </a>
+        </div>
+        <div class="flex gap-4 items-center">
+            <PixiEditorNavOtherProjects />
+
+            <NavLink
+                class="px-2 py-2"
+                href="https://github.com/PixiEditor/PixiEditor"
+                target="_blank">GitHub</NavLink
+            >
+
+            <a class="px-button-soft" href="/download">
+                Support us <Lucide data="heart-handshake" class="ms-2" />
+            </a>
+        </div>
+    </div>
+</nav>
+
+<div class="flex flex-col" id="_navMobile">
+    <div class="flex px-6 justify-between items-center lg:hidden">
+        <a href="/">
+            <Image src={Logo} alt="PixiEditor" loading="eager" />
+        </a>
+
+        <Lucide data="menu" class="text-2xl" id="_navMobileToggle" />
+    </div>
+
+    <div
+        class="my-4 pt-4 px-8 w-full gap-3 text-lg flex-col bg-neutral-900 flex-grow hidden"
+        id="_navMobileMenu"
+    >
+        <NavLink class="py-2" href="/docs">Docs</NavLink>
+        <NavLink
+            class="py-2"
+            href="https://forum.pixieditor.net/"
+            target="_blank">Forum</NavLink
+        >
+        <NavLink class="py-2" href="/blog">Blog</NavLink>
+        <NavLink class="py-2" href="/help">Help</NavLink>
+
+        <div class="mt-auto py-8 w-full flex flex-col gap-4">
+            <a class="p-2 block bg-pc-softpixired w-full text-center rounded"
+                >Download</a
+            >
+            <a class="p-2 block bg-neutral-600 w-full text-center rounded"
+                >Support us <Lucide data="heart-handshake" class="ms-2" /></a
+            >
+        </div>
+    </div>
+</div>
+
+<script>
+    let expanded = false;
+    const nav = document.getElementById("_navMobile")!;
+    const toggler = document.getElementById("_navMobileToggle")!;
+    const menu = document.getElementById("_navMobileMenu")!;
+
+    toggler.addEventListener("click", () => {
+        nav.classList.toggle("h-dvh", !expanded);
+        setDisplay(menu, "flex", !expanded);
+
+        toggler.classList.toggle("icon-menu", expanded);
+        toggler.classList.toggle("icon-x", !expanded);
+
+        document.body.classList.toggle("overflow-hidden", !expanded);
+
+        expanded = !expanded;
+    });
+
+    function setDisplay(
+        element: HTMLElement,
+        className: string,
+        visible: boolean,
+    ) {
+        element.classList.toggle(className, visible);
+        element.classList.toggle("hidden", !visible);
+    }
+</script>

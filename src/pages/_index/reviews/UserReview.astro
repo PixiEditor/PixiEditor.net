@@ -1,0 +1,25 @@
+﻿---
+import type { ImageMetadata } from "astro";
+import { Image } from "astro:assets";
+
+interface Props {
+	author: string,
+    date: string,
+    platform: ImageMetadata
+}
+
+const { author, date, platform } = Astro.props;
+---
+
+<div class="w-full h-fit rounded bg-neutral-700 p-6">
+    <p>
+        <slot />
+    </p>
+    <div class="flex mt-6 bg-neutral-600 justify-between px-3 py-1 rounded">
+        <div>
+            <Image class="inline w-6 h-6" src={platform} alt="" />
+            <span class="ms-2 align-middle">{author}</span>
+        </div>
+        <span>{date}</span>
+    </div>
+</div>

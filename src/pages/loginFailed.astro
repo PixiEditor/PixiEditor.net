@@ -1,0 +1,23 @@
+---
+import Layout from "@layouts/Layout.astro";
+import UnlinkImage from "../assets/icons/unlink.svg"; 
+import { Image } from "astro:assets";
+---
+
+<Layout fullTitle="Login Expired" class="bg-neutral-900 text-white">
+  <section class="container mx-auto flex flex-col items-center justify-center text-center pt-24 pb-24 gap-10">
+    
+    <Image 
+      src={UnlinkImage} 
+      alt="Login Expired Icon" 
+      loading="eager"
+    />
+    
+    <h1 class="text-4xl font-bold px-4">Link Expired or Invalid</h1>
+    
+    <p class="text-xl text-neutral-300 max-w-md px-4">
+      This login link is no longer valid. You can request a new login link from the app.
+    </p>
+    
+  </section>
+</Layout>

@@ -1,0 +1,19 @@
+---
+import ClientColorPicker from "./ClientColorPicker";
+
+async function getVersions(packageName: string): Promise<string[]> {
+    //if (import.meta.env.DEV) return [ "1.0.0" ];
+
+    const versions: { versions: string[] } = await (await fetch(`https://api.nuget.org/v3-flatcontainer/${packageName}/index.json`)).json();
+
+    return versions.versions;
+}
+
+const wpfVersions = await getVersions("pixieditor.colorpicker");
+const avaloniaVersions = await getVersions("pixieditor.colorpicker.avaloniaui");
+
+const wpfVersion = wpfVersions[wpfVersions.length - 1];
+const avaloniaVersion = avaloniaVersions[avaloniaVersions.length - 1];
+---
+
+<ClientColorPicker client:load wpfVersion={wpfVersion} avaloniaVersion={avaloniaVersion} />

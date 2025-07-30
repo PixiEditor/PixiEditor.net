@@ -1,0 +1,21 @@
+﻿---
+import Layout from "../layouts/Layout.astro";
+import { IconNames } from "@components/PixiPerfecticonMeta";
+import PixiPerfectIcon from "@components/PixiPerfectIcon.astro";
+---
+
+<Layout title="PixiPerfect Icons p-2">
+    <section class="container mx-auto py-12">
+        <h1 class="text-xl font-bold mb-4">PixiPerfect Icons</h1>
+
+        <div class="flex flex-wrap gap-2">
+            {IconNames.map(x =>
+                    <div class="w-32 bg-neutral-900 rounded border border-neutral-950">
+                        <input class="bg-neutral-700 w-full rounded-t p-1" value={x}/>
+                        <PixiPerfectIcon data={x} class="text-4xl text-center w-full block my-3" title={x} />
+                    </div>
+            )}
+        </div>
+    </section>
+
+</Layout>

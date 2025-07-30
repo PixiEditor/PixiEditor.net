@@ -1,0 +1,65 @@
+---
+
+const tiers = [
+    "silver",
+    "gold",
+    "platinum",
+    "diamond",
+]
+
+---
+
+<div class="flex flex-col gap-4">
+    <h1 class="text-2xl font-bold text-center">Contributors</h1>
+    <div class="overflow-x-auto">
+        <table
+            class="w-full table-auto border-collapse border border-neutral-700"
+        >
+            <thead>
+                <tr>
+                    <th class="px-4 py-2 text-left">Name</th>
+                    <th class="px-4 py-2 text-left">Amount</th>
+                </tr>
+            </thead>
+            <tbody>
+                {
+                    contributors.map((contributor) => (
+                        <tr key={contributor.id}>
+                            <td class="px-4 py-2 border-b border-neutral-700">
+                                {contributor.name}
+                            </td>
+                            <td class="px-4 py-2 border-b border-neutral-700">
+                                {contributor.totalAmountDonated / 100} $
+                            </td>
+                        </tr>
+                    ))
+                }
+            </tbody>
+        </table>
+    </div>
+
+    <script>
+
+// TODO: https://docs.opencollective.com/help/contributing/development/api/collectives#get-members-per-tier
+const url = "https://opencollective.com/pixieditor/members/all.json"
+
+let fetching = true;
+let contributors = [];
+
+fetch(url).then((res) => {
+    if (res.ok) {
+        return res.json();
+    } else {
+        throw new Error("Network response was not ok");
+    }
+}).then((data) => {
+    console.log(data);
+    contributors = data.members.filter((member) => member.role === "BACKER");
+}).catch((error) => {
+    console.error("There has been a problem with your fetch operation:", error);
+}).finally(() => {
+    fetching = false;
+});
+
+    </script>
+</div>

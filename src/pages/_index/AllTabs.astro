@@ -1,0 +1,102 @@
+---
+import Lucide from "@components/Lucide.astro";
+
+const tabFiles = import.meta.glob('./tabs/*.astro', { eager: true });
+
+const tabCollection = Object.entries(tabFiles).map(([_, module]: any) => {
+    return {
+        id: module.data.id,
+        data: module.data,
+        open: module.data.order === 0,
+        content: module.default,
+    };
+}).sort((o1, o2) => o1.data.order - o2.data.order);
+---
+
+<div class="flex justify-center gap-6 max-md:hidden mt-14" role="tablist">
+    {tabCollection.map((tab) => (
+            <button class="w-32 flex flex-col items-center tab-button cursor-pointer" name={tab.id} id={`${tab.id}-button`} aria-controls={tab.id} role="tab">
+                <tab.data.iconType
+                        data={tab.data.icon}
+                        class={`text-5xl ${tab.data.textClass}`}
+                />
+                <h2 class="font-semibold mt-3">
+                    {tab.data.title}
+                </h2>
+{              <div class={`opacity-0 aria-selected-parent:opacity-100 rounded-full ${tab.data.backgroundClass} w-full h-[3px]`}></div> }
+                <span class="sr-only">{tab.data.title}</span>
+            </button>
+    ))}
+</div>
+
+<div class="mt-6">
+    {tabCollection.map((tab, i) => (
+            <details name="features" id={tab.id} class="tab-panel" open={tab.open} role="tabpanel" aria-labelledby={`${tab.id}-button`}>
+                <summary class="md:hidden list-none flex justify-between items-center px-6 py-3 border-b border-b-neutral-700 cursor-pointer">
+                    <div>
+                        <tab.data.iconType
+                                data={tab.data.icon}
+                                class={`text-2xl inline align-middle text-${tab.data.textClass}`}
+                        />
+                        <h2 class={`font-bold inline align-middle`}>
+                            {tab.data.title}
+                        </h2>
+                    </div>
+                    <Lucide data={i == 0 ? "chevron-up" : "chevron-down"} class="summary-indicator" />
+                </summary>
+
+                <div class="bg-neutral-900 w-full px-12 lg:rounded p-4">
+                    <tab.content />
+                </div>
+            </details>
+    ))}
+</div>
+
+<script>
+const buttons = document.getElementsByClassName("tab-button") as HTMLCollectionOf<HTMLButtonElement>;
+const panels = document.getElementsByClassName("tab-panel") as HTMLCollectionOf<HTMLDetailsElement>;
+const query = window.matchMedia("(max-width: 768px)");
+
+query.addEventListener('change', (x) => {
+    if (!x.matches) {
+        if (Array.from(panels).every(panel => !panel.open)) {
+            panels.item(0)!.open = true;
+        }
+    }
+})
+
+for (const button of buttons) {
+    button.addEventListener('click', () => {
+        const details = document.getElementById(button.name) as HTMLDetailsElement;
+
+        details.open = true;
+    })
+}
+
+for (const panel of panels) {
+    updatePanelButton(undefined, panel);
+    panel.addEventListener('toggle', e => updatePanelButton(e, panel));
+}
+
+function updatePanelButton(event: Event | undefined, panel: HTMLDetailsElement) {
+    const button = buttons.namedItem(panel.id)! as HTMLButtonElement & { open: boolean };
+    const icon = panel.querySelector("summary .summary-indicator")!;
+    
+    button.ariaSelected = panel.open.toString();
+    panel.dataset.open = panel.open.toString();
+
+    icon.classList.toggle("icon-chevron-down", !panel.open);
+    icon.classList.toggle("icon-chevron-up", panel.open);
+
+    const video = panel.querySelector("video");
+
+    if (event?.isTrusted) {
+        if (panel.open) {
+            video?.play();
+        }
+        else {
+            video?.pause();
+        }
+    }
+}
+</script>

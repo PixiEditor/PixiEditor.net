@@ -1,0 +1,190 @@
+﻿---
+import { Image } from "astro:assets";
+
+import OpenCollectiveLogo from "@assets/logos/OpenCollective.svg";
+
+import SilverTier from "@assets/icons/donationTiers/silver.svg";
+import GoldTier from "@assets/icons/donationTiers/gold.svg";
+import DiamondTier from "@assets/icons/donationTiers/diamond.svg";
+import PlatinumTier from "@assets/icons/donationTiers/platinum.svg";
+
+import { openCollective as links } from "../../assets/links";
+import ContributorsTable from "./ContributorsTable.astro";
+---
+
+<h1 class="text-3xl font-bold text-center">
+    Support us with<Image
+        src={OpenCollectiveLogo}
+        alt="Open Collective"
+        class="inline ms-3"
+    />
+</h1>
+
+<div
+    class="grid grid-cols-[auto_auto_auto] grid-rows-[auto_auto] max-lg:grid-cols-1 gap-y-4 mt-12 mx-4 items-center justify-center"
+>
+    <div class="grid grid-cols-2 md:grid-cols-4 gap-6">
+        <a class="tier silver" href={links.silver} target="_blank">
+            <h2 class="uppercase font-bold">Silver</h2>
+            <Image src={SilverTier} width="80" alt="" />
+            <p class="font-bold text-xl">
+                $5 <span class="text-xs font-normal">/ month</span>
+            </p>
+        </a>
+        <a class="tier gold" href={links.gold} target="_blank">
+            <h2 class="uppercase font-bold">Gold</h2>
+            <Image src={GoldTier} width="80" alt="" />
+            <p class="font-bold text-xl">
+                $10 <span class="text-xs font-normal">/ month</span>
+            </p>
+        </a>
+        <a class="tier platinum" href={links.diamond} target="_blank">
+            <h2 class="uppercase font-bold">Platinum</h2>
+            <Image src={PlatinumTier} width="80" alt="" />
+            <p class="font-bold text-xl">
+                $25 <span class="text-xs font-normal">/ month</span>
+            </p>
+        </a>
+        <a class="tier diamond" href={links.platinum} target="_blank">
+            <h2 class="uppercase font-bold">Diamond</h2>
+            <Image src={DiamondTier} width="80" alt="" />
+            <p class="font-bold text-xl">
+                $50 <span class="text-xs font-normal">/ month</span>
+            </p>
+        </a>
+    </div>
+
+    <p class="uppercase font-bold px-12 mx-auto">or</p>
+
+    <div class="w-48 mx-auto">
+        <div
+            class="bg-neutral-700 focus-within:outline rounded p-2 grid grid-cols-[1fr_auto]"
+        >
+            <input
+                class="bg-transparent placeholder:text-white placeholder:opacity-50 min-w-0 outline-none [appearance:textfield] [&::-webkit-outer-spin-button]:appearance-none [&::-webkit-inner-spin-button]:appearance-none"
+                type="number"
+                placeholder="Enter amount"
+                id="donate-amount"
+            />
+            <label class="cursor-text" for="donate-amount">$</label>
+        </div>
+        <button
+            class="mt-3 p-3 px-6 bg-neutral-900 font-bold rounded w-full uppercase cursor-pointer hover:bg-neutral-950 transition-colors duration-200"
+            data-donate-button>Donate</button
+        >
+        <script>
+            const amountInput = document.getElementById(
+                "donate-amount",
+            ) as HTMLInputElement;
+            amountInput.addEventListener("change", ceilValue);
+            const donateButtons = document.querySelectorAll(
+                "[data-donate-button]",
+            );
+            donateButtons.forEach((button) => {
+                button.addEventListener("click", donateCustomAmount);
+            });
+            function ceilValue() {
+                if (amountInput.value.length === 0) return;
+                const originalValue = Number(amountInput.value);
+                const newValue = Math.max(Math.floor(originalValue), 1);
+                if (originalValue === newValue) return;
+                amountInput.value = newValue.toString();
+            }
+            function donateCustomAmount() {
+                ceilValue();
+                const amount = Number(amountInput.value);
+                if (Number.isNaN(amount)) return;
+                // TODO: Maybe move this in links.ts if possible
+                const url = `https://opencollective.com/pixieditor/donate?interval=oneTime&amount=${amount}`;
+                window.open(url, "_blank");
+            }
+        </script>
+    </div>
+
+    <p class="text-center max-lg:row-[1]">
+        Choose a tier and contribute monthly
+    </p>
+
+    <p></p>
+
+    <p class="text-center max-lg:row-[4]">Make a one-time donation</p>
+</div>
+<!-- <ContributorsTable class="mt-12" /> -->
+
+<style lang="scss">
+    @use "sass:color";
+    @reference "tailwindcss";
+    @tailwind utilities;
+
+    $silver: rgb(146, 146, 146);
+    $gold: rgb(177, 162, 79);
+    $platinum: rgb(217, 249, 255);
+    $diamond: rgb(232, 197, 255);
+
+    $silver-start: color.scale($silver, $lightness: -30%);
+    $gold-start: color.scale($gold, $lightness: -30%, $saturation: -90%);
+    $platinum-start: color.scale(
+        $platinum,
+        $lightness: -30%,
+        $saturation: -90%
+    );
+    $diamond-start: color.scale($diamond, $lightness: -30%, $saturation: -90%);
+
+    $shadow-start: rgb(0, 0, 0);
+
+    @keyframes intro-breath {
+        from {
+            filter: drop-shadow(0 0 10px $shadow-start);
+        }
+
+        to {
+            filter: drop-shadow(0 0 13px var(--tier-color));
+        }
+    }
+
+    @keyframes breath {
+        from {
+            filter: drop-shadow(0 0 10px var(--tier-color-start));
+        }
+
+        to {
+            filter: drop-shadow(0 0 13px var(--tier-color));
+        }
+    }
+
+    .tier {
+        @apply flex flex-col items-center px-6 py-3 rounded bg-neutral-900 hover:bg-neutral-950 transition-colors duration-200 gap-1;
+
+        &.silver:hover img {
+            --tier-color: #{$silver};
+            --tier-color-start: #{$silver-start};
+            animation:
+                intro-breath 0.5s forwards,
+                breath 2s alternate-reverse infinite ease-out 0.5s;
+        }
+
+        &.gold:hover img {
+            --tier-color: #{$gold};
+            --tier-color-start: #{$gold-start};
+            animation:
+                intro-breath 0.5s forwards,
+                breath 2s alternate-reverse infinite ease-out 0.5s;
+        }
+
+        &.platinum:hover img {
+            --tier-color: #{$platinum};
+            --tier-color-start: #{$platinum-start};
+            animation:
+                intro-breath 0.5s forwards,
+                breath 2s alternate-reverse infinite ease-out 0.5s;
+        }
+
+        &.diamond:hover img {
+            --tier-color: #{$diamond};
+            --tier-color-start: #{$diamond-start};
+            animation:
+                intro-breath 0.5s forwards,
+                breath 2s alternate-reverse infinite ease-out 0.5s;
+        }
+    }
+</style>

@@ -1,0 +1,64 @@
+﻿---
+import Logo from '@assets/logos/PixiEditorLogoTextHorizontal.svg'
+import { forum, steam, openCollective, discordInvites, socials } from '@assets/links'
+
+import { Image } from "astro:assets";
+
+import discordLogo from '@assets/icons/discord.svg';
+import redditLogo from '@assets/icons/reddit.svg';
+import steamLogo from '@assets/icons/steam.svg';
+import twitterLogo from '@assets/icons/twitter.svg';
+import youTubeLogo from '@assets/icons/youtube.svg';
+---
+
+<div class="bg-neutral-900">
+    <footer class="py-12 px-6 container mx-auto">
+        <div>
+            <Image src={Logo} alt="PixiEditor" loading="eager" />
+        </div>
+
+        <div class="grid max-w-4xl gap-y-8 my-12 grid-cols-2 lg:grid-cols-4">
+            <div>
+                <h1 class="font-bold">Other Projects</h1>
+                <ul class="flex flex-col gap-1 mt-1">
+                    <li><a class="hover:underline" href="/colorpicker">Color Picker</a></li>
+                </ul>
+            </div>
+            <div>
+                <h1 class="font-bold">Got stuck?</h1>
+                <ul class="flex flex-col gap-1 mt-1">
+                    <li><a class="hover:underline" href="/docs">Docs</a></li>
+                    <li><a class="hover:underline" href={forum.index}>Forum</a></li>
+                    <li><a class="hover:underline" href="/help">Help</a></li>
+                </ul>
+            </div>
+            <div>
+                <h1 class="font-bold">Support us</h1>
+                <ul class="flex flex-col gap-1 mt-1">
+                    <li><a class="hover:underline" href="/download">Founder's Pack</a></li>
+                    <li><a class="hover:underline" href={openCollective.page}>Open Collective</a></li>
+                </ul>
+            </div>
+            <div>
+                <h1 class="font-bold">Legal</h1>
+                <ul class="flex flex-col gap-1 mt-1">
+                    <li><a class="hover:underline" href="/docs/privacy-policy">Privacy Policy</a></li>
+                    <li><a class="hover:underline" href="/docs/terms-of-service">Terms of Service</a></li>
+                </ul>
+            </div>
+        </div>
+
+        <div class="flex max-md:flex-col gap-y-3 justify-between itemcenter">
+            <p class="text-neutral-500 text-center">{new Date().getFullYear()} Pixi Labs Sp. z o.o</p>
+        <p class="text-neutral-500 text-center">Bładnicka 23, 43-430, Międzyświeć, Poland. | NIP: 5482769278 | REGON: 54203277600000</p>
+            <div class="flex items-end gap-3 justify-center">
+                <a href={discordInvites.projectChannel}><Image src={discordLogo} class="w-8 h-8" alt="Discord" /></a>
+                <a href={socials.subreddit}><Image src={redditLogo} class="w-8 h-8" alt="Reddit" /></a>
+                <a href={steam.store}><Image src={steamLogo} class="w-8 h-8" alt="Steam" /></a>
+                <a href={socials.twitterPage}><Image src={twitterLogo} class="w-8 h-8" alt="Twitter" /></a>
+                <a href={socials.youtubePage}><Image src={youTubeLogo} class="w-8 h-8" alt="YouTube" /></a>
+            </div>
+        </div>
+
+    </footer>
+</div>

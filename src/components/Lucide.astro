@@ -1,0 +1,16 @@
+﻿---
+import 'lucide-static/font/lucide.css'
+import type { LucideIconName } from './LucideMeta';
+
+interface Props {
+	data: LucideIconName;
+    class?: string;
+    ariaRelevant?: boolean;
+}
+
+const { data, class: className, ariaRelevant, ...rest } = Astro.props;
+
+const iconName = `icon-${data}`;
+---
+
+<span class:list={[iconName, className, "lucide-icon"]} {...rest} aria-label={iconName} aria-hidden={!ariaRelevant} role="img"></span>

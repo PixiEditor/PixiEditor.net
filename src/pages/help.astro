@@ -1,0 +1,57 @@
+﻿---
+import Layout from "@layouts/Layout.astro";
+import Lucide from "../components/Lucide.astro";
+
+import { forum, discordInvites, email } from "@assets/links";
+---
+
+<Layout title="Help">
+    <section class="container mx-auto p-6 lg:p-12">
+        <h1 class="text-3xl text-center">How can we <span class="font-bold">help you?</span></h1>
+
+        <div class="grid grid-cols-1 md:grid-cols-3 mt-6 gap-6">
+            <div class="bg-neutral-700 rounded p-6 text-center flex flex-col justify-around">
+                <h2 class="text-xl font-bold">PixiEditor Docs</h2>
+                <p>
+                    Explore our comprehensive guides and documentation to get started or troubleshoot issues.
+                </p>
+                <a class="bg-pc-softpixired block mt-6 px-6 py-3 font-bold rounded flex items-center justify-center gap-3" href="/docs/">
+                    <Lucide data="library-big" class="text-xl font-normal" />
+                    Browse Docs
+                </a>
+            </div>
+            <div class="bg-neutral-700 rounded p-6 text-center flex flex-col justify-around">
+                <h2 class="text-xl font-bold">PixiEditor Forum</h2>
+                <p>
+                    Join discussions, share ideas, and seek support from fellow PixiEditor users in our forum
+                </p>
+                <a class="bg-pc-softpixired block mt-6 px-6 py-3 font-bold rounded flex items-center justify-center gap-3" href={forum.index} target="_blank">
+                    <Lucide data="messages-square" class="text-xl font-normal" />
+                    Join the Forum
+                </a>
+            </div>
+            <div class="bg-neutral-700 rounded p-6 text-center flex flex-col justify-around">
+                <h2 class="text-xl font-bold">Discord Server</h2>
+                <p>
+                    Connect with our community, ask questions, and stay updated by joining our Discord server
+                </p>
+                <a class="bg-pc-softpixired block mt-6 px-6 py-3 font-bold rounded flex items-center justify-center gap-3" href={discordInvites.projectChannel} target="_blank">
+                    Connect on Discord
+                </a>
+            </div>
+            <div class="bg-neutral-700 rounded p-6 text-center flex flex-col justify-around">
+                <h2 class="text-xl font-bold">Have specific questions?</h2>
+                <p>
+                    Reach out to us via email
+                </p>
+                <a class="bg-pc-softpixired block mt-6 px-6 py-3 font-bold rounded flex items-center justify-center gap-3" href=`mailto:${email.info}`>
+                    <Lucide data="mail" class="text-xl font-normal" />
+                    {email.info}
+                </a>
+            </div>
+            <div class="md:col-span-2 bg-neutral-700 rounded p-6 text-center">
+                <h2 class="text-xl font-bold">Check out YouTube tutorials</h2>
+            </div>
+        </div>
+    </section>
+</Layout>

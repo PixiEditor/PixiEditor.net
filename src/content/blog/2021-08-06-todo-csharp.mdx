@@ -1,0 +1,77 @@
+---
+title: How to write a Todo list app in 10 lines of code in pure C# [no dependencies]
+authors: [ flabbet ]
+tags: [code, programming, funny]
+date: 2021-08-06
+description: "This tutorial shows how to write to do app in 10 lines of code in pure C#."
+---
+
+Show me the one programmer who didn't want to write its own todo list app. In this article, I'll show you how
+to do that in 10 lines of code, without any external dependencies. Yes, really.
+
+## Talk is cheap, show me the code
+
+So, let's start with a new console app in .NET 5
+
+![New Console App](/img/blog-posts/todo-csharp/newproj.png)
+
+Let's give it a name
+
+![Todo App Name](/img/blog-posts/todo-csharp/todoname.png)
+
+Now select .NET 5
+
+![Select .NET 5](/img/blog-posts/todo-csharp/dotnet5.png)
+
+## Great! Coding time
+
+So, you ask me, how on earth, are you going to implement todo app in 10 lines of code?
+
+The answer is simple, let me explain it step by step.
+
+Let's start with defining your todo tasks.
+
+```csharp
+BuyMilk();
+BakeCookies();
+TalkToYourGrandma();
+WatchTv();
+Code();
+```
+
+awesome, tasks defined. Now, go complete them, and after each completed task, come back to your pc and
+write a method. Like that
+
+```csharp
+BuyMilk();
+BakeCookies();
+TalkToYourGrandma();
+WatchTv();
+Code();
+
+void BuyMilk() { }
+```
+
+After you complete all of your tasks, your program will compile, which means, 
+you have completed your todo list and app at the same time!
+
+You can see which tasks are completed and which are not, in the real time.
+
+Bonus points if your code editor highlights existing methods with green color, and undefined with red. 
+
+This is a final code 
+```csharp
+BuyMilk();
+BakeCookies();
+TalkToYourGrandma();
+WatchTv();
+Code();
+
+void BuyMilk() { }
+void BakeCookies() { } ;
+void WatchTv() { }
+void TalkToYourGrandma() { }
+void Code() { }
+```
+
+Thank you for coming to my TED talk.

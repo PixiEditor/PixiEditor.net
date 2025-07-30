@@ -1,0 +1,23 @@
+---
+import Layout from "@layouts/Layout.astro";
+import LoginSuccessImage from "../assets/icons/user-round-check.svg"; 
+import { Image } from "astro:assets";
+---
+
+<Layout fullTitle="Login Authorized!" class="bg-neutral-900 text-white">
+  <section class="container mx-auto flex flex-col items-center justify-center text-center pt-24 pb-24 gap-10">
+    
+    <Image 
+      src={LoginSuccessImage} 
+      alt="Login Authorized Icon" 
+      loading="eager"
+    />
+    
+    <h1 class="text-4xl font-bold px-4">Login Authorized!</h1>
+    
+    <p class="text-xl text-neutral-300 max-w-md px-4">
+      You're now logged in. You can close this window and return to PixiEditor.
+    </p>
+    
+  </section>
+</Layout>

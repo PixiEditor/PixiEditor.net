@@ -1,0 +1,18 @@
+﻿---
+import Lucide from "../../components/Lucide.astro";
+interface Props {
+    emoji: string,
+	background?: boolean,
+    href?: string
+}
+
+const { emoji, background = true, href } = Astro.props;
+
+const backgroundClass = background ? "opacity-20" : "";
+const hoverClass = href ? "hover:bg-neutral-600 transition-colors" : "";
+---
+
+<a class:list={["mx-2 bg-neutral-700 p-2 rounded-full", hoverClass, backgroundClass]} href={href} target="_blank">
+    <Lucide data="hash" class="align-bottom text-[#80848E]" />
+    {emoji} <slot />
+</a>

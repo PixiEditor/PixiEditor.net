@@ -1,0 +1,16 @@
+﻿---
+import "@styles/pixiperfect-icon.css"
+import type { PixiPerfectIconName } from "./PixiPerfecticonMeta";
+import { iconToUnicode } from "./PixiPerfecticonMeta";
+
+interface Props {
+    data: PixiPerfectIconName,
+    class?: string,
+    ariaRelevant?: boolean,
+}
+
+const { data, class: className, ariaRelevant, ...rest } = Astro.props;
+
+---
+
+<span class:list={["pixiperfect-icon", className]} aria-label={data} aria-hidden={!ariaRelevant} role="img" {...rest}>{iconToUnicode[data]}</span>

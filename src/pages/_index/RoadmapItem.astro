@@ -1,0 +1,32 @@
+---
+const content = await Astro.slots.render('default');
+
+interface Props {
+    isDone?: boolean
+}
+
+const { isDone } = Astro.props;
+
+const liClass = isDone ? "marker-done" : "marker-not-done";
+const ariaLabel = isDone ? `${content} (done)` : undefined;
+---
+
+<style>
+@reference "tailwindcss";
+@config "../../../tailwind.config.mjs";
+@tailwind utilities;
+
+.marker-done::marker {
+    content: "\e16d    ";
+    font-family: lucide;
+    @apply text-pc-softpixired font-bold;
+}
+
+.marker-not-done::marker {
+    content: "\e16a    ";
+    font-family: lucide;
+    @apply text-pc-softpixired font-bold;
+}
+</style>
+
+<li class={liClass} aria-label={ariaLabel}><slot /></li>

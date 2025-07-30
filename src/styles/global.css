@@ -1,0 +1,72 @@
+﻿@import "tailwindcss";
+@import 'node_modules/vanilla-infinite-marquee/infinite-marquee.css';
+@config "../../tailwind.config.mjs";
+@tailwind utilities;
+
+.px-button-base,
+.px-button-soft,
+.px-button-grey {
+    @apply px-3 py-2 rounded cursor-pointer;
+}
+
+.px-button-soft {
+    @apply bg-pc-softpixired hover:bg-pc-softpixired-400 transition-colors;
+}
+
+.px-button-grey {
+    @apply bg-neutral-700 hover:bg-neutral-600 transition-colors;
+}
+
+.platform-dropdown-trigger {
+    color: red;
+
+}
+
+.platform-dropdown-trigger+.platform-dropdown-container {
+    display: none;
+    position: relative;
+    transform: translateX(-50%);
+}
+
+.platform-dropdown-trigger:hover+.platform-dropdown-container,
+.platform-dropdown-trigger+.platform-dropdown-container:hover {
+    display: block;
+}
+
+.progress-bar {
+    height: 17px;
+    border-radius: 8px;
+    overflow: hidden;
+}
+
+.progress-bar-inner {
+    height: 17px;
+}
+
+/* I couldn't make tailwind to generate this classes on dynamic classes */
+.bg-pc-procedural-orange {
+    background-color: #FF7F00;
+}
+
+.bg-pc-pixel-blue {
+    background-color: #3C98D8;
+}
+
+.bg-pc-raster-green {
+    background-color: #87D33B
+}
+
+.bg-pc-vector-purple {
+    background-color: #A500FF;
+}
+
+.bg-pc-animation-pink {
+    background-color: #ED385C;
+}
+
+.founders-gradient {
+    background: linear-gradient(257deg, #832ED7 -0.25%, #9D42F8 23.74%, #DCB8FF 47.75%, #AB56FF 71.75%, #762BC0 95.75%);
+    background-clip: text;
+    -webkit-background-clip: text;
+-webkit-text-fill-color: transparent;
+}

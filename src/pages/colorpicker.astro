@@ -1,0 +1,183 @@
+---
+import Layout from "@layouts/Layout.astro";
+import ColorPickerContent from "./_colorpicker/ColorPickerContent.astro";
+import colorpicker from "@assets/videos/colorpicker.mp4";
+import Lucide from "@components/Lucide.astro";
+import { experimental_AstroContainer } from "astro/container";
+import Waves from "@assets/waves.svg";
+import WavesBottom from "@assets/wave-bottom.svg";
+import { getImage } from "astro:assets";
+
+const namespaceDefintion = `<Window
+    ...
+    xmlns:colorpicker="clr-namespace:ColorPicker;assembly=ColorPicker" #COPY#
+    ...>`;
+
+const componentUsage = `    <colorpicker:StandardColorPicker x:Name="main" /> #COPY#
+    <colorpicker:PortableColorPicker ColorState="{Binding ElementName=main, Path=ColorState, Mode=TwoWay}" /> #COPY#`;
+
+const container = await experimental_AstroContainer.create();
+const lucideCopy = await container.renderToString(Lucide, {
+    props: { data: "copy", ariaRelevant: true },
+});
+
+function formatXaml(code: string) {
+    return code
+        .replaceAll("<", "&lt;")
+        .replaceAll(">", "&gt;")
+        .replaceAll(
+            /([\w:]+)=(".+")/g,
+            `<span class="text-[#9cdcfe]">$1</span><span class="text-white">=</span><span class="text-[#ce9178]">$2</span>`,
+        )
+        .replaceAll(
+            /&lt;([\w:]+)/g,
+            `&lt;<span class="text-[#569cd6]">$1</span>`,
+        )
+        .replaceAll(
+            /(.*)#COPY#$/gm,
+            `$1<button class="inline align-middle cursor-pointer hover:text-white transition-colors reference-copy-button bg-transparent">${lucideCopy}<span class="copyable hidden">$1</span></button>`,
+        );
+
+    //
+}
+
+const waveImg = await getImage({ src: Waves });
+const waveImgBottom = await getImage({ src: WavesBottom });
+---
+
+<Layout title="AvaloniaUI/WPF Color Picker">
+    <div class="py-8 wavy-bg" style={`background-image: url(${waveImg.src});`}>
+        <div class="container mx-auto text-center">
+            <div class="page-title">
+                <h1 class="text-3xl max-w-4xl mx-auto">
+                    Likely the most <strong class="font-bold"
+                        >customizable</strong
+                    > and <strong class="font-bold">advanced</strong> color picker
+                    for WPF and AvaloniaUI.
+                </h1>
+                <a
+                    href="/ColorPickerDemo/"
+                    class="px-button-soft block w-fit mx-auto my-8"
+                    target="_blank"
+                    >Try in the browser <Lucide
+                        data="chevron-right"
+                        class="align-bottom"
+                    /></a
+                >
+                <a
+                    href="/ColorPickerDemo/"
+                    target="_blank"
+                    class="my-8 w-fit mx-auto block"
+                >
+                    <div class="p-1 rounded-[5px] bg-black">
+                        <video
+                            muted
+                            autoplay
+                            width="300"
+                            height="480"
+                            class="bg-neutral-800 w-[300px] h-[480px]"
+                            class="rounded"
+                            src={colorpicker}></video>
+                    </div>
+                </a>
+            </div>
+        </div>
+    </div>
+
+    <div
+        class="mb-4 wavy-bg-bottom"
+        style={`background-image: url(${waveImgBottom.src});`}
+    >
+        <div class="container mx-auto">
+            <h1 class="text-3xl font-bold mb-4 pt-[350px] text-center">Usage guide</h1>
+
+            <ColorPickerContent />
+
+            <h2 class="text-xl mt-8 mb-1">
+                <span class="font-semibold">Use</span> the component
+            </h2>
+            <div class="grid grid-cols-1 w-fit bg-neutral-910 p-2 rounded-xl">
+                <pre
+                    class="bg-neutral-900 p-4 rounded-t text-[#808080] overflow-auto"><code set:html={formatXaml(namespaceDefintion)} /></pre>
+
+                <div
+                    class="bg-neutral-700 h-1 flex justify-center items-center"
+                >
+                </div>
+
+                <pre
+                    class="bg-neutral-900 p-4 rounded-b text-[#808080] overflow-auto"><code set:html={formatXaml(componentUsage)} /></pre>
+            </div>
+
+            <h2 class="text-xl mt-8 mb-1">
+                <span class="font-semibold">Read</span> further documentation
+            </h2>
+            <a class="px-button-soft block w-fit" href="/docs/colorpicker"
+                >Visit the docs <Lucide
+                    data="arrow-right"
+                    class="align-bottom"
+                /></a
+            >
+        </div>
+    </div>
+</Layout>
+
+<script>
+    const buttons = document.querySelectorAll<HTMLButtonElement>(
+        "button.reference-copy-button",
+    );
+
+    for (const button of buttons) {
+        button.addEventListener("click", () => {
+            const toCopy = button.querySelector(".copyable");
+
+            navigator.clipboard.writeText(toCopy!.textContent!.trim());
+        });
+    }
+</script>
+
+<style lang="scss">
+    $from: #e3002d;
+    $to: #ff3425;
+
+    .video-gradient {
+        background: linear-gradient(
+            135deg,
+            rgba(255, 0, 0, 1) 0%,
+            rgba(255, 154, 0, 1) 10%,
+            rgba(208, 222, 33, 1) 20%,
+            rgba(79, 220, 74, 1) 30%,
+            rgba(63, 218, 216, 1) 40%,
+            rgba(47, 201, 226, 1) 50%,
+            rgba(28, 127, 238, 1) 60%,
+            rgba(95, 21, 242, 1) 70%,
+            rgba(186, 12, 248, 1) 80%,
+            rgba(251, 7, 217, 1) 90%,
+            rgba(255, 0, 0, 1) 100%
+        );
+        background-size: 500% 500%;
+        animation: video-gradient 16s alternate linear infinite;
+    }
+
+    @keyframes video-gradient {
+        from {
+            background-position: 0 0;
+        }
+
+        to {
+            background-position: 100% 100%;
+        }
+    }
+
+    .wavy-bg {
+        background-cover: no-repeat;
+        background-repeat: no-repeat;
+        background-size: cover;
+    }
+
+    .wavy-bg-bottom {
+        background-cover: no-repeat;
+        background-repeat: no-repeat;
+        background-size: cover;
+    }
+</style>

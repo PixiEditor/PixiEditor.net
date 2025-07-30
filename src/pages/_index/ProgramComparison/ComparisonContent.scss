@@ -1,0 +1,7 @@
+.program-comparison-column:first-child .program-comparison-item {
+    @apply rounded-s;
+}
+
+.program-comparison-column:last-child .program-comparison-item {
+    @apply rounded-e;
+}

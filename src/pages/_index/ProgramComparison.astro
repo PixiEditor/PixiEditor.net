@@ -1,0 +1,66 @@
+﻿---
+import { data, Quality } from './ProgramComparison';
+import type { Editor, Criterion } from './ProgramComparison';
+import type { LucideIconName } from '@components/LucideMeta';
+import Lucide from "../../components/Lucide.astro";
+import { Image } from "astro:assets";
+
+const getQualityClass = (quality?: Quality): string => {
+    switch (quality) {
+        case Quality.Positive:
+            return 'text-green-500';
+        case Quality.Neutral:
+            return 'text-orange-500';
+        case Quality.Negative:
+            return 'text-red-500';
+        default:
+            return '';
+    }
+};
+
+const getQualityIcon = (quality?: Quality): LucideIconName => {
+    switch (quality) {
+        case Quality.Positive:
+            return 'thumbs-up';
+        case Quality.Neutral:
+            return 'triangle-alert';
+        case Quality.Negative:
+            return 'thumbs-down';
+        default:
+            throw Error("Invalid quality icon");
+    }
+};
+---
+
+<table class="mx-auto">
+    <thead>
+        <tr>
+            <th />
+            {data.Editors.map((editor: Editor) => (
+                    <th>
+                        <Image class="inline py-2" src={editor.icon} width="40" height="40" alt="" />
+                        <div class="inline font-bold">{editor.name}</div>
+                    </th>
+            ))}
+        </tr>
+    </thead>
+    <tbody>
+    {data.Criteria.map((criterion: Criterion) => (
+            <tr class="odd:bg-neutral-900">
+                <td class="px-3 font-bold">{criterion.name}</td>
+                {data.Editors.map((editor: Editor) => {
+                    const comparison = criterion.comparisons.find((c) => c.editorId === editor.id);
+                    return (
+                            <td class="p-3">
+                                {
+                                    (comparison?.quality !== Quality.NA) &&
+                                    (<Lucide data={getQualityIcon(comparison?.quality)} class:list={[getQualityClass(comparison?.quality), "align-bottom"]}/>)
+                                }
+                                {comparison?.label}
+                            </td>
+                    );
+                })}
+            </tr>
+    ))}
+    </tbody>
+</table>

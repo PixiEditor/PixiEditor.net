@@ -1,0 +1,19 @@
+﻿---
+import Lucide from "@components/Lucide.astro";
+
+export interface TabButtonProps {
+  name: string;
+  iconData: string;
+  title: string;
+  colorClass: string; // For text and decoration colors (e.g., "text-pc-pixel-blue")
+}
+
+const { name, iconData, title, colorClass } = Astro.props;
+---
+
+<button class="w-32 h-20 flex flex-col items-center tab-button" name={name}>
+  <Lucide data={iconData} class={`${colorClass} text-5xl`} />
+  <h2 class={`font-semibold decoration-4 data-open-parent:underline ${colorClass}`}>
+    {title}
+  </h2>
+</button>

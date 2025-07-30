@@ -1,0 +1,159 @@
+﻿---
+import { getCollection, getEntry, render } from 'astro:content';
+import Layout from "@layouts/Layout.astro";
+import Lucide from '@components/Lucide.astro';
+import { Image } from 'astro:assets';
+import "remark-github-blockquote-alert/alert.css";
+
+export async function getStaticPaths() {
+    const posts = await getCollection('blog');
+    return posts.map(post => ({
+        params: { id: post.id, year: post.data.date.getFullYear(), month: post.data.date.getMonth() + 1, day: post.data.date.getDate() },
+        props: { post },
+    }));
+}
+
+const formatter = new Intl.DateTimeFormat('en-US', { 
+    year: 'numeric', 
+    month: 'long', 
+    day: 'numeric' 
+});
+
+const { post } = Astro.props;
+const authorReference = post.data.authors?.[0]; // TODO: support multiple authors
+const author = !authorReference ? null : await getEntry(authorReference.collection, authorReference.id);
+
+const dateString = formatter.format(post.data.date);
+
+const { Content, headings } = await render(post);
+---
+
+<Layout fullTitle={`${post.data.title} | PixiEditor Blog`} description={post.data.description} cover={post.data.cover ?? "img/blog-cover.png"}>
+    <div class="mx-auto max-w-screen-xl pt-12 pb-12">
+        <a class="mb-2 block text-neutral-400" href="/blog"><Lucide data="chevron-left" class="align-bottom pe-3" /> All Articles</a>
+        <h1 class="text-5xl font-bold my-6">{post.data.title}</h1>
+        <div class="flex pb-12 lg:flex-row flex-col md:gap-6 lg:gap-12 items-center lg:items-start p-4 lg:p-0">
+            <div class="flex flex-col w-full lg:w-auto pb-4 lg:items-end w-48 lg:top-22">
+                <div class="flex lg:flex-col md:flex-row h-fit gap-4 lg:gap-0 items-center lg:items-stretch">
+                    {author ? <Image src={author.data.picture} class="object-contain w-12" alt=""/> : null}
+                    <a href={authorReference ? `/blog/authors/${authorReference.id}` : null}>{author?.data.name ?? "Anonymous"}</a>
+                    <p class="text-neutral-400 hidden lg:block">{dateString}</p>
+                    <hr class="my-6 border-0 bg-neutral-600 h-1 rounded">
+                    <div class="flex flex-col gap-1">
+                        {post.data.tags?.map((tag) => (
+                            // Add once tag page is implemented
+/*                             <a href={`/blog/tags/${tag.id}`} class="py-1 px-3 bg-neutral-900 w-fit rounded">{tag.id}</a> */
+                            <span class="py-1 px-3 bg-neutral-900 w-fit rounded">{tag.id}</span>
+                        ))}
+                    </div>
+                </div>
+                <p class="text-neutral-400 block lg:hidden">{dateString}</p>
+            </div>
+            <div class="prose prose-pixi">
+                <Content />
+            </div>
+            <div class="hidden lg:flex flex-col text-nowrap w-40 sticky top-25">
+              {headings.map(x => (
+    <a
+        href={`#${x.slug}`}
+        class:list={[
+            "relative",
+            "block",
+            "border-l-neutral-500",
+            "border-l-2",
+            "py-1",
+            "hover:border-l-pc-softpixired-400",
+            `depth-${x.depth - 1}`
+        ]}
+    >
+        {x.text}
+    </a>
+))}
+            </div>
+        </div>
+    </div>
+</Layout>
+
+<style>
+
+html { 
+    scroll-behavior: smooth;
+    scroll-padding-top: 10rem;
+ }
+
+[class*="depth-"] {
+    position: relative;
+}
+
+.depth-0{
+    padding-left: 0.5rem; 
+    font-size: 1rem; 
+    font-weight: bold;
+}
+.depth-1 { 
+    padding-left: 1rem; 
+    font-size: 1rem;
+}
+.depth-2 { padding-left: 3rem; font-size: 0.9rem; }
+.depth-3 { padding-left: 4rem; font-size: 0.8rem; }
+.depth-4 { padding-left: 5rem; font-size: 0.75rem; }
+.depth-5 { padding-left: 6rem; font-size: 0.7rem; }
+.depth-6 { padding-left: 7rem; font-size: 0.7rem; }
+
+.depth-2::before,
+.depth-3::before,
+.depth-4::before,
+.depth-5::before,
+.depth-6::before {
+    content: "";
+    position: absolute;
+    top: 0;
+    bottom: 0;
+    width: 1px;
+    background-color: #444;
+    opacity: 0.5;
+}
+
+/* Stack lines per depth using box-shadow trick */
+.depth-2::before {
+    left: 1rem;
+    box-shadow:
+        1rem 0 0 #444;
+}
+
+.depth-3::before {
+    left: 1rem;
+    box-shadow:
+        1rem 0 0 #444,
+        2rem 0 0 #444;
+}
+
+.depth-4::before {
+    left: 1rem;
+    box-shadow:
+        1rem 0 0 #444,
+        2rem 0 0 #444,
+        3rem 0 0 #444;
+}
+
+.depth-5::before {
+    left: 1rem;
+    box-shadow:
+        1rem 0 0 #444,
+        2rem 0 0 #444,
+        3rem 0 0 #444,
+        4rem 0 0 #444;
+}
+
+.depth-6::before {
+    left: 1rem;
+    box-shadow:
+        1rem 0 0 #444,
+        2rem 0 0 #444,
+        3rem 0 0 #444,
+        4rem 0 0 #444,
+        5rem 0 0 #444;
+}
+
+
+</style>

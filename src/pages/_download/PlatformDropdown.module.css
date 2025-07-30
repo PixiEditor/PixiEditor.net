@@ -1,0 +1,14 @@
+.dropdown-trigger {
+    color: red;
+
+}
+
+.dropdown-trigger + .dropdown-container {
+    display: none;
+    position: relative;
+    transform: translateX(-50%);
+}
+
+.dropdown-trigger:hover + .dropdown-container, .dropdown-trigger + .dropdown-container:hover  {
+    display: block;
+}

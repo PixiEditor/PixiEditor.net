@@ -1,0 +1,16 @@
+- [x] Docs starlight
+- [x] Improve texts above main videos
+- [x] success page
+- [x] update color picker page
+- [x] direct download link on success page?
+- [x] blog assets
+- [x] blog article responsive
+- [ ] Founder's Pack statute
+- [x] Color Picker webassembly demo
+- [x] Supporter Pack -> Founder's Pack
+- [x] Download buttons (download installer for macos for people who have bundle already)
+- [x] What can you do cards
+- [x] Improve videos
+- [x] Update privacy policy with analytics
+- [ ] Readme on GitHub for Drawie, PixiDocks
+- [x] OG for pages and blog posts

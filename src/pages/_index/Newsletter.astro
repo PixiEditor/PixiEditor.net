@@ -1,0 +1,120 @@
+---
+
+---
+
+<!-- <div class="container mx-auto py-12 text-center">
+    <h2 class="text-2xl font-bold mb-4">Subscribe to our Newsletter</h2>
+    <p class="mb-6">Don't worry, we don't have time to spam you. Only high quality content!</p>
+    <form action="https://pixieditor.us1.list-manage.com/subscribe/post?u=1234567890abcdef1234567890&amp;id=1234567890" method="post" class="flex flex-col items-center">
+        <div class="flex flex-row gap-3 h-12">
+        <input type="email" name="EMAIL" placeholder="Enter your email" required class="px-4 py-4 border rounded">
+        <button type="submit" class="px-button-soft px-6 py-3">Subscribe</button>
+        </div>
+        <div class="mt-4">
+            <label>
+                <input type="checkbox" name="gdpr" required>
+                I agree to PixiEditor's <a href="/docs/privacy-policy" class="text-gray-400 hover:underline">Privacy Policy</a>
+            </label>
+        </div>
+    </form>
+</div> -->
+<script is:inline src="https://unpkg.com/@rive-app/canvas-lite"></script>
+
+<div
+  class="text-white p-6 rounded shadow-lg mx-[55px] relative overflow-hidden bg-neutral-800"
+>
+  <h2 class="text-2xl font-bold mb-1">
+    Join our newsletter to stay up to date!
+  </h2>
+  <p class="mb-4 text-zinc-300">
+    Don’t worry, we don’t have time to spam you. Only high quality content!
+  </p>
+
+  <form id="newsletter-form">
+    <div class="flex flex-col sm:flex-row gap-2 max-w-2xl">
+      <input
+        type="email"
+        placeholder="Enter your email"
+        class="flex-1 px-4 py-2 rounded border border-zinc-700 bg-zinc-800 text-white placeholder-zinc-400 focus:outline-none focus:ring-2 focus:ring-indigo-500"
+        required
+      />
+      <button
+        id="submit-button"
+        type="submit"
+        class="px-button-soft py-2 rounded transition-colors duration-300"
+      >
+        Join newsletter
+      </button>
+    </div>
+    <label class="flex items-center mt-3 text-sm text-zinc-400">
+      <input type="checkbox" class="mr-2 accent-indigo-500" required />
+      I agree to PixiEditor’s
+      <a href="/docs/privacy-policy" class="ml-1 underline hover:text-white"
+        >privacy policy</a
+      >.
+    </label>
+  </form>
+
+  <canvas id="canvas" class="lg:absolute relative -mb-16 -mt-17 -ml-50 left-full lg:m-auto lg:left-auto lg:-bottom-10 lg:-right-5 w-[250px] h-[250px]" style={{pointerEvents: "none"}}
+  ></canvas>
+</div>
+
+<script>
+  const r = new rive.Rive({
+    src: "/mushy.riv",
+    canvas: document.getElementById("canvas"),
+    autoplay: true,
+    stateMachines: "State Machine 1",
+    onLoad: () => {
+      r.resizeDrawingSurfaceToCanvas();
+      const inputs = r.stateMachineInputs("State Machine 1");
+      var form = document.getElementById("newsletter-form");
+      form.addEventListener("submit", () => {
+        inputs[0].fire();
+      });
+
+      const submitButton = document.getElementById("submit-button");
+      submitButton.addEventListener("pointerenter", () => {
+        inputs[1].value = true;
+      });
+
+      submitButton.addEventListener("pointerleave", () => {
+        inputs[1].value = false;
+      });
+    },
+  });
+
+  const submitForm = (e) => {
+    e.preventDefault();
+    let endPoint = "https://newsletter.pixieditor.net/api/public/subscription";
+    let email = e.target[0].value;
+    let data = {
+      email: email,
+      list_uuids: ["f9f70b85-6695-40f5-8ac7-e28a4f8b95ae"],
+    };
+
+    fetch(endPoint, {
+      method: "POST",
+      body: JSON.stringify(data),
+      headers: {
+        "Content-Type": "application/json",
+      },
+    })
+      .then((response) => {
+        if (response.ok) {
+          e.target[0].value = "";
+          e.target[2].checked = false;
+          e.target[0].placeholder = "Success!";
+          setTimeout(() => {
+            e.target[0].placeholder = "Enter your email";
+          }, 2000);
+        }
+      })
+      .catch((error) => {
+        console.error(error);
+      });
+  };
+
+  const form = document.getElementById("newsletter-form");
+  form.addEventListener("submit", submitForm);
+</script>

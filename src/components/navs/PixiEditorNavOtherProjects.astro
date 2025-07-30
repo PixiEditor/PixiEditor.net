@@ -1,0 +1,43 @@
+---
+import Lucide from "@components/Lucide.astro";
+import { github, nuget } from "@assets/links";
+import OtherProjectCard from "./OtherProjectCard.astro";
+import PixiPerfectIcon from "@components/PixiPerfectIcon.astro";
+---
+
+<div class="dropdown">
+    <div class="dropdown-trigger">
+        <span slot="header">Other Projects <Lucide data="chevron-down" class="align-middle" /></span>
+    </div>
+    <div class="dropdown-container absolute right-0">
+        <div class="pt-5 px-2">
+            <div class="p-4 bg-neutral-transparent rounded">
+                <div class="bg-neutral-900 max-w-screen-xl px-4 pt-4">
+                    <div class="rounded ms-auto grid grid-cols-2 gap-4">
+                        <OtherProjectCard name="Color Picker" description="For Avalonia and WPF" icon="color-picker" iconPosition="right-[-2rem] bottom-[-1rem]" iconType={PixiPerfectIcon} links={{ globe: "/colorpicker", github: github.ColorPicker.index, package: nuget.ColorPicker }} />
+                        <OtherProjectCard name="Drawie" description="GPU-accelerated 2D toolkit" icon="pencil-ruler" iconPosition="right-[-2rem] bottom-[-2rem]" links={{ github: github.Drawie.index }} />
+                        <OtherProjectCard name="PixiDocks" description="A dockable window library for Avalonia" icon="app-window" iconPosition="right-[-2rem] bottom-[-4rem]" links={{ github: github.Docks.index }} />
+                        <OtherProjectCard name="Parser" description="A library for parsing .pixi files" icon="file-chart-pie" iconPosition="right-[-1.8rem] bottom-[-2rem]" links={{ github: github.Parser.index, package: nuget.Parser }} />
+                    </div>
+                    <p class="text-right py-2 text-neutral-500"><a href={github.PixiEditor.index}>View more on GitHub <Lucide data="move-right" class="align-middle" /></a></p>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<style lang="scss">
+    .dropdown-trigger {
+        + .dropdown-container {
+            visibility: hidden;
+            transition: visibility .1s, opacity .1s ease-in-out;
+            opacity: 0;
+        }
+
+        &:hover + .dropdown-container,
+        + .dropdown-container:hover {
+            visibility: visible;
+            opacity: 1;
+        }
+    }
+</style>

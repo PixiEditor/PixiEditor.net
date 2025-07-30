@@ -1,0 +1,23 @@
+﻿---
+import Lucide from "@components/Lucide.astro";
+import type { IndexTabData } from "./TabData";
+import HlsVideo from "@components/HlsVideo.astro";
+
+export const data: IndexTabData = {
+    order: 4,
+    id: "animations",
+    title: "Animations",
+    backgroundClass: "bg-pc-animation-pink",
+    textClass: "text-pc-animation-pink",
+    iconType: Lucide,
+    icon: "clapperboard",
+}
+---
+
+<h1 class="text-2xl font-bold text-center">Bring stories to life with frame-by-frame <span class="text-pc-animation-pink">Animations</span></h1>
+
+<HlsVideo class="w-full my-4 mx-auto rounded" width="682" height="384" loop srcPlaylist="/videos/Animation/Animation.m3u8" fallbackVideo="/videos/Animation.mp3" />
+
+<p class="text-center">
+    Turn your drawings into moving stories! Create smooth frame-by-frame animations with tools that make it fun and easy to bring your art to life.
+</p>

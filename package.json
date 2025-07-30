@@ -1,10 +1,28 @@
 {
-  "dependencies": {
-    "@docusaurus/core": "^3.5.2",
-    "@docusaurus/module-type-aliases": "^3.5.2",
-    "@docusaurus/plugin-google-analytics": "^3.5.2",
-    "@docusaurus/preset-classic": "^3.5.2",
-    "npm-check-updates": "^17.1.1"
+  "name": "pixieditor.net",
+  "type": "module",
+  "version": "0.0.1",
+  "scripts": {
+    "dev": "astro dev",
+    "build": "astro build",
+    "preview": "astro preview",
+    "astro": "astro"
   },
-  "packageManager": "yarn@1.22.22+sha512.a6b2f7906b721bba3d67d4aff083df04dad64c399707841b7acf00f6b133b7ac24255f2652fa22ae3534329dc6180534e98d17432037ff6fd140556e2bb3137e"
+  "dependencies": {
+    "@astrojs/mdx": "^4.2.6",
+    "@astrojs/sitemap": "^3.4.0",
+    "@astrojs/solid-js": "^5.0.10",
+    "@fontsource/montserrat": "^5.1.1",
+    "@tailwindcss/typography": "^0.5.16",
+    "@tailwindcss/vite": "^4.0.17",
+    "astro": "^5.7.13",
+    "hls.js": "^1.5.20",
+    "lucide-static": "^0.473.0",
+    "remark-github-blockquote-alert": "^1.3.1",
+    "sass": "^1.84.0",
+    "solid-js": "^1.9.5",
+    "tailwindcss": "^4.0.17",
+    "vanilla-infinite-marquee": "^1.0.13"
+  },
+  "packageManager": "yarn@4.7.0"
 }

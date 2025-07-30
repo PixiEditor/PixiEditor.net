@@ -1,0 +1,18 @@
+---
+import { getDownloadAssets } from "@assets/links";
+import PlatformSelection from "./PlatformSelection.jsx";
+import { getImage } from "astro:assets";
+
+import Microsoft from "@assets/logos/MicrosoftStoreLogoGrey.svg";
+import Apple from "@assets/logos/AppleLogo.svg";
+
+const microsoftLogo = await getImage({ src: Microsoft, width: 40, height: 40 });
+const appleLogo = await getImage({ src: Apple, width: 40, height: 40 });
+const { fullInfo } = Astro.props;
+---
+
+<PlatformSelection client:load data-links={await getDownloadAssets()}
+    fullInfo={fullInfo}
+    microsoftLogo={microsoftLogo}
+    appleLogo={appleLogo}
+    linuxLogo={null!} />

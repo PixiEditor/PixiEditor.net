@@ -1,0 +1,54 @@
+---
+import Lucide from "@components/Lucide.astro";
+import type { LucideIconName } from "../../components/LucideMeta.ts";
+import NoAi from "@assets/icons/no-ai.svg";
+import Europe from "@assets/icons/europe.svg";
+import { Image } from "astro:assets";
+
+type HighlightItem = {
+  title: string;
+  icon?: LucideIconName;
+  customIcon?: ImageMetadata;
+};
+
+
+const highlights : HighlightItem[] = [
+  {
+    title: "Free and Open Source",
+    icon: "heart-handshake"
+  },
+  {
+    title: "Desktop Native",
+    icon: "tv-minimal",
+  },
+  {
+    title: "Cross Platform",
+    icon: "blocks"
+  },
+  {
+    title: "Works Offline",
+    icon: "cloud-off",
+  },
+  {
+    title: "No AI",
+    customIcon: NoAi
+  },
+  {
+    title: "Based in Europe",
+    customIcon: Europe
+  }
+
+];
+
+---
+
+<div class="flex flex-col items-center justify-center gap-8">
+  <h1 class="text-center text-3xl">How are we putting <span class="font-bold">users</span> first?</h1>
+  <div class="grid grid-cols-1 md:grid-cols-6 gap-4">
+    {highlights.map((highlight) => (
+      <div class="flex flex-col items-center">
+        {highlight.icon != null ? <Lucide data={highlight.icon} class="text-[96px] text-neutral-400" /> : <Image src={highlight.customIcon} alt={highlight.title} class="w-[96px] h-[144px]" />}
+        <h2 class="text-xl font-semibold mt-2">{highlight.title}</h2>
+      </div>
+    ))}
+  </div>

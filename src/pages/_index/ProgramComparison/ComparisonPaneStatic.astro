@@ -1,0 +1,9 @@
+---
+import { getImage } from "astro:assets";
+import { data } from "../ProgramComparison";
+import { ComparisonPane } from "./ComparisonPane";
+
+const editorIcons = await Promise.all(data.Editors.map(async x => { return { id: x.id, image: await getImage({ src: x.icon, width: 40, height: 40 }) } }));
+---
+
+<ComparisonPane client:idle editorIcons={editorIcons} />

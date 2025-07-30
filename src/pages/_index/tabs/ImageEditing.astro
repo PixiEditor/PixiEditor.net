@@ -1,0 +1,24 @@
+﻿---
+import Lucide from "@components/Lucide.astro";
+import type { IndexTabData } from "./TabData";
+import HlsVideo from "@components/HlsVideo.astro";
+
+export const data: IndexTabData = {
+    order: 2,
+    id: "image-editing",
+    title: "Image Editing",
+    backgroundClass: "bg-pc-raster-green",
+    textClass: "text-pc-raster-green",
+    iconType: Lucide,
+    icon: "palette"
+}
+---
+
+<h1 class="text-2xl font-bold text-center">Select, delete, clip, resize - everything you need for <span class="text-pc-raster-green">Image Editing</span></h1>
+
+<HlsVideo class="w-full my-4 mx-auto rounded" width="682" height="384" loop srcPlaylist="/videos/Image Editing/Image Editing.m3u8" fallbackVideo="/videos/Image Editing.mp4" />
+
+<p class="text-center">
+    Use raster tools to edit images, sketch or paint. 
+Whether you're doodling or making a masterpiece, PixiEditor is there for you!
+</p>

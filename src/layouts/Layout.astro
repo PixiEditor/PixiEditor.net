@@ -1,0 +1,81 @@
+---
+import PixiEditorNav from "@components/navs/PixiEditorNav.astro";
+import PixiEditorFooter from "../components/navs/PixiEditorFooter.astro";
+import "@fontsource/montserrat";
+import "@fontsource/montserrat/700.css";
+
+interface BaseProps {
+	/**
+	 * If true the content will not be placed inside a <main> element
+	 */
+	notMain?: boolean;
+	class?: string;
+}
+
+// Either title or fullTitle must be set
+type Props =
+	| (BaseProps & {
+		/**
+		 * Specifies the Page title as `${title} | PixiEditor`. Use fullTitle if you do not want PixiEditor to be appended
+		 */
+		title: string;
+		fullTitle?: never;
+		/**
+		 * Specifies the OpenGraph image to be used. If not set, the default image will be used
+		 */
+		cover?: string;
+
+		description?: string;
+	})
+	| (BaseProps & {
+		title?: never;
+		/**
+		 * Specifies the full Page Title. Use title if you want PixiEditor appended like `${title} | PixiEditor`
+		 */
+		fullTitle: string;
+		/**
+		 * Specifies the OpenGraph image to be used. If not set, the default image will be used
+		 */
+		cover?: string;
+		description?: string;
+	});
+
+const { title, fullTitle, notMain, cover, description, class: className, ...rest } = Astro.props;
+
+const pageTitle = title
+	? `${title} | PixiEditor`
+	: fullTitle;
+
+import '../styles/global.css';
+---
+
+<!doctype html>
+<html lang="en">
+	<head>
+		<meta charset="UTF-8" />
+		<meta name="viewport" content="width=device-width" />
+		<link rel="icon" type="image/svg+xml" href="/favicon.svg" />
+		<link rel="sitemap" href="/sitemap-index.xml" />
+		<meta property="generator" content={Astro.generator} />
+		<meta property="og:title" content={pageTitle} />
+		<meta property="og:type" content="website" />
+		<meta property="og:url" content={Astro.site} />
+		<meta property="og:image" content={(import.meta.env.DEV ? Astro.url.origin + "/" : Astro.site) + (cover ?? "img/og.png")} />
+		<meta property="og:description" content={description ?? "PixiEditor is an open-source Universal 2D Graphics Editor."} />
+		<script defer src="https://cloud.umami.is/script.js" data-website-id="4bd73c8c-e42a-4c6a-8ac6-97ce418a3a93"></script>
+		<title>{pageTitle}</title>
+	</head>
+	<body class="m-0 w-full h-full bg-neutral-800 text-white font-montserrat">
+		<PixiEditorNav />
+
+		{notMain ? <slot /> : <main class={className} {...rest}><slot /></main>}
+
+		<PixiEditorFooter />
+	</body>
+</html>
+
+<style>
+	body {
+		color-scheme: dark;
+	}
+</style>

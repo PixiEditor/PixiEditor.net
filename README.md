@@ -1,5 +1,37 @@
-# Welcome to official [PixiEditor.net](https://pixieditor.net) website source
+# PixiEditor.net
 
-# Contributing
+Site is built using [Astro](https://docs.astro.build/en/getting-started/) and [Tailwind](https://tailwindcss.com/docs/)
 
-Check out [website folder](https://github.com/PixiEditor/PixiEditor.net/tree/master/website), readme inside contains info on how to start. Website was built using [Docusaurus](https://docusaurus.io)
+## File structure
+
+/src/pages - Pages (route definitions)
+
+/src/assets - Assets like images
+
+/src/components - Common Components
+
+/src/layouts - Page Layouts
+
+/src/content/blog - Blog Pages
+
+/src/content/docs - Documentation Pages
+
+/src/styles - Style Pages
+
+## Dev Server
+
+Dev Server should start at http://localhost:4321/
+
+### CLI
+
+```bash
+yarn dev
+```
+
+### VS Code
+
+Go to the Run tab and run the `Development Server`
+
+### Webstorm
+
+Run the `Dev Server` Configuration

@@ -1,0 +1,27 @@
+---
+import Layout from '@layouts/Layout.astro';
+import { Image } from 'astro:assets';
+import { getCollection } from 'astro:content';
+
+export async function getStaticPaths() {
+    const authors = await getCollection('authors');
+    return authors.map(author => ({
+        params: { id: author.id },
+        props: { author },
+    }));
+}
+
+const { author } = Astro.props;
+---
+
+<Layout fullTitle=`${author.data.name} | PixiEditor Blog`>
+    <section class="container mx-auto my-12">
+        <div class="flex items-center gap-3">
+            <Image src={author.data.picture} class="w-12" alt="" />
+            <div>
+                <h1 class="text-xl"><span class="font-bold">{author.data.name}</span> @{author.id}</h1>
+                <h2>{author.data.title}</h2>
+            </div>
+        </div>
+    </section>
+</Layout>

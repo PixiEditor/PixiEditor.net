@@ -1,0 +1,23 @@
+﻿---
+import PixiPerfectIcon from "@components/PixiPerfectIcon.astro";
+import type { IndexTabData } from "./TabData";
+import HlsVideo from "@components/HlsVideo.astro";
+
+export const data: IndexTabData = {
+    order: 1,
+    id: "pixel-art",
+    title: "Pixel Art",
+    backgroundClass: "bg-pc-pixel-blue",
+    textClass: "text-pc-pixel-blue",
+    iconType: PixiPerfectIcon,
+    icon: "lowres-circle"
+}
+---
+
+<h1 class="text-2xl font-bold text-center">Dedicated <span class="text-pc-pixel-blue">Pixel Art</span> toolset and advanced palette management</h1>
+
+<HlsVideo class="w-full my-4 mx-auto rounded" width="682" height="384" loop srcPlaylist="/videos/Pixel Art/Pixel Art.m3u8" fallbackVideo="/videos/Pixel Art.mp4" />
+
+<p class="text-center">
+    Create pixel art with a dedicated toolset. Perfect for game sprites, animations, or nostalgic artwork. Enjoy features like pixel-perfect pen mode for clean edges.
+</p>

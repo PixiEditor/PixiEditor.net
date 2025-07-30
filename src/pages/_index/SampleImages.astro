@@ -1,0 +1,30 @@
+---
+import Image from "astro/components/Image.astro";
+
+import GameSprites from "@assets/sampleImages/game_sprites.svg";
+import SpriteSheets from "@assets/sampleImages/sprite_sheets.svg";
+import VectorGraphics from "@assets/sampleImages/vector_graphics.png";
+import LogoDesign from "@assets/sampleImages/logo_design.svg";
+import ColorAdjustments from "@assets/sampleImages/color_adjustment.svg";
+import Parrot from "@assets/sampleImages/parrot.svg";
+import Textures from "@assets/sampleImages/textures.png";
+import HeightMap from "@assets/sampleImages/proceduralIslands.svg";
+import PhotoFilters from "@assets/sampleImages/photo_filters.png";
+import IconFonts from "@assets/sampleImages/icon_fonts.png";
+import CustomShaders from "@assets/sampleImages/custom_shaders.png";
+---
+
+<div class="py-8 flex gap-4 justify-center w-full overflow-x-auto">
+  <Image draggable="false" src={GameSprites} height="200" alt="" />
+  <Image draggable="false" src={Parrot} height="200" alt="" />
+  <img draggable="false" src="/images/slimy.svg" height="200" alt="" />
+  <Image draggable="false" src={HeightMap} height="200" alt="" />
+  <Image draggable="false" src={VectorGraphics} height="200" alt="" />
+  <Image draggable="false" src={SpriteSheets} height="200" alt="" />
+  <Image draggable="false" src={ColorAdjustments} height="200" alt="" />
+  <Image draggable="false" src={LogoDesign} height="200" alt="" />
+  <Image draggable="false" src={Textures} height="200" alt="" />
+  <Image draggable="false" src={PhotoFilters} height="200" alt="" />
+  <Image draggable="false" src={IconFonts} height="200" alt="" />
+  <Image draggable="false" src={CustomShaders} height="200" alt="" />
+</div>

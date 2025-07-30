@@ -1,0 +1,64 @@
+---
+import Image from "astro/components/Image.astro"
+import PixiPerfectIcon from "@components/PixiPerfectIcon.astro"
+import SteamLogo from '@assets/logos/SteamLogo.svg';
+import UserReview from "./UserReview.astro";
+import MicrosoftStoreLogo from '@assets/logos/MicrosoftStoreLogo.svg';
+
+import fetchPixiEditorReviewStats from "./SteamReviewExtractor";
+
+const steamReviewData = import.meta.env.DEV
+    ? { totalReviews: 121, positivePercentage: 91 }
+    : await fetchPixiEditorReviewStats();
+---
+
+<div class="grid md:grid-cols-2 gap-6 mt-12">
+    <div class="rounded text-center bg-neutral-700">
+        <div class="mx-auto bg-neutral-600 p-2 rounded-t flex justify-center gap-2">
+            <Image class="w-6 h-6" width="24" height="24" src={SteamLogo} alt="" />
+            Steam
+        </div>
+        <p class="text-7xl font-extrabold my-3">{steamReviewData.positivePercentage.toFixed(0)}%</p>
+        <p class="pb-3">positive reviews <span class="font-bold">out of {steamReviewData.totalReviews}</span></p>
+    </div>
+    <div class="max-md:hidden rounded text-center bg-neutral-700">
+        <div class="mx-auto bg-neutral-600 p-2 rounded-t flex justify-center gap-2">
+            <Image class="w-6 h-6" width="24" height="24" src={MicrosoftStoreLogo} alt="" />
+            Microsoft Store
+        </div>
+        <div class="flex justify-center items-center">
+            <span class="text-7xl font-extrabold my-3">4.4</span>
+            <span class="text-2xl ms-3 mt-3 text-pc-softpixired">
+                <PixiPerfectIcon data="star-filled" />
+                <PixiPerfectIcon data="star-filled" />
+                <PixiPerfectIcon data="star-filled" />
+                <PixiPerfectIcon data="star-filled" />
+                <PixiPerfectIcon data="star-half-filled" />
+            </span>
+        </div>
+        <p class="pb-3">based on <span class="font-bold">220 ratings</span></p>
+    </div>
+</div>
+
+
+<div class="flex gap-6 mt-6">
+    <div class="w-full md:w-1/2 flex flex-col gap-6">
+        <UserReview author="MilkShakeManiac" date="10.03.2024" platform={SteamLogo}>
+            My 9 Year old spends so much time in PixiEditor creating pixel art from all sorts of themes from Marvel to Jurassic World and MORE! It's easy to use with a lot of handy tools and features. If it's even easy to use for a 9 year old, who would not want to use PixiEditor... I'ts Great, Simply... Outstanding!!!
+        </UserReview>
+        <UserReview author="Logid" date="27.02.2023" platform={SteamLogo}>
+            Pixi is a feature rich pixel editor that coming from photoshop or similar software, you'll feel at home within seconds, and for the price of FREE, you'd be a fool to not download it and give it a try.
+        </UserReview>
+    </div>
+    <div class="w-1/2 max-md:hidden flex flex-col gap-6">
+        <UserReview author="Uriel" date="21.09.2024" platform={MicrosoftStoreLogo}>
+            The truth is that it is very good, it is one of the best applications to draw in pixel art :)
+        </UserReview>
+        <UserReview author="José Raphael" date="12.04.2024" platform={MicrosoftStoreLogo}>
+            I loved it, of all the pixel art programs I provide this one has the most professional interface, which helped me adapt and understand it quickly.
+        </UserReview>
+        <UserReview author="Dakota" date="28.03.2024" platform={MicrosoftStoreLogo}>
+            I have only used this for a few minutes and I already know how to do pretty much anything I want. I really liked using this and I would definitely recommend this to others.
+        </UserReview>
+    </div>
+</div>

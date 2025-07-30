@@ -1,0 +1,28 @@
+---
+import ChannelPill from "./ChannelPill.astro";
+import Lucide from "@components/Lucide.astro";
+import DiscordLogoFull from '@assets/logos/DiscordLogoFull.svg';
+import Image from "astro/components/Image.astro";
+import { forum, discordInvites } from '@assets/links';
+---
+
+<div class="overflow-hidden flex flex-col gap-8 mt-10 py-4 items-center text-xl">
+    <p class="whitespace-nowrap"><ChannelPill emoji="❓">help</ChannelPill><ChannelPill emoji="🤣">memes</ChannelPill><ChannelPill background={false} emoji="🔀" href={discordInvites.chatChannel}>chat</ChannelPill>with artists all over the world!<ChannelPill emoji="❓">help</ChannelPill><ChannelPill emoji="🤣">memes</ChannelPill></p>
+    <p class="whitespace-nowrap"><ChannelPill emoji="🔀">chat</ChannelPill><ChannelPill emoji="📢">announcements</ChannelPill>Take part in our <ChannelPill emoji="🎨📆" background={false} href={discordInvites.aotwChannel}>art-of-the-week</ChannelPill><ChannelPill emoji="🔀">chat</ChannelPill><ChannelPill emoji="📢">announcements</ChannelPill></p>
+    <p class="whitespace-nowrap"><ChannelPill emoji="💬">project</ChannelPill><ChannelPill emoji="🎨🧬">procedural-art</ChannelPill>Get <ChannelPill emoji="❓" background={false} href={discordInvites.helpChannel}>help</ChannelPill> from experts<ChannelPill emoji="💬">project</ChannelPill><ChannelPill emoji="🎨🧬">procedural-art</ChannelPill></p>
+    <p class="whitespace-nowrap"><ChannelPill emoji="🤣">memes</ChannelPill><ChannelPill emoji="🔀">chat</ChannelPill>Talk about the <ChannelPill background={false} emoji="💬" href={discordInvites.projectChannel}>project</ChannelPill><ChannelPill emoji="🤣">memes</ChannelPill><ChannelPill emoji="🔀">chat</ChannelPill>
+</div>
+
+<div class="flex max-sm:flex-col justify-center gap-6 mt-10 mx-4">
+    <div class="px-1 has-[:hover]:px-0 transition-all">
+        <a class="px-5 py-4 flex justify-center items-center bg-discord-blurple rounded hover:px-6 transition-all" href={discordInvites.projectChannel} target="_blank">
+            <Image src={DiscordLogoFull} width="152" height="43" alt="Discord" />
+        </a>
+    </div>
+    <div class="px-1 has-[:hover]:px-0 transition-all">
+        <a class="px-5 max-md:py-3 h-full flex justify-center items-center bg-pc-softpixired text-xl rounded hover:px-6 transition-all" href={forum.index} target="_blank">
+            <Lucide class="align-middle text-3xl me-3" data="messages-square" />
+            PixiEditor Forum
+        </a>
+    </div>
+</div>

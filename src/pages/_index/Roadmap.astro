@@ -1,0 +1,55 @@
+---
+import RoadmapItem from "./RoadmapItem.astro"
+---
+
+<div class="overflow-auto max-md:pb-3">
+    <div class="flex w-fit gap-6 mt-12 px-8 mx-auto">
+        <div class="card">
+            <h1>2025</h1>
+            <ul>
+                <RoadmapItem isDone>2.0 Release</li>
+                <RoadmapItem>Extensions</li>
+                <RoadmapItem>Extension Store</li>
+                <RoadmapItem>Tutorials</li>
+                <RoadmapItem>Documentation</li>
+            </ul>
+        </div>
+
+        <div class="card">
+            <h1>2026</h1>
+            <ul>
+                <RoadmapItem>Vector Animations</li>
+                <RoadmapItem>Lottie Support</li>
+                <RoadmapItem>Brush Engine</li>
+                <RoadmapItem>Tile Tools</li>
+            </ul>
+        </div>
+
+        <div class="card">
+            <h1>And beyond!</h1>
+            <ul>
+                <RoadmapItem>Web version</li>
+                <RoadmapItem>Asset Marketplace</li>
+                <RoadmapItem>CLI</li>
+                <RoadmapItem>Interactive Graphics Format</li>
+            </ul>
+        </div>
+    </div>
+</div>
+
+<style>
+@reference "tailwindcss";
+@tailwind utilities;
+
+.card {
+    @apply w-72 bg-neutral-800 p-8 rounded text-lg;
+}
+
+.card > h1 {
+    @apply text-3xl font-bold;
+}
+
+.card > ul {
+    @apply ps-8 mt-6 flex flex-col gap-y-3;
+}
+</style>

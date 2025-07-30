@@ -1,0 +1,26 @@
+﻿---
+import Lucide from "@components/Lucide.astro";
+import type { IndexTabData } from "./TabData";
+import { Image } from "astro:assets"
+
+import ProceduralArt1 from "@assets/index/procedural-art-1.png"
+import HlsVideo from "@components/HlsVideo.astro";
+
+export const data: IndexTabData = {
+    order: 0,
+    id: "procedural-art",
+    title: "Procedural Art",
+    backgroundClass: "bg-pc-procedural-orange",
+    textClass: "text-pc-procedural-orange",
+    iconType: Lucide,
+    icon: "workflow"
+}
+---
+
+<h1 class="text-2xl font-bold text-center">Create non-destructibe, procedural graphics with <span class="text-pc-procedural-orange">Node Graph</span></h1>
+
+<HlsVideo class="w-full my-4 mx-auto rounded" width="682" height="384" loop autoplay srcPlaylist="/videos/Procedural Art/Procedural Art.m3u8" fallbackVideo="/videos/Procedural Art.mp4" />
+
+<p class="text-center">
+    Node Graph allows for creating fully non-destructible graphics and animations. Connect nodes to easily compose complex visuals. From pre-built effects to custom shaders, the possibilities are endless!
+</p>

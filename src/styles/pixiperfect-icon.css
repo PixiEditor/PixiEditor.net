@@ -1,0 +1,8 @@
+﻿@font-face {
+    font-family: 'PixiPerfect';
+    src: url('/fonts/PixiPerfect.ttf') format('truetype');
+}
+
+.pixiperfect-icon {
+    font-family: 'PixiPerfect';
+}

@@ -1,0 +1,92 @@
+---
+title: PixiEditor Devlog 3
+authors: [ flabbet ]
+tags: [ devlog, pixieditor2.0 ]
+date: 2024-06-14
+description: "Devlog 3 for PixiEditor 2.0"
+---
+
+Long time no see! I've been working on PixiEditor 2.0 for a while now, and I have some updates to share with you.
+
+{/* truncate */}
+
+## State of the project
+
+I am happy to announce, that I'll be working on PixiEditor full-time from now on. I resigned from a juicy programmer salary, so I can work on PixiEditor every day and bring the greatest 2D app to life.
+If you'd like to support me, you can do so by [buying a supporter pack](/donate).
+
+As you may know, we announced PixiEditor 2.0 about 4 months ago and promised exciting features like animations, layer nodes, infinite canvas, and extensions.
+
+The sheer amount of work required to make all of these features is simply enormous, but fear not, we're up to the challenge.
+
+Almost a year ago, we started working on the huge task of changing the UI framework of the app. This means basically, that most of the app had to be rewritten from scratch.
+Up until now, PixiEditor was built in something called WPF, it is a framework for building Windows applications. It's great, but it's not cross-platform. We've decided to switch to AvaloniaUI which solves this problem.
+
+And oh boy, what a journey it was. I mean, it still is. Besides replicating all of the UI elements, behaviors, and features, I allowed myself to 
+sidetrack a little bit to improve various elements from the WPF version, fix old bugs, and prepare everything for new features, mostly extensions.
+
+## New look and feel
+
+The new UI is not only refreshed but also more consistent, prepared for creating custom themes, and more user-friendly. Here's a sneak peek:
+
+
+![PixiEditor 2.0 UI](/img/blog-posts/devlog3/newUI.png)
+
+
+### Icons 
+
+We've remade a lot of the icons of the app so they are more consistent and look better, we've also changed the way how they are stored and loaded, previously all of them were PNGs, so 
+scaling was visible on some of them. Now we use SVGs, which are vector graphics, so they look sharp at any size. Here's a comparison:
+
+Old:
+<img src="/img/blog-posts/devlog3/oldToolset.png" alt="Old icons" style={{width: 100}}/>
+
+
+New:
+<img src="/img/blog-posts/devlog3/newToolset.png" alt="New icons" style={{width: 100}}/>
+
+
+### New docking System
+
+In PixiEditor WPF's version, we used a ready-made solution called AvalonDock, which was nice but had some limitations. There is something similar to AvalonDock in AvaloniaUI available, but after playing with it for a while, I couldn't achieve the desired 
+effect. As a result, I've decided to write my own system, it works exactly the way I want it to, and it's much more flexible. Here's a demo:
+
+
+<video src="/videos/devlog3/docking.webm" style={{width: "100%"}} autoPlay muted/>
+
+## Animations
+
+Animations are one of the most anticipated features of PixiEditor 2.0. And we've begun working on them! We're fairly early in the development process, but we already have something to show.
+
+Here's a funky little animation I've made using PixiEditor 2.0:
+
+<video src="/videos/devlog3/anim.webm" style={{width: "100%"}} autoPlay muted loop/>
+
+So far we built basic support for frame-by-frame animations, however, we plan to add property keyframes, like opacity, position, rotation, etc.
+
+
+## Extensions
+
+This is so far the most challenging part of the project, it influences almost every other aspect of the app. We want to make PixiEditor as extensible as possible, but also keep it simple, easy to use, and secure.
+
+There are a few key elements that describe my philosophy of extensions:
+
+- Write once, run everywhere - extensions should be cross-platform and work everywhere PixiEditor works, developers should not worry about compatibility.
+- Secure - extensions should not be able to access any sensitive data, connect to the internet, or access connected devices unless explicitly allowed by the user.
+- Easy to use - developers should be able to create extensions with minimal effort, and users should be able to install them with a single click.
+- Language-agnostic API - We don't want to limit developers in terms of programming language, originally PixiEditor was written in C#, but we want to allow developers to write extensions in any language they want.
+
+Yeah, I know this sounds like a list written by someone who doesn't even know how to connect a printer and just writes down what sounds good, but surprise surprise, most of these goals are already achieved.
+
+All thanks to the amazing piece of technology called WASI. It stands for "WebAssembly System Interface", and don't get fooled by the name, it's not just for the web. 
+I'll not go into technical details here, but in short, it allows running pieces of code in a secure, isolated environment, and it doesn't care about the language it's originally written in. 
+
+The blog post about it soon! A little more technical one, so if you're interested in this topic, stay tuned.
+
+
+## What's next?
+
+We plan to share devlogs roughly every 2 weeks, so you can stay up to date with the project. 
+We're almost fully focusing on animations right now, closed alpha will be available in the following months, so stay tuned and make sure to [sign up for the newsletter](/v2) to get early access to PixiEditor 2.0.
+
+Have a great day and see you in two weeks!

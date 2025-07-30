@@ -1,0 +1,38 @@
+---
+interface Props {
+    class?: string;
+}
+
+const requiresContainer = !Astro.slots.has("container");
+
+const { class: className, ...rest } = Astro.props;
+---
+
+<div class="dropdown" {...rest}>
+    <div class="dropdown-trigger">
+        <slot name="header" />
+    </div>
+    {
+        requiresContainer &&
+        <div class="dropdown-container">
+            <div class="absolute w-fit">
+                <slot />
+            </div>
+        </div>
+    }
+    <slot name="container" />
+</div>
+
+<style lang="scss">
+    .dropdown-trigger {
+        + .dropdown-container {
+            display: none;
+            position: relative;
+            transform: translateX(-50%);
+        }
+
+        &:hover + .dropdown-container, + .dropdown-container:hover  {
+            display: block;
+        }
+    }
+</style>

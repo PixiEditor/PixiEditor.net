@@ -1,0 +1,18 @@
+﻿---
+import { Image } from "astro:assets";
+import { steam } from "@assets/links";
+import Lucide from "../Lucide.astro";
+import FoundersPack from "@assets/founders-pack.svg";
+
+const { class: className } = Astro.props;
+---
+
+<div class=`bg-neutral-900 p-6 rounded max-w-screen-md mx-auto ${className}`>
+    <h1 class="text-2xl text-center">Check out our <span class="font-bold">Founder's Pack</span></h1>
+
+    <div class="m-8">
+        <Image src={FoundersPack} alt="Founder's Pack" class="w-full" />
+    </div>
+
+    <a class="flex py-1 gap-2 justify-center rounded bg-pc-softpixired hover:bg-pc-softpixired-400 transition-colors" href="/download" target="_blank">Buy Now</a>
+</div>

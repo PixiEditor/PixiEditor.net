@@ -1,0 +1,23 @@
+﻿---
+import Lucide from "@components/Lucide.astro";
+import type { IndexTabData } from "./TabData";
+import HlsVideo from "@components/HlsVideo.astro";
+
+export const data: IndexTabData = {
+    order: 3,
+    id: "vector-art",
+    title: "Vector Art",
+    backgroundClass: "bg-pc-vector-purple",
+    textClass: "text-pc-vector-purple",
+    iconType: Lucide,
+    icon: "pen-tool",
+}
+---
+
+<h1 class="text-2xl font-bold text-center">Create and edit <span class="text-pc-vector-purple">Vectors</span>. Snapping included</h1>
+
+<HlsVideo class="w-full my-4 mx-auto rounded" width="682" height="384" loop srcPlaylist="/videos/Vectors/Vectors.m3u8" fallbackVideo="/videos/Vectors.mp4" />
+
+<p class="text-center">
+    Craft logos, icons, and illustrations with our flexible curve tool and vector shapes. Your designs stay sharp at any size, making it easy to create and edit. Mix freely with raster images.
+</p>

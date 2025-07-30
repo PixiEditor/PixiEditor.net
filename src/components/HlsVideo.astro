@@ -1,0 +1,56 @@
+---
+import type { HTMLAttributes } from 'astro/types';
+
+interface Props extends HTMLAttributes<"video"> {
+    srcPlaylist: string,
+    fallbackVideo: string,
+    class?: string
+}
+
+const { srcPlaylist, fallbackVideo, class: className, ...attrs } = Astro.props;
+---
+
+<video data-src={srcPlaylist} data-fallback={fallbackVideo} class=`hls-video ${className}` controls {...attrs}></video>
+
+<script>
+    import Hls from 'hls.js';
+   
+    const videos = document.querySelectorAll<HTMLVideoElement>("video.hls-video");
+
+    if (Hls.isSupported()) {
+        videos.forEach(prepareVideoElementHls);
+    }
+    else {
+        videos.forEach(prepareVideoFallback);
+    }
+
+    function prepareVideoFallback(element: HTMLVideoElement) {
+        if (element.canPlayType('application/vnd.apple.mpegurl')) {
+            element.src = element.getAttribute("data-src")!;
+        }
+        else {
+            element.src = element.getAttribute("data-fallback")!;
+        }
+        
+        if (element.autoplay) {
+            element.addEventListener('canplay', function ()
+            {
+                element.play();
+            });
+        }
+    }
+
+    function prepareVideoElementHls(element: HTMLVideoElement) {
+        var hls = new Hls();
+
+        hls.loadSource(element.getAttribute("data-src")!);
+        hls.attachMedia(element);
+
+        if (element.autoplay) {
+            hls.on(Hls.Events.MEDIA_ATTACHED, function () {
+                element.muted = true;
+                element.play();
+            });
+        }
+    }
+</script>

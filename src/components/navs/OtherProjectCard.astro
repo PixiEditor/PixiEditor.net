@@ -1,0 +1,35 @@
+---
+import Lucide from "@components/Lucide.astro"
+import type { LucideIconName } from "@components/LucideMeta";
+import type { PixiPerfectIconName } from "@components/PixiPerfecticonMeta";
+
+interface Props {
+    name: string;
+    description: string;
+    icon: LucideIconName | PixiPerfectIconName;
+    iconType?(_props: any): any;
+    iconPosition: string,
+    links: {
+        [icon: string]: string
+    }
+}
+
+const { name, description, icon, iconType = Lucide, iconPosition, links } = Astro.props;
+const customElement = { iconType };
+---
+
+<div class="bg-neutral-800 p-4 rounded relative overflow-hidden z-10">
+    <customElement.iconType class=`absolute ${iconPosition} text-neutral-700 text-9xl -z-10` data={icon as LucideIconName} />
+
+    <h1 class="text-xl font-semibold flex justify-between">{name}</h1>
+    <span>{description}</span>
+    <div class="text-2xl mt-2 flex gap-1">
+        {
+            Object.entries(links).map(([icon, url]) => (<a
+                    href={url}
+                    target={url.startsWith("/") ? "" : "_blank"}
+                    class="px-1"
+                    ><Lucide data={icon as LucideIconName} ariaRelevant /></a>))
+        }
+    </div>
+</div>
