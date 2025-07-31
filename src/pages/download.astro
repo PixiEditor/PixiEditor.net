@@ -12,10 +12,12 @@ import FoundersPackLogoMobile from "@assets/founders-pack-mobile.svg";
 
 import { steam, microsoft } from "@assets/links";
 import PlatformSelectionCardContent from "./_download/PlatformSelectionCardContent.astro";
+
+const basePricePLN = 100;
 ---
 
 <Layout title="Download">
-    <div class="bg-neutral-900 ">
+    <div class="bg-neutral-900">
         <section class="container max-w-[1218px] py-12 mx-auto text-center">
             <div>
                 <h1 class="text-4xl pb-4">
@@ -125,18 +127,19 @@ import PlatformSelectionCardContent from "./_download/PlatformSelectionCardConte
                             type="submit"
                             class="flex-[1_1_30%] min-w-[120px] px-button-base bg-[#731BCA] hover:bg-[#801CDA] transition-colors flex items-center justify-center text-center rounded"
                         >
-                            <Lucide
-                                data="circle-dollar-sign"
-                                class="align-middle mr-1"
-                            />
-                            Buy Now
+                            <div id="price" data-pln-price={basePricePLN}>
+                                Loading price...
+                            </div>
                         </button>
                     </form>
-                            <span class="text-sm w-[150px] hidden absolute md:absolute md:block bg-neutral-900 -right-[40px] top-[5px] rounded-lg px-2 py-1 rotate-14 border-solid border-2 border-rose-400 text-rose-400"
-                                >Limited time offer</span
-                            >
+                    <span
+                        class="text-sm w-[150px] hidden absolute md:absolute md:block bg-neutral-900 -right-[40px] top-[5px] rounded-lg px-2 py-1 rotate-14 border-solid border-2 border-rose-400 text-rose-400"
+                        >Limited time offer</span
+                    >
+                <span class="text-neutral-500 text-sm text-left mt-4"
+                    >Lowest price in the past 30 days: 100 PLN. Prices shown in other currency than PLN are estimaed, final price in checkout may vary.</span
+                >
                 </div>
-                            <span class="text-neutral-600 text-sm text-left mt-4">Lowest price in the past 30 days: 100 PLN</span>
             </div>
         </section>
     </div>
@@ -175,3 +178,58 @@ import PlatformSelectionCardContent from "./_download/PlatformSelectionCardConte
         z-index: -1;
     }
 </style>
+
+<script is:inline>
+  const SUPPORTED_CURRENCIES = ['USD', 'EUR', 'CHF', 'GBP', 'JPY', 'NOK', 'SEK', 'CZK', 'DKK', 'CAD', 'AUD'];
+
+  async function getUserCurrency() {
+    try {
+      const res = await fetch("https://ipapi.co/json/");
+      const data = await res.json();
+      return data.currency || 'PLN';
+    } catch {
+      return 'PLN'; // fallback
+    }
+  }
+
+  async function getNBPRate(toCurrency) {
+    if (toCurrency === 'PLN') return 1;
+    try {
+      const res = await fetch(`https://api.nbp.pl/api/exchangerates/rates/A/${toCurrency}?format=json`);
+      if (!res.ok) throw new Error("Unsupported currency");
+      const data = await res.json();
+      return data.rates[0].mid;
+    } catch {
+      return null;
+    }
+  }
+
+  async function convertPrice() {
+    const priceEl = document.getElementById('price');
+    const plnPrice = parseFloat(priceEl.dataset.plnPrice);
+
+    const userCurrency = await getUserCurrency();
+    const upperCurrency = userCurrency.toUpperCase();
+
+    if (!SUPPORTED_CURRENCIES.includes(upperCurrency)) {
+      priceEl.textContent = `${plnPrice.toFixed(2)} PLN`;
+      return;
+    }
+
+    const rate = await getNBPRate(upperCurrency);
+    if (!rate) {
+      priceEl.textContent = `${plnPrice.toFixed(2)} PLN`;
+      return;
+    }
+
+    const converted = plnPrice / rate;
+    const formatter = new Intl.NumberFormat(navigator.language, {
+      style: 'currency',
+      currency: upperCurrency
+    });
+
+    priceEl.textContent = formatter.format(converted);
+  }
+
+  convertPrice();
+</script>
