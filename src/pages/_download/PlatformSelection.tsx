@@ -80,8 +80,7 @@ export default function PlatformSelection(props: { "data-links": any, microsoftL
         {selectedOption().startsWith("macOS") && props.fullInfo &&
         (
             <div class="w-full max-w-d text-center flex flex-col min-h-[150px] gap-4">
-              <p>We will share binaries without Founder's Pack for macOS once we gather enough funds from Founder's Bundle to continue the development.</p>
-              <p>Use the Founder's Bundle form on the right, to get macOS Founder's Edition.</p>
+              <p>Building for MacOS is expensive for us, so for now the MacOS version is only available if you purchase Founder's Bundle. This might change in the future.</p>
               <p class="mt-auto">Already own Founder's Bundle? <a href={getDownloadUrlForOption(selectedOption())} class="underline">Download</a></p>
               <p class="text-sm text-neutral-400 mt-auto">You can still <a href="/docs/contribution/compileguide" class="underline">build from source</a></p>
             </div>
