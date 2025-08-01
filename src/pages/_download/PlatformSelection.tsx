@@ -79,8 +79,9 @@ export default function PlatformSelection(props: { "data-links": any, microsoftL
         )}
         {selectedOption().startsWith("macOS") && props.fullInfo &&
         (
-            <div class="w-full max-w-d text-center flex flex-col min-h-[150px]">
+            <div class="w-full max-w-d text-center flex flex-col min-h-[150px] gap-4">
               <p>We will share binaries without Founder's Pack for macOS once we gather enough funds from Founder's Bundle to continue the development.</p>
+              <p>Use the Founder's Bundle form on the right, to get macOS Founder's Edition.</p>
               <p class="mt-auto">Already own Founder's Bundle? <a href={getDownloadUrlForOption(selectedOption())} class="underline">Download</a></p>
               <p class="text-sm text-neutral-400 mt-auto">You can still <a href="/docs/contribution/compileguide" class="underline">build from source</a></p>
             </div>
