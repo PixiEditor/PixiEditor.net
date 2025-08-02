@@ -39,6 +39,9 @@ export default function PlatformSelection(props: { "data-links": any, microsoftL
 
   function getDownloadUrlForOption(option: string): string {
     const mappedOption = optionsMap[option as keyof typeof optionsMap];
+    if(versionInfo === undefined || versionInfo.assets === undefined || mappedOption === undefined) {
+      return "https://github.com/PixiEditor/PixiEditor/releases/latest";
+    }
     const asset = versionInfo.assets.find(x => x.platform.toLowerCase() === mappedOption.platform && x.architecture.toLowerCase() === mappedOption.architecture && x.option === mappedOption.option);
     if (!asset) {
       return "https://github.com/PixiEditor/PixiEditor/releases/latest";
@@ -71,7 +74,7 @@ export default function PlatformSelection(props: { "data-links": any, microsoftL
               <span class="align-middle">Download</span>
             </a>
             <div class={props.fullInfo ? "flex justify-around mt-5 max-w-72 mx-auto" : "flex justify-around mt-2 max-w-72 mx-auto"}>
-              <span class="mr-4">Version {versionInfo.version}</span>
+              <span class="mr-4">Version {versionInfo.version ?? "check failed"}</span>
               <a class="underline" href="https://forum.pixieditor.net/c/changelogs" target="_blank">Release Notes <SolidLucide data="external-link" class="align-sub" /> </a>
             </div>
             {props.fullInfo ? <a class="text-sm text-neutral-400 underline" href="https://github.com/PixiEditor/PixiEditor/releases" target="_blank">Download archive versions from GitHub <SolidLucide data="external-link" /> </a> : null}

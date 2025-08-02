@@ -1,0 +1,14 @@
+---
+import Layout from "@layouts/Layout.astro";
+import Instruction from "@assets/instruction.png";
+import { Image } from "astro:assets";
+---
+
+<Layout fullTitle="Download PixiEditor" class="bg-neutral-900">
+                <Image
+                    src={Instruction}
+                    alt="Instruction"
+                    class="w-[600px]"
+                    loading="eager"
+                />
+    </Layout>
