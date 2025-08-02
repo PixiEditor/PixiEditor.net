@@ -11,7 +11,7 @@ const appleLogo = await getImage({ src: Apple, width: 40, height: 40 });
 const { fullInfo } = Astro.props;
 ---
 
-<PlatformSelection client:load data-links={await fetch("https://pixieditor.net/releases").then(res => res.json()).catch(res => JSON.stringify({ version: "check failed", assets: [] }))}
+<PlatformSelection client:load data-links={await getDownloadAssets()}
     fullInfo={fullInfo}
     microsoftLogo={microsoftLogo}
     appleLogo={appleLogo}
