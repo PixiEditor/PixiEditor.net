@@ -181,12 +181,45 @@ const basePricePLN = 100;
 
 <script is:inline>
   const SUPPORTED_CURRENCIES = ['USD', 'EUR', 'CHF', 'GBP', 'JPY', 'NOK', 'SEK', 'CZK', 'DKK', 'CAD', 'AUD'];
+ const CountryToCurrency = {
+  'PL': 'PLN',
+  'US': 'USD',
+  'DE': 'EUR',
+  'FR': 'EUR',
+  'IT': 'EUR',
+  'ES': 'EUR',
+  'AT': 'EUR',
+  'NL': 'EUR',
+  'BE': 'EUR',
+  'FI': 'EUR',
+  'PT': 'EUR',
+  'IE': 'EUR',
+  'LU': 'EUR',
+  'MT': 'EUR',
+  'GR': 'EUR',
+  'SI': 'EUR',
+  'CY': 'EUR',
+  'SK': 'EUR',
+  'EE': 'EUR',
+  'LV': 'EUR',
+  'LT': 'EUR',
+  'CH': 'CHF',
+  'GB': 'GBP',
+  'JP': 'JPY',
+  'NO': 'NOK',
+  'SE': 'SEK',
+  'CZ': 'CZK',
+  'DK': 'DKK',
+  'CA': 'CAD',
+  'AU': 'AUD'
+};
 
   async function getUserCurrency() {
     try {
-      const res = await fetch("https://ipapi.co/json/");
-      const data = await res.json();
-      return data.currency || 'PLN';
+      const res = await fetch("https://ip2c.org/s");
+      // Example response: "1;PL;POL;Poland"
+      const data = await res.text();
+      return CountryToCurrency[data.split(';')[1]] || 'PLN';
     } catch {
       return 'PLN'; // fallback
     }
