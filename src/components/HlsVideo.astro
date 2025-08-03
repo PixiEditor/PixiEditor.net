@@ -10,7 +10,7 @@ interface Props extends HTMLAttributes<"video"> {
 const { srcPlaylist, fallbackVideo, class: className, ...attrs } = Astro.props;
 ---
 
-<video data-src={srcPlaylist} data-fallback={fallbackVideo} class=`hls-video ${className}` controls {...attrs}></video>
+<video data-src={srcPlaylist} playsinline data-fallback={fallbackVideo} class=`hls-video ${className}` controls {...attrs}></video>
 
 <script>
     import Hls from 'hls.js';
