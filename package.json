@@ -2,6 +2,10 @@
   "name": "pixieditor.net",
   "type": "module",
   "version": "0.0.1",
+  "engines": {
+    "npm": "please-use-yarn",
+    "yarn": ">= 4.0.0"
+  },
   "scripts": {
     "dev": "astro dev",
     "build": "astro build",
