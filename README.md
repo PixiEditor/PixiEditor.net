@@ -31,7 +31,3 @@ yarn dev
 ### VS Code
 
 Go to the Run tab and run the `Development Server`
-
-### Webstorm
-
-Run the `Dev Server` Configuration
