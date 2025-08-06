@@ -6,6 +6,10 @@ date: 2024-06-14
 description: "Devlog 3 for PixiEditor 2.0"
 ---
 
+import OldToolset from "./assets/devlog3/oldToolset.png"
+import NewToolset from "./assets/devlog3/newToolset.png"
+import { Image } from "astro:assets";
+
 Long time no see! I've been working on PixiEditor 2.0 for a while now, and I have some updates to share with you.
 
 {/* truncate */}
@@ -30,7 +34,7 @@ sidetrack a little bit to improve various elements from the WPF version, fix old
 The new UI is not only refreshed but also more consistent, prepared for creating custom themes, and more user-friendly. Here's a sneak peek:
 
 
-![PixiEditor 2.0 UI](/img/blog-posts/devlog3/newUI.png)
+![PixiEditor 2.0 UI](./assets/devlog3/newUI.png)
 
 
 ### Icons 
@@ -39,11 +43,11 @@ We've remade a lot of the icons of the app so they are more consistent and look 
 scaling was visible on some of them. Now we use SVGs, which are vector graphics, so they look sharp at any size. Here's a comparison:
 
 Old:
-<img src="/img/blog-posts/devlog3/oldToolset.png" alt="Old icons" style={{width: 100}}/>
+<Image src={OldToolset} alt="Old icons" class="w-[100px]" />
 
 
 New:
-<img src="/img/blog-posts/devlog3/newToolset.png" alt="New icons" style={{width: 100}}/>
+<Image src={NewToolset} alt="New icons" class="w-[100px]" />
 
 
 ### New docking System

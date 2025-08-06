@@ -30,27 +30,27 @@ I noticed that a lot of open-source programs, even powerful ones, tend to expose
 
 The extremely powerful and popular 3D app, before version 2.8, using it was a pain. Thankfully v2.8 solved that issue, but it's still a good example since open-source blender was released in 2002 and version 2.8 in 2019, so whooping 17 years of pretty bad UI and UX, confusing shortcuts, and navigation.
 
-![Blender 2.79](/img/blog-posts/1.0/blender-2.79.png)
+![Blender 2.79](./assets/1.0/blender-2.79.png)
 
 ### Inkscape
 
 Now let's check out the most popular free and open-source vector graphics editor.
 
-![Inkscape](/img/blog-posts/1.0/inkscape.png)
+![Inkscape](./assets/1.0/inkscape.png)
 
 WHOAH, that's a lot of buttons, what do they do? I don't know, I just want to draw a simple line.
 
-![Straight Line Button](/img/blog-posts/1.0/StraightLine.png)
+![Straight Line Button](./assets/1.0/StraightLine.png)
 
 Ok, it is written here that this tool can create a straight line. Let's draw one then.
 
-<video src="/img/blog-posts/1.0/where-is-my-line.webm" controls width="600"/>
+<video src="/videos/1.0/where-is-my-line.webm" controls width="600"/>
 
 Uh oh, where is my line? Even dragging the box around requires surgical precision. 
 
 After 10 minutes of trying to find the answer in the official manual, online forums, and by clicking things in the app I finally found that you have to hold Shift and click on color to set stroke color.
 
-![stroke-color](/img/blog-posts/1.0/stroke-color.png)
+![stroke-color](./assets/1.0/stroke-color.png)
 
 Not very intuitive for a beginner, right? After even more time, I found the fill and stroke menu, which exposes all the options the way it should've in the first place. Why it doesn't show automatically?
 Why top bar doesn't have a button to toggle it? 
@@ -81,13 +81,13 @@ Dedicated system for managing color palettes, which allows to easily access to c
 1,2,3 etc. The system consists of a palette browser which is like a database for your palettes, you can quickly
 access them, mark them as favorites, delete, rename them, etc. 
 
-![Browser-screenshot](/img/blog-posts/devlog2/Palette-Browser.png)
+![Browser-screenshot](./assets/devlog2/Palette-Browser.png)
 
 One of the most interesting things it has is the [Lospec Palette List](https://lospec.com/palette-list) integration. What does it mean?
 
 Lospec is the most popular pixel-art site with a great palette database, PixiEditor 1.0 supports their palette protocol, which allows importing palettes from their website with just one click.
 
-<video src="/img/blog-posts/1.0/Palette browser.webm" controls width="700"/>
+<video src="/videos/1.0/Palette browser.webm" controls width="700"/>
 
 ## Symmetry
 
@@ -95,13 +95,13 @@ Achieving geometrical perfection takes time. But those 2 funky lines can help yo
 
 It's like having 4 hands drawing simultaneously.
 
-<video src="/img/blog-posts/1.0/Symmetry.webm" controls width="700"/>
+<video src="/videos/1.0/Symmetry.webm" controls width="700"/>
 
 ## New selection transformation
 
 Selection now allows scaling, rotating, skewing and transforming perspective (with pivot!).
 
-<video src="/img/blog-posts/1.0/Selection.webm" controls width="700"/>
+<video src="/videos/1.0/Selection.webm" controls width="700"/>
 
 ## Lasso tool
 
@@ -112,7 +112,7 @@ Selection now allows scaling, rotating, skewing and transforming perspective (wi
 The whole codebase in PixiEditor 1.0 was rewritten from the ground up. And thanks to that, we've built
 quite a robust command system, which allows you to easily search for stuff and rebind shortcuts.
 
-<video src="/img/blog-posts/1.0/CommandManager.webm" controls width="700"/>
+<video src="/videos/1.0/CommandManager.webm" controls width="700"/>
 
 Not only you can use it to find actions, but also to parse colors!
 
@@ -121,7 +121,7 @@ Not only you can use it to find actions, but also to parse colors!
 Layer masks are a great way to hide parts of a layer. And we have them now!
 Below is a video example of how it works.
 
-<video src="/img/blog-posts/1.0/Masks.webm" controls width="700"/>
+<video src="/videos/1.0/Masks.webm" controls width="700"/>
 
 ## Clip layers
 
@@ -130,21 +130,21 @@ Let's say you have a layer with a weapon, and you want to draw on top of it some
 of drawing on the same layer, you can now create a new layer, clip it to the weapon layer, and without a lot
 of precision, draw on top of it.
 
-<video src="/img/blog-posts/1.0/ClipToBelow.webm" controls width="700"/>
+<video src="/videos/1.0/ClipToBelow.webm" controls width="700"/>
 
 ## Lock layer alpha
 
 It's like a clip to other layers, but it allows clipping to itself. In other words,
 if you toggle lock alpha, you won't be able to draw on transparent pixels on this layer.
 
-<video src="/img/blog-posts/1.0/LockAlpha.webm" controls width="700"/>
+<video src="/videos/1.0/LockAlpha.webm" controls width="700"/>
 
 ## Blend modes
 
 Blend modes define how colors from different layers mix together. PixiEditor 1.0 allows you to
 change the blend mode of each layer. Simple as that.
 
-<video src="/img/blog-posts/1.0/BlendModes.webm" controls width="700"/>
+<video src="/videos/1.0/BlendModes.webm" controls width="700"/>
 
 ## Other stuff
 
