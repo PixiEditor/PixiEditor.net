@@ -10,7 +10,7 @@ export default {
 	],
 	theme: {
 		extend: {
-			fontFamily: { montserrat: 'Montserrat' },
+			fontFamily: { montserrat: "'Montserrat', 'Segoe UI', 'Helvetica Neue', 'Helvetica', 'Arial', sans-serif" },
 			colors: {
 				'pc-pixired': '#e3002d',
 				'pc-softpixired': '#CA1B3D',
