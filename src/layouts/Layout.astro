@@ -62,6 +62,7 @@ import '../styles/global.css';
 		<meta property="og:url" content={Astro.site} />
 		<meta property="og:image" content={(import.meta.env.DEV ? Astro.url.origin + "/" : Astro.site) + (cover ?? "img/og.png")} />
 		<meta property="og:description" content={description ?? "PixiEditor is an open-source Universal 2D Graphics Editor."} />
+		<meta name="description" content={description ?? "PixiEditor is an open-source Universal 2D Graphics Editor."} />
 		<script defer src="https://cloud.umami.is/script.js" data-website-id="4bd73c8c-e42a-4c6a-8ac6-97ce418a3a93"></script>
 		<title>{pageTitle}</title>
 	</head>
