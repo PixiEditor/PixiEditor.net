@@ -3,12 +3,12 @@ import { getAuthors, getBlogPath } from "@content/contentHelper";
 import { getCollection } from "astro:content";
 import Layout from "@layouts/Layout.astro";
 import { Image } from "astro:assets";
+import { Picture } from "astro:assets";
 import Lucide from "@components/Lucide.astro";
 
-import BlogCover from "@assets/blog-posts/defaultBlogCover.png";
+import BlogCover from "../content/blog/assets/defaultBlogCover.png";
 
 const posts = await getCollection("blog");
-const authors = await getCollection("authors");
 ---
 
 <Layout title="Blog" description="PixiEditor Blog" cover="img/blog-cover.png">
@@ -29,11 +29,11 @@ const authors = await getCollection("authors");
                     .map((x) => {
                         return (
                             <a class="flex flex-col gap-2" href={getBlogPath(x)}>
-                                    <Image
-                                        src={x.data.cover ?? BlogCover}
+                                    <Picture
                                         class="object-contain rounded-lg border-neutral-700 border-2"
-                                        alt=""
-                                    />
+                                        src={x.data.cover ?? BlogCover}
+                                        widths={[300, 740, 1080]}
+                                        alt=""/>
 
                                     <p class="text-neutral-400">
                                         {x.data.date.toLocaleDateString(
