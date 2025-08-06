@@ -5,10 +5,9 @@ import Layout from "@layouts/Layout.astro";
 import { Image } from "astro:assets";
 import Lucide from "@components/Lucide.astro";
 
-import BlogCover from "@assets/blog-posts/defaultBlogCover.png";
+import BlogCover from "../content/blog/assets/defaultBlogCover.png";
 
 const posts = await getCollection("blog");
-const authors = await getCollection("authors");
 ---
 
 <Layout title="Blog" description="PixiEditor Blog" cover="img/blog-cover.png">
