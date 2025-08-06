@@ -5,6 +5,8 @@ import Layout from "@layouts/Layout.astro";
 import { Image } from "astro:assets";
 import Lucide from "@components/Lucide.astro";
 
+import BlogCover from "@assets/blog-posts/defaultBlogCover.png";
+
 const posts = await getCollection("blog");
 const authors = await getCollection("authors");
 ---
@@ -25,9 +27,9 @@ const authors = await getCollection("authors");
                     .map((x) => {
                         return (
                             <a class="flex flex-col gap-2" href={getBlogPath(x)}>
-                                    <img
-                                        src={x.data.cover ?? "/img/blog-cover.png"}
-                                        class="object-contain rounded-lg border-black border-neutral-700 border-2"
+                                    <Image
+                                        src={x.data.cover ?? BlogCover}
+                                        class="object-contain rounded-lg border-neutral-700 border-2"
                                         alt=""
                                     />
 
