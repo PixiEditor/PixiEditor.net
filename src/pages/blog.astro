@@ -1,6 +1,6 @@
 ﻿---
-import { getBlogPath } from "@content/contentHelper";
-import { getCollection, getEntry } from "astro:content";
+import { getAuthors, getBlogPath } from "@content/contentHelper";
+import { getCollection } from "astro:content";
 import Layout from "@layouts/Layout.astro";
 import { Image } from "astro:assets";
 import Lucide from "@components/Lucide.astro";
@@ -42,19 +42,8 @@ const authors = await getCollection("authors");
                                 <p class="text-xl font-bold">{x.data.title}</p>
 
                                 <div class="flex flex-row gap-2">
-                                    <Image
-                                    class="rounded-full h-6 w-6"
-                                        src={
-                                            authors.find(
-                                                (y) => y.id == x.data.authors?.[0].id)?.data.picture} alt="Author's picture"/>
-                                <p>
-                                    {
-                                        authors.find(
-                                            (y) =>
-                                                y.id == x.data.authors?.[0].id,
-                                        )?.data.name
-                                    }
-                                </p>
+                                    <Image class="rounded-full h-6 w-6" src={getAuthors(x)![0].data.picture} alt=""/>
+                                    <p>{getAuthors(x)![0].data.name}</p>
                                 </div>
                             </a>
                         );
