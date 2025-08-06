@@ -3,6 +3,7 @@ import { getBlogPath } from "@content/contentHelper";
 import { getCollection, getEntry } from "astro:content";
 import Layout from "@layouts/Layout.astro";
 import { Image } from "astro:assets";
+import Lucide from "@components/Lucide.astro";
 
 const posts = await getCollection("blog");
 const authors = await getCollection("authors");
@@ -10,7 +11,10 @@ const authors = await getCollection("authors");
 
 <Layout title="Blog" description="PixiEditor Blog" cover="img/blog-cover.png">
     <div class="container mx-auto p-4">
-        <h1 class="text-3xl font-bold my-12">All Articles</h1>
+        <h1 class="text-3xl font-bold my-12">
+            All Articles
+            <a href="/blog.xml" target="_blank" class="text-neutral-500 cursor-pointer hover:text-neutral-100 ps-1"><Lucide class="align-text-bottom" data="rss" /></a>
+        </h1>
         <div class="grid gap-y-12 gap-x-12 mb-12 md:grid-cols-1 lg:grid-cols-3">
             {
                 posts
