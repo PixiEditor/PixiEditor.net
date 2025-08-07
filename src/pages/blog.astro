@@ -30,7 +30,7 @@ const posts = await getCollection("blog");
                         return (
                             <a class="flex flex-col gap-2" href={getBlogPath(x)}>
                                     <Picture
-                                        class="object-contain rounded-lg border-neutral-700 border-2"
+                                        class="object-cover rounded-lg border-neutral-700 border-2 aspect-[2560/1480]"
                                         src={x.data.cover ?? BlogCover}
                                         widths={[300, 740, 1080]}
                                         alt=""/>
