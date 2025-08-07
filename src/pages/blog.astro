@@ -15,7 +15,7 @@ const posts = await getCollection("blog");
     <div class="container mx-auto p-4">
         <h1 class="text-3xl font-bold my-12">
             All Articles
-            <a href="/blog.xml" target="_blank" class="text-neutral-500 cursor-pointer hover:text-neutral-100 ps-1" title="RSS Feed">
+            <a href="/blog.xml" target="_blank" class="text-neutral-500 transition-colors cursor-pointer hover:text-neutral-200 ps-1" title="RSS Feed">
                 <Lucide class="align-text-bottom" data="rss" />
             </a>
         </h1>
@@ -30,7 +30,7 @@ const posts = await getCollection("blog");
                         return (
                             <a class="flex flex-col gap-2" href={getBlogPath(x)}>
                                     <Picture
-                                        class="object-contain rounded-lg border-neutral-700 border-2"
+                                        class="object-cover rounded-lg border-neutral-700 border-2 aspect-[2560/1480]"
                                         src={x.data.cover ?? BlogCover}
                                         widths={[300, 740, 1080]}
                                         alt=""/>
