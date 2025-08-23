@@ -1,0 +1,67 @@
+---
+title: PixiEditor 2.0 August 2025 Status
+authors: [ flabbet ] 
+tags: [ status, pixieditor2.0 ]
+date: 2025-08-23
+description: "Roadmap update, 2.0 release summary and app status."
+cover: "./assets/stateq12025/cover.png"
+---
+
+import { Image } from 'astro:assets';
+import ditherClose from 'assets/august-status/dither-close.png';
+import ditherBrush from 'assets/august-status/dither-brush.png';
+
+We've launched PixiEditor 2.0 almost a month ago, after receiving a ton of constructive of feedback, we're making exciting changes to the roadmap.
+
+## Node-based Brush Engine
+
+I must admit, "Painting" toolset without a Brush Engine feels... a little incomplete. That's why we're going to fix it as soon as possible. Instead of 2026, we plan to release a **Node-based Brush Engine**
+by the end of the 2025.
+
+We wouldn't be ourselves if we released just a brush engine. I can say with confidence, it's going to be one of the most advanced brush engines on the market. 
+We are taking inspiration from this approach https://www.youtube.com/watch?v=O03oK2I4FZI and we'll utilize our [Node Graph](/docs/usage/node-graph/getting-started-with-node-graph/) for that.
+
+But talk is cheap, I wouldn't make this blog post with empty promises. Here's our work-in-progress Brush Engine in action.
+
+### Procedural dithering + palette indexing brush
+
+<video src='/videos/august-status/dither-brush.webm' loop autoplay mute controls playsinline/>
+
+Let's take a closer look at the effect of this brush:
+
+<Image src={ditherClose} alt="Close look at the brush effect" />
+
+And now, a node graph of this brush:
+
+<Image src={ditherBrush} alt="Brush graph" />
+
+As you can see, we can plug anything into the Brush Output, the same way as it works with other Node Graph related stuff. I used a Shader for this one [based on this blog post](https://tympanus.net/codrops/2025/06/04/building-a-real-time-dithering-shader/).
+
+
+Naturally, anything `Brush Output` exposes can be procedurally generated, such as shape or fill of the Brush.
+
+### Vector Shape Brush
+
+TODO: Add
+
+### Pressure & Rotation
+
+TODO: Add
+
+### The goal
+
+The whole system is still very early in development (like actually 10 hours of development time lol), but the prototype is already extremely powerful. Our goals for the Brush Engine are:
+
+- Full stylus/drawing tablet support (pressure, twist, rotation, etc)
+- Ability to create basic brushes (drawing textures)
+- Ability to define vector shapes of the brushes
+- Full support for other PixiEditor Nodes
+- Full readback of layers/textures (brushes should be able to sample your layers and react according to them)
+- Entity Brushes - Brushes that can evaluate over time, like drying ink, falling sand, fireworks?
+- Animated Brushes
+
+## What about Extensions and Extension Store?
+
+We unfortunately had to move this for 2026. It's not realistic to squeeze this alongside Brush Engine. We might get Extensions API in a minimal state working, but I really want to take time to develop it
+properly, with all security and feature considerations in mind. Realistically Extension Store requires full time employees who can moderate and support whole extension marketplace. I'm not even mentioning infrastracture
+maintainance.
