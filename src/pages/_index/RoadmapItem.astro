@@ -2,12 +2,13 @@
 const content = await Astro.slots.render('default');
 
 interface Props {
-    isDone?: boolean
+    isDone?: boolean,
+    inProgress?: boolean
 }
 
-const { isDone } = Astro.props;
+const { isDone, inProgress } = Astro.props;
 
-const liClass = isDone ? "marker-done" : "marker-not-done";
+const liClass = isDone ? "marker-done" : (inProgress ? "marker-in-progress" : "marker-not-done");
 const ariaLabel = isDone ? `${content} (done)` : undefined;
 ---
 
@@ -27,6 +28,13 @@ const ariaLabel = isDone ? `${content} (done)` : undefined;
     font-family: lucide;
     @apply text-pc-softpixired font-bold;
 }
+
+.marker-in-progress::marker {
+    content: "\e16e    ";
+    font-family: lucide;
+    @apply text-pc-softpixired font-bold;
+}
+
 </style>
 
 <li class={liClass} aria-label={ariaLabel}><slot /></li>
