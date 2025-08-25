@@ -10,6 +10,8 @@ cover: "./assets/stateq12025/cover.png"
 import { Image } from 'astro:assets';
 import ditherClose from 'assets/august-status/dither-close.png';
 import ditherBrush from 'assets/august-status/dither-brush.png';
+import mushyBrush from 'assets/august-status/mushy-brush.png';
+import vecGraph from 'assets/august-status/vec-brush.png';
 
 We've launched PixiEditor 2.0 almost a month ago, after receiving a ton of constructive of feedback, we're making exciting changes to the roadmap.
 
@@ -23,7 +25,35 @@ We are taking inspiration from this approach https://www.youtube.com/watch?v=O03
 
 But talk is cheap, I wouldn't make this blog post with empty promises. Here's our work-in-progress Brush Engine in action.
 
+### Vector Shape Brush
+
+Let's start with simple stuff, basic vector brush.
+
+<video src='/videos/august-status/brush.webm' loop autoplay mute controls playsinline/>
+
+and the graph:
+
+<Image src={vecGraph} alt="Close look at the brush effect" />
+
+Nothing fancy, just a vector layer plugged into brush shape with rotation applied.
+
+### Raster, pressure based brush.
+
+Obligatory texture brush
+
+<video src='/videos/august-status/mushy.webm' loop autoplay mute controls playsinline/>
+
+Graph:
+
+<Image src={mushyBrush} alt="Brush graph" />
+
+Pressure based, scaled image as a brush.
+
 ### Procedural dithering + palette indexing brush
+
+Time to step up the game.
+
+Here is an example of a brush, that automatically dithers and applies color-indexing to the image that it is drawn on.
 
 <video src='/videos/august-status/dither-brush.webm' loop autoplay mute controls playsinline/>
 
@@ -37,16 +67,7 @@ And now, a node graph of this brush:
 
 As you can see, we can plug anything into the Brush Output, the same way as it works with other Node Graph related stuff. I used a Shader for this one [based on this blog post](https://tympanus.net/codrops/2025/06/04/building-a-real-time-dithering-shader/).
 
-
 Naturally, anything `Brush Output` exposes can be procedurally generated, such as shape or fill of the Brush.
-
-### Vector Shape Brush
-
-TODO: Add
-
-### Pressure & Rotation
-
-TODO: Add
 
 ### The goal
 
@@ -55,7 +76,7 @@ The whole system is still very early in development (like actually 10 hours of d
 - Full stylus/drawing tablet support (pressure, twist, rotation, etc)
 - Ability to create basic brushes (drawing textures)
 - Ability to define vector shapes of the brushes
-- Full support for other PixiEditor Nodes
+- Full support for other PixiEditor Nodes - custom shaders, filters, matrices, etc.
 - Full readback of layers/textures (brushes should be able to sample your layers and react according to them)
 - Entity Brushes - Brushes that can evaluate over time, like drying ink, falling sand, fireworks?
 - Animated Brushes
@@ -65,3 +86,45 @@ The whole system is still very early in development (like actually 10 hours of d
 We unfortunately had to move this for 2026. It's not realistic to squeeze this alongside Brush Engine. We might get Extensions API in a minimal state working, but I really want to take time to develop it
 properly, with all security and feature considerations in mind. Realistically Extension Store requires full time employees who can moderate and support whole extension marketplace. I'm not even mentioning infrastracture
 maintainance.
+
+## Vector Toolset improvements
+
+For version 2.1, we also want to polish and improve the vector toolset. Creating vectors from scratch requires a lot of patience at the moment (sorry about that!). I want to acknowledge, that we are working on this!
+
+## Performance
+
+I don't think the day where I can say "It can't be more optimized" will ever come, so it's more of a formality to say, that I'm working on optimizations for various scenarios. 
+
+App like PixiEditor is especially tricky to optimize, as it allows for so many custom scenarios with Node Graph. However, here are a few cases that I managed to improve so far:
+
+- Animation rendering (an issue where the app was so laggy, that you couldn't stop the animation)
+- Better preview rendering. At the moment PixiEditor has to execute the Node Graph multiple times if anything changes, one time for each viewport and one time for document preview. Additionally, I decreased
+amount of times that non-essential previews are rerendered (such as layers, cels and this tiny 16x16 preview in the document tab)
+- For the heaviest graphs, I added an option to fully disable preview rendering. The difference can be huge.
+
+The ideal system would only execute graph once to render all previews, although it's not a trivial thing to do, hopefully one day!
+
+## Hardware issues
+
+There were quite a bit of reports of PixiEditor not working on some hardware. Since the release, I've added a OpenGL render api for compatibility and it helped in many cases.
+I must admit, these kind of issues are the hardest to fix. Replicating the issue is sometimes close to impossible without an actual hardware that experiences the issue.
+
+The best way to actually find some clues about what could be causing it, is to report harware specifications along with additional information such as:
+
+- Render Api used in PixiEditor (Vulkan/OpenGL)
+- GPU drivers version
+- For linux, Desktop Environment.
+
+This is the only way we can spot patterns and narrow down the issue cause (CPU, GPU Drivers, etc.)
+
+I would like to thank everyone who reports all kinds of issues and provides details, you're the true heroes here.
+
+## In summary
+
+Brush engine is coming, vector toolset is about to get better, so will performance.
+
+Of course, version 2.1 will be much more than that, we've already added new nodes, options and fixed tons of bugs.
+
+If you would like to support our work, consider purchasing [Founder's Pack](https://pixieditor.net/download), contributing to the source code, reporting issues or/and testing development versions.
+
+Thank you to everyone who already did, we couldn't continue this project without all of you.
