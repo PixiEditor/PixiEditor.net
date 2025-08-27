@@ -125,7 +125,7 @@ const basePricePLN = 100;
                         />
                         <button
                             type="submit"
-                            class="flex-[1_1_30%] min-w-[120px] px-button-base bg-[#731BCA] hover:bg-[#801CDA] transition-colors flex items-center justify-center text-center rounded"
+                            class="flex-[1_1_30%] min-w-[120px] px-button-base bg-[#731BCA] hover:bg-[#801CDA] transition-colors flex items-center justify-center text-center rounded disabled:opacity-50 disabled:cursor-not-allowed"
                         >
                             <div id="price" data-pln-price={basePricePLN}>
                                 Loading price...
@@ -216,10 +216,19 @@ const basePricePLN = 100;
 
   async function getUserCurrency() {
     try {
+        const unsupportedCurrencies = ["CO"];
+
       const res = await fetch("https://ip2c.org/s");
       // Example response: "1;PL;POL;Poland"
       const data = await res.text();
-      return CountryToCurrency[data.split(';')[1]] || 'PLN';
+
+      const countryCode = data.split(';')[1];
+
+      if(unsupportedCurrencies.includes(countryCode)) {
+        return 'UNSUPPORTED';
+      }
+
+      return CountryToCurrency[countryCode] || 'PLN';
     } catch {
       return 'PLN'; // fallback
     }
@@ -243,6 +252,13 @@ const basePricePLN = 100;
 
     const userCurrency = await getUserCurrency();
     const upperCurrency = userCurrency.toUpperCase();
+
+    if(upperCurrency === "UNSUPPORTED")
+  {
+    priceEl.textContent = "Not available in your country";
+    priceEl.parentElement.disabled = true;
+    return;
+  }
 
     if (!SUPPORTED_CURRENCIES.includes(upperCurrency)) {
       priceEl.textContent = `${plnPrice.toFixed(2)} PLN`;
