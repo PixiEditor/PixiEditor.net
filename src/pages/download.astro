@@ -136,6 +136,8 @@ const basePricePLN = 100;
                         class="text-sm w-[150px] hidden absolute md:absolute md:block bg-neutral-900 -right-[40px] top-[5px] rounded-lg px-2 py-1 rotate-14 border-solid border-2 border-rose-400 text-rose-400"
                         >Limited time offer</span
                     >
+                    
+                <span class="text-sm text-right mt-4" id="unavailable-info">You can still buy Founder's Pack on <a class="underline" target="_blank" href="https://store.steampowered.com/app/2435860/PixiEditor__Founders_Pack/">Steam</a></span>
                 <span class="text-neutral-500 text-sm text-left mt-4"
                     >Lowest price in the past 30 days: 100 PLN. Prices shown in other currency than PLN are estimated, final price in checkout may vary.</span
                 >
@@ -216,7 +218,7 @@ const basePricePLN = 100;
 
   async function getUserCurrency() {
     try {
-        const unsupportedCurrencies = ["CO"];
+        const unsupportedCurrencies = ["CO", "ME", "KP", "KR", "IN", "RS", "MX", "AE", "TR", "AM"];
 
       const res = await fetch("https://ip2c.org/s");
       // Example response: "1;PL;POL;Poland"
@@ -248,16 +250,23 @@ const basePricePLN = 100;
 
   async function convertPrice() {
     const priceEl = document.getElementById('price');
+    const unavailableInfo = document.getElementById('unavailable-info');
     const plnPrice = parseFloat(priceEl.dataset.plnPrice);
 
+    priceEl.parentElement.disabled = true;
+    unavailableInfo.style.display = 'none';
     const userCurrency = await getUserCurrency();
     const upperCurrency = userCurrency.toUpperCase();
 
     if(upperCurrency === "UNSUPPORTED")
   {
-    priceEl.textContent = "Not available in your country";
+    priceEl.textContent = "Not yet available in your country";
     priceEl.parentElement.disabled = true;
+    unavailableInfo.style.display = 'block';
     return;
+  }
+  else{
+    priceEl.parentElement.disabled = false;
   }
 
     if (!SUPPORTED_CURRENCIES.includes(upperCurrency)) {
