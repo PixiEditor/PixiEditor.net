@@ -13,6 +13,10 @@ export const steam = {
     supporterPackStore: "https://store.steampowered.com/app/2435860/PixiEditor__Supporter_Pack/"
 }
 
+export const flathub = {
+    store: "https://flathub.org/apps/details/net.pixieditor.PixiEditor"
+}
+
 export const microsoft = {
     store: "https://apps.microsoft.com/detail/9nddrhs8pbrn"
 }

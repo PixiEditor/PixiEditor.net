@@ -1,16 +1,14 @@
 ---
-import Lucide from "@components/Lucide.astro";
 import OpenCollective from "@components/supportUs/OpenCollective.astro";
 import Layout from "@layouts/Layout.astro";
 import { Image } from "astro:assets";
 
 import SteamLogo from "@assets/icons/steam.svg";
-import MicrosoftStoreLogoGrey from "@assets/logos/MicrosoftStoreLogoGrey.svg";
-import AppleLogo from "@assets/logos/AppleLogo.svg";
+import FlathubLogo from "@assets/icons/flathub.svg";
 import FoundersPackLogo from "@assets/founders-pack.svg";
 import FoundersPackLogoMobile from "@assets/founders-pack-mobile.svg";
 
-import { steam, microsoft } from "@assets/links";
+import { steam, flathub } from "@assets/links";
 import PlatformSelectionCardContent from "./_download/PlatformSelectionCardContent.astro";
 
 const basePricePLN = 100;
@@ -44,6 +42,7 @@ const basePricePLN = 100;
                             <a
                                 class="flex flex-col items-center w-24"
                                 href={steam.store}
+                                target="_blank"
                             >
                                 <Image
                                     src={SteamLogo}
@@ -51,6 +50,18 @@ const basePricePLN = 100;
                                     alt=""
                                 />
                                 <p>Steam</p>
+                            </a>
+                            <a
+                                class="flex flex-col items-center w-24"
+                                href={flathub.store}
+                                target="_blank"
+                            >
+                                <Image
+                                    src={FlathubLogo}
+                                    class="block h-8 w-8"
+                                    alt="Flathub logo"
+                                />
+                                <p>Flathub</p>
                             </a>
                             <!-- <a
                                 class="flex flex-col items-center w-24"
