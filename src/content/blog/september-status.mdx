@@ -39,6 +39,16 @@ Flatpak solves that issue, it automatically integrates with your desktop environ
 Due to nature of PixiEditor, rendering is a ___very___ tricky part. Not only Node Graph allows for arbitrary customizations, shaders and operations, PixiEditor has vector capabilities (rendering crisp vectors on small documents)
 and animations. 
 
+Here's a quick comparision of new renderer with heavy animation
+
+Old:
+
+<video src='/videos/september-status/old.webm' loop autoplay mute controls playsinline/>
+
+New:
+
+<video src='/videos/september-status/new.webm' loop autoplay mute controls playsinline/>
+
 ### Single threaded rendering 
 
 PixiEditor renders on the UI Thread, which means that heavy graphs can lag or even freeze the UI. 
@@ -106,13 +116,13 @@ Well, it was. After many days of freezes, crashes and debugging, it seemed to fi
 
 ◝(ᵔᗜᵔ)◜
 
-(vid)
+<video src='/videos/september-status/render-thread-sample.webm' loop autoplay mute controls playsinline/>
 
 Until I ran PixiEditor with it...
 
 It worked like a hot mess...
 
-(vid)
+<video src='/videos/september-status/pixieditor-rt.webm' loop autoplay mute controls playsinline/>
 
 (¬_¬")
 
@@ -158,8 +168,11 @@ Why did it work like that? Well version 1.0 had CPU only rendering, and CPU chun
 Fortunately, I managed to properly implement GPU chunk textures, which significantly improves rendering performance. Because of this, I was able to get rid of intermediate surface and draw the chunks 
 to the screen directly. 
 
-Direct screen rendering opens a possibility for another amazing optimization technique, which is occlusion culling. In the new renderer, PixiEditor will only draw chunks you see on the screen, if you zoom the 
+Direct screen rendering opens a possibility for another amazing optimization technique called occlusion culling. In the new renderer, PixiEditor will only draw chunks you see on the screen, if you zoom the 
 viewport, chunks outside the visible area won't be rendered.
+
+Here's a preview with shrinked visible area to see the effect
+<video src='/videos/september-status/occlusion-culling.webm' loop autoplay mute controls playsinline/>
 
 Furthermore, if you have a document with graph, that consists of layers only, drawing shouldn't allocate more memory than amount of chunks required. So creating huge documents by itself won't cause memory problems for PixiEditor. 
 Saving .pixi files will also save filled chunks only.
