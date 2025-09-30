@@ -1,0 +1,173 @@
+---
+title: PixiEditor September 2025 Status
+authors: [ flabbet ] 
+tags: [ status, pixieditor2.0 ]
+date: 2025-09-30
+description: "Flatpak version, new renderer and more nodes!"
+cover: "./assets/september-status/cover.png"
+---
+
+import FlathubWidget from "../../components/FlathubWidget.astro";
+
+Hi, hello and welcome to the September PixiEditor Status update! On today's menu:
+
+- Flatpak version
+- New renderer
+- More nodes!
+
+Let's get to it.
+
+
+## Flatpak version
+
+Flatpak is a one of the package managers for Linux, which is designed to be the universal package manager for Linux software, especially GUI apps.
+
+Up until now, PixiEditor was distributed via `.tar.gz` and `.deb` formats. It was suboptimal, as integrating PixiEditor to your Linux desktop required more effort.
+
+Flatpak solves that issue, it automatically integrates with your desktop environment and manages updates. So if you are on Linux, give it a try!
+
+<FlathubWidget
+  title="PixiEditor"
+  author="PixiEditor"
+  description="Universal node-based 2D editor."
+  appUrl="https://flathub.org/en/apps/net.pixieditor.PixiEditor"
+  iconUrl="https://raw.githubusercontent.com/PixiEditor/PixiEditor/refs/heads/flatpak-v2.0.1.14/assets/flatpak/icon-512.png"
+/>
+
+## New renderer
+
+Due to nature of PixiEditor, rendering is a ___very___ tricky part. Not only Node Graph allows for arbitrary customizations, shaders and operations, PixiEditor has vector capabilities (rendering crisp vectors on small documents)
+and animations. 
+
+### Single threaded rendering 
+
+PixiEditor renders on the UI Thread, which means that heavy graphs can lag or even freeze the UI. 
+
+The logical solution was to make rendering on a separate thread. 
+
+Well...
+
+#### My little render thread journey
+
+In short, Render Thread is a thing that runs in the background, independendly of the main app and renders graphics in it's own pace. So whenever the main app requests a new frame,
+render thread grabs this request, renders and gives the frame back to the main app.
+
+And I really wish it was that simple. This will be a little technical, so if you are just interested in new features, feel free to skip it.
+
+PixiEditor uses Vulkan or OpenGL for rendering. However neither Vulkan nor OpenGL is "standalone", we must first access Avalonia's GPU context to hook our own rendering. We use Avalonia's composition renderer to update the UI with rendered stuff.
+
+Current renderer performs rendering "on demand", meaning that each UI control sends a render request with its surface to draw on. It has a few benefits:
+
+- No additional intermediate surfaces,
+- Out of the box "render only what you see" approach
+
+...and a few downsides:
+- More error prone (surfaces might get disposed mid-flight)
+- Potentially rendering the same frame multiple times
+- It's harder to manage renders and perform optimizations
+- It's virtually impossible to make rendering on other thread
+
+So the very first step was to inverse the rendering logic, so we have more control over each rendered frame.
+
+Instead of 
+
+```
+Refresh request --> UI control surface --> Render to control's surface
+``` 
+
+I had to do 
+
+```
+Refresh request --> Render into intermediate surface --> UI control renders intermediate surface
+```
+
+Having one managing system that decides what gets rendered and in what resolution opens up a lot of optimization possibilities. 
+
+For example if you have Node Graph opened and layer's panel visible, renderer will render layer's preview only once in slightly higher resolution (because node previews are bigger), instead of rendering it twice
+in different resolutions.
+
+Great, so we have a system that produces bitmaps/surfaces with all previews and frames, that are just grabbed by UI controls to display. So the next logical step is to render these asynchronously.
+
+Before I decided to jump into building separate thread solution, I tried better rendering scheduling in Avalonia's UI Thread dispatcher. It is still one thread, but any lags should be "spread out" over a few frames.
+
+At first it seemed to work really great, playing animations for heavy graphs was smooth and the UI was responsive. Unfortunately, after some time I discovered, that manipulating heavy graphs (like moving a layer)
+resulted in degraded performance. Rendering a singular layer into the bitmap wasn't slower than in previous renderer, but scheduler fired less often, so it seemed like it was laggy.
+
+The only logical solution left at that time, was to implement separate render thread.
+
+...
+
+Remember the part, where I mentioned we use Avalonia's GPU context and compositor? 
+Yeah, to get separate render thread I had to properly synchronize not only access to GPU API, but also render thread's render loop with avalonia's compositor.
+
+Sounds painful, huh?
+
+Well, it was. After many days of freezes, crashes and debugging, it seemed to finally work. I developed it on a test project, but still.
+
+◝(ᵔᗜᵔ)◜
+
+(vid)
+
+Until I ran PixiEditor with it...
+
+It worked like a hot mess...
+
+(vid)
+
+(¬_¬")
+
+
+#### Rendering scheduling
+
+Something had to be done, I think whole rework already took me full 2 weeks, where one whole week was dedicated to render thread. Shipping renderer that provides worse performance is unacceptable, even
+if it's better in some scenarios.
+
+At that point, I already invested so much time into this. I decided to give up separate render thread for now. However the point of whole rework was to fix freezes and improve the performance.
+
+So what now?
+
+I got my shit together and facts straight. 
+
+\> _New rework solves laggy animation performance_<br/>
+\> _Manipulation performance is degraded due to background scheduler update rate_
+
+...
+
+\> _Can't I just fire rendering immediately for manipulating and do background rendering for animation?_
+
+5 lines of code and problem solved.
+
+<span style={{fontSize: "48px"}}>🙈</span>
+
+It doesn't completely replace separate thread solution. It still runs on the main thread, but it's already much better. At least according to my tests.
+
+_(to any brave soul, if you want to play around render thread solution I made, check `render-thread` branch both for `PixiEditor` and `src/Drawie`)_
+
+### GPU chunks and direct viewport rendering
+
+This optimization is quite exciting for me. It's only related to drawing/painting performance, but it's been on my mind since the beginning of version 2.0.
+
+PixiEditor uses chunks for layers. So instead of storing full resolution layer it only stores chunks that have something in them. For example, if you have 1024x1024 document, one layer of this document
+consists of 4 chunks that are 256x256 each. If you only draw on one chunk, others won't be stored in the memory.
+
+This system was developed for version 1.0 and lost its meaning during transition to 2.0. Due to performance reasons we had to use intermediate, full resolution texture before drawing to the screen. 
+Which kills any benefits of chunks.
+
+Why did it work like that? Well version 1.0 had CPU only rendering, and CPU chunks were leftover from 1.0. I tried making them GPU a while ago, but it had major problems back then.
+
+Fortunately, I managed to properly implement GPU chunk textures, which significantly improves rendering performance. Because of this, I was able to get rid of intermediate surface and draw the chunks 
+to the screen directly. 
+
+Direct screen rendering opens a possibility for another amazing optimization technique, which is occlusion culling. In the new renderer, PixiEditor will only draw chunks you see on the screen, if you zoom the 
+viewport, chunks outside the visible area won't be rendered.
+
+Furthermore, if you have a document with graph, that consists of layers only, drawing shouldn't allocate more memory than amount of chunks required. So creating huge documents by itself won't cause memory problems for PixiEditor. 
+Saving .pixi files will also save filled chunks only.
+
+## New Nodes
+
+### Text
+
+### Posterize
+
+## Autumn Sale
