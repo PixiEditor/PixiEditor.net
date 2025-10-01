@@ -1,18 +1,22 @@
 ---
-title: PixiEditor September 2025 Status
+title: A story about multithreaded rendering | September Status
+slug: september-status
 authors: [ flabbet ] 
 tags: [ status, pixieditor2.0 ]
-date: 2025-09-30
+date: 2025-10-02
 description: "Flatpak version, new renderer and more nodes!"
 cover: "./assets/september-status/cover.png"
 ---
 
 import FlathubWidget from "../../components/FlathubWidget.astro";
+import textNodes from "./assets/september-status/text-nodes.png";
+import posterizeImg from "./assets/september-status/posterize.png";
+import { Image } from "astro:assets";
 
 Hi, hello and welcome to the September PixiEditor Status update! On today's menu:
 
 - Flatpak version
-- New renderer
+- New renderer and a story of great failure
 - More nodes!
 
 Let's get to it.
@@ -60,11 +64,11 @@ Well...
 #### My little render thread journey
 
 In short, Render Thread is a thing that runs in the background, independendly of the main app and renders graphics in it's own pace. So whenever the main app requests a new frame,
-render thread grabs this request, renders and gives the frame back to the main app.
+render thread grabs this request, renders and hands the frame to the main app.
 
 And I really wish it was that simple. This will be a little technical, so if you are just interested in new features, feel free to skip it.
 
-PixiEditor uses Vulkan or OpenGL for rendering. However neither Vulkan nor OpenGL is "standalone", we must first access Avalonia's GPU context to hook our own rendering. We use Avalonia's composition renderer to update the UI with rendered stuff.
+PixiEditor uses Vulkan and OpenGL for rendering. However neither Vulkan nor OpenGL is "standalone", we must first access Avalonia's GPU context to hook our own rendering. We use Avalonia's composition renderer to update the UI with rendered stuff.
 
 Current renderer performs rendering "on demand", meaning that each UI control sends a render request with its surface to draw on. It has a few benefits:
 
@@ -108,7 +112,7 @@ The only logical solution left at that time, was to implement separate render th
 ...
 
 Remember the part, where I mentioned we use Avalonia's GPU context and compositor? 
-Yeah, to get separate render thread I had to properly synchronize not only access to GPU API, but also render thread's render loop with avalonia's compositor.
+Yeah, to get a separate render thread I had to properly synchronize not only access to GPU API, but also render thread's render loop with avalonia's compositor.
 
 Sounds painful, huh?
 
@@ -132,7 +136,7 @@ It worked like a hot mess...
 Something had to be done, I think whole rework already took me full 2 weeks, where one whole week was dedicated to render thread. Shipping renderer that provides worse performance is unacceptable, even
 if it's better in some scenarios.
 
-At that point, I already invested so much time into this. I decided to give up separate render thread for now. However the point of whole rework was to fix freezes and improve the performance.
+At that point, I already invested so much time into this. I decided to give up separate render thread for now. However the whole point of the rework was to fix freezes and improve the performance.
 
 So what now?
 
@@ -143,7 +147,7 @@ I got my shit together and facts straight.
 
 ...
 
-\> _Can't I just fire rendering immediately for manipulating and do background rendering for animation?_
+\> _Can't I just fire rendering immediately when user manipulates the canvas and do background rendering for animation?_
 
 5 lines of code and problem solved.
 
@@ -163,9 +167,9 @@ consists of 4 chunks that are 256x256 each. If you only draw on one chunk, other
 This system was developed for version 1.0 and lost its meaning during transition to 2.0. Due to performance reasons we had to use intermediate, full resolution texture before drawing to the screen. 
 Which kills any benefits of chunks.
 
-Why did it work like that? Well version 1.0 had CPU only rendering, and CPU chunks were leftover from 1.0. I tried making them GPU a while ago, but it had major problems back then.
+Why did it work like that? Well version 1.0 had CPU only rendering, and CPU chunks were a leftover from 1.0. I tried making them GPU a while ago, but it had major problems back then.
 
-Fortunately, I managed to properly implement GPU chunk textures, which significantly improves rendering performance. Because of this, I was able to get rid of intermediate surface and draw the chunks 
+Fortunately, I managed to properly implement GPU chunk textures, which significantly improves rendering performance. Thanks to this, I was able to get rid of intermediate surface and draw the chunks 
 to the screen directly. 
 
 Direct screen rendering opens a possibility for another amazing optimization technique called occlusion culling. In the new renderer, PixiEditor will only draw chunks you see on the screen, if you zoom the 
@@ -174,13 +178,35 @@ viewport, chunks outside the visible area won't be rendered.
 Here's a preview with shrinked visible area to see the effect
 <video src='/videos/september-status/occlusion-culling.webm' loop autoplay mute controls playsinline/>
 
-Furthermore, if you have a document with graph, that consists of layers only, drawing shouldn't allocate more memory than amount of chunks required. So creating huge documents by itself won't cause memory problems for PixiEditor. 
+Furthermore, if you have a document with a graph, that consists of layers only, drawing shouldn't allocate more memory than amount of chunks required. So creating huge documents by itself won't cause memory problems for PixiEditor. 
 Saving .pixi files will also save filled chunks only.
+
+Please note that new renderer is not yet released. It will require some more testing before it lands in the development version.
 
 ## New Nodes
 
-### Text
+### Slice Text, Character Position and Text Info
+
+We've added a few new nodes for text manipulation.
+
+<Image src={textNodes} alt="Text nodes example"/>
+
+And here's a quick demo of what you can do with them
+
+<video src='/videos/september-status/txt.mp4' loop autoplay mute controls playsinline/>
+
+These are already in the [development version](https://pixieditor.net/docs/open-beta/) (2.0.1.15-dev), so feel free to try them out!
 
 ### Posterize
 
-## Autumn Sale
+The Posterize node reduces the number of colors in an image, creating a stylized effect. It works by mapping the colors in the input image to a limited set of colors based on the specified number of levels.
+
+<Image src={posterizeImg} alt="Posterize node example"/>
+
+## What's next?
+
+We are still working on fixes and improvements after 2.0 release along with a Brush Engine. Hopefully I'll have more news about it in October status update. 
+
+If you would like to support our work, consider purchasing [Founder's Pack](https://pixieditor.net/download), contributing to the source code, reporting issues or/and testing development versions.
+
+Thank you for reading, see you next month!
