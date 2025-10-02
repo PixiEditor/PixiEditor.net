@@ -9,7 +9,7 @@ interface Method {
 const methods: Method[] = [
     {
         name: ".NET CLI",
-        command: (p, v) => `dotnet add ${p} --verison ${v}`,
+        command: (p, v) => `dotnet add ${p} --version ${v}`,
         isCli: true
     },
     {
