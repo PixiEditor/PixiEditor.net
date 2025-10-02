@@ -86,15 +86,11 @@ So the very first step was to invert the rendering logic, so we have more contro
 
 Instead of 
 
-```
 Refresh request --> UI control surface --> Render to control's surface
-``` 
 
 I had to do 
 
-```
 Refresh request --> Render into intermediate surface --> UI control renders intermediate surface
-```
 
 Having one managing system that decides what gets rendered and in what resolution opens up a lot of optimization possibilities. 
 
