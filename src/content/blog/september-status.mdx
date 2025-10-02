@@ -9,6 +9,7 @@ cover: "./assets/september-status/cover.png"
 ---
 
 import FlathubWidget from "../../components/FlathubWidget.astro";
+import FoundersPackBanner from "../../components/supportUs/FoundersPackBanner.astro";
 import textNodes from "./assets/september-status/text-nodes.png";
 import posterizeImg from "./assets/september-status/posterize.png";
 import { Image } from "astro:assets";
@@ -164,7 +165,7 @@ This optimization is quite exciting for me. It's only related to drawing/paintin
 PixiEditor uses chunks for layers. So instead of storing full resolution layer it only stores chunks that have something in them. For example, if you have a 1024x1024 document, one layer of this document
 consists of 4 chunks that are 256x256 each. If you only draw on one chunk, others won't be stored in memory.
 
-This system was developed for version 1.0 and lost its meaning during transition to 2.0. Due to performance reasons we had to use intermediate, full resolution texture before drawing to the screen. 
+This system was developed for version 1.0 and lost its meaning during transition to 2.0. Due to the performance reasons we had to use intermediate, full resolution texture before drawing to the screen. 
 Which kills any benefits of chunks.
 
 Why did it work like that? Well, version 1.0 had CPU-only rendering, and CPU chunks were a leftover from 1.0. I tried making them GPU a while ago, but it had major problems back then.
@@ -199,7 +200,9 @@ These are already in the [development version](https://pixieditor.net/docs/open-
 
 ### Posterize
 
-The Posterize node reduces the number of colors in an image, creating a stylized effect. It works by mapping the colors in the input image to a limited set of colors based on the specified number of levels.
+The Posterize node reduces the number of colors in an image, creating a stylized effect. It works by mapping the colors in the input image to a limited set of colors based on the specified number of levels. 
+
+We added a node for that. There are 2 modes available: RGB and Luminance. The latter will produce grayscale posterization.
 
 <Image src={posterizeImg} alt="Posterize node example"/>
 
@@ -207,6 +210,9 @@ The Posterize node reduces the number of colors in an image, creating a stylized
 
 We are still working on fixes and improvements after the 2.0 release along with a Brush Engine. Hopefully I'll have more news about it in October status update. 
 
-If you would like to support our work, consider purchasing [Founder's Pack](https://pixieditor.net/download), contributing to the source code, reporting issues or/and testing development versions.
+<FoundersPackBanner/ >
+
+Also, thanks to Sebasthem for letting us use a photo of this cute kitty! <br/> 
+Sebasthem's [Instagram](https://www.instagram.com/p/DNm5RyyODL0/?igsh=MWg0NjM4Z21kdGNoMA==)
 
 Thank you for reading, see you next month!

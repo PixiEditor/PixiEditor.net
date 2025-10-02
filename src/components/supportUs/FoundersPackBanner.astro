@@ -1,0 +1,44 @@
+---
+const purchaseUrl = "https://pixieditor.net/download";
+---
+
+<div class="banner">
+  <p>
+    <strong>PixiEditor</strong> is fully funded by the community - please consider supporting us with the <strong>Founder's Pack</strong>!
+  </p>
+  <a href={purchaseUrl} target="_blank" class="button">Support Now</a>
+</div>
+
+<style>
+  .banner {
+    background: linear-gradient(135deg, #1a1a2e, #2a004f);
+    border: 1px solid #5f259f;
+    border-radius: 1rem;
+    padding: 1.5rem;
+    margin: 2rem 0;
+    text-align: center;
+    color: #e2d7f7;
+    font-size: 1.1rem;
+    box-shadow: 0 4px 12px rgba(0,0,0,0.4);
+  }
+
+  .banner p {
+    margin-bottom: 1rem;
+  }
+
+  .button {
+    background-color: #9b4dff;
+    color: #fff;
+    padding: 0.75rem 1.5rem;
+    border-radius: 0.75rem;
+    text-decoration: none;
+    font-weight: 600;
+    transition: background 0.25s ease, transform 0.25s ease;
+    display: inline-block;
+  }
+
+  .button:hover {
+    background-color: #7d38cc;
+    transform: scale(1.05);
+  }
+</style>
