@@ -35,12 +35,15 @@ function patchLucideStyles(): Plugin {
   };
 }
 
+const site = "https://pixieditor.net";
+
 // https://astro.build/config
 export default defineConfig({
-  site: "https://pixieditor.net",
+  site: site,
   integrations: [mdx(), solidJs(), sitemap(
     {
-      filter: (page) => page !== "https://pixieditor.net/purchaseSuccess/",
+      customSitemaps: [`${site}/docs/sitemap-index.xml`],
+      filter: (page) => page !== `${site}/purchaseSuccess/`
     }
   )],
   markdown: {
