@@ -100,14 +100,14 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@astrojs/sitemap@npm:^3.4.0":
-  version: 3.4.0
-  resolution: "@astrojs/sitemap@npm:3.4.0"
+"@astrojs/sitemap@npm:^3.6.0":
+  version: 3.6.0
+  resolution: "@astrojs/sitemap@npm:3.6.0"
   dependencies:
     sitemap: "npm:^8.0.0"
     stream-replace-string: "npm:^2.0.0"
-    zod: "npm:^3.24.2"
-  checksum: 10c0/f7b3811cc2eb14161b73933864ad0d525d103390626b4c7c7e42ab290bfe4acc53042e42fdf00cc6a64b7cf34bc5ca3c29ca11a09de85334949d399776f75f67
+    zod: "npm:^3.25.76"
+  checksum: 10c0/a88c3c0c476b230cd1717c37d55408c57295539e9d141ff6738bcf38cefeb340a79b1d08c08f9bec39ec7ad6bfbb619454e1ae2053c8a65bbe3f1cd87a9e5904
   languageName: node
   linkType: hard
 
@@ -4570,7 +4570,7 @@ __metadata:
   dependencies:
     "@astrojs/mdx": "npm:^4.2.6"
     "@astrojs/rss": "npm:^4.0.12"
-    "@astrojs/sitemap": "npm:^3.4.0"
+    "@astrojs/sitemap": "npm:^3.6.0"
     "@astrojs/solid-js": "npm:^5.0.10"
     "@fontsource/montserrat": "npm:^5.1.1"
     "@tailwindcss/typography": "npm:^0.5.16"
@@ -6103,6 +6103,13 @@ __metadata:
   version: 3.24.4
   resolution: "zod@npm:3.24.4"
   checksum: 10c0/ab3112f017562180a41a0f83d870b333677f7d6b77f106696c56894567051b91154714a088149d8387a4f50806a2520efcb666f108cd384a35c236a191186d91
+  languageName: node
+  linkType: hard
+
+"zod@npm:^3.25.76":
+  version: 3.25.76
+  resolution: "zod@npm:3.25.76"
+  checksum: 10c0/5718ec35e3c40b600316c5b4c5e4976f7fee68151bc8f8d90ec18a469be9571f072e1bbaace10f1e85cf8892ea12d90821b200e980ab46916a6166a4260a983c
   languageName: node
   linkType: hard
 
