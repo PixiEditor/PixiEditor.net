@@ -4,6 +4,7 @@ import Layout from "@layouts/Layout.astro";
 import Lucide from '@components/Lucide.astro';
 import { Image } from 'astro:assets';
 import "remark-github-blockquote-alert/alert.css";
+import FoundersPackBanner from '@components/supportUs/FoundersPackBanner.astro';
 
 export async function getStaticPaths() {
     const posts = await getCollection('blog');
@@ -62,7 +63,16 @@ const { Content, headings } = await render(post);
                 <p class="text-neutral-400 block lg:hidden">{dateString}</p>
             </div>
             <div class="prose prose-pixi w-full">
+            {post.data.video ?
+            <div class="w-full lg:w-auto aspect-video">
+               <iframe class="w-full h-full rounded-lg" src={"https://www.youtube-nocookie.com/embed/" + new URL(post.data.video).pathname.slice(1)}
+                title="YouTube video player"
+               allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
+                referrerpolicy="strict-origin-when-cross-origin" allowfullscreen></iframe>
+            </div>
+            : null}
                 <Content />
+                <FoundersPackBanner/ >
             </div>
             <div class="hidden lg:flex flex-col text-nowrap w-40 sticky top-25">
               {headings.map(x => (
