@@ -11,11 +11,10 @@ type HighlightItem = {
   customIcon?: ImageMetadata;
 };
 
-
-const highlights : HighlightItem[] = [
+const highlights: HighlightItem[] = [
   {
     title: "Free and Open Source",
-    icon: "heart-handshake"
+    icon: "heart-handshake",
   },
   {
     title: "Desktop Native",
@@ -23,7 +22,7 @@ const highlights : HighlightItem[] = [
   },
   {
     title: "Cross Platform",
-    icon: "blocks"
+    icon: "blocks",
   },
   {
     title: "Works Offline",
@@ -31,24 +30,38 @@ const highlights : HighlightItem[] = [
   },
   {
     title: "No AI",
-    customIcon: NoAi
+    customIcon: NoAi,
   },
   {
     title: "Based in Europe",
-    customIcon: Europe
-  }
-
+    customIcon: Europe,
+  },
 ];
-
 ---
 
 <div class="flex flex-col items-center justify-center gap-8">
-  <h1 class="text-center text-3xl">How are we putting <span class="font-bold">users</span> first?</h1>
-  <div class="grid grid-cols-1 md:grid-cols-6 gap-4">
-    {highlights.map((highlight) => (
-      <div class="flex flex-col items-center">
-        {highlight.icon != null ? <Lucide data={highlight.icon} class="text-[96px] text-neutral-400" /> : <Image src={highlight.customIcon} alt={highlight.title} class="w-[96px] h-[144px]" />}
-        <h2 class="text-xl font-semibold mt-2">{highlight.title}</h2>
-      </div>
-    ))}
+  <h1 class="text-center text-3xl">
+    How are we putting <span class="font-bold">users</span> first?
+  </h1>
+  <div class="grid grid-cols-2 md:grid-cols-6 gap-4">
+    {
+      highlights.map((highlight) => (
+        <div class="flex flex-col items-center">
+          {highlight.icon != null ? (
+            <Lucide
+              data={highlight.icon}
+              class="text-[96px] text-neutral-400"
+            />
+          ) : (
+            <Image
+              src={highlight.customIcon}
+              alt={highlight.title}
+              class="w-[96px] h-[144px]"
+            />
+          )}
+          <h2 class="text-xl text-center font-semibold mt-2">{highlight.title}</h2>
+        </div>
+      ))
+    }
   </div>
+</div>
