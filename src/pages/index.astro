@@ -15,12 +15,6 @@ import Newsletter from './_index/Newsletter.astro';
 ---
 
 <Layout fullTitle="PixiEditor" description='PixiEditor is a free and open-source universal 2D graphics editor, powered by innovative Node Graph workflow. Create vectors, edit photos, design graphics, make pixel art and animate - all in one app!'>
-     <div id="banner" class="bg-orange-400 text-white text-center py-3 px-4 flex flex-col sm:flex-row sm:justify-center sm:items-center gap-2 hidden">
-        <span class="font-bold text-lg">
-            🍂 Autumn Sale is here! Use code <span class="underline">AUTUMN30</span> to get Founder's Pack 30% off!
-        </span>
-        <span id="autumn-timer" class="font-mono text-lg bg-white/20 rounded px-2 py-1"></span>
-    </div>
     <section class="container mx-auto flex flex-col items-center text-center mt-10">
         <h1 class="text-2xl md:text-[40px] font-bold">
             Universal 2D Graphics Editor <br>
@@ -47,10 +41,13 @@ import Newsletter from './_index/Newsletter.astro';
 
     <div class="bg-neutral-900 mt-8 py-12">
         <section class="container mx-auto">
-            <h1 class="text-center text-3xl">Explore our <span class="font-bold">roadmap</span></h1>
+            <h1 class="text-center text-3xl">Explore our <span class="font-bold">open roadmap</span></h1>
+            <h2 class="text-center text-white/60 mt-2 mb-6">PixiEditor roadmap is based on open, community proposals and voting system</h2>
 
             <div class="max-w-5xl mx-auto gap-5 flex flex-col">
             <Roadmap />
+            <!-- Centered gray text saying something -->
+            <span class="text-center text-white/60">Roadmap refreshes once a day</span>
             <Newsletter />
             </div>
         </section>
@@ -77,35 +74,3 @@ import Newsletter from './_index/Newsletter.astro';
     </section>
 
 </Layout>
-
-<script is:inline>
-    const saleStart = Date.UTC(2025, 8, 29, 17, 0, 0);
-    const saleEnd = Date.UTC(2025, 9, 6, 17, 0, 0);
-  const banner = document.getElementById('banner');
-  
-  const now = new Date();
-  if (now > saleStart) {
-    banner.classList.remove('hidden');
-  }
-
-  function updateCountdown() {
-    const now = new Date();
-    const diff = saleEnd - now;
-    const timerEl = document.getElementById('autumn-timer');
-
-    if (diff <= 0) {
-        banner.classList.add('hidden');
-      return;
-    }
-
-    const days = Math.floor(diff / (1000 * 60 * 60 * 24));
-    const hours = Math.floor((diff % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
-    const minutes = Math.floor((diff % (1000 * 60 * 60)) / (1000 * 60));
-    const seconds = Math.floor((diff % (1000 * 60)) / 1000);
-
-    timerEl.textContent = `${days}d ${hours}h ${minutes}m ${seconds}s`;
-  }
-
-  updateCountdown();
-  setInterval(updateCountdown, 1000);
-</script>
