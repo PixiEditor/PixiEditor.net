@@ -91,7 +91,7 @@ const proposals: (Proposal | null)[] = await Promise.all(
             p !== null &&
             p.status in StatusVariant &&
             p.status != "rejected" &&
-            (p.forVersion === "2.2" || p.forVersion === null),
+            (p.forVersion === "2.2" || p.forVersion === "2.1" || p.forVersion === null),
     ),
 );
 ---
@@ -124,6 +124,7 @@ const proposals: (Proposal | null)[] = await Promise.all(
                     ><span style="margin-right: 5px;">Brush Tools</span
                     ></RoadmapItem
                 >
+                <ProposalItem proposals={proposals} forVersion="2.1" />
             </div>
         </div>
 
@@ -132,15 +133,19 @@ const proposals: (Proposal | null)[] = await Promise.all(
             <Chip linkTo="https://forum.pixieditor.net/c/proposals/22"
                 >Status: Open for proposals</Chip
             >
+            <div class="mt-4">
             <ProposalItem proposals={proposals} forVersion="2.2" />
+            </div>
         </div>
 
         <div class="card max-h-[600px] overflow-y-auto">
             <h1>Proposals</h1>
             <Chip linkTo="https://forum.pixieditor.net/c/proposals/22"
-                >Propose a feature here</Chip
+                >Click to propose a feature</Chip
             >
+            <div class="mt-4">
             <ProposalItem proposals={proposals} forVersion={null} />
+            </div>
         </div>
     </div>
 </div>
