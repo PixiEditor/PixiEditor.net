@@ -1,0 +1,67 @@
+---
+import RoadmapItem from "src/pages/_index/RoadmapItem.astro";
+import Chip from "./Chip.astro";
+import type { Proposal } from "./ForumData";
+
+interface Props {
+    proposals: (Proposal | null)[];
+    forVersion?: string | null;
+}
+
+export const StatusVariant: Record<string,"violet" | "blue" | "green" | "red" | "yellow" | "gray"> = {
+    "open-for-discussion": "blue",
+    accepted: "green",
+    rejected: "red",
+    "more-info-needed": "yellow",
+    frozen: "gray",
+};
+
+const statusLabel: Record<string, string> = {
+    "open-for-discussion": "Open",
+    accepted: "Accepted",
+    rejected: "Rejected",
+    "more-info-needed": "More info needed",
+    frozen: "Frozen",
+};
+
+const { proposals, forVersion } = Astro.props;
+---
+
+<div class="card-list">
+    {
+        proposals
+            .filter(
+                (p): p is Proposal => p != null && p.forVersion === forVersion,
+            )
+            .map((p) => (
+                <RoadmapItem>
+                    <a href={p.url} target="_blank" class="block">
+                        <div class="flex flex-col gap-2">
+                            <div class="font-medium leading-tight">
+                                {p.title}
+                            </div>
+                            <div class="flex flex-wrap items-center gap-2">
+                                <span class="text-sm text-white/60">
+                                    {p.votes}
+                                     vote{p.votes === 1 ? "" : "s"}
+                                </span>
+                                <Chip
+                                    variant={StatusVariant[p.status]}
+                                    label={statusLabel[p.status]}
+                                />
+                            </div>
+                        </div>
+                    </a>
+                </RoadmapItem>
+            ))
+    }
+</div>
+
+<style>
+    @reference "tailwindcss";
+    @tailwind utilities;
+
+ .card-list {
+        @apply flex flex-col gap-3;
+    }
+</style>

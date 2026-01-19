@@ -1,40 +1,21 @@
 ---
-const content = await Astro.slots.render('default');
-
 interface Props {
-    isDone?: boolean,
-    inProgress?: boolean
+    hoverable?: boolean;
 }
 
-const { isDone, inProgress } = Astro.props;
-
-const liClass = isDone ? "marker-done" : (inProgress ? "marker-in-progress" : "marker-not-done");
-const ariaLabel = isDone ? `${content} (done)` : undefined;
+const { hoverable = true } = Astro.props;
 ---
 
+<div
+    class:list={[hoverable ? "hoverable" : "", "rounded-lg bg-white/5 px-3 py-2"]}>
+    <slot />
+</div>
+
 <style>
-@reference "tailwindcss";
-@config "../../../tailwind.config.mjs";
-@tailwind utilities;
+    @reference "tailwindcss";
+    @tailwind utilities;
 
-.marker-done::marker {
-    content: "\e16d    ";
-    font-family: lucide;
-    @apply text-pc-softpixired font-bold;
-}
-
-.marker-not-done::marker {
-    content: "\e16a    ";
-    font-family: lucide;
-    @apply text-pc-softpixired font-bold;
-}
-
-.marker-in-progress::marker {
-    content: "\e16e    ";
-    font-family: lucide;
-    @apply text-pc-softpixired font-bold;
-}
-
+    .hoverable {
+        @apply transition cursor-pointer hover:bg-white/10;
+    }
 </style>
-
-<li class={liClass} aria-label={ariaLabel}><slot /></li>

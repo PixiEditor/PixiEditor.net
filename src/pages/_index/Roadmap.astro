@@ -1,55 +1,176 @@
 ---
-import RoadmapItem from "./RoadmapItem.astro"
+import Chip from "@components/Chip.astro";
+import RoadmapItem from "./RoadmapItem.astro";
+import type { Topic, Proposal } from "@components/ForumData";
+import ProposalItem, { StatusVariant } from "@components/ProposalItem.astro";
+
+const FORUM_BASE = "https://forum.pixieditor.net";
+const CATEGORY_ID = 22;
+
+let topics: Topic[] = [];
+if (import.meta.env.DEV) {
+    // Mock data for development
+    for (let i = 1; i <= 5; i++) {
+        topics.push({
+            id: i,
+            slug: `mock-proposal-${i}`,
+            title: `Mock Proposal ${i}`,
+            vote_count: Math.floor(Math.random() * 100),
+            post_stream: {
+                posts: [
+                    {
+                        cooked:
+                            i % 2 == 0
+                                ? `<p><code>${["accepted", "rejected", "more-info-needed", "open-for-discussion"][i % 4]}</code><br>Discussion ends: <code>2026-04-17</code><br><code>2.2</code></p>`
+                                : `<p><code>${["accepted", "rejected", "more-info-needed", "open-for-discussion"][i % 4]}</code><br>Discussion ends: <code>2026-04-17</code></p>`,
+                        username: "flabbet",
+                    },
+                ],
+            },
+        });
+    }
+} else {
+    const categoryRes = await fetch(`${FORUM_BASE}/c/${CATEGORY_ID}.json`);
+    const categoryData = await categoryRes.json();
+
+    topics = categoryData?.topic_list?.topics || [];
+}
+
+const proposals: (Proposal | null)[] = await Promise.all(
+    topics.map(async (topic: Topic) => {
+        let topicData;
+        if (import.meta.env.DEV) {
+            topicData = topic;
+        } else {
+            const topicRes = await fetch(
+                `${FORUM_BASE}/t/${topic.slug}/${topic.id}.json`,
+            );
+            topicData = await topicRes.json();
+        }
+
+        const votingPost = topicData.post_stream.posts.find(
+            (p: { cooked: string; username: string }) =>
+                p.cooked.includes("Discussion ends:") &&
+                p.username == "flabbet",
+        );
+
+        let forVersion = null;
+        let status = "Unknown";
+        if (votingPost) {
+            // Status, first line between <code> tags
+            // Voting ends, second line after "Discussion ends:" in format YYYY-MM-DD, between <code> tags
+            const codeElements = votingPost.cooked
+                .match(/<code>(.*?)<\/code>/g)
+                ?.map((code: string) => code.replace(/<\/?code>/g, "").trim());
+
+            if (codeElements.length >= 0) {
+                status = codeElements[0].trim();
+                if (codeElements.length >= 2) {
+                    const votingEndsStr = codeElements[1].trim();
+                }
+                if (codeElements.length >= 3) {
+                    forVersion = codeElements[2].trim();
+                }
+            }
+        } else {
+            return null;
+        }
+
+        return {
+            id: topic.id,
+            title: topic.title,
+            url: `${FORUM_BASE}/t/${topic.slug}/${topic.id}`,
+            votes: topic.vote_count ?? 0,
+            status: status,
+            forVersion,
+        };
+    }),
+).then((results) =>
+    results.filter(
+        (p): p is Proposal =>
+            p !== null &&
+            p.status in StatusVariant &&
+            p.status != "rejected" &&
+            (p.forVersion === "2.2" || p.forVersion === "2.1" || p.forVersion === null),
+    ),
+);
 ---
 
 <div class="overflow-auto max-md:pb-3">
-    <div class="flex w-fit gap-6 mt-12 px-8 mx-auto">
-        <div class="card">
-            <h1>2025</h1>
-            <ul>
-                <RoadmapItem isDone>2.0 Release</li>
-                <RoadmapItem><a style="text-decoration: underline" href="/blog/2025/08/23/august-status">Brush Engine</a></li>
-                <RoadmapItem>Tutorials</li>
-                <RoadmapItem>Documentation</li>
-            </ul>
+    <div class="flex w-fit gap-6 px-8 mx-auto">
+        <div class="card max-h-[600px] overflow-y-auto">
+            <h1>PixiEditor 2.1</h1>
+            <Chip linkTo="/blog/2025/12/10/21-beta" variant="violet"
+                >Status: Beta</Chip
+            >
+            <div class="card-list">
+                <RoadmapItem
+                    hoverable={false}
+                    ><span style="margin-right: 5px;">Brush Engine</span
+                    ></RoadmapItem
+                >
+                <RoadmapItem
+                    hoverable={false}
+                    ><span style="margin-right: 5px;">Smart Layers</span
+                    ></RoadmapItem
+                >
+                <RoadmapItem
+                    hoverable={false}
+                        >Customizable Toolsets</span
+                    ></RoadmapItem
+                >
+                <RoadmapItem
+                    hoverable={false}
+                    ><span style="margin-right: 5px;">Brush Tools</span
+                    ></RoadmapItem
+                >
+                <ProposalItem proposals={proposals} forVersion="2.1" />
+            </div>
         </div>
 
-        <div class="card">
-            <h1>2026</h1>
-            <ul>
-                <RoadmapItem>Extensions</li>
-                <RoadmapItem>Extension Store</li>
-                <RoadmapItem>Vector Animations</li>
-                <RoadmapItem>Lottie Support</li>
-                <RoadmapItem>Tile Tools</li>
-            </ul>
+        <div class="card max-h-[600px] overflow-y-auto">
+            <h1>PixiEditor 2.2</h1>
+            <Chip linkTo="https://forum.pixieditor.net/c/proposals/22"
+                >Status: Open for proposals</Chip
+            >
+            <div class="mt-4">
+            <ProposalItem proposals={proposals} forVersion="2.2" />
+            </div>
         </div>
 
-        <div class="card">
-            <h1>And beyond!</h1>
-            <ul>
-                <RoadmapItem>Web version</li>
-                <RoadmapItem>Asset Marketplace</li>
-                <RoadmapItem>CLI</li>
-                <RoadmapItem>Interactive Graphics Format</li>
-            </ul>
+        <div class="card max-h-[600px] overflow-y-auto">
+            <h1>Proposals</h1>
+            <Chip linkTo="https://forum.pixieditor.net/c/proposals/22"
+                >Click to propose a feature</Chip
+            >
+            <div class="mt-4">
+            <ProposalItem proposals={proposals} forVersion={null} />
+            </div>
         </div>
     </div>
 </div>
 
 <style>
-@reference "tailwindcss";
-@tailwind utilities;
+    @reference "tailwindcss";
+    @tailwind utilities;
 
-.card {
-    @apply w-72 bg-neutral-800 p-8 rounded text-lg;
-}
+    .card {
+        @apply w-72 bg-neutral-800 p-8 rounded text-lg;
+    }
 
-.card > h1 {
-    @apply text-3xl font-bold;
-}
+    .card > h1 {
+        @apply text-3xl font-bold;
+    }
 
-.card > ul {
-    @apply ps-8 mt-6 flex flex-col gap-y-3;
-}
+    .card > ul {
+        @apply ps-8 mt-2 flex flex-col gap-y-3;
+    }
+
+    .card > h1 {
+        @apply mb-2;
+    } 
+
+ .card-list {
+        @apply flex flex-col gap-3 mt-4;
+    }
 </style>

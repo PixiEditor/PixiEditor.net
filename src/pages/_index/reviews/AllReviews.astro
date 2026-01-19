@@ -4,6 +4,8 @@ import PixiPerfectIcon from "@components/PixiPerfectIcon.astro"
 import SteamLogo from '@assets/logos/SteamLogo.svg';
 import UserReview from "./UserReview.astro";
 import MicrosoftStoreLogo from '@assets/logos/MicrosoftStoreLogo.svg';
+import YouTube from '@assets/logos/YouTube.svg';
+import Gamefromscratch from '@assets/logos/gfs.jpg';
 
 import fetchPixiEditorReviewStats from "./SteamReviewExtractor";
 
@@ -51,9 +53,9 @@ const steamReviewData = import.meta.env.DEV
         </UserReview>
     </div>
     <div class="w-1/2 max-md:hidden flex flex-col gap-6">
-        <UserReview author="Uriel" date="21.09.2024" platform={MicrosoftStoreLogo}>
-            The truth is that it is very good, it is one of the best applications to draw in pixel art :)
-        </UserReview>
+        <a href="https://youtu.be/sY_vdLlMAEI?t=195" target="_blank"><UserReview author="Gamefromscratch" date="22.09.2025" platform={YouTube} logo={Gamefromscratch}>
+            This is one of my surprise discoveries of the year. I definitely have my eye on this one going forward. It is an awesome tool. It's probably my tool of 2025, if I was to give awards.
+        </UserReview></a>
         <UserReview author="José Raphael" date="12.04.2024" platform={MicrosoftStoreLogo}>
             I loved it, of all the pixel art programs I provide this one has the most professional interface, which helped me adapt and understand it quickly.
         </UserReview>
