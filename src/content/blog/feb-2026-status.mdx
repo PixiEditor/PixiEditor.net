@@ -1,0 +1,125 @@
+---
+title: PixiEditor 2.0 February 2026 Status
+authors: [ flabbet ] 
+tags: [ status, pixieditor2.0 ]
+date: 2026-03-02
+description: "Improved animations, mushy advisor, optimizations and much more. PixiEditor 2026 February status"
+cover: "./assets/feb-2026-status/cover.png"
+---
+
+Hello!
+
+First of all, sorry for not posting a status update earlier. We are preparing for final 2.1 release and I was too busy with the development. There are so many new stuff and I can't wait to share it with you.
+
+## macOS binaries for everyone
+
+Before we jump into the new things and status update of PixiEditor, let's start with some news.
+
+Up until now, we've shared macOS binaries bundled with Founder's Bundle only. It was due to the fact, that developing for macOS is quite expensive and we had to gather some funds for further development. I am very happy to 
+announce that starting with version 2.1, macOS binaries will be available free for everyone. Steam version included.
+
+Of course, anyone who purchased Founder's Bundle will still have it. 
+
+In other words, we'll share macOS version on the same terms as versions for other operating systems. No need to buy Founder's Bundle or compile from source.
+
+## Libregraphics
+
+Folks from Libregraphics conference reached out to me, asking if I want to give a talk about PixiEditor and I couldn't resist the opportunity. 
+
+So join me on [Libre Graphics Meeting 2026](https://libregraphicsmeeting.org/2026/) in Nuremberg! [I'll be giving a talk about PixiEditor on April 25th](https://libregraphicsmeeting.org/2026/program/talk_pixieditor/). 
+
+Let's have a chat!
+
+## What's coming along with V2.1
+
+As previously announced, we're building a marketplace as a part of our funding plan. It will contain useful workspaces, brushes, palettes and extensions. I can finally share with you today what kind of extension will be
+available on 2.1 premiere.
+
+All tools described below will be made with Brush Engine. We will not paywall any new features. We have not decided on prices yet and details of extensions are not final.
+
+There will be 2 bigger extensions and some brush packs.
+
+### Advanced pixel art suite
+
+A brand new toolset with tools for pixel art dedicated to speed up tedious work, such as auto dithering and dithered gradient tool. We're experimenting with tools for auto removing jaggies, pixel cluster tool (orphan pixels remover) and light aware shading brush.
+
+We're open for ideas though, if you are missing some specific tool for your pixel art workflow, let us know!
+
+### Texturing suite
+
+A set of texturing workspaces for various scenarios. Such as:
+
+1. Skybox texturing workspace (with live preview of the skybox)
+2. 3D parallax workspace (create environment layers and preview parallax of them)
+3. Weather stress workspace (a workspace with various effects like fog, desaturation, rain - useful for checking how your textures look in different settings)
+
+Of course it'll include 3D cube texturing workspace and tiling texturing workspace from Founder's Pack.
+
+We're also experimenting with auto normal map generator and generic 3D models texturing workspace. Although the latter may be added after 2.1 release.
+
+## Compatibility
+
+We are doing our best to ensure your files from 2.0 will work and look the same in 2.1. However, due to the nature of PixiEditor and infinite possibilities of your graphs, we are unable to test everything ourselves.
+This is why we are calling you to action! Please send us your .pixi files made in PixiEditor 2.0 so we can run them on the new version and verify that everything is working properly.
+
+Please do so [here](PUT LINK HERE, add a checkbox there asking for user for consent to put them in public render tests)
+
+## The state of PixiEditor
+
+Time for the juicy stuff. I don't have an exact release date for V2.1, but we are very close. Overall we are in testing-refining phase now. It's a really big update, there's a brand new node-based Brush Engine, Smart Layers, Node Graph Blackboard,
+reworked animation timeline, reworked rendering, new tools, full screen viewports and tons of smaller features/changes.
+
+### Reworked animation timeline
+
+This is something many of you requested. We've overhauled the timeline and workflow of animation system. This is the very first [community proposal](https://forum.pixieditor.net/t/timeline-improvements/540) coming to life.
+
+<video src='/videos/feb-2026-status/newtimeline.webm' loop autoplay mute controls playsinline/>
+
+The most important changes:
+- Gaps between cels will now display empty canvas. Old files still fallback to the base layer (it's possible to enable this behavior)
+- Cels can no longer overlap
+- Drawing on an empty space will create a cel if it doesn't exist
+- To draw on the base layer, you need to hide animation for this layer with eye icon
+- Changed the feel and a look of cels
+
+Please test it yourself on [dev channel](https://pixieditor.net/docs/open-beta/) and let us know if it's better and more pleasant to use! 
+
+For compatibility reasons, files with overlapping frames will still overlap if you open them in version 2.1, if you move them, you won't be unable to overlap them again.
+
+### Mushy advisor
+
+There are some things that may not be obvious. One of these things are smart layers. In version 2.1, importing anything from the outside of the editor will be imported as a smart layer by default. This allows you to directly
+use other .pixi or .svg file as a layer. 
+
+To keep this consistent, normal .png or other image files work this way too. It additionally solves a problem of cutting off parts of the image if you transform it outside of the document bounds.
+
+But there's a one problem. You can't directly draw on a smart layer. You need to either rasterize it first or edit the source file. Once you realize this, it's not a problem, but it may look like a bug to someone who
+does not know that.
+
+Initially, I wanted to solve this problem by simply displaying a pop-up with a question about the default behavior, when user tries to draw on a smart layer.
+
+But I got carried away a little...
+
+<video src='/videos/feb-2026-status/advisor.webm' loop autoplay mute controls playsinline/>
+
+I added him to a few more places, he not only asks questions but also gives tips. Can you find all of them?
+
+### GIF and APNG to frames
+
+### Adaptable inputs
+
+### Node Arrays
+
+### Gradient tool
+
+### Bindable tool transient shortcuts
+
+### Improved SVG support
+
+### Non contigouos fill and magic wand
+
+### Significant performance improvements
+
+### More Math
+
+### Color space improvements
