@@ -18,15 +18,13 @@ Before we jump into the new things and status update of PixiEditor, let's start 
 Up until now, we've shared macOS binaries bundled with the Founder's Bundle only. It was because developing for macOS is quite expensive, and we had to gather some funds for further development. I am very happy to 
 announce that starting with version 2.1, macOS binaries will be available for free for everyone. Steam version included.
 
-Of course, anyone who purchased the Founder's Bundle will still have it. 
-
 In other words, we'll share the macOS version on the same terms as versions for other operating systems. No need to buy Founder's Bundle or compile from source.
 
 ## Libregraphics
 
 Folks from the Libregraphics conference reached out to me, asking if I wanted to give a talk about PixiEditor, and I couldn't resist the opportunity. 
 
-So join me on [Libre Graphics Meeting 2026](https://libregraphicsmeeting.org/2026/) in Nuremberg! [I'll be giving a talk about PixiEditor on April 25th](https://libregraphicsmeeting.org/2026/program/talk_pixieditor/). 
+So join me on [Libre Graphics Meeting 2026](https://libregraphicsmeeting.org/2026/) in Nuremberg! [I'll be giving a talk about PixiEditor on April 25th](https://libregraphicsmeeting.org/2026/program/talk_power_of_node_driven_2d_workflows/). 
 
 Let's have a chat!
 
@@ -35,11 +33,11 @@ Let's have a chat!
 As previously announced, we're building a marketplace as a part of our funding plan. It will contain useful workspaces, brushes, palettes, and extensions. I can finally share with you today what kind of extension will be
 available on 2.1 premiere.
 
-All tools described below will be made with the Brush Engine. We will not paywall any new features. We have not decided on prices yet, and details of extensions are not final.
+We have not decided on prices yet, and details of extensions are not final.
 
-There will be 2 bigger extensions and some brush packs.
+We're planning to release 2 bigger extensions and some brush packs.
 
-### Advanced pixel art suite
+### Advanced pixel art toolset
 
 A brand new toolset with tools for pixel art dedicated to speeding up tedious work, such as auto-dithering and a dithered gradient tool. We're experimenting with tools for auto-removing jaggies, the pixel cluster tool (orphan pixels remover), and the light-aware shading brush.
 
@@ -81,6 +79,7 @@ The most important changes:
 - Gaps between cels will now display an empty canvas. Old files still fall back to the base layer (it's possible to enable this behavior)
 - Cels can no longer overlap
 - Drawing on an empty space will create a cel if it doesn't exist
+- Creating a new cel will place it as close as possible to the active frame
 - To draw on the base layer, you need to hide the animation for this layer with the eye icon
 - Changed the feel and look of cels
 
@@ -90,10 +89,10 @@ For compatibility reasons, files with overlapping frames will still overlap if y
 
 ### Mushy advisor
 
-Some things may not be obvious. One of these things is smart layers. In version 2.1, importing anything from the outside of the editor will be imported as a smart layer by default. This allows you to do so directly.
-Use another .pixi or .svg file as a layer. 
+Some things may not be obvious. One of these things is smart layers. In version 2.1, importing anything from the outside of the editor will be imported as a smart layer by default. This allows you to directly
+use another .pixi or .svg file as a layer. 
 
-To keep this consistent, normal .png or other image files work this way too. It additionally solves the problem of cutting off parts of the image if you transform it outside of the document bounds.
+To keep things consistent, normal .png or other image files work this way too. It additionally solves the problem of cutting off parts of the image if you transform it outside of the document bounds.
 
 But there's one problem. You can't directly draw on a smart layer. You need to either rasterize it first or edit the source file. Once you realize this, it's not a problem, but it may look like a bug to someone who
 does not know that.
@@ -104,7 +103,7 @@ But I got carried away a little...
 
 <video src='/videos/feb-2026-status/advisor.webm' loop autoplay mute controls playsinline/>
 
-I added him to a few more places. He not only asks questions but also gives tips. Can you find all of them?
+I added this little guy to a few more places. It not only asks questions but also gives tips. Can you find all of them?
 
 ### GIF and APNG to frames
 
@@ -202,7 +201,8 @@ Our little obsession. We've greatly improved loading times and various performan
 And we're not done yet. In fact, CPK developed a brand new QOI encoder from scratch, and it beats or is very close to the original C implementation in encoding and decoding times. We're actually still testing it, so it's not yet part of PixiEditor, but I can't
 wait to test how it feels. For context, we are using the QOI file format to save images within a `.pixi` file. Even though it is not a part of PixiEditor yet, you can test it yourself [here](https://actualqoi.pages.dev/) already.
 
-Up to this day, we have been using .NET Standard 2.0 Qoi.Netstandard encoder, which performs quite poorly. We had a choice to use another, faster library, but it would limit PixiParser's embeddability (.NET 8+ minimum) or write our own .NET Standard library.
+Up to this day, we have been using .NET Standard 2.0 Qoi.Netstandard encoder, which performs quite poorly. We had a choice to use another, faster library or write our own solution. All the libraries we tested 
+had issues here and there, so we've decided on building it from scratch.
 
 ![QOI encoder benchmark result, where our performs the best](assets/feb-2026-status/qoi.png)
 
@@ -219,3 +219,13 @@ Who doesn't love trigonometry! Math node now includes Atan, Atan2, Acos, and Asi
 I swear, if I had to make a list of things that I'm losing sleep over, color spaces would be in the top 3 if not first.
 
 If you encountered weird color issues, wrong-looking gradients, or anything similar, it should not happen in 2.1 ... I hope.
+
+## Finale
+
+Thank you for reading it all the way down! We are putting countless hours into PixiEditor, we actually care about building a powerful free tool that can compete and outperform other proprietary solutions. 
+
+If you think that what we do here is useful, please consider supporting us with a Founder's Bundle, share the word about PixiEditor with a friend, your community or a family member. Also if you have .pixi files, that we could test against PixiEditor 2.1, don't forget to send them [here](https://forms.gle/QNmY1RsdkQMysfrV7)!
+
+With love,
+
+flabbet, Mushy and PixiEditor Team
