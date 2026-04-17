@@ -3208,6 +3208,13 @@ __metadata:
   languageName: node
   linkType: hard
 
+"js-confetti@npm:^0.13.1":
+  version: 0.13.1
+  resolution: "js-confetti@npm:0.13.1"
+  checksum: 10c0/2b60985bff6b33b6b02762e434c59dbaccc7ab0474987b738d8887de863d01a0f3ed52c1772c352f64d4905329e68384bd2fc15c90653e3689bbfec2f8bb2753
+  languageName: node
+  linkType: hard
+
 "js-tokens@npm:^4.0.0":
   version: 4.0.0
   resolution: "js-tokens@npm:4.0.0"
@@ -4577,6 +4584,7 @@ __metadata:
     "@tailwindcss/vite": "npm:^4.0.17"
     astro: "npm:^5.7.13"
     hls.js: "npm:^1.5.20"
+    js-confetti: "npm:^0.13.1"
     lucide-static: "npm:^0.473.0"
     remark-github-blockquote-alert: "npm:^1.3.1"
     sass: "npm:^1.84.0"

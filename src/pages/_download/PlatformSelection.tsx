@@ -63,8 +63,8 @@ export default function PlatformSelection(props: { "data-links": any, microsoftL
         />
       </div>
       <div class={props.fullInfo ? "flex items-center justify-center min-h-[150px]" : "flex items-center justify-center h-[80px]"}>
-        {(!selectedOption().startsWith("macOS") || !props.fullInfo) && 
-        (
+        {
+        
           <div>
             <a href={getDownloadUrlForOption(selectedOption())} class="px-button-soft block w-full max-w-xs mx-auto text-xl py-3">
               <SolidLucide data="download" class="align-middle me-1" />
@@ -76,15 +76,6 @@ export default function PlatformSelection(props: { "data-links": any, microsoftL
             </div>
             {props.fullInfo ? <a class="text-sm text-neutral-400 underline" href="https://github.com/PixiEditor/PixiEditor/releases" target="_blank">Download archive versions from GitHub <SolidLucide data="external-link" /> </a> : null}
           </div>
-        )}
-        {selectedOption().startsWith("macOS") && props.fullInfo &&
-        (
-            <div class="w-full max-w-d text-center flex flex-col min-h-[150px] gap-4">
-              <p>Building for MacOS is expensive for us, so for now the MacOS version is only available if you purchase Founder's Bundle. This might change in the future.</p>
-              <p class="mt-auto">Already own Founder's Bundle? <a href={getDownloadUrlForOption(selectedOption())} class="underline">Download</a></p>
-              <p class="text-sm text-neutral-400 mt-auto">You can still <a href="/docs/contribution/compileguide" class="underline">build from source</a></p>
-            </div>
-        )
         }
       </div>
 
