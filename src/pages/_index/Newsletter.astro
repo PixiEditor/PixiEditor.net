@@ -53,12 +53,11 @@ const { hideMushy = false } = Astro.props;
         Join newsletter
       </button>
     </div>
-    <label class="flex items-center mt-3 text-sm text-zinc-400">
-      <input type="checkbox" class="mr-2 accent-indigo-500" required />
-      I agree to PixiEditor’s
-      <a href="/docs/privacy-policy" class="ml-1 underline hover:text-white"
-        >privacy policy</a
-      >.
+    <label class="text-sm text-zinc-400">
+      <input type="checkbox" class="mr-2 mt-4 accent-indigo-500" required />
+      I agree to receive commercial and marketing information about new products and promotions {hideMushy ? null : <br/>} offered by Pixi Labs sp. z o.o., to the e-mail address provided by me. In addition. I have read the{hideMushy ? " " : <br/>}<a href="/docs/newsletter-regulations" target="_blank" class="underline hover:text-white"
+        >Newsletter Regulations</a> and <a target="_blank" href="/docs/privacy-policy" class="underline hover:text-white"
+        >Privacy Policy</a> and accept their provisions.
     </label>
   </form>
 
