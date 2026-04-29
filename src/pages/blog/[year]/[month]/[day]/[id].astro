@@ -54,8 +54,6 @@ const { Content, headings } = await render(post);
                     <hr class="my-6 border-0 bg-neutral-600 h-1 rounded">
                     <div class="flex flex-col gap-1">
                         {post.data.tags?.map((tag) => (
-                            // Add once tag page is implemented
-/*                             <a href={`/blog/tags/${tag.id}`} class="py-1 px-3 bg-neutral-900 w-fit rounded">{tag.id}</a> */
                             <span class="py-1 px-3 bg-neutral-900 w-fit rounded">{tag.id}</span>
                         ))}
                     </div>
