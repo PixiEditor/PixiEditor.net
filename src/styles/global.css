@@ -64,6 +64,10 @@
     background-color: #ED385C;
 }
 
+.bg-pc-drawing-yellow {
+    background-color: #FBFF00;
+}
+
 .founders-gradient {
     background: linear-gradient(257deg, #832ED7 -0.25%, #9D42F8 23.74%, #DCB8FF 47.75%, #AB56FF 71.75%, #762BC0 95.75%);
     background-clip: text;

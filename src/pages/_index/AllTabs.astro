@@ -15,7 +15,7 @@ const tabCollection = Object.entries(tabFiles).map(([_, module]: any) => {
 
 <div class="flex justify-center gap-6 max-md:hidden mt-14" role="tablist">
     {tabCollection.map((tab) => (
-            <button class="w-32 flex flex-col items-center tab-button cursor-pointer" name={tab.id} id={`${tab.id}-button`} aria-controls={tab.id} role="tab">
+            <button class="group w-32 flex flex-col items-center tab-button cursor-pointer" name={tab.id} id={`${tab.id}-button`} aria-controls={tab.id} role="tab" >
                 <tab.data.iconType
                         data={tab.data.icon}
                         class={`text-5xl ${tab.data.textClass}`}
@@ -23,7 +23,7 @@ const tabCollection = Object.entries(tabFiles).map(([_, module]: any) => {
                 <h2 class="font-semibold mt-3">
                     {tab.data.title}
                 </h2>
-{              <div class={`opacity-0 aria-selected-parent:opacity-100 rounded-full ${tab.data.backgroundClass} w-full h-[3px]`}></div> }
+{              <div class={`opacity-0 group-aria-selected:opacity-100 rounded-full ${tab.data.backgroundClass} w-full h-[3px]`}></div> }
                 <span class="sr-only">{tab.data.title}</span>
             </button>
     ))}

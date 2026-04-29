@@ -20,6 +20,7 @@ export default {
 				'pc-raster-green': '#87D33B',
 				'pc-vector-purple': '#B046E6',
 				'pc-animation-pink': '#ED385C',
+				'pc-drawing-yellow': '#FBFF00',
 				'discord-blurple': '#5865F2',
 				'neutral-910': 'oklch(0.170 0 0)'
 			},
