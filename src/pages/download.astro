@@ -226,7 +226,7 @@ const basePricePLN = 120;
 
   async function getUserCurrency() {
     try {
-        const unsupportedCurrencies = ["CO", "ME", "KP", "KR", "IN", "RS", "MX", "AE", "TR", "AM"];
+        const unsupportedCountries = ["CO", "ME", "KP", "KR", "IN", "RS", "MX", "AE", "TR", "AM", "CL", "VN"];
 
       const res = await fetch("https://ip2c.org/s");
       // Example response: "1;PL;POL;Poland"
@@ -234,7 +234,7 @@ const basePricePLN = 120;
 
       const countryCode = data.split(';')[1];
 
-      if(unsupportedCurrencies.includes(countryCode)) {
+      if(unsupportedCountries.includes(countryCode)) {
         return 'UNSUPPORTED';
       }
 
