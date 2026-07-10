@@ -27,7 +27,7 @@ async function fetchReviewStats(appid: number): Promise<{ totalReviews: number; 
     const data: SteamReviewsResponse = await response.json();
 
     const { total_positive, total_reviews } = data.query_summary;
-    const positivePercentage = (total_positive / total_reviews) * 100;
+    const positivePercentage = total_reviews > 0 ? (total_positive / total_reviews) * 100 : 0;
 
     return {
         totalReviews: total_reviews,
