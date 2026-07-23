@@ -40,9 +40,9 @@ const highlights: HighlightItem[] = [
 ---
 
 <div class="flex flex-col items-center justify-center gap-8">
-  <h1 class="text-center text-3xl">
+  <h2 class="text-center text-3xl">
     How are we putting <span class="font-bold">users</span> first?
-  </h1>
+  </h2>
   <div class="grid grid-cols-2 md:grid-cols-6 gap-4">
     {
       highlights.map((highlight) => (
@@ -54,12 +54,12 @@ const highlights: HighlightItem[] = [
             />
           ) : (
             <Image
-              src={highlight.customIcon}
+              src={highlight.customIcon!}
               alt={highlight.title}
               class="w-[96px] h-[144px]"
             />
           )}
-          <h2 class="text-xl text-center font-semibold mt-2">{highlight.title}</h2>
+          <h3 class="text-xl text-center font-semibold mt-2">{highlight.title}</h3>
         </div>
       ))
     }
