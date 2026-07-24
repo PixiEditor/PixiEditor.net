@@ -58,9 +58,11 @@ interface GithubReleaseAsset {
     browser_download_url: string;
 }
 
-export async function getDownloadAssets(): Promise<{ version: string, assets: { platform: string; architecture: string; option: string; downloadUrl: string; }[] }> {
+let cachedDownloadAssetsPromise: Promise<{ version: string, assets: { platform: string; architecture: string; option: string; downloadUrl: string; }[] }> | null = null;
 
-   if(!import.meta.env.PROD) {
+async function fetchDownloadAssets(): Promise<{ version: string, assets: { platform: string; architecture: string; option: string; downloadUrl: string; }[] }> {
+
+    if (!import.meta.env.PROD) {
         {
             return {
                 version: "v0.0.0",
@@ -84,14 +86,15 @@ export async function getDownloadAssets(): Promise<{ version: string, assets: { 
                         downloadUrl: "https://example.com/macos-x64.dmg"
                     }
                 ]
+            }
         }
     }
-} 
 
     const response: { tag_name: string, assets: GithubReleaseAsset[] } = await fetch("https://api.github.com/repos/PixiEditor/PixiEditor/releases/latest")
         .then(resp => resp.json())
         .catch(err => {
             console.error("Failed to fetch PixiEditor releases from GitHub:", err);
+            throw err;
         });
 
     const relevantAssets = response.assets.map(asset => {
@@ -120,10 +123,20 @@ export async function getDownloadAssets(): Promise<{ version: string, assets: { 
             option: extension as string,
             downloadUrl: asset.browser_download_url
         };
-    }).filter(x => x);
+    }).filter((x): x is NonNullable<typeof x> => x !== null);
 
     return {
         version: response.tag_name,
         assets: relevantAssets
     }
+}
+
+export function getDownloadAssets(): Promise<{ version: string, assets: { platform: string; architecture: string; option: string; downloadUrl: string; }[] }> {
+    if (!cachedDownloadAssetsPromise) {
+        cachedDownloadAssetsPromise = fetchDownloadAssets().catch((err) => {
+            cachedDownloadAssetsPromise = null;
+            throw err;
+        });
+    }
+    return cachedDownloadAssetsPromise;
 }

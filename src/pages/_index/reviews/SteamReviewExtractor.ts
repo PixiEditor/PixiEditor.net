@@ -35,6 +35,14 @@ async function fetchReviewStats(appid: number): Promise<{ totalReviews: number; 
     };
 }
 
-export default async function fetchPixiEditorReviewStats(): Promise<{ totalReviews: number; positivePercentage: number }> {
-    return await fetchReviewStats(2218560);
+let cachedPromise: Promise<{ totalReviews: number; positivePercentage: number }> | null = null;
+
+export default function fetchPixiEditorReviewStats(): Promise<{ totalReviews: number; positivePercentage: number }> {
+    if (!cachedPromise) {
+        cachedPromise = fetchReviewStats(2218560).catch((err) => {
+            cachedPromise = null;
+            throw err;
+        });
+    }
+    return cachedPromise;
 }
