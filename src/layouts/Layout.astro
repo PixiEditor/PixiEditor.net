@@ -75,7 +75,7 @@ import '../styles/global.css';
 
 		<PixiEditorFooter />
 
-		<script is:inline type="application/ld+json" set:html={JSON.stringify(jsonLd)}></script>
+		{jsonLd && <script is:inline type="application/ld+json" set:html={JSON.stringify(jsonLd)}></script>}
 	</body>
 </html>
 
