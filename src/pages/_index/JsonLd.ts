@@ -93,10 +93,7 @@ export default {
             "@id": pixiLabsId,
             "name": "Pixi Labs",
             "legalName": "Pixi Labs Sp. z o.o",
-            "contactPoint": {
-                "@type": "ContactPoint",
-                "email": "contact@pixilabs.eu"
-            }
+            "email": "contact@pixilabs.eu"
         }
     ]
 };
