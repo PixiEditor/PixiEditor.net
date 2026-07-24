@@ -23,29 +23,6 @@ const steamReviewData = import.meta.env.DEV
         <p class="text-7xl font-extrabold my-3">{steamReviewData.positivePercentage.toFixed(0)}%</p>
         <p class="pb-3">positive reviews <span class="font-bold">out of {steamReviewData.totalReviews}</span></p>
     </div>
-
-    {steamReviewData.totalReviews > 0 && (
-        <script type="application/ld+json" set:html={JSON.stringify({
-            "@context": "https://schema.org",
-            "@type": "SoftwareApplication",
-            "name": "PixiEditor",
-            "operatingSystem": "Windows, macOS, Linux",
-            "applicationCategory": "DesignApplication",
-            "description": "PixiEditor is a free and open-source universal 2D graphics editor, powered by an innovative Node Graph workflow. Create vectors, edit photos, design graphics, make pixel art and animate — all in one app.",
-            "offers": {
-                "@type": "Offer",
-                "price": "0",
-                "priceCurrency": "USD"
-            },
-            "aggregateRating": {
-                "@type": "AggregateRating",
-                "ratingValue": Math.round(steamReviewData.positivePercentage),
-                "ratingCount": steamReviewData.totalReviews,
-                "bestRating": 100,
-                "worstRating": 0
-            }
-        })} />
-    )}
     
     <div class="max-md:hidden rounded text-center bg-neutral-700">
         <div class="mx-auto bg-neutral-600 p-2 rounded-t flex justify-center gap-2">

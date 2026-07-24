@@ -24,8 +24,8 @@ type Props =
 		 * Specifies the OpenGraph image to be used. If not set, the default image will be used
 		 */
 		cover?: string;
-
 		description?: string;
+		jsonLd?: any;
 	})
 	| (BaseProps & {
 		title?: never;
@@ -38,9 +38,10 @@ type Props =
 		 */
 		cover?: string;
 		description?: string;
+		jsonLd?: any;
 	});
 
-const { title, fullTitle, notMain, cover, description, class: className, ...rest } = Astro.props;
+const { title, fullTitle, notMain, cover, description, jsonLd, class: className, ...rest } = Astro.props;
 
 const pageTitle = title
 	? `${title} | PixiEditor`
@@ -73,6 +74,8 @@ import '../styles/global.css';
 		{notMain ? <slot /> : <main class={className} {...rest}><slot /></main>}
 
 		<PixiEditorFooter />
+
+		<script is:inline type="application/ld+json" set:html={JSON.stringify(jsonLd)}></script>
 	</body>
 </html>
 

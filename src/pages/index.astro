@@ -12,9 +12,13 @@ import CommunityInfo from "./_index/CommunityInfo.astro";
 import Perks from './_index/Highlights.astro';
 import Highlights from './_index/Highlights.astro';
 import Newsletter from './_index/Newsletter.astro';
+import JsonLdData from './_index/JsonLd';
 ---
 
-<Layout fullTitle="PixiEditor – Free Pixel Editor & 2D Graphics Software" description='PixiEditor is a free and open-source universal 2D graphics editor, powered by innovative Node Graph workflow. Create vectors, edit photos, design graphics, make pixel art and animate - all in one app!'>
+<Layout
+    fullTitle="PixiEditor – Free Pixel Editor & 2D Graphics Software"
+    description='PixiEditor is a free and open-source universal 2D graphics editor, powered by innovative Node Graph workflow. Create vectors, edit photos, design graphics, make pixel art and animate - all in one app!'
+    jsonLd={JsonLdData}>
 <a
 	href="https://forum.pixieditor.net/t/pixieditor-2-1-0-20/578"
 	class="mx-4 mb-1 block rounded-sm border border-white/5 bg-[#111214] px-6 py-2 transition hover:bg-[#15171a]"
