@@ -9,7 +9,7 @@ export const socials = {
 }
 
 export const steam = {
-    store: "https://store.steampowered.com/app/2218560/PixiEditor__Pixel_Art_Editor/",
+    store: "https://store.steampowered.com/app/2218560/PixiEditor/",
     supporterPackStore: "https://store.steampowered.com/app/2435860/PixiEditor__Supporter_Pack/"
 }
 

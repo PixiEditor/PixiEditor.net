@@ -1,6 +1,7 @@
 import { pixiEditorId, pixiLabsId, blogId } from "@components/JsonLdShared";
 import fetchPixiEditorReviewStats from "./reviews/SteamReviewExtractor";
 import { getDownloadAssets } from "@assets/links";
+import { socials, github, flathub, forum, discordInvites, openCollective, steam } from "@assets/links";
 
 let steamReviewData = null;
 try {
@@ -48,13 +49,16 @@ export default {
             ],
             "sameAs": [
                 "https://www.wikidata.org/wiki/Q140676827",
-                "https://github.com/PixiEditor/PixiEditor",
-                "https://discord.gg/qSRMYmq",
-                "https://forum.pixieditor.net",
-                "https://www.reddit.com/r/PixiEditor/",
-                "https://store.steampowered.com/app/2218560/PixiEditor/",
-                "https://flathub.org/en/apps/net.pixieditor.PixiEditor"
+                github.PixiEditor.index,
+                discordInvites.chatChannel,
+                steam.store,
+                flathub.store,
+                socials.subreddit,
+                socials.youtubePage,
+                socials.twitterPage,
+                openCollective.page
             ],
+            "discussionUrl": forum.index,
             "offers": {
                 "@type": "Offer",
                 "price": "0",
