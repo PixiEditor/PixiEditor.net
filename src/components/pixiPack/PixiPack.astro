@@ -1,0 +1,24 @@
+---
+import PixiPackCard from "./PixiPackCard.astro";
+import { packs } from "./packs";
+import Title from "./title.svg";
+import { Image } from "astro:assets";
+---
+
+<section
+    class="bg-neutral-900 border border-neutral-700 rounded p-6 flex flex-col gap-6"
+>
+    <div class="text-center">
+        <Image src={Title} alt="PixiPack" class="mx-auto" />
+
+        <p class="mt-3 text-neutral-400 max-w-3xl mx-auto">
+            Support next year of PixiEditor's development and get access to unique perks
+        </p>
+    </div>
+
+    <div class="grid grid-cols-3 gap-4 max-lg:grid-cols-1">
+        {packs.map(pack => (
+            <PixiPackCard {...pack}/>
+        ))}
+    </div>
+</section>

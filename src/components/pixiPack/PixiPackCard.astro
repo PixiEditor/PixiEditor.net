@@ -1,0 +1,58 @@
+---
+import PixiPackBadge from "./PixiPackBadge.astro";
+import PixiPackButton from "./PixiPackButton.astro";
+import { Image } from "astro:assets";
+
+interface Props {
+    title: string;
+    badge: string;
+    accent: string;
+    background: string;
+    button: string;
+    buttonHover: string;
+    description?: string;
+    features: string[];
+    price: number;
+    badgeImage: Image;
+    titleStyle?: string;
+}
+
+const props = Astro.props;
+---
+
+<div class:list={["rounded-xl p-3 flex flex-col", props.background]}>
+    <div class="flex justify-between">
+        <div class="flex flex-col items-start">
+            {props.badge ? <PixiPackBadge text={props.badge} accent={props.accent} /> : null}
+
+            <h3 class:list={["text-2xl font-bold"]} style={props.titleStyle}>
+                {props.title}
+            </h3>
+        </div>
+
+        <Image src={props.badgeImage} alt="" class="w-[48px] h-[48px]" />
+    </div>
+
+    {
+        props.description && (
+            <p class="mt-2 text-neutral-300 text-start">{props.description}</p>
+        )
+    }
+
+    <ul class="mt-[6px] flex-1">
+        {
+            props.features.map((feature) => (
+                <li class="flex text-start gap-[6px]">
+                    <span>✧</span>
+                    <span set:html={feature} />
+                </li>
+            ))
+        }
+    </ul>
+
+    <PixiPackButton
+        price={props.price}
+        color={props.button}
+        hover={props.buttonHover}
+    />
+</div>

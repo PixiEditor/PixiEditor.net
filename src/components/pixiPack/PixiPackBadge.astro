@@ -1,0 +1,17 @@
+---
+interface Props {
+    text: string;
+    accent: string;
+}
+
+const { text, accent } = Astro.props;
+---
+
+<span
+    class:list={[
+        "rounded-full px-2 py-[2px] text-[10px]",
+        accent
+    ]}
+>
+    {text}
+</span>
