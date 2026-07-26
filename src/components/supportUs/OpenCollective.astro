@@ -12,41 +12,41 @@ import { openCollective as links } from "../../assets/links";
 import ContributorsTable from "./ContributorsTable.astro";
 ---
 
-<h1 class="text-3xl font-bold text-center">
+<h2 class="text-3xl font-bold text-center">
     Support us with<Image
         src={OpenCollectiveLogo}
         alt="Open Collective"
         class="inline ms-3"
     />
-</h1>
+</h2>
 
 <div
     class="grid grid-cols-[auto_auto_auto] grid-rows-[auto_auto] max-lg:grid-cols-1 gap-y-4 mt-12 mx-4 items-center justify-center"
 >
     <div class="grid grid-cols-2 md:grid-cols-4 gap-6">
         <a class="tier silver" href={links.silver} target="_blank">
-            <h2 class="uppercase font-bold">Silver</h2>
+            <h3 class="uppercase font-bold">Silver</h3>
             <Image src={SilverTier} width="80" alt="" />
             <p class="font-bold text-xl">
                 $5 <span class="text-xs font-normal">/ month</span>
             </p>
         </a>
         <a class="tier gold" href={links.gold} target="_blank">
-            <h2 class="uppercase font-bold">Gold</h2>
+            <h3 class="uppercase font-bold">Gold</h3>
             <Image src={GoldTier} width="80" alt="" />
             <p class="font-bold text-xl">
                 $10 <span class="text-xs font-normal">/ month</span>
             </p>
         </a>
         <a class="tier platinum" href={links.diamond} target="_blank">
-            <h2 class="uppercase font-bold">Platinum</h2>
+            <h3 class="uppercase font-bold">Platinum</h3>
             <Image src={PlatinumTier} width="80" alt="" />
             <p class="font-bold text-xl">
                 $25 <span class="text-xs font-normal">/ month</span>
             </p>
         </a>
         <a class="tier diamond" href={links.platinum} target="_blank">
-            <h2 class="uppercase font-bold">Diamond</h2>
+            <h3 class="uppercase font-bold">Diamond</h3>
             <Image src={DiamondTier} width="80" alt="" />
             <p class="font-bold text-xl">
                 $50 <span class="text-xs font-normal">/ month</span>
@@ -109,7 +109,7 @@ import ContributorsTable from "./ContributorsTable.astro";
 
     <p class="text-center max-lg:row-[4]">Make a one-time donation</p>
 </div>
-<!-- <ContributorsTable class="mt-12" /> -->
+{/* <ContributorsTable class="mt-12" /> */}
 
 <style lang="scss">
     @use "sass:color";
