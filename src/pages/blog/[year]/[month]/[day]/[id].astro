@@ -5,6 +5,7 @@ import Lucide from '@components/Lucide.astro';
 import { Image } from 'astro:assets';
 import "remark-github-blockquote-alert/alert.css";
 import FoundersPackBanner from '@components/supportUs/FoundersPackBanner.astro';
+import getBlogJsonLd from './_blogPost/BlogPostJsonLd';
 
 export async function getStaticPaths() {
     const posts = await getCollection('blog');
@@ -39,9 +40,15 @@ const author = !authorReference ? null : await getEntry(authorReference.collecti
 const dateString = formatter.format(post.data.date);
 
 const { Content, headings } = await render(post);
+
+const jsonLd = getBlogJsonLd(post, author ?? null, Astro.url);
 ---
 
-<Layout fullTitle={`${post.data.title} | PixiEditor Blog`} description={post.data.description} cover={post.data.cover ?? "img/blog-cover.png"}>
+<Layout
+    fullTitle={`${post.data.title} | PixiEditor Blog`}
+    description={post.data.description}
+    cover={post.data.cover ?? "img/blog-cover.png"}
+    jsonLd={jsonLd}>
     <div class="mx-auto max-w-screen-xl pt-12 pb-12">
         <a class="mb-2 block text-neutral-400" href="/blog"><Lucide data="chevron-left" class="align-bottom pe-3" /> All Articles</a>
         <h1 class="text-2xl sm:text-5xl font-bold my-6 px-4">{post.data.title}</h1>

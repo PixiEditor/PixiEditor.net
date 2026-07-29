@@ -99,7 +99,7 @@ const proposals: (Proposal | null)[] = await Promise.all(
 <div class="overflow-auto max-md:pb-3">
     <div class="flex w-fit gap-6 px-8 mx-auto">
         <div class="card max-h-[600px] overflow-y-auto">
-            <h1>PixiEditor 2.1</h1>
+            <h3>PixiEditor 2.1</h3>
             <Chip linkTo="/blog/2025/12/10/21-beta" variant="green"
                 >Status: Released</Chip
             >
@@ -129,7 +129,7 @@ const proposals: (Proposal | null)[] = await Promise.all(
         </div>
 
         <div class="card max-h-[600px] overflow-y-auto">
-            <h1>PixiEditor 2.2</h1>
+            <h3>PixiEditor 2.2</h3>
             <Chip linkTo="https://forum.pixieditor.net/c/proposals/22"
                 >Status: Open for proposals</Chip
             >
@@ -139,7 +139,7 @@ const proposals: (Proposal | null)[] = await Promise.all(
         </div>
 
         <div class="card max-h-[600px] overflow-y-auto">
-            <h1>Proposals</h1>
+            <h3>Proposals</h3>
             <Chip linkTo="https://forum.pixieditor.net/c/proposals/22"
                 >Click to propose a feature</Chip
             >
@@ -158,7 +158,7 @@ const proposals: (Proposal | null)[] = await Promise.all(
         @apply w-72 bg-neutral-800 p-8 rounded text-lg;
     }
 
-    .card > h1 {
+    .card > h3 {
         @apply text-3xl font-bold;
     }
 
@@ -166,7 +166,7 @@ const proposals: (Proposal | null)[] = await Promise.all(
         @apply ps-8 mt-2 flex flex-col gap-y-3;
     }
 
-    .card > h1 {
+    .card > h3 {
         @apply mb-2;
     } 
 
