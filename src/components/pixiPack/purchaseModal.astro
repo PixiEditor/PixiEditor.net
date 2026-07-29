@@ -1,0 +1,65 @@
+---
+interface Props {
+    id?: string;
+}
+
+const { id = "purchase-modal" } = Astro.props;
+
+const apiUrl = "https://auth.pixieditor.net";
+---
+
+<div
+    id={id}
+    class="fixed inset-0 z-50 hidden items-center justify-center bg-black/70 backdrop-blur-sm"
+>
+    <div
+        class="w-full max-w-[430px] rounded-lg border border-neutral-700 bg-neutral-900 shadow-2xl"
+    >
+        <form
+            data-api-url={apiUrl}
+            id="purchase-form"
+        >
+            <input id="product-id" type="hidden" name="ProductId" />
+
+            <div class="px-8 pt-8 pb-6">
+
+                <h2 class="text-lg font-semibold text-center">
+                    What email should we assign the licence to?
+                </h2>
+
+                <div class="mt-8">
+                    <input
+                        id="purchase-email"
+                        name="Email"
+                        type="email"
+                        required
+                        autocomplete="email"
+                        placeholder="you@example.com"
+                        class="w-full rounded border border-neutral-700 bg-neutral-800 px-4 py-3 outline-none transition focus:border-rose-500"
+                    />
+                </div>
+
+            </div>
+
+            <div class="flex gap-2 border-t border-neutral-800 p-5">
+
+                <button
+                    type="button"
+                    id="purchase-cancel"
+                    class="flex-1 rounded border border-neutral-700 py-3 transition hover:bg-neutral-800 cursor-pointer"
+                >
+                    Cancel
+                </button>
+
+                <button
+                    type="submit"
+                    class="flex-1 rounded bg-rose-600 py-3 font-medium transition hover:bg-rose-500 cursor-pointer"
+                >
+                    Next
+                </button>
+
+            </div>
+            <p id="form-error" class=" mb-3 text-center text-sm text-red-500 hidden"></p>
+        </form>
+    </div>
+</div>

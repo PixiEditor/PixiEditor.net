@@ -13,9 +13,10 @@ export const packs = [
         button: "bg-neutral-500",
         buttonHover: "hover:bg-neutral-400",
 
-        price: 30,
+        price: 120,
 
         badgeImage: SilverBadge,
+        productId: "PixiLabs.Supporter26Tier1",
 
         features: [
             "10 unique <strong>brushes</strong>",
@@ -36,9 +37,10 @@ export const packs = [
 
         description: "Everything in Silver, plus:",
 
-        price: 80,
+        price: 300,
 
         badgeImage: GoldBadge,
+        productId: "PixiLabs.Supporter26Tier2",
 
         features: [
             "<strong>Reusable Animation</strong> Workspace",
@@ -59,8 +61,9 @@ export const packs = [
         description: "Everything in Gold, plus:",
 
         badgeImage: DiamondBadge,
+        productId: "PixiLabs.Supporter26Tier3",
 
-        price: 150,
+        price: 570,
 
         features: [
             "Free access to <strong>all Extensions</strong> from PixiEditor's Extension Browser**",
