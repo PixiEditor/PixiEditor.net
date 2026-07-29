@@ -1,0 +1,22 @@
+---
+interface Props {
+    price: number;
+    color: string;
+    hover: string;
+    productId: string;
+}
+
+const props = Astro.props;
+const { productId } = props; 
+---
+
+<button data-product-id={productId} class="purchase-button"
+    data-price-pln={props.price}
+    class:list={[
+        "mt-3 w-full rounded py-2 transition cursor-pointer",
+        props.color,
+        props.hover
+    ]}
+>
+    Buy for  <span class="font-semibold">Loading...</span>
+</button>

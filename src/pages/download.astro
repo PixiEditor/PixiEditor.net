@@ -7,16 +7,16 @@ import SteamLogo from "@assets/icons/steam.svg";
 import FlathubLogo from "@assets/icons/flathub.svg";
 import FoundersPackLogo from "@assets/founders-pack.svg";
 import FoundersPackLogoMobile from "@assets/founders-pack-mobile.svg";
+import PixiPack from "@components/pixiPack/PixiPack.astro";
 
 import { steam, flathub } from "@assets/links";
 import PlatformSelectionCardContent from "./_download/PlatformSelectionCardContent.astro";
-
-const basePricePLN = 120;
+import PurchaseModal from "@components/pixiPack/purchaseModal.astro";
 ---
 
 <Layout title="Download Free Pixel Editor & 2D Graphics Software">
     <div class="bg-neutral-900">
-        <section class="container max-w-[1218px] py-12 mx-auto text-center">
+        <section class="container max-w-[1289px] py-12 mx-auto text-center">
             <div>
                 <h1 class="text-4xl pb-4">
                     You are <span class="font-bold">one step away</span> from <br
@@ -24,11 +24,11 @@ const basePricePLN = 120;
                 </h1>
             </div>
             <div
-                class="grid grid-cols-[12fr_20fr] gap-3 mx-4 mt-4 max-md:flex max-md:flex-col"
+                class="grid grid-cols-[12fr_24fr] gap-3 mx-4 mt-4 max-md:flex max-md:flex-col"
             >
                 <div class="flex flex-col gap-3">
                     <div
-                        class="bg-neutral-800 p-2 rounded min-h-[211px] h-full"
+                        class="bg-neutral-800 p-2 rounded min-h-[211px] h-full flex flex-col justify-center"
                     >
                         <PlatformSelectionCardContent fullInfo={true} />
                     </div>
@@ -86,217 +86,260 @@ const basePricePLN = 120;
                         </div>
                     </div>
                 </div>
-                <div
-                    class="bg-founders py-6 px-12 max-md:px-6 rounded flex justify-between flex-col max-md:row-span-1"
-                >
-                    <div>
-                        <div
-                            class="flex justify-center items-center gap-4 flex-wrap"
-                        >
-                            <h2
-                                class="text-3xl font-bold founders-gradient text-center"
-                            >
-                                Founder's Bundle
-                            </h2>
-                        </div>
-
-                        <p class="text-sm text-neutral-400">
-                            Support PixiEditor and get access to pre-configured
-                            workspaces such as: 2D + voxel texturing, card
-                            builder and reusable pixel art animation! <a href="/blog/2025/07/30/20-release/#founders-pack" class="underline" target="_blank">Read more</a>
-                        </p>
-                    </div>
-                    <picture class="py-4">
-                        <source
-                            srcset={FoundersPackLogoMobile.src}
-                            media="(max-width: 500px)"
-                        />
-                        <Image
-                            src={FoundersPackLogo}
-                            alt="Founder's Bundle Logo"
-                            class="w-full max-w-full h-auto"
-                        />
-                    </picture>
-                    <form
-                        class="flex flex-wrap gap-4 mt-4"
-                        action="https://auth.pixieditor.net/content/createCheckoutSession"
-                        method="POST"
-                        id="purchaseForm"
-                    >
-                        <input
-                            type="email"
-                            name="Email"
-                            required
-                            placeholder="you@example.com"
-                            class="flex-[1_1_66%] min-w-[200px] px-4 py-2 rounded bg-neutral-800 border border-neutral-700 focus:outline-none focus:ring-2 focus:ring-indigo-500 text-white placeholder-gray-400"
-                        />
-                        <input
-                            type="hidden"
-                            name="ProductId"
-                            value="PixiEditor.FoundersPack"
-                        />
-                        <button
-                            type="submit"
-                            class="flex-[1_1_30%] min-w-[120px] px-button-base bg-[#731BCA] hover:bg-[#801CDA] transition-colors flex items-center justify-center text-center rounded disabled:opacity-50 disabled:cursor-not-allowed"
-                        >
-                            <div id="price" data-pln-price={basePricePLN}>
-                                Loading price...
-                            </div>
-                        </button>
-                    </form>
-                    <span
-                        class="text-sm w-[150px] hidden absolute md:absolute md:block bg-neutral-900 -right-[40px] top-[5px] rounded-lg px-2 py-1 rotate-14 border-solid border-2 border-rose-400 text-rose-400"
-                        >Last chance! Leaving July 30th</span
-                    >
-                    
-                <span class="text-sm text-right mt-4" id="unavailable-info">You can still buy Founder's Pack for Windows and Linux on <a class="underline" target="_blank" href="https://store.steampowered.com/app/2435860/PixiEditor__Founders_Pack/">Steam</a></span>
-                </div>
+                <PixiPack />
             </div>
+
+            <p class="text-right text-xs text-neutral-400 mt-2 mx-4">
+                Prices in the checkout may vary depending on your country, currency and previously owned PixiPack tiers.<br />
+                * Badge visuals depend on chosen tier (silver, gold, diamond)<br
+                />
+                ** Extensions include Advanced Pixel Art, Skybox Texturing, Normal
+                Map and Basic Texturing.
+            </p>
         </section>
     </div>
     <section class="py-12">
         <OpenCollective />
     </section>
+    <PurchaseModal />
 </Layout>
 
-<style>
-    .bg-founders {
-        position: relative;
-        border-radius: 8px;
-        z-index: 0;
+<script is:inline>
+    const SUPPORTED_CURRENCIES = [
+        "USD",
+        "EUR",
+        "CHF",
+        "GBP",
+        "JPY",
+        "NOK",
+        "SEK",
+        "CZK",
+        "DKK",
+        "CAD",
+        "AUD",
+    ];
+    const CountryToCurrency = {
+        PL: "PLN",
+        US: "USD",
+        DE: "EUR",
+        FR: "EUR",
+        IT: "EUR",
+        ES: "EUR",
+        AT: "EUR",
+        NL: "EUR",
+        BE: "EUR",
+        FI: "EUR",
+        PT: "EUR",
+        IE: "EUR",
+        LU: "EUR",
+        MT: "EUR",
+        GR: "EUR",
+        SI: "EUR",
+        CY: "EUR",
+        SK: "EUR",
+        EE: "EUR",
+        LV: "EUR",
+        LT: "EUR",
+        CH: "CHF",
+        GB: "GBP",
+        JP: "JPY",
+        NO: "NOK",
+        SE: "SEK",
+        CZ: "CZK",
+        DK: "DKK",
+        CA: "CAD",
+        AU: "AUD",
+    };
+
+    async function getUserCurrency() {
+        try {
+            const unsupportedCountries = [
+                "CO",
+                "ME",
+                "KP",
+                "KR",
+                "IN",
+                "RS",
+                "MX",
+                "AE",
+                "TR",
+                "AM",
+                "CL",
+                "VN",
+                "OM",
+            ];
+
+            const res = await fetch("https://ip2c.org/s");
+            // Example response: "1;PL;POL;Poland"
+            const data = await res.text();
+
+            const countryCode = data.split(";")[1];
+
+            if (unsupportedCountries.includes(countryCode)) {
+                return "UNSUPPORTED";
+            }
+
+            return CountryToCurrency[countryCode] || "PLN";
+        } catch {
+            return "PLN"; // fallback
+        }
     }
 
-    .bg-founders::before {
-        content: "";
-        position: absolute;
-        inset: 0;
-        border-radius: 8px;
-        padding: 1px;
-        background: linear-gradient(
-            257.37deg,
-            #832ed7 -0.25%,
-            #9d42f8 23.74%,
-            #dcb8ff 47.75%,
-            #ab56ff 71.75%,
-            #762bc0 95.75%
-        );
-        -webkit-mask:
-            linear-gradient(#fff 0 0) content-box,
-            linear-gradient(#fff 0 0);
-        -webkit-mask-composite: xor;
-        mask-composite: exclude;
-        pointer-events: none;
-        z-index: -1;
+    async function getNBPRate(toCurrency) {
+        if (toCurrency === "PLN") return 1;
+        try {
+            const res = await fetch(
+                `https://api.nbp.pl/api/exchangerates/rates/A/${toCurrency}?format=json`,
+            );
+            if (!res.ok) throw new Error("Unsupported currency");
+            const data = await res.json();
+            return data.rates[0].mid;
+        } catch {
+            return null;
+        }
     }
-</style>
+
+    async function convertPrice(plnPrice, userCurrency) {
+        const upperCurrency = userCurrency.toUpperCase();
+
+        if (upperCurrency === "UNSUPPORTED") {
+            return "UNSUPPORTED";
+        }
+
+        if (!SUPPORTED_CURRENCIES.includes(upperCurrency)) {
+            return `${plnPrice.toFixed(2)} PLN`;
+        }
+
+        const rate = await getNBPRate(upperCurrency);
+        if (!rate) {
+            return `${plnPrice.toFixed(2)} PLN`;
+        }
+
+        const converted = (plnPrice / rate) * 1.04; // 4% fee for currency conversion
+        const formatter = new Intl.NumberFormat(navigator.language, {
+            style: "currency",
+            currency: upperCurrency,
+        });
+
+        return formatter.format(converted);
+    }
+
+    getUserCurrency().then(currency => {
+
+    const priceElements = document.querySelectorAll(".purchase-button");
+    for (const btn of priceElements) {
+        btn.disabled = true;
+        const plnPrice = parseFloat(btn.dataset.pricePln);
+        convertPrice(plnPrice, currency).then(convertedPrice => {
+        if(convertedPrice === "UNSUPPORTED") {
+            btn.textContent = "Not yet available in your country";
+            btn.disabled = true;
+            btn.classList.remove(btn.classList.values().find((v, i) => v.startsWith("hover:")), "cursor-pointer");
+        } else {
+        btn.querySelector("span").textContent = convertedPrice;
+        btn.disabled = false;
+        }
+    });
+    }
+    })
+</script>
 
 <script is:inline>
-  const SUPPORTED_CURRENCIES = ['USD', 'EUR', 'CHF', 'GBP', 'JPY', 'NOK', 'SEK', 'CZK', 'DKK', 'CAD', 'AUD'];
- const CountryToCurrency = {
-  'PL': 'PLN',
-  'US': 'USD',
-  'DE': 'EUR',
-  'FR': 'EUR',
-  'IT': 'EUR',
-  'ES': 'EUR',
-  'AT': 'EUR',
-  'NL': 'EUR',
-  'BE': 'EUR',
-  'FI': 'EUR',
-  'PT': 'EUR',
-  'IE': 'EUR',
-  'LU': 'EUR',
-  'MT': 'EUR',
-  'GR': 'EUR',
-  'SI': 'EUR',
-  'CY': 'EUR',
-  'SK': 'EUR',
-  'EE': 'EUR',
-  'LV': 'EUR',
-  'LT': 'EUR',
-  'CH': 'CHF',
-  'GB': 'GBP',
-  'JP': 'JPY',
-  'NO': 'NOK',
-  'SE': 'SEK',
-  'CZ': 'CZK',
-  'DK': 'DKK',
-  'CA': 'CAD',
-  'AU': 'AUD'
-};
+    const modal = document.getElementById("purchase-modal");
+    const form = document.getElementById("purchase-form");
+    const productId = document.getElementById("product-id");
 
-  async function getUserCurrency() {
-    try {
-        const unsupportedCountries = ["CO", "ME", "KP", "KR", "IN", "RS", "MX", "AE", "TR", "AM", "CL", "VN", "OM"];
+    window.openPurchaseModal = function (product) {
+        productId.value = product;
+        modal.classList.remove("hidden");
+        modal.classList.add("flex");
 
-      const res = await fetch("https://ip2c.org/s");
-      // Example response: "1;PL;POL;Poland"
-      const data = await res.text();
+        const purchaseEmail = document.getElementById("purchase-email");
+        purchaseEmail.focus();
+        purchaseEmail.select();
+        const formError = document.getElementById("form-error");
+        formError.textContent = "";
+    };
 
-      const countryCode = data.split(';')[1];
+    document.getElementById("purchase-cancel").onclick = () => {
+        modal.classList.remove("flex");
+        modal.classList.add("hidden");
+    };
 
-      if(unsupportedCountries.includes(countryCode)) {
-        return 'UNSUPPORTED';
-      }
-
-      return CountryToCurrency[countryCode] || 'PLN';
-    } catch {
-      return 'PLN'; // fallback
-    }
-  }
-
-  async function getNBPRate(toCurrency) {
-    if (toCurrency === 'PLN') return 1;
-    try {
-      const res = await fetch(`https://api.nbp.pl/api/exchangerates/rates/A/${toCurrency}?format=json`);
-      if (!res.ok) throw new Error("Unsupported currency");
-      const data = await res.json();
-      return data.rates[0].mid;
-    } catch {
-      return null;
-    }
-  }
-
-  async function convertPrice() {
-    const priceEl = document.getElementById('price');
-    const unavailableInfo = document.getElementById('unavailable-info');
-    const plnPrice = parseFloat(priceEl.dataset.plnPrice);
-
-    priceEl.parentElement.disabled = true;
-    unavailableInfo.style.display = 'none';
-    const userCurrency = await getUserCurrency();
-    const upperCurrency = userCurrency.toUpperCase();
-
-    if(upperCurrency === "UNSUPPORTED")
-  {
-    priceEl.textContent = "Not yet available in your country";
-    priceEl.parentElement.disabled = true;
-    unavailableInfo.style.display = 'block';
-    return;
-  }
-  else{
-    priceEl.parentElement.disabled = false;
-  }
-
-    if (!SUPPORTED_CURRENCIES.includes(upperCurrency)) {
-      priceEl.textContent = `${plnPrice.toFixed(2)} PLN`;
-      return;
-    }
-
-    const rate = await getNBPRate(upperCurrency);
-    if (!rate) {
-      priceEl.textContent = `${plnPrice.toFixed(2)} PLN`;
-      return;
-    }
-
-    const converted = plnPrice / rate;
-    const formatter = new Intl.NumberFormat(navigator.language, {
-      style: 'currency',
-      currency: upperCurrency
+    modal.addEventListener("click", (e) => {
+        if (e.target === modal) {
+            modal.classList.remove("flex");
+            modal.classList.add("hidden");
+        }
     });
 
-    priceEl.textContent = formatter.format(converted);
-  }
+    document.addEventListener("keydown", (e) => {
+        if (e.key === "Escape") {
+            modal.classList.remove("flex");
+            modal.classList.add("hidden");
+        }
+    });
 
-  convertPrice();
+    form.addEventListener("submit", (e) => {
+        e.preventDefault();
+        const email = document.getElementById("purchase-email").value;
+        const formError = document.getElementById("form-error");
+        formError.classList.add("hidden");
+        const product = productId.value;
+
+        if (!email || !product) return;
+
+        const formData = new FormData();
+        formData.append("Email", email);
+        formData.append("ProductId", product);
+        formData.append("JsonResponse", true);
+
+        const response = fetch(
+            form.dataset.apiUrl + "/content/createCheckoutSession",
+            {
+                method: "POST",
+                body: formData,
+            },
+        );
+
+        response
+            .then((response) => {
+                if (!response.ok) {
+                    response.text().then((text) => {
+                        if (text === "USER_ALREADY_OWNS_PRODUCT") {
+                            formError.textContent =
+                                "You already own this tier of PixiPack!";
+                        } else {
+                            formError.textContent =
+                                "An error occurred. Please try again.";
+                        }
+                    });
+                } else {
+                    return response.json();
+                }
+            })
+            .then((data) => {
+                if (location) {
+                    location.href = data.url;
+                } else {
+                    formError.textContent =
+                        "An error occurred. Please try again.";
+                    formError.classList.remove("hidden");
+                }
+            })
+            .catch((error) => {
+                console.error("Error:", error);
+                formError.textContent =
+                    "An error occurred. Please try again or contact us at info@pixieditor.net";
+                formError.classList.remove("hidden");
+            });
+    });
+</script>
+
+<script is:inline>
+    document.querySelectorAll(".purchase-button").forEach((btn) => {
+        btn.addEventListener("click", () => {
+            openPurchaseModal(btn.dataset.productId);
+        });
+    });
 </script>
