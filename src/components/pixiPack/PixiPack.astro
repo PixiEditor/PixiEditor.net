@@ -3,6 +3,13 @@ import PixiPackCard from "./PixiPackCard.astro";
 import { packs } from "./packs";
 import Title from "./title.svg";
 import { Image } from "astro:assets";
+
+interface Props {
+    buttonLink?: string;
+}
+
+const props = Astro.props;
+
 ---
 
 <section
@@ -18,7 +25,7 @@ import { Image } from "astro:assets";
 
     <div class="grid grid-cols-3 gap-4 max-lg:grid-cols-1">
         {packs.map(pack => (
-            <PixiPackCard {...pack}/>
+            <PixiPackCard {...pack} buttonLink={props.buttonLink}/>
         ))}
     </div>
 </section>
