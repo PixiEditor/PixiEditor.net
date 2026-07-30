@@ -48,6 +48,7 @@ const jsonLd = getBlogJsonLd(post, author ?? null, Astro.url);
     fullTitle={`${post.data.title} | PixiEditor Blog`}
     description={post.data.description}
     cover={post.data.cover ?? "img/blog-cover.png"}
+    ogImage={post.data.ogImage ?? "img/blog-cover.png"}
     jsonLd={jsonLd}>
     <div class="mx-auto max-w-screen-xl pt-12 pb-12">
         <a class="mb-2 block text-neutral-400" href="/blog"><Lucide data="chevron-left" class="align-bottom pe-3" /> All Articles</a>

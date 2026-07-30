@@ -23,6 +23,7 @@ type Props =
 		/**
 		 * Specifies the OpenGraph image to be used. If not set, the default image will be used
 		 */
+		ogImage?: string;
 		cover?: string;
 		description?: string;
 		jsonLd?: any;
@@ -36,16 +37,27 @@ type Props =
 		/**
 		 * Specifies the OpenGraph image to be used. If not set, the default image will be used
 		 */
+		ogImage?: string;
 		cover?: string;
 		description?: string;
 		jsonLd?: any;
 	});
 
-const { title, fullTitle, notMain, cover, description, jsonLd, class: className, ...rest } = Astro.props;
+const { title, fullTitle, notMain, ogImage, cover, description, jsonLd, class: className, ...rest } = Astro.props;
 
 const pageTitle = title
 	? `${title} | PixiEditor`
 	: fullTitle;
+
+	console.log("ogImage", ogImage);
+const ogImageUrl = ogImage?.src
+	? new URL(ogImage.src, Astro.url.origin).href
+	: cover?.src
+		? new URL(cover.src, Astro.url.origin).href
+		: new URL("/img/og.png", Astro.url.origin).href;
+
+const width = ogImage?.width ?? cover?.width ?? 1200;
+const height = ogImage?.height ?? cover?.height ?? 730;
 
 import '../styles/global.css';
 ---
@@ -62,8 +74,12 @@ import '../styles/global.css';
 		<meta property="og:title" content={pageTitle} />
 		<meta property="og:type" content="website" />
 		<meta property="og:url" content={Astro.site} />
-		<meta property="og:image" content={cover?.src ? (new URL(cover.src, Astro.url.origin).href) : (Astro.url.origin + "/img/og.png")} />
+		<meta property="og:image" content={ogImageUrl} />
 		<meta property="og:description" content={description ?? "PixiEditor is an open-source Universal 2D Graphics Editor."} />
+		<meta property="og:site_name" content="PixiEditor" />
+		<meta property="og:image:width" content={width} />
+		<meta property="og:image:height" content={height} />
+		<meta name="twitter:card" content="summary_large_image" />
 		<meta name="description" content={description ?? "PixiEditor is an open-source Universal 2D Graphics Editor."} />
 		<script defer src="https://cloud.umami.is/script.js" data-website-id="4bd73c8c-e42a-4c6a-8ac6-97ce418a3a93"></script>
 		<title>{pageTitle}</title>
