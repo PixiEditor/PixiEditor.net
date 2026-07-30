@@ -16,6 +16,7 @@ interface Props {
     badgeImage: Image;
     titleStyle?: string;
     productId: string;
+    buttonLink?: string;
 }
 
 const props = Astro.props;
@@ -53,6 +54,7 @@ const props = Astro.props;
 
     <PixiPackButton
         price={props.price}
+        buttonLink={props.buttonLink}
         color={props.button}
         hover={props.buttonHover}
         productId={props.productId}

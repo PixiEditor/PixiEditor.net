@@ -74,3 +74,56 @@
     -webkit-background-clip: text;
 -webkit-text-fill-color: transparent;
 }
+
+.stats-table {
+  width: 100%;
+  border-collapse: separate;
+  border-spacing: 0;
+  margin: 1.5rem 0 2.5rem;
+  overflow: hidden;
+  border-radius: 12px;
+  border: 1px solid #303030;
+  background: #1c1c1c;
+}
+
+.stats-table th {
+  text-align: left;
+  font-size: 0.8rem;
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+  color: #a0a0a0;
+  padding: 0.85rem 1rem;
+  background: #303030;
+}
+
+.stats-table td {
+  padding: 0.9rem 1rem;
+  border-top: 1px solid #303030;
+  color: #e5e5e5;
+}
+
+.stats-table td:nth-child(2),
+.stats-table th:nth-child(2) {
+  text-align: right;
+  font-variant-numeric: tabular-nums;
+}
+
+.stats-table .highlight td {
+  font-weight: 700;
+  color: #ffffff;
+}
+
+.stats-table .sub-row td:first-child {
+  padding-left: 2rem;
+  color: #b0b0b0;
+}
+
+.stats-table span {
+  color: #888888;
+  font-size: 0.9em;
+}
+
+/* Optional hover effect */
+.stats-table tbody tr:hover td {
+  background: #252525;
+}
