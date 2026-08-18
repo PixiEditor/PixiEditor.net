@@ -16,330 +16,348 @@ import PurchaseModal from "@components/pixiPack/purchaseModal.astro";
 
 <Layout title="Download Free Pixel Editor & 2D Graphics Software">
     <div class="bg-neutral-900">
-        <section class="container max-w-[1289px] py-12 mx-auto text-center">
-            <div>
-                <h1 class="text-4xl pb-4">
-                    You are <span class="font-bold">one step away</span> from <br
-                    /> downloading PixiEditor
-                </h1>
-            </div>
+        <section class="min-h-[calc(100vh-100px)] flex flex-col">
             <div
-                class="grid grid-cols-[12fr_24fr] gap-3 mx-4 mt-4 max-md:flex max-md:flex-col"
+                class="container max-w-[1289px] mx-auto w-full flex-1 flex flex-col justify-center text-center py-12"
             >
-                <div class="flex flex-col gap-3">
-                    <div
-                        class="bg-neutral-800 p-2 rounded min-h-[211px] h-full flex flex-col justify-center"
-                    >
-                        <PlatformSelectionCardContent fullInfo={true} />
-                    </div>
-                    <div
-                        class="bg-neutral-800 p-6 rounded flex flex-col justify-between gap-6"
-                    >
-                        <h2 class="text-xl font-medium">
-                            PixiEditor in Stores
-                        </h2>
-                        <div class="flex justify-center">
-                            <a
-                                class="flex flex-col items-center w-24"
-                                href={steam.store}
-                                target="_blank"
-                            >
-                                <Image
-                                    src={SteamLogo}
-                                    class="block h-8 w-8"
-                                    alt=""
-                                />
-                                <p>Steam</p>
-                            </a>
-                            <a
-                                class="flex flex-col items-center w-24"
-                                href={flathub.store}
-                                target="_blank"
-                            >
-                                <Image
-                                    src={FlathubLogo}
-                                    class="block h-8 w-8"
-                                    alt="Flathub logo"
-                                />
-                                <p>Flathub</p>
-                            </a>
-                            {/*
-                            <a
-                                class="flex flex-col items-center w-24"
-                                href={microsoft.store}
-                            >
-                                <Image
-                                    src={MicrosoftStoreLogoGrey}
-                                    class="block h-8 w-8"
-                                    alt=""
-                                />
-                                <p>Microsoft</p>
-                            </a>
-                            <a class="flex flex-col items-center w-24">
-                                <Image
-                                    src={AppleLogo}
-                                    class="block h-8 w-8"
-                                    alt=""
-                                />
-                                <p class="text-red-200">Apple</p>
-                            </a> */}
+                <div>
+                    <h1 class="text-4xl pb-4">
+                        You are <span class="font-bold">one step away</span> from
+                        <br />
+                        downloading PixiEditor
+                    </h1>
+                </div>
+
+                <div
+                    class="grid grid-cols-[12fr_24fr] gap-3 mx-4 mt-4 max-md:flex max-md:flex-col"
+                >
+                    <div class="flex flex-col gap-3">
+                        <div
+                            class="bg-neutral-800 p-2 rounded min-h-[211px] h-full flex flex-col justify-center"
+                        >
+                            <PlatformSelectionCardContent fullInfo={true} />
+                        </div>
+
+                        <div
+                            class="bg-neutral-800 p-6 rounded flex flex-col justify-between gap-6"
+                        >
+                            <h2 class="text-xl font-medium">
+                                PixiEditor in Stores
+                            </h2>
+
+                            <div class="flex justify-center">
+                                <a
+                                    class="flex flex-col items-center w-24"
+                                    href={steam.store}
+                                    target="_blank"
+                                >
+                                    <Image
+                                        src={SteamLogo}
+                                        class="block h-8 w-8"
+                                        alt=""
+                                    />
+                                    <p>Steam</p>
+                                </a>
+
+                                <a
+                                    class="flex flex-col items-center w-24"
+                                    href={flathub.store}
+                                    target="_blank"
+                                >
+                                    <Image
+                                        src={FlathubLogo}
+                                        class="block h-8 w-8"
+                                        alt="Flathub logo"
+                                    />
+                                    <p>Flathub</p>
+                                </a>
+                            </div>
                         </div>
                     </div>
+
+                    <PixiPack />
                 </div>
-                <PixiPack />
+
+                <p class="text-right text-xs text-neutral-400 mt-2 mx-4">
+                    Prices in the checkout may vary depending on your country,
+                    currency and previously owned PixiPack tiers.<br />
+                    * Badge visuals depend on chosen tier (silver, gold, diamond)<br
+                    />
+                    ** Extensions include Advanced Pixel Art, Skybox Texturing, Normal
+                    Map and Basic Texturing.
+                </p>
             </div>
 
-            <p class="text-right text-xs text-neutral-400 mt-2 mx-4">
-                Prices in the checkout may vary depending on your country, currency and previously owned PixiPack tiers.<br />
-                * Badge visuals depend on chosen tier (silver, gold, diamond)<br
-                />
-                ** Extensions include Advanced Pixel Art, Skybox Texturing, Normal
-                Map and Basic Texturing.
-            </p>
+            <div
+                class="flex flex-col items-center justify-center text-center text-xl mx-auto"
+            >
+                <span>Other ways to support</span>
+
+                <svg
+                    xmlns="http://www.w3.org/2000/svg"
+                    width="24"
+                    height="24"
+                    viewBox="0 0 24 24"
+                    fill="none"
+                    stroke="currentColor"
+                    stroke-width="2"
+                    stroke-linecap="round"
+                    stroke-linejoin="round"
+                    class="mt-2"
+                >
+                    <path d="M8 18L12 22L16 18"></path>
+                    <path d="M12 2V22"></path>
+                </svg>
+            </div>
         </section>
+
+        <section class="my-12 bg-neutral-800 py-12">
+            <OpenCollective />
+        </section>
+        <PurchaseModal />
     </div>
-    <section class="py-12">
-        <OpenCollective />
-    </section>
-    <PurchaseModal />
-</Layout>
 
-<script is:inline>
-    const SUPPORTED_CURRENCIES = [
-        "USD",
-        "EUR",
-        "CHF",
-        "GBP",
-        "JPY",
-        "NOK",
-        "SEK",
-        "CZK",
-        "DKK",
-        "CAD",
-        "AUD",
-    ];
-    const CountryToCurrency = {
-        PL: "PLN",
-        US: "USD",
-        DE: "EUR",
-        FR: "EUR",
-        IT: "EUR",
-        ES: "EUR",
-        AT: "EUR",
-        NL: "EUR",
-        BE: "EUR",
-        FI: "EUR",
-        PT: "EUR",
-        IE: "EUR",
-        LU: "EUR",
-        MT: "EUR",
-        GR: "EUR",
-        SI: "EUR",
-        CY: "EUR",
-        SK: "EUR",
-        EE: "EUR",
-        LV: "EUR",
-        LT: "EUR",
-        CH: "CHF",
-        GB: "GBP",
-        JP: "JPY",
-        NO: "NOK",
-        SE: "SEK",
-        CZ: "CZK",
-        DK: "DKK",
-        CA: "CAD",
-        AU: "AUD",
-    };
+    <script is:inline>
+        const SUPPORTED_CURRENCIES = [
+            "USD",
+            "EUR",
+            "CHF",
+            "GBP",
+            "JPY",
+            "NOK",
+            "SEK",
+            "CZK",
+            "DKK",
+            "CAD",
+            "AUD",
+        ];
+        const CountryToCurrency = {
+            PL: "PLN",
+            US: "USD",
+            DE: "EUR",
+            FR: "EUR",
+            IT: "EUR",
+            ES: "EUR",
+            AT: "EUR",
+            NL: "EUR",
+            BE: "EUR",
+            FI: "EUR",
+            PT: "EUR",
+            IE: "EUR",
+            LU: "EUR",
+            MT: "EUR",
+            GR: "EUR",
+            SI: "EUR",
+            CY: "EUR",
+            SK: "EUR",
+            EE: "EUR",
+            LV: "EUR",
+            LT: "EUR",
+            CH: "CHF",
+            GB: "GBP",
+            JP: "JPY",
+            NO: "NOK",
+            SE: "SEK",
+            CZ: "CZK",
+            DK: "DKK",
+            CA: "CAD",
+            AU: "AUD",
+        };
 
-    async function getUserCurrency() {
-        try {
-            const unsupportedCountries = [
-                "CO",
-                "ME",
-                "KP",
-                "KR",
-                "IN",
-                "RS",
-                "MX",
-                "AE",
-                "TR",
-                "AM",
-                "CL",
-                "VN",
-                "OM",
-            ];
+        async function getUserCurrency() {
+            try {
+                const unsupportedCountries = [
+                    "CO",
+                    "ME",
+                    "KP",
+                    "KR",
+                    "IN",
+                    "RS",
+                    "MX",
+                    "AE",
+                    "TR",
+                    "AM",
+                    "CL",
+                    "VN",
+                    "OM",
+                ];
 
-            const res = await fetch("https://ip2c.org/s");
-            // Example response: "1;PL;POL;Poland"
-            const data = await res.text();
+                const res = await fetch("https://ip2c.org/s");
+                // Example response: "1;PL;POL;Poland"
+                const data = await res.text();
 
-            const countryCode = data.split(";")[1];
+                const countryCode = data.split(";")[1];
 
-            if (unsupportedCountries.includes(countryCode)) {
+                if (unsupportedCountries.includes(countryCode)) {
+                    return "UNSUPPORTED";
+                }
+
+                return CountryToCurrency[countryCode] || "PLN";
+            } catch {
+                return "PLN"; // fallback
+            }
+        }
+
+        async function getNBPRate(toCurrency) {
+            if (toCurrency === "PLN") return 1;
+            try {
+                const res = await fetch(
+                    `https://api.nbp.pl/api/exchangerates/rates/A/${toCurrency}?format=json`,
+                );
+                if (!res.ok) throw new Error("Unsupported currency");
+                const data = await res.json();
+                return data.rates[0].mid;
+            } catch {
+                return null;
+            }
+        }
+
+        async function convertPrice(plnPrice, userCurrency) {
+            const upperCurrency = userCurrency.toUpperCase();
+
+            if (upperCurrency === "UNSUPPORTED") {
                 return "UNSUPPORTED";
             }
 
-            return CountryToCurrency[countryCode] || "PLN";
-        } catch {
-            return "PLN"; // fallback
-        }
-    }
+            if (!SUPPORTED_CURRENCIES.includes(upperCurrency)) {
+                return `${plnPrice.toFixed(2)} PLN`;
+            }
 
-    async function getNBPRate(toCurrency) {
-        if (toCurrency === "PLN") return 1;
-        try {
-            const res = await fetch(
-                `https://api.nbp.pl/api/exchangerates/rates/A/${toCurrency}?format=json`,
-            );
-            if (!res.ok) throw new Error("Unsupported currency");
-            const data = await res.json();
-            return data.rates[0].mid;
-        } catch {
-            return null;
-        }
-    }
+            const rate = await getNBPRate(upperCurrency);
+            if (!rate) {
+                return `${plnPrice.toFixed(2)} PLN`;
+            }
 
-    async function convertPrice(plnPrice, userCurrency) {
-        const upperCurrency = userCurrency.toUpperCase();
-
-        if (upperCurrency === "UNSUPPORTED") {
-            return "UNSUPPORTED";
-        }
-
-        if (!SUPPORTED_CURRENCIES.includes(upperCurrency)) {
-            return `${plnPrice.toFixed(2)} PLN`;
-        }
-
-        const rate = await getNBPRate(upperCurrency);
-        if (!rate) {
-            return `${plnPrice.toFixed(2)} PLN`;
-        }
-
-        const converted = (plnPrice / rate) * 1.04; // 4% fee for currency conversion
-        const formatter = new Intl.NumberFormat(navigator.language, {
-            style: "currency",
-            currency: upperCurrency,
-        });
-
-        return formatter.format(converted);
-    }
-
-    getUserCurrency().then(currency => {
-
-    const priceElements = document.querySelectorAll(".purchase-button");
-    for (const btn of priceElements) {
-        btn.disabled = true;
-        const plnPrice = parseFloat(btn.dataset.pricePln);
-        convertPrice(plnPrice, currency).then(convertedPrice => {
-        if(convertedPrice === "UNSUPPORTED") {
-            btn.textContent = "Not yet available in your country";
-            btn.disabled = true;
-            btn.classList.remove(btn.classList.values().find((v, i) => v.startsWith("hover:")), "cursor-pointer");
-        } else {
-        btn.querySelector("span").textContent = convertedPrice;
-        btn.disabled = false;
-        }
-    });
-    }
-    })
-</script>
-
-<script is:inline>
-    const modal = document.getElementById("purchase-modal");
-    const form = document.getElementById("purchase-form");
-    const productId = document.getElementById("product-id");
-
-    window.openPurchaseModal = function (product) {
-        productId.value = product;
-        modal.classList.remove("hidden");
-        modal.classList.add("flex");
-
-        const purchaseEmail = document.getElementById("purchase-email");
-        purchaseEmail.focus();
-        purchaseEmail.select();
-        const formError = document.getElementById("form-error");
-        formError.textContent = "";
-    };
-
-    document.getElementById("purchase-cancel").onclick = () => {
-        modal.classList.remove("flex");
-        modal.classList.add("hidden");
-    };
-
-    modal.addEventListener("click", (e) => {
-        if (e.target === modal) {
-            modal.classList.remove("flex");
-            modal.classList.add("hidden");
-        }
-    });
-
-    document.addEventListener("keydown", (e) => {
-        if (e.key === "Escape") {
-            modal.classList.remove("flex");
-            modal.classList.add("hidden");
-        }
-    });
-
-    form.addEventListener("submit", (e) => {
-        e.preventDefault();
-        const email = document.getElementById("purchase-email").value;
-        const formError = document.getElementById("form-error");
-        formError.classList.add("hidden");
-        const product = productId.value;
-
-        if (!email || !product) return;
-
-        const formData = new FormData();
-        formData.append("Email", email);
-        formData.append("ProductId", product);
-        formData.append("JsonResponse", true);
-
-        const response = fetch(
-            form.dataset.apiUrl + "/content/createCheckoutSession",
-            {
-                method: "POST",
-                body: formData,
-            },
-        );
-
-        response
-            .then((response) => {
-                if (!response.ok) {
-                    response.text().then((text) => {
-                        if (text === "USER_ALREADY_OWNS_PRODUCT") {
-                            formError.textContent =
-                                "You already own this tier of PixiPack!";
-                        } else {
-                            formError.textContent =
-                                "An error occurred. Please try again.";
-                        }
-                    });
-                } else {
-                    return response.json();
-                }
-            })
-            .then((data) => {
-                if (location) {
-                    location.href = data.url;
-                } else {
-                    formError.textContent =
-                        "An error occurred. Please try again.";
-                    formError.classList.remove("hidden");
-                }
-            })
-            .catch((error) => {
-                console.error("Error:", error);
-                formError.textContent =
-                    "An error occurred. Please try again or contact us at info@pixieditor.net";
-                formError.classList.remove("hidden");
+            const converted = (plnPrice / rate) * 1.04; // 4% fee for currency conversion
+            const formatter = new Intl.NumberFormat(navigator.language, {
+                style: "currency",
+                currency: upperCurrency,
             });
-    });
-</script>
 
-<script is:inline>
-    document.querySelectorAll(".purchase-button").forEach((btn) => {
-        btn.addEventListener("click", () => {
-            openPurchaseModal(btn.dataset.productId);
+            return formatter.format(converted);
+        }
+
+        getUserCurrency().then((currency) => {
+            const priceElements = document.querySelectorAll(".purchase-button");
+            for (const btn of priceElements) {
+                btn.disabled = true;
+                const plnPrice = parseFloat(btn.dataset.pricePln);
+                convertPrice(plnPrice, currency).then((convertedPrice) => {
+                    if (convertedPrice === "UNSUPPORTED") {
+                        btn.textContent = "Not yet available in your country";
+                        btn.disabled = true;
+                        btn.classList.remove(
+                            btn.classList
+                                .values()
+                                .find((v, i) => v.startsWith("hover:")),
+                            "cursor-pointer",
+                        );
+                    } else {
+                        btn.querySelector("span").textContent = convertedPrice;
+                        btn.disabled = false;
+                    }
+                });
+            }
         });
-    });
-</script>
+    </script>
+
+    <script is:inline>
+        const modal = document.getElementById("purchase-modal");
+        const form = document.getElementById("purchase-form");
+        const productId = document.getElementById("product-id");
+
+        window.openPurchaseModal = function (product) {
+            productId.value = product;
+            modal.classList.remove("hidden");
+            modal.classList.add("flex");
+
+            const purchaseEmail = document.getElementById("purchase-email");
+            purchaseEmail.focus();
+            purchaseEmail.select();
+            const formError = document.getElementById("form-error");
+            formError.textContent = "";
+        };
+
+        document.getElementById("purchase-cancel").onclick = () => {
+            modal.classList.remove("flex");
+            modal.classList.add("hidden");
+        };
+
+        modal.addEventListener("click", (e) => {
+            if (e.target === modal) {
+                modal.classList.remove("flex");
+                modal.classList.add("hidden");
+            }
+        });
+
+        document.addEventListener("keydown", (e) => {
+            if (e.key === "Escape") {
+                modal.classList.remove("flex");
+                modal.classList.add("hidden");
+            }
+        });
+
+        form.addEventListener("submit", (e) => {
+            e.preventDefault();
+            const email = document.getElementById("purchase-email").value;
+            const formError = document.getElementById("form-error");
+            formError.classList.add("hidden");
+            const product = productId.value;
+
+            if (!email || !product) return;
+
+            const formData = new FormData();
+            formData.append("Email", email);
+            formData.append("ProductId", product);
+            formData.append("JsonResponse", true);
+
+            const response = fetch(
+                form.dataset.apiUrl + "/content/createCheckoutSession",
+                {
+                    method: "POST",
+                    body: formData,
+                },
+            );
+
+            response
+                .then((response) => {
+                    if (!response.ok) {
+                        response.text().then((text) => {
+                            if (text === "USER_ALREADY_OWNS_PRODUCT") {
+                                formError.textContent =
+                                    "You already own this tier of PixiPack!";
+                            } else {
+                                formError.textContent =
+                                    "An error occurred. Please try again.";
+                            }
+                        });
+                    } else {
+                        return response.json();
+                    }
+                })
+                .then((data) => {
+                    if (location) {
+                        location.href = data.url;
+                    } else {
+                        formError.textContent =
+                            "An error occurred. Please try again.";
+                        formError.classList.remove("hidden");
+                    }
+                })
+                .catch((error) => {
+                    console.error("Error:", error);
+                    formError.textContent =
+                        "An error occurred. Please try again or contact us at info@pixieditor.net";
+                    formError.classList.remove("hidden");
+                });
+        });
+    </script>
+
+    <script is:inline>
+        document.querySelectorAll(".purchase-button").forEach((btn) => {
+            btn.addEventListener("click", () => {
+                openPurchaseModal(btn.dataset.productId);
+            });
+        });
+    </script>
+</Layout>
