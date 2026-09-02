@@ -1,0 +1,107 @@
+---
+title: Project Polish and 3D | PixiEditor September Status
+slug: september-26-status
+authors: [ flabbet ] 
+tags: [ status, pixieditor2.0 ]
+date: 2026-09-02
+description: ""
+cover: "./assets/september-status/cover.png"
+---
+
+Hi, hello and welcome! What a great day for some news and PixiStories. On today's menu:
+
+- Project Polish (v2.2b) - a roadmap for stable, friendly and polished PixiEditor,
+- Drawie 2 - an upgrade for our rendering technology,
+- Vertie - an experimental 3D backend for Drawie,
+- Arco - a brand new drawing backend, made from scratch. Why and how.
+
+Let's get into it!
+
+## Project Polish
+
+Despite the name, it's not a lesson about how to pronounce "Brzęczyszczykiewicz". Yes, PixiEditor is made in Poland and yes, I am Polish, but that's just a coincidence.
+
+Anyway, Project Polish is our roadmap to fix most of the rough edges of the app, from missing basic features, to UX improvements and long-standing bugs.
+Additionally, we're finally preparing proper tutorials, aka. "PixiEditor Essentials". In fact [the very first UI walkthrough is already available on our docs!](https://pixieditor.net/docs/handbook/essentials/hello-pixieditor/) 
+YouTube version is on the finish line.
+
+So, what's should you expect? On our internal roadmap we have things like:
+
+- Layer locking
+- Alignment options (center elements within selection horizontally, vertically etc.)
+- More text options (inlines, alignment, kerning, variable fonts, proper emoji-within-font support and more)
+- Filters panel for quick layer filter compositing
+- Improved vector workflow and more vector tools like knife, fill, quick bool operations and expand to stroke
+- Better Node Graph UX (layout management, insert node on connection)
+- New selection tools
+- Improved touchscreen and touchpad controls
+- Upgrade to avalonia 12 (Linux drag and drop, better performance and stability) 
+- Improved welcome screen 
+- Startup performance improvements
+- Performance improvements
+- Better clipboard support when it comes to copying and pasting to/from other apps
+- General UI polish
+
+It is not the final roadmap for version 2.2, it's our internal milestone that we want to accomplish for version 2.2. There are some [interesting community proposals open](https://forum.pixieditor.net/c/proposals/22), which we are planning to go over soon and update 
+the roadmap on the website. Take a look and vote for your favourites, it's not too late!
+
+Some of the things from Project Polish we've already implemented, but not yet released. For example
+
+### Avalonia 12 and UI improvements for Linux
+
+Previously, PixiEditor had windows-like titlebar on Linux, which does not fit the ecosystem. With Avalonia 12 upgrade, I've decided to refresh it's look
+
+[screenshot]
+
+Additionally, on some distros with disabled system title bars, PixiEditor's popups did not have borders and blended with the background. It's a small thing, but adding borders really improves the overall feeling
+
+[screenshot]
+
+One of the biggest UX issues on Linux so far was not working drag and drop, it was the limitation of Avalonia 11 and with version 12 upgrade, we can finally drop our precious files!
+
+Avalonia 12 also brings experimental Wayland support. I did try enabling it and testing, however for now it's not usable with PixiEditor. We'll have to wait for it to get a bit more mature and adjust our rendering tech for it as well.
+
+### Some juicyness
+
+I come from a game dev background and term "juicy" is used a lot in context of visual feedback of game elements in response to user input. In other words, how squishy and satisfying the interactions are visual-wise.
+Avalonia's animation system is pretty powerful, but extremely unfun to use. The mental strain to add the most basic interaction is too big for me to usually do it in between more important tasks.
+
+To be honest this applies to majority of UI frameworks I used. At least without any plugins and external packages.
+
+But one day, I saw this [GodotHub](https://github.com/RykoTheDev/GodotHub) app, which does an exellent job with satisfying and juicy UI. It was the push I needed to actually do something about 
+lack of easy way to juicy-up things in PixiEditor. So, in one evening I coded a simple solution called `Juicy`. 
+With it, adding animations is stupidly simple. Let's take a look at tool buttons.
+
+[video]
+
+All it took to add this was:
+
+```
+Juice.Animations="Loaded:PopIn"
+```
+
+Majority of icon buttons in the app now respond to your clicks!
+
+[video]
+
+The syntax follows "event:animation" schema, it is also possible to specify multiple animations within one element by separating them with `;`. 
+
+Well anyway, I won't bore you with technical details, all it matters is that it is very easy to add juicyness to the app, which I am happy about and hopefully use more often.
+
+## Drawie 2 
+
+Drawie is what powers PixiEditor, it's a technology we built from scratch and have great plans for. In essence, Drawie in its current form is a library which talks to your GPU and sets up 
+a library called Skia, which does the actual rendering. Drawie introduces a few useful concepts on top of Skia, which makes the development easier.
+
+In context of PixiEditor, Drawie talks to Avalonia, asks for GPU, sets up Skia and forwards all rendering (like Draw Rectangle) to it, then it takes the result and gives it back to Avalonia for you to see.
+
+Outside of PixiEditor, Drawie is also a standalone platform, it does not require any UI framework and allows rendering things on the screen in different enviroments (like standalone desktop app or in the browser).
+So you can pretty much build your own UI framework, app or 2D game which will run on desktops and browsers, Drawie takes care of creating windows, managing input and displaying your 2D graphics.
+
+Well, that's at least the idea of it. It's far from being complete or even being semi-complete, but I did manage to get it to the point where I could use it for my internal needs.
+
+The challenges we faced for PixiEditor taught us a lot about graphics APIs, limitations and rendering in general. I want to take Drawie to the next level. 
+The next 2 sections of this blog is the prime example of what I want Drawie 2 to be and what it can give you in terms of PixiEditor.
+
+## Vertie - introducing 3D backend for Drawie
+
