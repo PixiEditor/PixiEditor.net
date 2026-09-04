@@ -5,7 +5,8 @@ authors: [ flabbet ]
 tags: [ status, pixieditor2.0 ]
 date: 2026-09-02
 description: ""
-cover: "./assets/september-status/cover.png"
+cover: "./assets/september-26-status/cover.png"
+ogImage: "./assets/september-26-status/cover-og.png"
 ---
 
 import Newsletter from "src/pages/_index/Newsletter.astro"
@@ -27,7 +28,8 @@ Anyway, Project Polish is our roadmap to fix most of the rough edges of the app,
 Additionally, we're finally preparing proper tutorials, aka. "PixiEditor Essentials". In fact [the very first UI walkthrough is already available on our docs!](https://pixieditor.net/docs/handbook/essentials/hello-pixieditor/) 
 YouTube version is on the finish line.
 
-So, what's should you expect? On our internal roadmap we have things like:
+So, what should you expect? On our internal roadmap we have things like:
+{/* Here I thought it is a list of tutorial ideas */}
 
 - Layer locking
 - Alignment options (center elements within selection horizontally, vertically etc.)
@@ -39,8 +41,7 @@ So, what's should you expect? On our internal roadmap we have things like:
 - Improved touchscreen and touchpad controls
 - Upgrade to avalonia 12 (Linux drag and drop, better performance and stability) 
 - Improved welcome screen 
-- Startup performance improvements
-- Performance improvements
+- Startup and in-app performance improvements
 - Better clipboard support when it comes to copying and pasting to/from other apps
 - General UI polish
 
@@ -99,6 +100,7 @@ In context of PixiEditor, Drawie talks to Avalonia, asks for GPU, sets up Skia a
 
 Outside of PixiEditor, Drawie is also a standalone platform, it does not require any UI framework and allows rendering things on the screen in different enviroments (like standalone desktop app or in the browser).
 So you can pretty much build your own UI framework, app or 2D game which will run on desktops and browsers, Drawie takes care of creating windows, managing input and displaying your 2D graphics.
+{/* On top you say it is a standalone platform, and then it is far from it. I got excited with how I can use Drawie and then read that actually I can't */}
 
 Well, that's at least the idea of it. Standalone platform is far from being complete or even being semi-complete, but I did manage to get it to the point where I could use it for my internal needs.
 
@@ -107,13 +109,13 @@ The next 2 sections of this blog are examples of what I want Drawie 2 to be and 
 
 ## Vertie - introducing 3D backend for Drawie
 
-At the beginning of the month I was supposed to be in the mountains, a short break from coding and managing the project. Well I was, but after a few days I broke my foot and was forced to go back in front of the computer.
+At the beginning of the month I was supposed to be in the mountains, a longer break from coding and managing the project. Well I was, but after a few days I broke my foot and was forced to go back in front of the computer.
 Well, I guess the world has decided, that touching grass is not for me.
 
 I didn't want to go back to the usual bug fixing and implementing requested features, after all I was supposed to be outside for the next 2 weeks. So I decided to experiment a little and do some stuff I 
 find fun and a little challenging.
 
-Why not add 3D rendering to Drawie? Making a 3D renderer in itself is already a fun thing, but no too hard by itself. More challenging part was adding a 3D pipeline and integrating it with Skia. My goal
+Why not add 3D rendering to Drawie? Making a 3D renderer is already a fun thing, but no too hard itself. More challenging part was adding a 3D pipeline and integrating it with Skia. My goal
 was to build it the way so it feels like it is an integral part of the library instead of an external feature glued together with existing stuff.
 
 I must say, I haven't felt this kind of focus in a long time, for almost 2 weeks I was hyperfocused and worked on it like 14 hours a day or so. Truly one in a decade state.
@@ -151,20 +153,20 @@ Everything is made in the fragment shader, meaning I can't just swap out cube fo
 Since early versions of PixiEditor 1.0, we've used Skia for rendering in PixiEditor, every shape, pen stroke and pixel is drawn by it. It is an amazing library made by Google and 
 if you are using a chromium-based browser (Google Chrome, Brave, Opera), you use it every day. It's fast, well supported and has tons of features.
 
-But we want to replace it with our own renderer.
+But, we want to replace it with our own renderer.
 
 Well, we wanted for a couple of years now, but in my head it felt impossible, or at least overwhelming. I sworn this is the last thing I want to reinvent from scratch.
 
 Yet here we are...
 
-But why do we want to replace it if it's so great? 
+Why do we want to replace it if it's so great? 
 
 It's a good question. Like with many general purpose tools, they are great and make life easier until they do not. We pushed limits of Skia with PixiEditor, both performance and feature-wise. 
 There are a lot of compromises we had to make in order to get some features working.
 
-I exadurated a little with the title of this section, we're not saying goodbye to Skia, just not yet, and probably not for many months if not years. 
-Thankfully, we can approach this incrementally, meaning that we can replace some parts of Skia with our own library and leave Skia in other parts. So instead of making a big jump after, let's say 2 years,
-we can replace one small thing in 3 months and slowly replace all other parts later on.
+I exaggerated a little with the title of this section, we're not saying goodbye to Skia, just not yet, and probably not for many months if not years. 
+Thankfully, we can approach this incrementally, meaning that we can replace some parts of Skia with our own library and leave Skia in other parts. So, instead of making a big jump after let's say 2 years,
+we can replace one small thing in 3 months, and slowly replace all other parts later on.
 
 We're particularly interested in checking out if we can make Arco (working title, subject to change) do image processing with unpremultiplied alpha textures. Premultiplying color data
 makes various image processing operations easier, this is what Skia operates on. In fact it is illegal in Skia to do processing on unpremul textures. 
