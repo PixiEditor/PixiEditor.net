@@ -5,6 +5,7 @@
 export const socials = {
     subreddit: "https://www.reddit.com/r/PixiEditor/",
     twitterPage: "https://twitter.com/PixiEditor",
+    mastodonPage: "https://mastodon.social/@pixieditor",
     youtubePage: "https://www.youtube.com/@PixiEditor"
 }
 
