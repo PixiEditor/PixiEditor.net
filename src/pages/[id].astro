@@ -1,0 +1,132 @@
+---
+import { getCollection, getEntry, render } from "astro:content";
+import Layout from "@layouts/Layout.astro";
+import Lucide from "@components/Lucide.astro";
+import "remark-github-blockquote-alert/alert.css";
+import FoundersPackBanner from "@components/supportUs/FoundersPackBanner.astro";
+
+export async function getStaticPaths() {
+    const posts = await getCollection("entries");
+    return posts.map((post) => {
+        return {
+            params: {
+                id: post.id,
+            },
+            props: { post },
+        };
+    });
+}
+
+const { post } = Astro.props;
+
+const { Content, headings } = await render(post);
+---
+
+<Layout fullTitle={`${post.data.title}`} description={post.data.description}>
+    <div class="mx-auto max-w-screen-xl pt-12 pb-12">
+        <div
+            class="flex flex-col lg:flex-row justify-center items-center gap-6 lg:gap-12 pb-12 p-4 lg:p-0 text-left"
+        >
+            <div class="prose prose-pixi w-full mx-auto">
+                <h1>{post.data.title}</h1>
+                <Content />
+                <FoundersPackBanner />
+            </div>
+        </div>
+    </div>
+</Layout>
+
+<style>
+    html {
+        scroll-behavior: smooth;
+        scroll-padding-top: 10rem;
+    }
+
+    [class*="depth-"] {
+        position: relative;
+    }
+
+    .depth-0 {
+        padding-left: 0.5rem;
+        font-size: 1rem;
+        font-weight: bold;
+    }
+    .depth-1 {
+        padding-left: 1rem;
+        font-size: 1rem;
+    }
+    .depth-2 {
+        padding-left: 3rem;
+        font-size: 0.9rem;
+    }
+    .depth-3 {
+        padding-left: 4rem;
+        font-size: 0.8rem;
+    }
+    .depth-4 {
+        padding-left: 5rem;
+        font-size: 0.75rem;
+    }
+    .depth-5 {
+        padding-left: 6rem;
+        font-size: 0.7rem;
+    }
+    .depth-6 {
+        padding-left: 7rem;
+        font-size: 0.7rem;
+    }
+
+    .depth-2::before,
+    .depth-3::before,
+    .depth-4::before,
+    .depth-5::before,
+    .depth-6::before {
+        content: "";
+        position: absolute;
+        top: 0;
+        bottom: 0;
+        width: 1px;
+        background-color: #444;
+        opacity: 0.5;
+    }
+
+    /* Stack lines per depth using box-shadow trick */
+    .depth-2::before {
+        left: 1rem;
+        box-shadow: 1rem 0 0 #444;
+    }
+
+    .depth-3::before {
+        left: 1rem;
+        box-shadow:
+            1rem 0 0 #444,
+            2rem 0 0 #444;
+    }
+
+    .depth-4::before {
+        left: 1rem;
+        box-shadow:
+            1rem 0 0 #444,
+            2rem 0 0 #444,
+            3rem 0 0 #444;
+    }
+
+    .depth-5::before {
+        left: 1rem;
+        box-shadow:
+            1rem 0 0 #444,
+            2rem 0 0 #444,
+            3rem 0 0 #444,
+            4rem 0 0 #444;
+    }
+
+    .depth-6::before {
+        left: 1rem;
+        box-shadow:
+            1rem 0 0 #444,
+            2rem 0 0 #444,
+            3rem 0 0 #444,
+            4rem 0 0 #444,
+            5rem 0 0 #444;
+    }
+</style>
