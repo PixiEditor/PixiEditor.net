@@ -1,0 +1,340 @@
+---
+import Layout from "@layouts/Layout.astro";
+import Lucide from "@components/Lucide.astro";
+import { getEntry } from "astro:content";
+
+export const ITEMS_URL = "https://cdn.pixilabs.eu/items.json";
+
+export async function getExtensions() {
+    const response = await fetch(ITEMS_URL);
+
+    if (!response.ok) {
+        throw new Error(`Failed to fetch extensions: ${response.status}`);
+    }
+
+    const items = await response.json();
+
+    return Promise.all(
+        items.map(async (item) => {
+            let body = item.Body;
+
+            if (body?.startsWith("http://") || body?.startsWith("https://")) {
+                const bodyResponse = await fetch(body);
+
+                if (!bodyResponse.ok) {
+                    throw new Error(
+                        `Failed to fetch extension body ${body}: ${bodyResponse.status}`,
+                    );
+                }
+
+                body = await bodyResponse.text();
+            }
+
+            return {
+                ...item,
+                Body: body,
+            };
+        }),
+    );
+}
+
+export async function getStaticPaths() {
+    const extensions = await getExtensions();
+
+    return extensions.map((extension) => ({
+        params: {
+            id: extension.Id,
+        },
+        props: {
+            extension,
+        },
+    }));
+}
+
+const { extension } = Astro.props;
+
+const formatter = new Intl.DateTimeFormat("en-US", {
+    year: "numeric",
+    month: "long",
+    day: "numeric",
+});
+
+const releaseDate = new Date(extension.ReleaseDate);
+const dateString = formatter.format(releaseDate);
+
+const hasDiscount = extension.PercentageDiscount > 0 && extension.Price > 0;
+
+const discountedPrice = hasDiscount
+    ? extension.Price * (1 - extension.PercentageDiscount / 100)
+    : extension.Price;
+
+const formatPrice = (price: number) => {
+    return new Intl.NumberFormat("en-US", {
+        style: "currency",
+        currency: extension.Currency || "USD",
+    }).format(price);
+};
+
+const isFree = extension.Price === 0;
+
+const bodyEntry = await getEntry("extensions", extension.Id);
+const rendered = await bodyEntry?.rendered;
+---
+
+<Layout
+    fullTitle={`${extension.Name} | PixiEditor Extensions`}
+    description={extension.Description}
+    cover={extension.ImageUrl}
+    ogImage={extension.ImageUrl}
+>
+    <div class="mx-auto max-w-screen-xl pt-12 pb-16">
+        <a
+            class="mb-2 block text-neutral-400 hover:text-white transition-colors"
+            href="/extensions"
+        >
+            <Lucide data="chevron-left" class="align-bottom pe-3" />
+            All Extensions
+        </a>
+
+        <div
+            class="grid grid-cols-1 lg:grid-cols-[minmax(0,4fr)_minmax(220px,1fr)] gap-8 lg:gap-12 pt-4"
+        >
+            <main class="min-w-0">
+                <h1 class="text-3xl sm:text-5xl font-bold mb-3 px-4 lg:px-0">
+                    {extension.Name}
+                </h1>
+
+                <p
+                    class="text-neutral-400 text-base sm:text-lg leading-relaxed mb-8 px-4 lg:px-0"
+                >
+                    {extension.Description}
+                </p>
+
+                {
+                    extension.ShowcaseUrls?.length > 0 && (
+                        <div class="px-4 lg:px-0 mb-8">
+                            <div class="relative aspect-video overflow-hidden rounded-lg border border-neutral-700 bg-neutral-900">
+                                <div id="showcase-main" class="w-full h-full">
+                                    {/\.(mp4|webm|mov)(\?.*)?$/i.test(
+                                        extension.ShowcaseUrls[0],
+                                    ) ? (
+                                        <video
+                                            src={extension.ShowcaseUrls[0]}
+                                            controls
+                                            playsinline
+                                            class="w-full h-full object-contain"
+                                        />
+                                    ) : (
+                                        <img
+                                            src={extension.ShowcaseUrls[0]}
+                                            alt={`${extension.Name} showcase`}
+                                            class="w-full h-full object-contain"
+                                        />
+                                    )}
+                                </div>
+
+                                {extension.ShowcaseUrls.length > 1 && (
+                                    <>
+                                        <button
+                                            type="button"
+                                            id="showcase-prev"
+                                            class="absolute left-3 top-1/2 -translate-y-1/2 rounded-full bg-black/60 px-3 py-2 text-white transition-opacity hover:bg-black/80 disabled:opacity-30"
+                                            aria-label="Previous showcase"
+                                            disabled
+                                        >
+                                            ←
+                                        </button>
+
+                                        <button
+                                            type="button"
+                                            id="showcase-next"
+                                            class="absolute right-3 top-1/2 -translate-y-1/2 rounded-full bg-black/60 px-3 py-2 text-white transition-opacity hover:bg-black/80"
+                                            aria-label="Next showcase"
+                                        >
+                                            →
+                                        </button>
+                                    </>
+                                )}
+                            </div>
+
+                            {extension.ShowcaseUrls.length > 1 && (
+                                <div class="flex gap-2 mt-3 overflow-x-auto pb-1">
+                                    {extension.ShowcaseUrls.map(
+                                        (url, index) => (
+                                            <button
+                                                type="button"
+                                                data-showcase-index={index}
+                                                class:list={[
+                                                    "showcase-thumbnail shrink-0 w-32 sm:w-40 aspect-video overflow-hidden rounded border bg-neutral-900 transition-colors",
+                                                    index === 0
+                                                        ? "border-neutral-400"
+                                                        : "border-neutral-700 hover:border-neutral-500",
+                                                ]}
+                                            >
+                                                {/\.(mp4|webm|mov)(\?.*)?$/i.test(
+                                                    url,
+                                                ) ? (
+                                                    <video
+                                                        src={url}
+                                                        muted
+                                                        playsinline
+                                                        preload="metadata"
+                                                        class="w-full h-full object-cover"
+                                                    />
+                                                ) : (
+                                                    <img
+                                                        src={url}
+                                                        alt={`${extension.Name} showcase ${index + 1}`}
+                                                        loading="lazy"
+                                                        class="w-full h-full object-cover"
+                                                    />
+                                                )}
+                                            </button>
+                                        ),
+                                    )}
+                                </div>
+                            )}
+                        </div>
+                    )
+                }
+
+                <hr class="border-0 bg-neutral-700 h-px mb-8 mx-4 lg:mx-0" />
+
+                {
+                    rendered && (
+                        <div class="prose prose-invert max-w-none" set:html={rendered.html}>
+                        </div>
+                    )
+                }
+            </main>
+
+            <aside class="px-4 lg:px-0">
+                <div
+                    class="lg:border-l-2 lg:border-neutral-800 lg:pl-6 lg:sticky lg:top-25"
+                >
+                    <div class="text-sm text-neutral-500 mb-1">Developer</div>
+
+                    <div class="font-bold text-lg mb-6">
+                        {extension.Author}
+                    </div>
+
+                    {
+                        !extension.HideAddToLibrary && (
+                            <div>
+                                <div class="text-sm text-neutral-500 mb-1">
+                                    Price
+                                </div>
+
+                                {isFree ? (
+                                    <div class="text-xl font-bold mb-4">
+                                        Free
+                                    </div>
+                                ) : (
+                                    <div class="mb-4">
+                                        <div class="text-xl font-bold">
+                                            {hasDiscount && (
+                                                <span class="text-sm text-neutral-500 line-through font-normal mr-2">
+                                                    {formatPrice(
+                                                        extension.Price,
+                                                    )}
+                                                </span>
+                                            )}
+
+                                            {formatPrice(discountedPrice)}
+                                        </div>
+
+                                        {hasDiscount && (
+                                            <div class="text-sm text-green-400 font-semibold mt-1">
+                                                {extension.PercentageDiscount}%
+                                                off
+                                            </div>
+                                        )}
+                                    </div>
+                                )}
+
+                                <a
+                                    href={`https://pixieditor.net/extensions/${extension.Id}`}
+                                    class="block w-full text-center rounded bg-pc-softpixired-500 hover:bg-pc-softpixired-400 transition-colors px-4 py-2.5 font-semibold"
+                                >
+                                    {isFree ? "Add to library" : "Purchase"}
+                                    <Lucide
+                                        data="external-link"
+                                        class="inline-block ms-1 align-text-bottom"
+                                        size={15}
+                                    />
+                                </a>
+                            </div>
+                        )
+                    }
+
+                    {
+                        extension.IsBundle &&
+                            extension.IncludedExtensions?.length > 0 && (
+                                <div class="border-t border-neutral-800 mt-6 pt-5">
+                                    <div class="text-sm text-neutral-500 mb-2">
+                                        Includes
+                                    </div>
+
+                                    <div class="flex flex-col gap-1">
+                                        {extension.IncludedExtensions.map(
+                                            (included) => (
+                                                <div class="text-sm text-neutral-300">
+                                                    {included}
+                                                </div>
+                                            ),
+                                        )}
+                                    </div>
+                                </div>
+                            )
+                    }
+
+                    <div class="text-xs text-neutral-600 mt-6">
+                        Released {dateString}
+                    </div>
+                </div>
+            </aside>
+        </div>
+    </div>
+</Layout>
+
+<script define:vars={{ showcaseUrls: extension.ShowcaseUrls }}>
+    const isVideo = (url) => /\.(mp4|webm|mov)(\?.*)?$/i.test(url);
+
+    const main = document.querySelector("#showcase-main");
+    const thumbnails = document.querySelectorAll(".showcase-thumbnail");
+    const prev = document.querySelector("#showcase-prev");
+    const next = document.querySelector("#showcase-next");
+
+    let currentIndex = 0;
+
+    const show = (index) => {
+        currentIndex = Math.max(0, Math.min(index, showcaseUrls.length - 1));
+
+        const url = showcaseUrls[currentIndex];
+
+        main.innerHTML = isVideo(url)
+            ? `<video src="${url}" controls playsinline class="w-full h-full object-contain"></video>`
+            : `<img src="${url}" alt="Showcase" class="w-full h-full object-contain">`;
+
+        thumbnails.forEach((thumbnail, index) => {
+            thumbnail.classList.toggle(
+                "border-neutral-400",
+                index === currentIndex,
+            );
+            thumbnail.classList.toggle(
+                "border-neutral-700",
+                index !== currentIndex,
+            );
+        });
+
+        prev.disabled = currentIndex === 0;
+        next.disabled = currentIndex === showcaseUrls.length - 1;
+    };
+
+    prev?.addEventListener("click", () => show(currentIndex - 1));
+    next?.addEventListener("click", () => show(currentIndex + 1));
+
+    thumbnails.forEach((thumbnail, index) => {
+        thumbnail.addEventListener("click", () => show(index));
+    });
+</script>

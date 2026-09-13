@@ -1,0 +1,269 @@
+---
+import Layout from '@layouts/Layout.astro';
+import { getCollection } from 'astro:content';
+
+const extensions = await getCollection('extensions');
+
+const layoutResponse = await fetch(
+    'https://cdn.pixilabs.eu/items-layout.json'
+);
+
+const layout = await layoutResponse.json();
+
+const extensionsById = new Map(
+    extensions.map((extension) => [extension.data.Id, extension])
+);
+
+const highlighted = layout.HighlightedExtensions
+    .map((highlight) => ({
+        ...highlight,
+        extension: extensionsById.get(highlight.ExtensionId)
+    }))
+    .filter((highlight) => highlight.extension);
+
+const featured = layout.FeaturedExtensionIds
+    .map((id) => extensionsById.get(id))
+    .filter(Boolean);
+
+const featuredIds = new Set(layout.FeaturedExtensionIds);
+const highlightedIds = new Set(
+    layout.HighlightedExtensions.map((highlight) => highlight.ExtensionId)
+);
+
+const allExtensions = extensions.filter(
+    (extension) =>
+        !featuredIds.has(extension.data.Id) &&
+        !highlightedIds.has(extension.data.Id)
+);
+
+const formatPrice = (extension) => {
+    if (extension.data.Price === 0)
+        return 'Free';
+
+    return `${extension.data.Price} ${extension.data.Currency}`;
+};
+---
+
+<Layout title="Extensions" description="Explore extensions for PixiEditor.">
+<main class="max-w-5xl mx-auto px-4 py-8">
+    <div class="space-y-8">
+
+        {highlighted[0] && (
+            <a
+                href={`/extensions/${highlighted[0].extension.data.Id}`}
+                class="group block overflow-hidden rounded-lg border border-neutral-700 bg-neutral-900"
+            >
+                <div class="grid md:grid-cols-2 min-h-[280px]">
+                    <div class="flex flex-col justify-center p-8">
+                        {highlighted[0].HeaderTaglineText && (
+                            <div
+                                class="mb-2 text-sm font-medium"
+                                style={`color: ${highlighted[0].Color}`}
+                            >
+                                {highlighted[0].HeaderTaglineText}
+                            </div>
+                        )}
+
+                        <h2 class="text-3xl font-bold mb-3">
+                            {highlighted[0].Header ||
+                                highlighted[0].extension.data.Name}
+                        </h2>
+
+                        <p class="text-neutral-400 mb-5">
+                            {highlighted[0].Description ||
+                                highlighted[0].extension.data.Description}
+                        </p>
+
+                        <div class="flex items-center gap-3">
+                            {highlighted[0].DealText && (
+                                <span
+                                    class="rounded px-3 py-1 text-sm font-semibold"
+                                    style={`color: ${highlighted[0].Color}; `}
+                                >
+                                    {highlighted[0].DealText}
+                                </span>
+                            )}
+
+                            <span class="text-sm text-neutral-400">
+                                {formatPrice(highlighted[0].extension)}
+                            </span>
+                        </div>
+                    </div>
+
+                    {highlighted[0].HighlightImageUrl && (
+                        <div class="overflow-hidden">
+                            <img
+                                src={highlighted[0].HighlightImageUrl}
+                                alt=""
+                                class="w-full h-full object-contain transition-transform duration-300 group-hover:scale-[1.02]"
+                            />
+                        </div>
+                    )}
+                </div>
+            </a>
+        )}
+
+        {featured.length > 0 && (
+            <section>
+                <h2 class="text-xl font-bold mb-3">
+                    Featured Extensions
+                </h2>
+
+                <div class="flex gap-3 overflow-x-auto pb-2">
+                    {featured.map((extension) => (
+                        <a
+                            href={`/extensions/${extension.id}`}
+                            class="group shrink-0 w-56 rounded-lg border border-neutral-700 bg-neutral-900 p-3 hover:border-neutral-500 transition-colors"
+                        >
+                            <div class="aspect-video overflow-hidden rounded mb-3">
+                                {extension.data.ImageUrl ? (
+                                    <img
+                                        src={extension.data.ImageUrl}
+                                        alt=""
+                                        class="w-full h-full object-contain"
+                                        loading="lazy"
+                                    />
+                                ) : (
+                                    <div class="w-full h-full flex items-center justify-center text-neutral-600">
+                                        No image
+                                    </div>
+                                )}
+                            </div>
+
+                            <div class="text-xs text-neutral-500">
+                                {extension.data.Author}
+                            </div>
+
+                            <h3 class="font-bold truncate">
+                                {extension.data.Name}
+                            </h3>
+
+                            <p class="text-sm text-neutral-400 line-clamp-2 min-h-10">
+                                {extension.data.Description}
+                            </p>
+
+                            <div class="mt-3 text-sm font-semibold">
+                                {formatPrice(extension)}
+                            </div>
+                        </a>
+                    ))}
+                </div>
+            </section>
+        )}
+
+        {highlighted[1] && (
+            <a
+                href={`/extensions/${highlighted[1].extension.data.Id}`}
+                class="group block overflow-hidden rounded-lg border border-neutral-700 bg-neutral-900"
+            >
+                <div class="grid md:grid-cols-2 min-h-[280px]">
+                    {highlighted[1].HighlightImageUrl && (
+                        <div class="overflow-hidden md:order-first">
+                            <img
+                                src={highlighted[1].HighlightImageUrl}
+                                alt=""
+                                class="w-full h-full object-contain transition-transform duration-300 group-hover:scale-[1.02]"
+                            />
+                        </div>
+                    )}
+
+                    <div class="flex flex-col justify-center p-8">
+                        {highlighted[1].HeaderTaglineText && (
+                            <div
+                                class="mb-2 text-sm font-medium"
+                                style={`color: ${highlighted[1].Color}`}
+                            >
+                                {highlighted[1].HeaderTaglineText}
+                            </div>
+                        )}
+
+                        <h2 class="text-3xl font-bold mb-3">
+                            {highlighted[1].Header ||
+                                highlighted[1].extension.data.Name}
+                        </h2>
+
+                        <p class="text-neutral-400 mb-5">
+                            {highlighted[1].Description ||
+                                highlighted[1].extension.data.Description}
+                        </p>
+
+                        <div class="flex items-center gap-3">
+                            {highlighted[1].DealText && (
+                                <span
+                                    class="rounded px-3 py-1 text-sm font-semibold"
+                                    style={`background-color: ${highlighted[1].Color}; color: white`}
+                                >
+                                    {highlighted[1].DealText}
+                                </span>
+                            )}
+
+                            <span class="text-sm text-neutral-400">
+                                {formatPrice(highlighted[1].extension)}
+                            </span>
+                        </div>
+                    </div>
+                </div>
+            </a>
+        )}
+
+        <section>
+            <h2 class="text-xl font-bold mb-3">
+                All Extensions
+            </h2>
+
+            <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-3">
+                {allExtensions.map((extension) => (
+                    <a
+                        href={`/extensions/${extension.id}`}
+                        class="group rounded-lg border border-neutral-700 bg-neutral-900 p-3 hover:border-neutral-500 transition-colors"
+                    >
+                        <div class="aspect-video overflow-hidden rounded mb-3">
+                            {extension.data.ImageUrl ? (
+                                <img
+                                    src={extension.data.ImageUrl}
+                                    alt=""
+                                    class="w-full h-full object-contain"
+                                    loading="lazy"
+                                />
+                            ) : (
+                                <div class="w-full h-full flex items-center justify-center text-neutral-600">
+                                    No image
+                                </div>
+                            )}
+                        </div>
+
+                        <div class="text-xs text-neutral-500">
+                            {extension.data.Author}
+                        </div>
+
+                        <div class="flex items-start justify-between gap-3">
+                            <h3 class="text-lg font-bold truncate">
+                                {extension.data.Name}
+                            </h3>
+
+                            <span class="shrink-0 text-sm font-semibold">
+                                {formatPrice(extension)}
+                            </span>
+                        </div>
+
+                        <p class="text-sm text-neutral-400 line-clamp-2 mt-1">
+                            {extension.data.Description}
+                        </p>
+                    </a>
+                ))}
+            </div>
+        </section>
+
+        <p class="text-center text-sm text-neutral-500">
+            Looking for more extensions?
+            <a
+                href="https://forum.pixieditor.net/t/extension-browser-beta/567"
+                class="underline hover:text-neutral-300"
+            >
+                Read more about the Extension Browser
+            </a>
+        </p>
+
+    </div>
+</main>
+</Layout>

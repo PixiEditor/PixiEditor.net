@@ -46,9 +46,6 @@ export default defineConfig({
       filter: (page) => page !== `${site}/purchaseSuccess/`
     }
   )],
-  markdown: {
-    remarkPlugins: [remarkAlert]
-  },
   vite: {
     plugins: [tailwindcss(), patchLucideStyles()],
     css: {
