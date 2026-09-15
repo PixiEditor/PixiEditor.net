@@ -1,49 +1,16 @@
 ---
 import Layout from "@layouts/Layout.astro";
 import Lucide from "@components/Lucide.astro";
-import { getEntry } from "astro:content";
+import { getEntry, getCollection } from "astro:content";
 
 export const ITEMS_URL = "https://cdn.pixilabs.eu/items.json";
 
-export async function getExtensions() {
-    const response = await fetch(ITEMS_URL);
-
-    if (!response.ok) {
-        throw new Error(`Failed to fetch extensions: ${response.status}`);
-    }
-
-    const items = await response.json();
-
-    return Promise.all(
-        items.map(async (item) => {
-            let body = item.Body;
-
-            if (body?.startsWith("http://") || body?.startsWith("https://")) {
-                const bodyResponse = await fetch(body);
-
-                if (!bodyResponse.ok) {
-                    throw new Error(
-                        `Failed to fetch extension body ${body}: ${bodyResponse.status}`,
-                    );
-                }
-
-                body = await bodyResponse.text();
-            }
-
-            return {
-                ...item,
-                Body: body,
-            };
-        }),
-    );
-}
+export const extensions = await getCollection("extensions");
 
 export async function getStaticPaths() {
-    const extensions = await getExtensions();
-
     return extensions.map((extension) => ({
         params: {
-            id: extension.Id,
+            id: extension.data.Id,
         },
         props: {
             extension,
@@ -53,39 +20,45 @@ export async function getStaticPaths() {
 
 const { extension } = Astro.props;
 
+const extensionData = extension.data;
+
 const formatter = new Intl.DateTimeFormat("en-US", {
     year: "numeric",
     month: "long",
     day: "numeric",
 });
 
-const releaseDate = new Date(extension.ReleaseDate);
+const releaseDate = new Date(extensionData.ReleaseDate);
 const dateString = formatter.format(releaseDate);
 
-const hasDiscount = extension.PercentageDiscount > 0 && extension.Price > 0;
+const extensionsById = new Map(
+    extensions.map((extension) => [extension.data.Id, extension]),
+);
 
-const discountedPrice = hasDiscount
-    ? extension.Price * (1 - extension.PercentageDiscount / 100)
-    : extension.Price;
+const getBundlePrice = (item) => {
+    const itemsPrice = item.IncludedExtensions.reduce((total, bundleItem) => {
+        const extension = extensionsById.get(bundleItem);
 
-const formatPrice = (price: number) => {
-    return new Intl.NumberFormat("en-US", {
-        style: "currency",
-        currency: extension.Currency || "USD",
-    }).format(price);
+        return total + (extension?.data.Price ?? 0);
+    }, 0);
+
+    return itemsPrice * (1 - item.PercentageDiscount / 100);
 };
 
-const isFree = extension.Price === 0;
+const finalPrice = extensionData.IsBundle
+    ? getBundlePrice(extensionData)
+    : extensionData.Price;
 
-const bodyEntry = await getEntry("extensions", extension.Id);
-const rendered = await bodyEntry?.rendered;
+const isFree = finalPrice === 0;
+
+const rendered = extension.rendered;
 ---
 
 <Layout
-    fullTitle={`${extension.Name} | PixiEditor Extensions`}
-    description={extension.Description}
-    cover={extension.ImageUrl}
-    ogImage={extension.ImageUrl}
+    fullTitle={`${extensionData.Name} | PixiEditor Extensions`}
+    description={extensionData.Description}
+    cover={extensionData.ImageUrl}
+    ogImage={extensionData.ImageUrl}
 >
     <div class="mx-auto max-w-screen-xl pt-12 pb-16">
         <a
@@ -101,39 +74,39 @@ const rendered = await bodyEntry?.rendered;
         >
             <main class="min-w-0">
                 <h1 class="text-3xl sm:text-5xl font-bold mb-3 px-4 lg:px-0">
-                    {extension.Name}
+                    {extensionData.Name}
                 </h1>
 
                 <p
                     class="text-neutral-400 text-base sm:text-lg leading-relaxed mb-8 px-4 lg:px-0"
                 >
-                    {extension.Description}
+                    {extensionData.Description}
                 </p>
 
                 {
-                    extension.ShowcaseUrls?.length > 0 && (
+                    extensionData.ShowcaseUrls?.length > 0 && (
                         <div class="px-4 lg:px-0 mb-8">
                             <div class="relative aspect-video overflow-hidden rounded-lg border border-neutral-700 bg-neutral-900">
                                 <div id="showcase-main" class="w-full h-full">
                                     {/\.(mp4|webm|mov)(\?.*)?$/i.test(
-                                        extension.ShowcaseUrls[0],
+                                        extensionData.ShowcaseUrls[0],
                                     ) ? (
                                         <video
-                                            src={extension.ShowcaseUrls[0]}
+                                            src={extensionData.ShowcaseUrls[0]}
                                             controls
                                             playsinline
                                             class="w-full h-full object-contain"
                                         />
                                     ) : (
                                         <img
-                                            src={extension.ShowcaseUrls[0]}
-                                            alt={`${extension.Name} showcase`}
+                                            src={extensionData.ShowcaseUrls[0]}
+                                            alt={`${extensionData.Name} showcase`}
                                             class="w-full h-full object-contain"
                                         />
                                     )}
                                 </div>
 
-                                {extension.ShowcaseUrls.length > 1 && (
+                                {extensionData.ShowcaseUrls.length > 1 && (
                                     <>
                                         <button
                                             type="button"
@@ -157,9 +130,9 @@ const rendered = await bodyEntry?.rendered;
                                 )}
                             </div>
 
-                            {extension.ShowcaseUrls.length > 1 && (
+                            {extensionData.ShowcaseUrls.length > 1 && (
                                 <div class="flex gap-2 mt-3 overflow-x-auto pb-1">
-                                    {extension.ShowcaseUrls.map(
+                                    {extensionData.ShowcaseUrls.map(
                                         (url, index) => (
                                             <button
                                                 type="button"
@@ -184,7 +157,7 @@ const rendered = await bodyEntry?.rendered;
                                                 ) : (
                                                     <img
                                                         src={url}
-                                                        alt={`${extension.Name} showcase ${index + 1}`}
+                                                        alt={`${extensionData.Name} showcase ${index + 1}`}
                                                         loading="lazy"
                                                         class="w-full h-full object-cover"
                                                     />
@@ -202,8 +175,10 @@ const rendered = await bodyEntry?.rendered;
 
                 {
                     rendered && (
-                        <div class="prose prose-invert max-w-none" set:html={rendered.html}>
-                        </div>
+                        <div
+                            class="prose prose-invert max-w-none mx-4 lg:mx-0"
+                            set:html={rendered.html}
+                        />
                     )
                 }
             </main>
@@ -215,11 +190,11 @@ const rendered = await bodyEntry?.rendered;
                     <div class="text-sm text-neutral-500 mb-1">Developer</div>
 
                     <div class="font-bold text-lg mb-6">
-                        {extension.Author}
+                        {extensionData.Author}
                     </div>
 
                     {
-                        !extension.HideAddToLibrary && (
+                        !extensionData.HideAddToLibrary && (
                             <div>
                                 <div class="text-sm text-neutral-500 mb-1">
                                     Price
@@ -232,27 +207,24 @@ const rendered = await bodyEntry?.rendered;
                                 ) : (
                                     <div class="mb-4">
                                         <div class="text-xl font-bold">
-                                            {hasDiscount && (
-                                                <span class="text-sm text-neutral-500 line-through font-normal mr-2">
-                                                    {formatPrice(
-                                                        extension.Price,
-                                                    )}
-                                                </span>
-                                            )}
-
-                                            {formatPrice(discountedPrice)}
+                                            <span
+                                                data-price-pln={finalPrice}
+                                                class="price-element"
+                                            >
+                                                Loading...
+                                            </span>
                                         </div>
-
-                                        {hasDiscount && (
-                                            <div class="text-sm text-green-400 font-semibold mt-1">
-                                                {extension.PercentageDiscount}%
-                                                off
-                                            </div>
-                                        )}
                                     </div>
                                 )}
 
-                                <a
+                                <p>
+                                    <span>
+                                        Extension can be{" "}
+                                        {isFree ? "added" : "purchased"} in the
+                                        app
+                                    </span>
+                                </p>
+                                {/*                                 <a
                                     href={`https://pixieditor.net/extensions/${extension.Id}`}
                                     class="block w-full text-center rounded bg-pc-softpixired-500 hover:bg-pc-softpixired-400 transition-colors px-4 py-2.5 font-semibold"
                                 >
@@ -262,33 +234,72 @@ const rendered = await bodyEntry?.rendered;
                                         class="inline-block ms-1 align-text-bottom"
                                         size={15}
                                     />
-                                </a>
+                                </a> */}
                             </div>
                         )
                     }
 
                     {
-                        extension.IsBundle &&
-                            extension.IncludedExtensions?.length > 0 && (
+                        extensionData.IsBundle &&
+                            extensionData.IncludedExtensions?.length > 0 && (
                                 <div class="border-t border-neutral-800 mt-6 pt-5">
-                                    <div class="text-sm text-neutral-500 mb-2">
+                                    <div class="text-sm text-neutral-500 mb-3">
                                         Includes
                                     </div>
 
-                                    <div class="flex flex-col gap-1">
-                                        {extension.IncludedExtensions.map(
-                                            (included) => (
-                                                <div class="text-sm text-neutral-300">
-                                                    {included}
-                                                </div>
-                                            ),
+                                    <div class="flex flex-wrap gap-1">
+                                        {extensionData.IncludedExtensions.map(
+                                            (included) => {
+                                                const includedExtension =
+                                                    extensionsById.get(
+                                                        included,
+                                                    );
+
+                                                if (!includedExtension) {
+                                                    return null;
+                                                }
+
+                                                return (
+                                                    <a
+                                                        href={`/extensions/${includedExtension.data.Id}`}
+                                                        class="inline-flex h-10 items-center gap-2 rounded-lg border border-neutral-700 bg-neutral-900 px-3 text-sm font-medium text-neutral-200 transition-colors hover:border-neutral-500 hover:bg-neutral-800"
+                                                    >
+                                                        <span>
+                                                            {
+                                                                includedExtension
+                                                                    .data.Name
+                                                            }
+                                                        </span>
+
+                                                        {includedExtension.data
+                                                            .ImageUrl && (
+                                                            <img
+                                                                src={
+                                                                    includedExtension
+                                                                        .data
+                                                                        .ImageUrl
+                                                                }
+                                                                alt=""
+                                                                class="h-7 w-7 rounded object-cover"
+                                                                loading="lazy"
+                                                            />
+                                                        )}
+                                                    </a>
+                                                );
+                                            },
                                         )}
                                     </div>
                                 </div>
                             )
                     }
 
-                    <div class="text-xs text-neutral-600 mt-6">
+                    { isFree ? "" :
+                    <p class="text-xs text-neutral-400 mt-6">
+                        Final price may vary, depending on currency conversion
+                        rate, local taxes and already owned extensions.
+                    </p>}
+
+                    <div class="text-xs text-neutral-400 mt-6">
                         Released {dateString}
                     </div>
                 </div>
@@ -297,7 +308,13 @@ const rendered = await bodyEntry?.rendered;
     </div>
 </Layout>
 
-<script define:vars={{ showcaseUrls: extension.ShowcaseUrls }}>
+<script>
+    import { updatePrices } from "../../utils/price-updater";
+
+    await updatePrices();
+</script>
+
+<script define:vars={{ showcaseUrls: extensionData.ShowcaseUrls }}>
     const isVideo = (url) => /\.(mp4|webm|mov)(\?.*)?$/i.test(url);
 
     const main = document.querySelector("#showcase-main");

@@ -5,8 +5,6 @@ import { Image } from "astro:assets";
 
 import SteamLogo from "@assets/icons/steam.svg";
 import FlathubLogo from "@assets/icons/flathub.svg";
-import FoundersPackLogo from "@assets/founders-pack.svg";
-import FoundersPackLogoMobile from "@assets/founders-pack-mobile.svg";
 import PixiPack from "@components/pixiPack/PixiPack.astro";
 
 import { steam, flathub } from "@assets/links";
@@ -117,148 +115,10 @@ import PurchaseModal from "@components/pixiPack/purchaseModal.astro";
         <PurchaseModal />
     </div>
 
-    <script is:inline>
-        const SUPPORTED_CURRENCIES = [
-            "USD",
-            "EUR",
-            "CHF",
-            "GBP",
-            "JPY",
-            "NOK",
-            "SEK",
-            "CZK",
-            "DKK",
-            "CAD",
-            "AUD",
-        ];
-        const CountryToCurrency = {
-            PL: "PLN",
-            US: "USD",
-            DE: "EUR",
-            FR: "EUR",
-            IT: "EUR",
-            ES: "EUR",
-            AT: "EUR",
-            NL: "EUR",
-            BE: "EUR",
-            FI: "EUR",
-            PT: "EUR",
-            IE: "EUR",
-            LU: "EUR",
-            MT: "EUR",
-            GR: "EUR",
-            SI: "EUR",
-            CY: "EUR",
-            SK: "EUR",
-            EE: "EUR",
-            LV: "EUR",
-            LT: "EUR",
-            CH: "CHF",
-            GB: "GBP",
-            JP: "JPY",
-            NO: "NOK",
-            SE: "SEK",
-            CZ: "CZK",
-            DK: "DKK",
-            CA: "CAD",
-            AU: "AUD",
-        };
+    <script>
+        import { updatePrices } from "../utils/price-updater";
 
-        async function getUserCurrency() {
-            try {
-                const unsupportedCountries = [
-                    "CO",
-                    "ME",
-                    "KP",
-                    "KR",
-                    "IN",
-                    "RS",
-                    "MX",
-                    "AE",
-                    "TR",
-                    "AM",
-                    "CL",
-                    "VN",
-                    "OM",
-                ];
-
-                const res = await fetch("https://ip2c.org/s");
-                // Example response: "1;PL;POL;Poland"
-                const data = await res.text();
-
-                const countryCode = data.split(";")[1];
-
-                if (unsupportedCountries.includes(countryCode)) {
-                    return "UNSUPPORTED";
-                }
-
-                return CountryToCurrency[countryCode] || "PLN";
-            } catch {
-                return "PLN"; // fallback
-            }
-        }
-
-        async function getNBPRate(toCurrency) {
-            if (toCurrency === "PLN") return 1;
-            try {
-                const res = await fetch(
-                    `https://api.nbp.pl/api/exchangerates/rates/A/${toCurrency}?format=json`,
-                );
-                if (!res.ok) throw new Error("Unsupported currency");
-                const data = await res.json();
-                return data.rates[0].mid;
-            } catch {
-                return null;
-            }
-        }
-
-        async function convertPrice(plnPrice, userCurrency) {
-            const upperCurrency = userCurrency.toUpperCase();
-
-            if (upperCurrency === "UNSUPPORTED") {
-                return "UNSUPPORTED";
-            }
-
-            if (!SUPPORTED_CURRENCIES.includes(upperCurrency)) {
-                return `${plnPrice.toFixed(2)} PLN`;
-            }
-
-            const rate = await getNBPRate(upperCurrency);
-            if (!rate) {
-                return `${plnPrice.toFixed(2)} PLN`;
-            }
-
-            const converted = (plnPrice / rate) * 1.04; // 4% fee for currency conversion
-            const formatter = new Intl.NumberFormat(navigator.language, {
-                style: "currency",
-                currency: upperCurrency,
-            });
-
-            return formatter.format(converted);
-        }
-
-        getUserCurrency().then((currency) => {
-            const priceElements = document.querySelectorAll(".purchase-button");
-            for (const btn of priceElements) {
-                btn.disabled = true;
-                const plnPrice = parseFloat(btn.dataset.pricePln);
-                convertPrice(plnPrice, currency).then((convertedPrice) => {
-                    if (convertedPrice === "UNSUPPORTED") {
-                        btn.textContent = "Not yet available in your country";
-                        btn.disabled = true;
-                        btn.classList.remove(
-                            btn.classList
-                                .values()
-                                .find((v, i) => v.startsWith("hover:")),
-                            "cursor-pointer",
-                        );
-                    } else {
-                        btn.querySelector("span").textContent = convertedPrice;
-                        btn.disabled = false;
-                    }
-                });
-            }
-        });
+        updatePrices();
     </script>
 
     <script is:inline>

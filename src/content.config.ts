@@ -1,4 +1,5 @@
-import { defineCollection, reference, z } from 'astro:content';
+import { defineCollection, reference } from 'astro:content';
+import { z } from "zod"
 import { glob } from 'astro/loaders';
 import type { Loader } from 'astro/loaders';
 
@@ -77,6 +78,7 @@ const extensionLoader = {
         Price: z.number().optional(),
         IsBundle: z.boolean().optional(),
         Currency: z.string(),
+        PercentageDiscount: z.number().optional(),
         IncludedExtensions: z.array(z.string()).optional()
     })
 };

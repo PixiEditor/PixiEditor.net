@@ -49,7 +49,6 @@ const pageTitle = title
 	? `${title} | PixiEditor`
 	: fullTitle;
 
-	console.log("ogImage", ogImage);
 const ogImageUrl = ogImage?.src
 	? new URL(ogImage.src, Astro.url.origin).href
 	: cover?.src
