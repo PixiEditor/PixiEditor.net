@@ -6,7 +6,6 @@ import { data } from "../ProgramComparison";
 
 function EditorIcon(editor: { id: string, image: GetImageResult }, selectedEditor?: Accessor<string>, setSelectedEditor?: Setter<string>): JSXElement {
     function handleClick() {
-        console.log(editor.id);
         if (setSelectedEditor) setSelectedEditor(editor.id);
     }
 
