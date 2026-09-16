@@ -57,7 +57,9 @@ const extensionLoader = {
     name: 'extensions',
     async load({ store, parseData, renderMarkdown }) {
         const response = await fetch('https://cdn.pixilabs.eu/items.json');
-        const items = await response.json();
+        var resp = await response.text();
+        console.log(resp)
+        const items = JSON.parse(resp);
 
         store.clear();
 
