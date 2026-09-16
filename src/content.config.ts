@@ -1,7 +1,5 @@
-import { defineCollection, reference } from 'astro:content';
-import { z } from "zod"
+import { defineCollection, reference, z } from 'astro:content';
 import { glob } from 'astro/loaders';
-import type { Loader } from 'astro/loaders';
 
 const blog = defineCollection({
     loader: glob({ pattern: "**/*.{md,mdx}", base: "./src/content/blog" }),
@@ -33,60 +31,4 @@ const docs = defineCollection({
     })
 })
 
-const extensionSchema = z.object({
-        Id: z.string(),
-        Name: z.string(),
-        Description: z.string(),
-        Author: z.string(),
-        ImageUrl: z.string().url().optional(),
-        Body: z.string(),
-        ReleaseDate: z.coerce.date(),
-        ShowcaseUrls: z.array(z.string().url()),
-        Versions: z.array(z.object({
-            ExtensionVersion: z.string(),
-            PixiEditorApiVersion: z.number()
-        })).optional(),
-        Price: z.number().optional(),
-        IsBundle: z.boolean().optional(),
-        Currency: z.string(),
-        PercentageDiscount: z.number().optional(),
-        IncludedExtensions: z.array(z.string()).optional()});
-
-
-const extensionLoader = {
-    name: 'extensions',
-    async load({ store, parseData, renderMarkdown }) {
-        const response = await fetch('https://pixi-worker.pixilabsinfo.workers.dev/items.json');
-        const items = await response.json();
-
-        store.clear();
-
-        for (const item of items) {
-            const body = item.Body.startsWith('http://') || item.Body.startsWith('https://')
-                ? await fetch(item.Body).then(response => response.text())
-                : item.Body;
-
-            const data = await parseData({
-                id: item.Id,
-                data: {
-                    ...item,
-                    Body: body
-                }
-            });
-
-            store.set({
-                id: item.Id,
-                data,
-                rendered: await renderMarkdown(body)
-            });
-        }
-    },
-    schema: extensionSchema
-};
-
-const extensions = defineCollection({
-    loader: extensionLoader,
-    schema: extensionSchema
-});
-
-export const collections = { blog, authors, docs, extensions };
+export const collections = { blog, authors, docs };

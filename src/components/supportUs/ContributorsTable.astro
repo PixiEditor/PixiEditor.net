@@ -53,6 +53,7 @@ fetch(url).then((res) => {
         throw new Error("Network response was not ok");
     }
 }).then((data) => {
+    console.log(data);
     contributors = data.members.filter((member) => member.role === "BACKER");
 }).catch((error) => {
     console.error("There has been a problem with your fetch operation:", error);
