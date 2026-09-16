@@ -33,6 +33,25 @@ const docs = defineCollection({
     })
 })
 
+const extensionSchema = z.object({
+        Id: z.string(),
+        Name: z.string(),
+        Description: z.string(),
+        Author: z.string(),
+        ImageUrl: z.string().url().optional(),
+        Body: z.string(),
+        ReleaseDate: z.coerce.date(),
+        ShowcaseUrls: z.array(z.string().url()),
+        Versions: z.array(z.object({
+            ExtensionVersion: z.string(),
+            PixiEditorApiVersion: z.number()
+        })).optional(),
+        Price: z.number().optional(),
+        IsBundle: z.boolean().optional(),
+        Currency: z.string(),
+        PercentageDiscount: z.number().optional(),
+        IncludedExtensions: z.array(z.string()).optional()});
+
 
 const extensionLoader = {
     name: 'extensions',
@@ -62,29 +81,12 @@ const extensionLoader = {
             });
         }
     },
-    schema: z.object({
-        Id: z.string(),
-        Name: z.string(),
-        Description: z.string(),
-        Author: z.string(),
-        ImageUrl: z.string().url().optional(),
-        Body: z.string(),
-        ReleaseDate: z.coerce.date(),
-        ShowcaseUrls: z.array(z.string().url()),
-        Versions: z.array(z.object({
-            ExtensionVersion: z.string(),
-            PixiEditorApiVersion: z.number()
-        })).optional(),
-        Price: z.number().optional(),
-        IsBundle: z.boolean().optional(),
-        Currency: z.string(),
-        PercentageDiscount: z.number().optional(),
-        IncludedExtensions: z.array(z.string()).optional()
-    })
+    schema: extensionSchema
 };
 
 const extensions = defineCollection({
-    loader: extensionLoader
+    loader: extensionLoader,
+    schema: extensionSchema
 });
 
 export const collections = { blog, authors, docs, extensions };

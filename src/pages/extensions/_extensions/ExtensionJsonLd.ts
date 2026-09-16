@@ -29,7 +29,7 @@ export default function getExtensionJsonLd(extension: any, url: URL) {
         ...(extension.Price > 0 ? {
             "offers": {
                 "@type": "Offer",
-                "price": (extension.Price / 100).toFixed(2),
+                "price": extension.Price.toFixed(2),
                 "priceCurrency": extension.Currency,
                 "url": extensionUrl
             }

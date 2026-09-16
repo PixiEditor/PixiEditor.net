@@ -31,68 +31,81 @@ if (import.meta.env.DEV) {
     }
 } else {
     const categoryRes = await fetch(`${FORUM_BASE}/c/${CATEGORY_ID}.json`);
+    console.log(`${FORUM_BASE}/c/${CATEGORY_ID}.json`)
     const categoryData = await categoryRes.json();
 
     topics = categoryData?.topic_list?.topics || [];
 }
 
-const proposals: (Proposal | null)[] = await Promise.all(
-    topics.map(async (topic: Topic) => {
-        let topicData;
-        if (import.meta.env.DEV) {
-            topicData = topic;
-        } else {
-            const topicRes = await fetch(
-                `${FORUM_BASE}/t/${topic.slug}/${topic.id}.json`,
-            );
-            topicData = await topicRes.json();
-        }
+const proposals: (Proposal | null)[] = [];
 
-        const votingPost = topicData.post_stream.posts.find(
-            (p: { cooked: string; username: string }) =>
-                p.cooked.includes("Discussion ends:") &&
-                p.username == "flabbet",
+for (const topic of topics) {
+    let topicData;
+
+    if (import.meta.env.DEV) {
+        topicData = topic;
+    } else {
+        const topicRes = await fetch(
+            `${FORUM_BASE}/t/${topic.slug}/${topic.id}.json`,
         );
 
-        let forVersion = null;
-        let status = "Unknown";
-        if (votingPost) {
-            // Status, first line between <code> tags
-            // Voting ends, second line after "Discussion ends:" in format YYYY-MM-DD, between <code> tags
-            const codeElements = votingPost.cooked
-                .match(/<code>(.*?)<\/code>/g)
-                ?.map((code: string) => code.replace(/<\/?code>/g, "").trim());
-
-            if (codeElements.length >= 0) {
-                status = codeElements[0].trim();
-                if (codeElements.length >= 2) {
-                    const votingEndsStr = codeElements[1].trim();
-                }
-                if (codeElements.length >= 3) {
-                    forVersion = codeElements[2].trim();
-                }
-            }
-        } else {
-            return null;
+        if (!topicRes.ok) {
+            console.error(
+                `Failed to fetch topic ${topic.id}: ${topicRes.status}`,
+            );
+            proposals.push(null);
+            continue;
         }
 
-        return {
-            id: topic.id,
-            title: topic.title,
-            url: `${FORUM_BASE}/t/${topic.slug}/${topic.id}`,
-            votes: topic.vote_count ?? 0,
-            status: status,
-            forVersion,
-        };
-    }),
-).then((results) =>
-    results.filter(
-        (p): p is Proposal =>
-            p !== null &&
-            p.status in StatusVariant &&
-            p.status != "rejected" &&
-            (p.forVersion === "2.2" || p.forVersion === "2.1" || p.forVersion === null),
-    ),
+        topicData = await topicRes.json();
+    }
+
+    const votingPost = topicData.post_stream.posts.find(
+        (p: { cooked: string; username: string }) =>
+            p.cooked.includes("Discussion ends:") &&
+            p.username == "flabbet",
+    );
+
+    if (!votingPost) {
+        proposals.push(null);
+        continue;
+    }
+
+    const codeElements = votingPost.cooked
+        .match(/<code>(.*?)<\/code>/g)
+        ?.map((code: string) =>
+            code.replace(/<\/?code>/g, "").trim(),
+        ) ?? [];
+
+    let status = "Unknown";
+    let forVersion = null;
+
+    if (codeElements.length >= 1) {
+        status = codeElements[0];
+
+        if (codeElements.length >= 3) {
+            forVersion = codeElements[2];
+        }
+    }
+
+    proposals.push({
+        id: topic.id,
+        title: topic.title,
+        url: `${FORUM_BASE}/t/${topic.slug}/${topic.id}`,
+        votes: topic.vote_count ?? 0,
+        status,
+        forVersion,
+    });
+}
+
+const filteredProposals = proposals.filter(
+    (p): p is Proposal =>
+        p !== null &&
+        p.status in StatusVariant &&
+        p.status != "rejected" &&
+        (p.forVersion === "2.2" ||
+            p.forVersion === "2.1" ||
+            p.forVersion === null),
 );
 ---
 

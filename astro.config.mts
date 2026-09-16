@@ -43,7 +43,7 @@ export default defineConfig({
   integrations: [mdx(), solidJs(), sitemap(
     {
       customSitemaps: [`${site}/docs/sitemap-index.xml`],
-      filter: (page) => page !== `${site}/purchaseSuccess/` && page !== `${site}/loginSuccess` && page !== `${site}/loginFailed`
+      filter: (page) => page !== `${site}/purchaseSuccess/` && page !== `${site}/loginSuccess/` && page !== `${site}/loginFailed/`
     }
   )],
   vite: {

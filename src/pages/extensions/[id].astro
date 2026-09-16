@@ -2,6 +2,7 @@
 import Layout from "@layouts/Layout.astro";
 import Lucide from "@components/Lucide.astro";
 import { getEntry, getCollection } from "astro:content";
+import getExtensionJsonLd from "./_extensions/ExtensionJsonLd";
 
 export const ITEMS_URL = "https://cdn.pixilabs.eu/items.json";
 
@@ -59,6 +60,7 @@ const rendered = extension.rendered;
     description={extensionData.Description}
     cover={extensionData.ImageUrl}
     ogImage={extensionData.ImageUrl}
+    jsonLd={getExtensionJsonLd}
 >
     <div class="mx-auto max-w-screen-xl pt-12 pb-16">
         <a
@@ -329,9 +331,16 @@ const rendered = extension.rendered;
 
         const url = showcaseUrls[currentIndex];
 
-        main.innerHTML = isVideo(url)
-            ? `<video src="${url}" controls playsinline class="w-full h-full object-contain"></video>`
-            : `<img src="${url}" alt="Showcase" class="w-full h-full object-contain">`;
+         const media = document.createElement(isVideo(url) ? "video" : "img");
+         media.setAttribute("src", url);
+         media.className = "w-full h-full object-contain";
+         if (media instanceof HTMLVideoElement) {
+             media.controls = true;
+             media.playsInline = true;
+         } else {
+             media.alt = "Showcase";
+         }
+         main?.replaceChildren(media);
 
         thumbnails.forEach((thumbnail, index) => {
             thumbnail.classList.toggle(

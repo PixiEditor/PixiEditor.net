@@ -17,6 +17,17 @@ export async function updatePrices() {
 
         if (convertedPrice === "UNSUPPORTED") {
             element.textContent = "Not yet available in your country";
+            if (element instanceof HTMLButtonElement) {
+                 element.disabled = true;
+                 element.closest("a")?.removeAttribute("href")
+                 element.classList.remove("cursor-pointer")
+                 element.classList.forEach(item => {
+                    if(item.startsWith("hover:"))
+                    {
+                        element.classList.remove(item);
+                    }
+                 });
+             }
         } else {
             const span = element.querySelector("span");
 
