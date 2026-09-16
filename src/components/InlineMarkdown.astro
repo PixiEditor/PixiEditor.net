@@ -1,0 +1,14 @@
+---
+const { children } = Astro.props;
+const text = children ?? "";
+
+const parts = text.split(/(\*\*.*?\*\*)/g);
+---
+
+{parts.map((part) =>
+    part.startsWith("**") && part.endsWith("**") ? (
+        <strong>{part.slice(2, -2)}</strong>
+    ) : (
+        part
+    )
+)}

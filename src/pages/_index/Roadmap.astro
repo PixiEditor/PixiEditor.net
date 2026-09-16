@@ -31,68 +31,120 @@ if (import.meta.env.DEV) {
     }
 } else {
     const categoryRes = await fetch(`${FORUM_BASE}/c/${CATEGORY_ID}.json`);
+    console.log(`${FORUM_BASE}/c/${CATEGORY_ID}.json`);
     const categoryData = await categoryRes.json();
 
     topics = categoryData?.topic_list?.topics || [];
 }
 
-const proposals: (Proposal | null)[] = await Promise.all(
-    topics.map(async (topic: Topic) => {
-        let topicData;
-        if (import.meta.env.DEV) {
-            topicData = topic;
-        } else {
-            const topicRes = await fetch(
-                `${FORUM_BASE}/t/${topic.slug}/${topic.id}.json`,
-            );
-            topicData = await topicRes.json();
+async function fetchDiscourseJson<T>(url: string): Promise<T> {
+    for (let attempt = 0; attempt < 5; attempt++) {
+        const response = await fetch(url);
+
+        if (response.ok) {
+            const contentType = response.headers.get("content-type") ?? "";
+
+            if (!contentType.includes("application/json")) {
+                const body = await response.text();
+
+                throw new Error(
+                    `Discourse returned non-JSON (${response.status}): ${body.slice(0, 200)}`,
+                );
+            }
+
+            return (await response.json()) as T;
         }
 
-        const votingPost = topicData.post_stream.posts.find(
-            (p: { cooked: string; username: string }) =>
-                p.cooked.includes("Discussion ends:") &&
-                p.username == "flabbet",
+        if (
+            response.status === 429 ||
+            response.status === 500 ||
+            response.status === 502 ||
+            response.status === 503 ||
+            response.status === 504
+        ) {
+            const retryAfter = response.headers.get("retry-after");
+            const delay = retryAfter
+                ? Number(retryAfter) * 1000
+                : 1000 * 2 ** attempt;
+
+            console.warn(
+                `Discourse ${response.status}, retrying in ${delay}ms: ${url}`,
+            );
+
+            await new Promise((resolve) => setTimeout(resolve, delay));
+            continue;
+        }
+
+        const body = await response.text();
+
+        throw new Error(
+            `Discourse request failed (${response.status}): ${body.slice(0, 200)}`,
+        );
+    }
+
+    throw new Error(`Discourse request failed after retries: ${url}`);
+}
+
+const proposals: (Proposal | null)[] = [];
+
+for (const topic of topics) {
+    let topicData;
+
+    if (import.meta.env.DEV) {
+        topicData = topic;
+    } else {
+        const topicRes = await fetchDiscourseJson<TopicData>(
+            `${FORUM_BASE}/t/${topic.slug}/${topic.id}.json`,
         );
 
-        let forVersion = null;
-        let status = "Unknown";
-        if (votingPost) {
-            // Status, first line between <code> tags
-            // Voting ends, second line after "Discussion ends:" in format YYYY-MM-DD, between <code> tags
-            const codeElements = votingPost.cooked
-                .match(/<code>(.*?)<\/code>/g)
-                ?.map((code: string) => code.replace(/<\/?code>/g, "").trim());
+        topicData = topicRes;
+    }
 
-            if (codeElements.length >= 0) {
-                status = codeElements[0].trim();
-                if (codeElements.length >= 2) {
-                    const votingEndsStr = codeElements[1].trim();
-                }
-                if (codeElements.length >= 3) {
-                    forVersion = codeElements[2].trim();
-                }
-            }
-        } else {
-            return null;
+    const votingPost = topicData.post_stream.posts.find(
+        (p: { cooked: string; username: string }) =>
+            p.cooked.includes("Discussion ends:") && p.username == "flabbet",
+    );
+
+    if (!votingPost) {
+        proposals.push(null);
+        continue;
+    }
+
+    const codeElements =
+        votingPost.cooked
+            .match(/<code>(.*?)<\/code>/g)
+            ?.map((code: string) => code.replace(/<\/?code>/g, "").trim()) ??
+        [];
+
+    let status = "Unknown";
+    let forVersion = null;
+
+    if (codeElements.length >= 1) {
+        status = codeElements[0];
+
+        if (codeElements.length >= 3) {
+            forVersion = codeElements[2];
         }
+    }
 
-        return {
-            id: topic.id,
-            title: topic.title,
-            url: `${FORUM_BASE}/t/${topic.slug}/${topic.id}`,
-            votes: topic.vote_count ?? 0,
-            status: status,
-            forVersion,
-        };
-    }),
-).then((results) =>
-    results.filter(
-        (p): p is Proposal =>
-            p !== null &&
-            p.status in StatusVariant &&
-            p.status != "rejected" &&
-            (p.forVersion === "2.2" || p.forVersion === "2.1" || p.forVersion === null),
-    ),
+    proposals.push({
+        id: topic.id,
+        title: topic.title,
+        url: `${FORUM_BASE}/t/${topic.slug}/${topic.id}`,
+        votes: topic.vote_count ?? 0,
+        status,
+        forVersion,
+    });
+}
+
+const filteredProposals = proposals.filter(
+    (p): p is Proposal =>
+        p !== null &&
+        p.status in StatusVariant &&
+        p.status != "rejected" &&
+        (p.forVersion === "2.2" ||
+            p.forVersion === "2.1" ||
+            p.forVersion === null),
 );
 ---
 
@@ -104,23 +156,18 @@ const proposals: (Proposal | null)[] = await Promise.all(
                 >Status: Released</Chip
             >
             <div class="card-list">
-                <RoadmapItem
-                    hoverable={false}
+                <RoadmapItem hoverable={false}
                     ><span style="margin-right: 5px;">Brush Engine</span
                     ></RoadmapItem
                 >
-                <RoadmapItem
-                    hoverable={false}
+                <RoadmapItem hoverable={false}
                     ><span style="margin-right: 5px;">Smart Layers</span
                     ></RoadmapItem
                 >
-                <RoadmapItem
-                    hoverable={false}
-                        >Customizable Toolsets</span
-                    ></RoadmapItem
+                <RoadmapItem hoverable={false}
+                    ><span>Customizable Toolsets</span></RoadmapItem
                 >
-                <RoadmapItem
-                    hoverable={false}
+                <RoadmapItem hoverable={false}
                     ><span style="margin-right: 5px;">Brush Tools</span
                     ></RoadmapItem
                 >
@@ -134,7 +181,7 @@ const proposals: (Proposal | null)[] = await Promise.all(
                 >Status: Open for proposals</Chip
             >
             <div class="mt-4">
-            <ProposalItem proposals={proposals} forVersion="2.2" />
+                <ProposalItem proposals={proposals} forVersion="2.2" />
             </div>
         </div>
 
@@ -144,7 +191,7 @@ const proposals: (Proposal | null)[] = await Promise.all(
                 >Click to propose a feature</Chip
             >
             <div class="mt-4">
-            <ProposalItem proposals={proposals} forVersion={null} />
+                <ProposalItem proposals={proposals} forVersion={null} />
             </div>
         </div>
     </div>
@@ -168,9 +215,9 @@ const proposals: (Proposal | null)[] = await Promise.all(
 
     .card > h3 {
         @apply mb-2;
-    } 
+    }
 
- .card-list {
+    .card-list {
         @apply flex flex-col gap-3 mt-4;
     }
 </style>

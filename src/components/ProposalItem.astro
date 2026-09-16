@@ -42,8 +42,8 @@ const { proposals, forVersion } = Astro.props;
                             </div>
                             <div class="flex flex-wrap items-center gap-2">
                                 <span class="text-sm text-white/60">
-                                    {p.votes}
-                                     vote{p.votes === 1 ? "" : "s"}
+                                    <span class="mr-1">{p.votes}</span>
+                                     <span>vote{p.votes === 1 ? "" : "s"}</span>
                                 </span>
                                 <Chip
                                     variant={StatusVariant[p.status]}

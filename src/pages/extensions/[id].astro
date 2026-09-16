@@ -1,0 +1,366 @@
+---
+import Layout from "@layouts/Layout.astro";
+import Lucide from "@components/Lucide.astro";
+import { getEntry, getCollection } from "astro:content";
+import getExtensionJsonLd from "./_extensions/ExtensionJsonLd";
+
+export const ITEMS_URL = "https://cdn.pixilabs.eu/items.json";
+
+export const extensions = await getCollection("extensions");
+
+export async function getStaticPaths() {
+    return extensions.map((extension) => ({
+        params: {
+            id: extension.data.Id,
+        },
+        props: {
+            extension,
+        },
+    }));
+}
+
+const { extension } = Astro.props;
+
+const extensionData = extension.data;
+
+const formatter = new Intl.DateTimeFormat("en-US", {
+    year: "numeric",
+    month: "long",
+    day: "numeric",
+});
+
+const releaseDate = new Date(extensionData.ReleaseDate);
+const dateString = formatter.format(releaseDate);
+
+const extensionsById = new Map(
+    extensions.map((extension) => [extension.data.Id, extension]),
+);
+
+const getBundlePrice = (item) => {
+    const itemsPrice = item.IncludedExtensions.reduce((total, bundleItem) => {
+        const extension = extensionsById.get(bundleItem);
+
+        return total + (extension?.data.Price ?? 0);
+    }, 0);
+
+    return itemsPrice * (1 - item.PercentageDiscount / 100);
+};
+
+const finalPrice = extensionData.IsBundle
+    ? getBundlePrice(extensionData)
+    : extensionData.Price;
+
+const isFree = finalPrice === 0;
+
+const rendered = extension.rendered;
+---
+
+<Layout
+    fullTitle={`${extensionData.Name} | PixiEditor Extensions`}
+    description={extensionData.Description}
+    cover={extensionData.ImageUrl}
+    ogImage={extensionData.ImageUrl}
+    jsonLd={getExtensionJsonLd}
+>
+    <div class="mx-auto max-w-screen-xl pt-12 pb-16">
+        <a
+            class="mb-2 block text-neutral-400 hover:text-white transition-colors"
+            href="/extensions"
+        >
+            <Lucide data="chevron-left" class="align-bottom pe-3" />
+            All Extensions
+        </a>
+
+        <div
+            class="grid grid-cols-1 lg:grid-cols-[minmax(0,4fr)_minmax(220px,1fr)] gap-8 lg:gap-12 pt-4"
+        >
+            <main class="min-w-0">
+                <h1 class="text-3xl sm:text-5xl font-bold mb-3 px-4 lg:px-0">
+                    {extensionData.Name}
+                </h1>
+
+                <p
+                    class="text-neutral-400 text-base sm:text-lg leading-relaxed mb-8 px-4 lg:px-0"
+                >
+                    {extensionData.Description}
+                </p>
+
+                {
+                    extensionData.ShowcaseUrls?.length > 0 && (
+                        <div class="px-4 lg:px-0 mb-8">
+                            <div class="relative aspect-video overflow-hidden rounded-lg border border-neutral-700 bg-neutral-900">
+                                <div id="showcase-main" class="w-full h-full">
+                                    {/\.(mp4|webm|mov)(\?.*)?$/i.test(
+                                        extensionData.ShowcaseUrls[0],
+                                    ) ? (
+                                        <video
+                                            src={extensionData.ShowcaseUrls[0]}
+                                            controls
+                                            playsinline
+                                            class="w-full h-full object-contain"
+                                        />
+                                    ) : (
+                                        <img
+                                            src={extensionData.ShowcaseUrls[0]}
+                                            alt={`${extensionData.Name} showcase`}
+                                            class="w-full h-full object-contain"
+                                        />
+                                    )}
+                                </div>
+
+                                {extensionData.ShowcaseUrls.length > 1 && (
+                                    <>
+                                        <button
+                                            type="button"
+                                            id="showcase-prev"
+                                            class="absolute left-3 top-1/2 -translate-y-1/2 rounded-full bg-black/60 px-3 py-2 text-white transition-opacity hover:bg-black/80 disabled:opacity-30"
+                                            aria-label="Previous showcase"
+                                            disabled
+                                        >
+                                            ←
+                                        </button>
+
+                                        <button
+                                            type="button"
+                                            id="showcase-next"
+                                            class="absolute right-3 top-1/2 -translate-y-1/2 rounded-full bg-black/60 px-3 py-2 text-white transition-opacity hover:bg-black/80"
+                                            aria-label="Next showcase"
+                                        >
+                                            →
+                                        </button>
+                                    </>
+                                )}
+                            </div>
+
+                            {extensionData.ShowcaseUrls.length > 1 && (
+                                <div class="flex gap-2 mt-3 overflow-x-auto pb-1">
+                                    {extensionData.ShowcaseUrls.map(
+                                        (url, index) => (
+                                            <button
+                                                type="button"
+                                                data-showcase-index={index}
+                                                class:list={[
+                                                    "showcase-thumbnail shrink-0 w-32 sm:w-40 aspect-video overflow-hidden rounded border bg-neutral-900 transition-colors",
+                                                    index === 0
+                                                        ? "border-neutral-400"
+                                                        : "border-neutral-700 hover:border-neutral-500",
+                                                ]}
+                                            >
+                                                {/\.(mp4|webm|mov)(\?.*)?$/i.test(
+                                                    url,
+                                                ) ? (
+                                                    <video
+                                                        src={url}
+                                                        muted
+                                                        playsinline
+                                                        preload="metadata"
+                                                        class="w-full h-full object-cover"
+                                                    />
+                                                ) : (
+                                                    <img
+                                                        src={url}
+                                                        alt={`${extensionData.Name} showcase ${index + 1}`}
+                                                        loading="lazy"
+                                                        class="w-full h-full object-cover"
+                                                    />
+                                                )}
+                                            </button>
+                                        ),
+                                    )}
+                                </div>
+                            )}
+                        </div>
+                    )
+                }
+
+                <hr class="border-0 bg-neutral-700 h-px mb-8 mx-4 lg:mx-0" />
+
+                {
+                    rendered && (
+                        <div
+                            class="prose prose-invert max-w-none mx-4 lg:mx-0"
+                            set:html={rendered.html}
+                        />
+                    )
+                }
+            </main>
+
+            <aside class="px-4 lg:px-0">
+                <div
+                    class="lg:border-l-2 lg:border-neutral-800 lg:pl-6 lg:sticky lg:top-25"
+                >
+                    <div class="text-sm text-neutral-500 mb-1">Developer</div>
+
+                    <div class="font-bold text-lg mb-6">
+                        {extensionData.Author}
+                    </div>
+
+                    {
+                        !extensionData.HideAddToLibrary && (
+                            <div>
+                                <div class="text-sm text-neutral-500 mb-1">
+                                    Price
+                                </div>
+
+                                {isFree ? (
+                                    <div class="text-xl font-bold mb-4">
+                                        Free
+                                    </div>
+                                ) : (
+                                    <div class="mb-4">
+                                        <div class="text-xl font-bold">
+                                            <span
+                                                data-price-pln={finalPrice}
+                                                class="price-element"
+                                            >
+                                                Loading...
+                                            </span>
+                                        </div>
+                                    </div>
+                                )}
+
+                                <p>
+                                    <span>
+                                        Extension can be{" "}
+                                        {isFree ? "added" : "purchased"} in the
+                                        app
+                                    </span>
+                                </p>
+                                {/*                                 <a
+                                    href={`https://pixieditor.net/extensions/${extension.Id}`}
+                                    class="block w-full text-center rounded bg-pc-softpixired-500 hover:bg-pc-softpixired-400 transition-colors px-4 py-2.5 font-semibold"
+                                >
+                                    {isFree ? "Add to library" : "Purchase"}
+                                    <Lucide
+                                        data="external-link"
+                                        class="inline-block ms-1 align-text-bottom"
+                                        size={15}
+                                    />
+                                </a> */}
+                            </div>
+                        )
+                    }
+
+                    {
+                        extensionData.IsBundle &&
+                            extensionData.IncludedExtensions?.length > 0 && (
+                                <div class="border-t border-neutral-800 mt-6 pt-5">
+                                    <div class="text-sm text-neutral-500 mb-3">
+                                        Includes
+                                    </div>
+
+                                    <div class="flex flex-wrap gap-1">
+                                        {extensionData.IncludedExtensions.map(
+                                            (included) => {
+                                                const includedExtension =
+                                                    extensionsById.get(
+                                                        included,
+                                                    );
+
+                                                if (!includedExtension) {
+                                                    return null;
+                                                }
+
+                                                return (
+                                                    <a
+                                                        href={`/extensions/${includedExtension.data.Id}`}
+                                                        class="inline-flex h-10 items-center gap-2 rounded-lg border border-neutral-700 bg-neutral-900 px-3 text-sm font-medium text-neutral-200 transition-colors hover:border-neutral-500 hover:bg-neutral-800"
+                                                    >
+                                                        <span>
+                                                            {
+                                                                includedExtension
+                                                                    .data.Name
+                                                            }
+                                                        </span>
+
+                                                        {includedExtension.data
+                                                            .ImageUrl && (
+                                                            <img
+                                                                src={
+                                                                    includedExtension
+                                                                        .data
+                                                                        .ImageUrl
+                                                                }
+                                                                alt=""
+                                                                class="h-7 w-7 rounded object-cover"
+                                                                loading="lazy"
+                                                            />
+                                                        )}
+                                                    </a>
+                                                );
+                                            },
+                                        )}
+                                    </div>
+                                </div>
+                            )
+                    }
+
+                    { isFree ? "" :
+                    <p class="text-xs text-neutral-400 mt-6">
+                        Final price may vary, depending on currency conversion
+                        rate, local taxes and already owned extensions.
+                    </p>}
+
+                    <div class="text-xs text-neutral-400 mt-6">
+                        Released {dateString}
+                    </div>
+                </div>
+            </aside>
+        </div>
+    </div>
+</Layout>
+
+<script>
+    import { updatePrices } from "../../utils/price-updater";
+
+    await updatePrices();
+</script>
+
+<script define:vars={{ showcaseUrls: extensionData.ShowcaseUrls }}>
+    const isVideo = (url) => /\.(mp4|webm|mov)(\?.*)?$/i.test(url);
+
+    const main = document.querySelector("#showcase-main");
+    const thumbnails = document.querySelectorAll(".showcase-thumbnail");
+    const prev = document.querySelector("#showcase-prev");
+    const next = document.querySelector("#showcase-next");
+
+    let currentIndex = 0;
+
+    const show = (index) => {
+        currentIndex = Math.max(0, Math.min(index, showcaseUrls.length - 1));
+
+        const url = showcaseUrls[currentIndex];
+
+         const media = document.createElement(isVideo(url) ? "video" : "img");
+         media.setAttribute("src", url);
+         media.className = "w-full h-full object-contain";
+         if (media instanceof HTMLVideoElement) {
+             media.controls = true;
+             media.playsInline = true;
+         } else {
+             media.alt = "Showcase";
+         }
+         main?.replaceChildren(media);
+
+        thumbnails.forEach((thumbnail, index) => {
+            thumbnail.classList.toggle(
+                "border-neutral-400",
+                index === currentIndex,
+            );
+            thumbnail.classList.toggle(
+                "border-neutral-700",
+                index !== currentIndex,
+            );
+        });
+
+        prev.disabled = currentIndex === 0;
+        next.disabled = currentIndex === showcaseUrls.length - 1;
+    };
+
+    prev?.addEventListener("click", () => show(currentIndex - 1));
+    next?.addEventListener("click", () => show(currentIndex + 1));
+
+    thumbnails.forEach((thumbnail, index) => {
+        thumbnail.addEventListener("click", () => show(index));
+    });
+</script>
