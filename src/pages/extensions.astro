@@ -5,7 +5,7 @@ import InlineMarkdown from "./../components/InlineMarkdown.astro"
 
 const extensions = await getCollection("extensions");
 
-const layoutResponse = await fetch("https://cdn.pixilabs.eu/items-layout.json");
+const layoutResponse = await fetch("https://pixi-worker.pixilabsinfo.workers.dev/items-layout.json");
 
 const layout = await layoutResponse.json();
 
