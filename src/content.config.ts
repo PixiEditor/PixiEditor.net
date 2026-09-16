@@ -63,7 +63,7 @@ const extensionLoader = {
 
         for (const item of items) {
             const body = item.Body.startsWith('http://') || item.Body.startsWith('https://')
-                ? await fetch(item.Body).then(response => response.text())
+                ? await fetch(item.Body.replace("cdn.pixilabs.eu", "pixi-worker.pixilabsinfo.workers.dev")).then(response => response.text())
                 : item.Body;
 
             const data = await parseData({
