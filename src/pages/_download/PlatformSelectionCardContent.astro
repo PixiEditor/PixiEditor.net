@@ -6,8 +6,12 @@ import { getImage } from "astro:assets";
 import Microsoft from "@assets/logos/MicrosoftStoreLogoGrey.svg";
 import Apple from "@assets/logos/AppleLogo.svg";
 
-const microsoftLogo = await getImage({ src: Microsoft, width: 40, height: 40 });
-const appleLogo = await getImage({ src: Apple, width: 40, height: 40 });
+const microsoftLogoResult = await getImage({ src: Microsoft, width: 40, height: 40 });
+const appleLogoResult = await getImage({ src: Apple, width: 40, height: 40 });
+
+const microsoftLogo = { src: microsoftLogoResult.src, width: 40, height: 40 };
+const appleLogo = { src: appleLogoResult.src, width: 40, height: 40 };
+
 const { fullInfo } = Astro.props;
 ---
 
@@ -15,4 +19,4 @@ const { fullInfo } = Astro.props;
     fullInfo={fullInfo}
     microsoftLogo={microsoftLogo}
     appleLogo={appleLogo}
-    linuxLogo={null!} />
+    linuxLogo={null} />

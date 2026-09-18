@@ -26,7 +26,7 @@ const optionsMap = {
   },
 };
 
-export default function PlatformSelection(props: { "data-links": any, microsoftLogo: GetImageResult, appleLogo: GetImageResult, linuxLogo: GetImageResult, fullInfo: boolean }) {
+export default function PlatformSelection(props: any) {
   const versionInfo = props["data-links"] as {
     version: string;
     assets: {
