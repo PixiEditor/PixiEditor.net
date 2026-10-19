@@ -21,6 +21,7 @@
     "@tailwindcss/typography": "^0.5.16",
     "@tailwindcss/vite": "^4.0.17",
     "astro": "7.3.2",
+    "astro-zoom": "^0.1.10",
     "hls.js": "^1.5.20",
     "js-confetti": "^0.13.1",
     "lucide-static": "^0.473.0",
