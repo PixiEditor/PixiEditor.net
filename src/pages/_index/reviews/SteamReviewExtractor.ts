@@ -1,37 +1,57 @@
-﻿// https://partner.steamgames.com/doc/store/getreviews
-interface SteamReviewsResponse {
-    query_summary: {
+﻿interface SteamReviewsResponse {
+    response?: {
+        query_summary?: {
+            total_positive: number;
+            total_negative: number;
+            total_reviews: number;
+        };
+    };
+    query_summary?: {
         total_positive: number;
+        total_negative: number;
         total_reviews: number;
     };
 }
 
 async function fetchReviewStats(appid: number): Promise<{ totalReviews: number; positivePercentage: number }> {
-    const endpoint = `https://store.steampowered.com/appreviews/${appid}`;
-    const params = new URLSearchParams({
-        filter: 'all',
-        language: 'all',
-        day_range: 'all',
+    const endpoint = 'https://api.steampowered.com/IUserReviewsService/GetAppReviews/v1/';
+
+    const input = {
+        appid,
+        filter: 1,
+        languages: ['all'],
+        day_range: 0,
         cursor: '*',
-        review_type: 'all',
-        purchase_type: 'all',
-        num_per_page: '1',
-        json: '1',
+        review_type: 0,
+        purchase_type: 1,
+        num_per_page: 1
+    };
+
+    const params = new URLSearchParams({
+        input_json: JSON.stringify(input)
     });
 
-    const response = await fetch(`${endpoint}?${params.toString()}`);
+    const response = await fetch(`${endpoint}?${params}`);
+
     if (!response.ok) {
-        throw new Error(`Failed to fetch data: ${response.statusText}`);
+        throw new Error(`Steam API error: ${response.status} ${response.statusText}`);
     }
 
     const data: SteamReviewsResponse = await response.json();
 
-    const { total_positive, total_reviews } = data.query_summary;
-    const positivePercentage = total_reviews > 0 ? (total_positive / total_reviews) * 100 : 0;
+    const summary = data.response?.query_summary ?? data.query_summary;
+
+    if (!summary) {
+        throw new Error(`Steam API returned an unexpected response: ${JSON.stringify(data)}`);
+    }
+
+    const { total_positive, total_reviews } = summary;
 
     return {
         totalReviews: total_reviews,
-        positivePercentage: positivePercentage,
+        positivePercentage: total_reviews > 0
+            ? (total_positive / total_reviews) * 100
+            : 0
     };
 }
 
@@ -44,5 +64,6 @@ export default function fetchPixiEditorReviewStats(): Promise<{ totalReviews: nu
             throw err;
         });
     }
+
     return cachedPromise;
 }
