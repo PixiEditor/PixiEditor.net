@@ -1,0 +1,232 @@
+---
+const START = "2026-11-27T00:00:00Z";
+const END = "2026-11-27T23:59:59Z";
+---
+
+<div id="bf-banner" class="bf" data-start={START} data-end={END}>
+    <div class="bf-inner">
+        <p class="bf-message">
+            <strong>Black Friday</strong>
+            <span id="bf-offer">50% off every extension</span>
+        </p>
+
+        <button type="button" id="bf-code" class="bf-code" aria-label="Copy discount code BLACKFRIDAY" hidden>
+            <span>BLACKFRIDAY</span>
+            <span id="bf-hint" class="bf-hint">Copy</span>
+        </button>
+
+        <div class="bf-timer" role="timer">
+            <span id="bf-label" class="bf-label">Starts in</span>
+            <span class="bf-unit" id="bf-d-wrap"><b id="bf-d">0</b><i>d</i></span>
+            <span class="bf-unit"><b id="bf-h">00</b><i>h</i></span>
+            <span class="bf-unit"><b id="bf-m">00</b><i>m</i></span>
+            <span class="bf-unit"><b id="bf-s">00</b><i>s</i></span>
+        </div>
+
+        <a href="/extensions" id="bf-cta" class="bf-cta">Browse extensions</a>
+    </div>
+</div>
+
+<style>
+    .bf {
+        --bf-accent: #CA1B3D;
+        --bf-bg: #1A1A1A;
+        --bf-text: #FFFFFF;
+        --bf-muted: #B0B0B0;
+
+        background: var(--bf-bg);
+        color: var(--bf-text);
+    }
+
+    .bf-inner {
+        max-width: 80rem;
+        margin: 0 auto;
+        padding: 0.5rem 1rem;
+        display: flex;
+        flex-wrap: wrap;
+        align-items: center;
+        justify-content: center;
+        gap: 0.5rem 1.25rem;
+        font-size: 0.875rem;
+    }
+
+    .bf-message {
+        margin: 0;
+        display: flex;
+        gap: 0.5rem;
+    }
+
+    .bf-message strong {
+        color: #FF7D7D;
+        font-weight: 600;
+    }
+
+    /* Code chip */
+    .bf-code {
+        display: inline-flex;
+        align-items: center;
+        gap: 0.5rem;
+        padding: 0.2rem 0.6rem;
+        border: 1px dashed var(--bf-accent);
+        border-radius: 0.375rem;
+        background: transparent;
+        color: var(--bf-text);
+        font: inherit;
+        font-weight: 600;
+        letter-spacing: 0.04em;
+        cursor: pointer;
+        transition: background-color 0.15s;
+    }
+
+    .bf-code[hidden] {
+        display: none;
+    }
+
+    .bf-code:hover {
+        background: rgba(255, 92, 92, 0.12);
+    }
+
+    .bf-hint {
+        font-size: 0.75rem;
+        font-weight: 400;
+        letter-spacing: 0;
+        color: var(--bf-muted);
+    }
+
+    /* Countdown */
+    .bf-timer {
+        display: inline-flex;
+        align-items: center;
+        gap: 0.25rem;
+    }
+
+    .bf-label {
+        margin-right: 0.35rem;
+        color: var(--bf-muted);
+    }
+
+    .bf-unit {
+        display: inline-flex;
+        align-items: baseline;
+        gap: 0.15rem;
+        padding: 0.15rem 0.45rem;
+        border-radius: 0.375rem;
+        background: rgba(255, 255, 255, 0.08);
+        font-variant-numeric: tabular-nums;
+    }
+
+    .bf-unit[hidden] {
+        display: none;
+    }
+
+    .bf-unit b {
+        font-weight: 700;
+    }
+
+    .bf-unit i {
+        font-style: normal;
+        font-size: 0.7rem;
+        color: var(--bf-muted);
+    }
+
+    /* Button */
+    .bf-cta {
+        padding: 0.3rem 0.85rem;
+        border-radius: 0.375rem;
+        background: var(--bf-accent);
+        color: var(--bf-text);
+        text-decoration: none;
+        transition: filter 0.15s;
+    }
+
+    .bf-cta[hidden] {
+        display: none;
+    }
+
+    .bf-cta:hover {
+        filter: brightness(1.1);
+    }
+
+    .bf-code:focus-visible,
+    .bf-cta:focus-visible {
+        outline: 2px solid var(--bf-text);
+        outline-offset: 2px;
+    }
+
+    @media (max-width: 640px) {
+        .bf-inner {
+            font-size: 0.8125rem;
+            gap: 0.4rem 0.85rem;
+        }
+        .bf-hint {
+            display: none;
+        }
+    }
+</style>
+
+<script>
+    const banner = document.getElementById("bf-banner");
+
+    if (banner) {
+        const start = new Date(banner.dataset.start!).getTime();
+        const end = new Date(banner.dataset.end!).getTime();
+
+        const label = document.getElementById("bf-label")!;
+        const dWrap = document.getElementById("bf-d-wrap")!;
+        const d = document.getElementById("bf-d")!;
+        const h = document.getElementById("bf-h")!;
+        const m = document.getElementById("bf-m")!;
+        const s = document.getElementById("bf-s")!;
+        const offer = document.getElementById("bf-offer")!;
+        const codeBtn = document.getElementById("bf-code")!;
+        const hint = document.getElementById("bf-hint")!;
+        const cta = document.getElementById("bf-cta") as HTMLAnchorElement;
+        const pad = (n: number) => String(n).padStart(2, "0");
+
+        // Don't show "Browse extensions" on the extensions page itself
+        const onExtensionsPage = window.location.pathname.startsWith("/extensions");
+
+        const tick = () => {
+            const now = Date.now();
+
+            if (now > end) {
+                banner.hidden = true;
+                clearInterval(interval);
+                return;
+            }
+
+            const live = now >= start;
+            const diff = Math.floor(((live ? end : start) - now) / 1000);
+            const days = Math.floor(diff / 86400);
+
+            label.textContent = live ? "Ends in" : "Starts in";
+            dWrap.hidden = days === 0;
+            d.textContent = String(days);
+            h.textContent = pad(Math.floor((diff % 86400) / 3600));
+            m.textContent = pad(Math.floor((diff % 3600) / 60));
+            s.textContent = pad(diff % 60);
+
+            // Before the sale: browse. During the sale: code
+            codeBtn.hidden = !live;
+            cta.hidden = live;
+            cta.style.visibility = onExtensionsPage ? "hidden" : "";
+            offer.textContent = live
+                ? "50% off every extension in the app"
+                : "50% off every extension";
+        };
+
+        const interval = setInterval(tick, 1000);
+        tick();
+
+        // Copy code on click
+        codeBtn.addEventListener("click", async () => {
+            try {
+                await navigator.clipboard.writeText("BLACKFRIDAY");
+                hint.textContent = "Copied!";
+            } catch {
+                hint.textContent = "Press Ctrl+C";
+            }
+            setTimeout(() => (hint.textContent = "Copy"), 1500);
+        });
+    }
+</script>
